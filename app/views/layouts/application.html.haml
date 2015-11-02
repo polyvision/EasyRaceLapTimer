@@ -1,0 +1,34 @@
+!!!
+%html{lang: "en"}
+  %head
+    %title
+      EasyRaceLapTimer
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "/"} EasyRaceLapTimer
+        #navbar.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.active
+              =link_to('Configuration',{action: 'index',controller: '/system'})
+            %li
+              =link_to('Monitor',{action: 'index',controller: '/monitor'})
+        / /.nav-collapse
+    .container
+      .row
+        .col-xs-12.center
+          - flash.each do |type, message|
+            %div{class: "alert #{bootstrap_class_for(type)} alert-danger fade in"}
+              %button.close{"data-dismiss" => "alert"} ×
+              = message
+      = yield

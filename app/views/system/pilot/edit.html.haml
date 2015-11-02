@@ -1,0 +1,24 @@
+%h1
+  edit pilot
+
+%ol.breadcrumb
+  %li
+    = link_to('Configuration',{action: 'index', controller: '/system'})
+  %li
+    = link_to('Pilots',{action: 'index', controller: '/system/pilot'})
+
+= form_for(@pilot,url: {action: 'update', id: @pilot.id},html: {class: 'form-inline'}) do |f|
+  .form-group
+    %label{:for => "exampleInputName2"}
+      = t('pilot.name')
+    = f.text_field(:name, placeholder: "Jon Doe", class: 'form-control', required: true)
+  .form-group
+    %label{:for => "exampleInputEmail2"}
+      = t('pilot.transponder_token')
+    = f.text_field(:transponder_token, placeholder: "XXXXXX", class: 'form-control', required: true)
+  .form-group
+    %label{:for => "exampleInputEmail2"}
+      = t('pilot.image')
+    = f.file_field(:image, class: 'form-control')
+  %button.btn.btn-default{:type => "submit"}
+    = t('actions.update')
