@@ -1,0 +1,18 @@
+I"\(function() {
+  var hostname;
+
+  hostname = function(url) {
+    var parser;
+    parser = document.createElement('a');
+    parser.href = url;
+    parser.href = parser.href;
+    parser.protocol = parser.protocol.replace("http", "ws");
+    return parser.href;
+  };
+
+  this.App = {};
+
+  App.cable = Cable.createConsumer(hostname("/"));
+
+}).call(this);
+:ET

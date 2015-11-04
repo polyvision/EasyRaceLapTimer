@@ -1,0 +1,7 @@
+I"q(function() {
+  this.App = {};
+
+  App.cable = Cable.createConsumer('ws://127.0.0.1:28080');
+
+}).call(this);
+:ET

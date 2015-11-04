@@ -1,0 +1,14 @@
+I"Y(function() {
+  App.messages = App.cable.subscriptions.create("MonitorUpdateChannel", {
+    received: function(data) {
+      if (data.type === "updated_stats") {
+        return $.get("/monitor/view", function(data) {
+          $("#monitor_view").html(data);
+          return console.log("works");
+        });
+      }
+    }
+  });
+
+}).call(this);
+:ET

@@ -1,0 +1,32 @@
+I"ï(function() {
+  Cable.Consumer = (function() {
+    function Consumer(url) {
+      this.url = url;
+      this.subscriptions = new Cable.Subscriptions(this);
+      this.connection = new Cable.Connection(this);
+      this.connectionMonitor = new Cable.ConnectionMonitor(this);
+    }
+
+    Consumer.prototype.send = function(data) {
+      return this.connection.send(data);
+    };
+
+    Consumer.prototype.inspect = function() {
+      return JSON.stringify(this, null, 2);
+    };
+
+    Consumer.prototype.toJSON = function() {
+      return {
+        url: this.url,
+        subscriptions: this.subscriptions,
+        connection: this.connection,
+        connectionMonitor: this.connectionMonitor
+      };
+    };
+
+    return Consumer;
+
+  })();
+
+}).call(this);
+:ET
