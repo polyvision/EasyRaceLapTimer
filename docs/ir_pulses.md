@@ -1,3 +1,5 @@
+![alt text](http://www.airbirds.de/wp-content/uploads/2015/11/logo_big.png "EasyRaceLapTimer")
+
 # EasyRaceLapTimer - IR Pulses
 
 7 bits are getting used for sending the transponder id (token). There's one thing to know in our approach. IR space pulses are also bits!
