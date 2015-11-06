@@ -18,7 +18,7 @@ CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 INCPATH       = -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I. -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtNetwork -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I.
 LINK          = g++
 LFLAGS        = -Wl,-O1
-LIBS          = $(SUBLIBS) -lwiringPi -lQt5Widgets -lQt5Network -lQt5Gui -lQt5Core -lGLESv2 -lpthread 
+LIBS          = $(SUBLIBS) -lcurl -lwiringPi -lQt5Widgets -lQt5Network -lQt5Gui -lQt5Core -lGLESv2 -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/bin/qmake
@@ -45,11 +45,8 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = main.cpp \
-		lirc_connection.cpp moc_lirc_connection.cpp
-OBJECTS       = main.o \
-		lirc_connection.o \
-		moc_lirc_connection.o
+SOURCES       = main.cpp 
+OBJECTS       = main.o
 DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/unix.conf \
@@ -104,8 +101,7 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/lex.prf \
-		ir_daemon.pro main.cpp \
-		lirc_connection.cpp
+		ir_daemon.pro main.cpp
 QMAKE_TARGET  = ir_daemon
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = ir_daemon
@@ -264,7 +260,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/ir_daemon1.0.0 || mkdir -p .tmp/ir_daemon1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/ir_daemon1.0.0/ && $(COPY_FILE) --parents lirc_connection.h .tmp/ir_daemon1.0.0/ && $(COPY_FILE) --parents main.cpp lirc_connection.cpp .tmp/ir_daemon1.0.0/ && (cd `dirname .tmp/ir_daemon1.0.0` && $(TAR) ir_daemon1.0.0.tar ir_daemon1.0.0 && $(COMPRESS) ir_daemon1.0.0.tar) && $(MOVE) `dirname .tmp/ir_daemon1.0.0`/ir_daemon1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/ir_daemon1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/ir_daemon1.0.0/ && $(COPY_FILE) --parents main.cpp .tmp/ir_daemon1.0.0/ && (cd `dirname .tmp/ir_daemon1.0.0` && $(TAR) ir_daemon1.0.0.tar ir_daemon1.0.0 && $(COMPRESS) ir_daemon1.0.0.tar) && $(MOVE) `dirname .tmp/ir_daemon1.0.0`/ir_daemon1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/ir_daemon1.0.0
 
 
 clean:compiler_clean 
@@ -287,12 +283,8 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_lirc_connection.cpp
+compiler_moc_header_make_all:
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_lirc_connection.cpp
-moc_lirc_connection.cpp: lirc_connection.h
-	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/dev/EasyRaceLapTimer/xtra/ir_daemon -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include lirc_connection.h -o moc_lirc_connection.cpp
-
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
 compiler_uic_make_all:
@@ -303,18 +295,12 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean 
+compiler_clean: 
 
 ####### Compile
 
 main.o: main.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
-
-lirc_connection.o: lirc_connection.cpp lirc_connection.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lirc_connection.o lirc_connection.cpp
-
-moc_lirc_connection.o: moc_lirc_connection.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_lirc_connection.o moc_lirc_connection.cpp
 
 ####### Install
 

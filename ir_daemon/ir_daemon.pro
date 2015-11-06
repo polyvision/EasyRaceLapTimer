@@ -16,5 +16,4 @@ CONFIG   -= app_bundle
 SOURCES += main.cpp
 HEADERS +=
 
-LIBS= -lcurl
-#unix:LIBS = -lwiringPi
+LIBS= -lcurl -lwiringPi
