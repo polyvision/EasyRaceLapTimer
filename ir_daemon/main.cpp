@@ -101,7 +101,7 @@ void push_to_service(QList<int>& list,unsigned int delta_time,int control_bit){
 	
 	if(control_bit == (int)val_to_push % 2){
 		printf("token: %u time: %u\n",val_to_push,delta_time);
-        post_request(val_to_push,delta_time);
+        post_request(val_to_push,delta_time); // this sends the request to the rails web app
 	}else{
 		printf("control bit wrong: %i token: %u\n",control_bit,val_to_push);
 	}
