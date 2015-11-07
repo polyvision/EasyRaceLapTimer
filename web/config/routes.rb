@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/system/stop_race_session' => 'system#stop_race_session'
   post '/system/start_race_session' => 'system#start_race_session'
 
+  patch 'system/update_style' => 'system#update_style'
+
   post 'api/v1/lap_track' => 'api/v1/lap_track#create'
   get 'api/v1/lap_track/create' => 'api/v1/lap_track#create'
   get 'api/v1/monitor' => 'api/v1/monitor#index'

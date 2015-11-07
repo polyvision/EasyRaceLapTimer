@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028210025) do
+ActiveRecord::Schema.define(version: 20151107150456) do
 
   create_table "pilot_race_laps", force: :cascade do |t|
     t.datetime "created_at",      null: false
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 20151028210025) do
     t.datetime "updated_at", null: false
     t.string   "title"
     t.boolean  "active"
+  end
+
+  create_table "style_settings", force: :cascade do |t|
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "own_logo_image"
   end
 
   create_table "users", force: :cascade do |t|

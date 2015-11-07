@@ -1,0 +1,22 @@
+!!!
+%html{lang: "en"}
+  %head
+    %title
+      EasyRaceLapTimer
+
+    = stylesheet_link_tag    'monitor', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    .container
+      .row
+        .col-xs-12.center
+          - flash.each do |type, message|
+            %div{class: "alert #{bootstrap_class_for(type)} alert-danger fade in"}
+              %button.close{"data-dismiss" => "alert"} ×
+              = message
+      = yield
+      .row
+        .col-md-6.col-md-offset-3
+          = link_to(url: {action: 'index', controller: '/system'}) do
+            = image_tag('logo_big.png')

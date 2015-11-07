@@ -15,9 +15,13 @@ What you get with EasyRaceLaptimer:
 * and much more comming soon!
 
 
-**Important notice**
+**Important notices**
 
 EasyRaceLapTimer works basicly with any IR transponder, as long as you provide code for interpreting the IR pulses. Just have a look at the *ir_daemon* tool.
+
+Be sure to use the full size of your SD card on the Raspberry PI
+
+    sudo raspi-config
 
 # file structure
 

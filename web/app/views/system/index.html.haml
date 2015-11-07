@@ -8,6 +8,8 @@
         %i.fa.fa-gamepad.fa-6
           Pilots
   .col-xs-6
+    %h2
+      Race Tracking
     - if RaceSession::get_open_session
       %label{:for => "exampleInputName2"}
         active Session
@@ -22,3 +24,16 @@
 
         %button.btn.btn-default{:type => "submit"}
           = t('actions.start_race_session')
+
+.row
+  .col-xs-6
+    %h2
+      Style Settings
+    = form_for(@style_setting,url: url_for(action: 'update_style')) do |f|
+      .form-group
+        %label{:for => ""}
+          = t('style_setting.own_logo_image')
+        = f.file_field :own_logo_image
+        - if !@style_setting.own_logo_image.blank?
+          = image_tag(@style_setting.own_logo_image.mini_thumb.url)
+      = f.submit

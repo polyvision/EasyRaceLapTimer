@@ -1,2 +1,6 @@
-#monitor_view
-  =render file:'/monitor/_view.html.haml'
+-if @current_race_session
+  #monitor_view
+    =render file:'/monitor/_view.html.haml'
+- else
+  .alert.alert-warning{role:"alert"}
+    Sorry, there's no race at present going on.

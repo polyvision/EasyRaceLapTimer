@@ -8551,3 +8551,3002 @@ Migrating to PilotRaceLapRaceSession (20151028210025)
   [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'admin@easyracelaptimer.com' LIMIT 1[0m
   [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["email", "admin@easyracelaptimer.com"], ["encrypted_password", "$2a$10$qJW1Qp9iULF4lqeU8I9BeufxZlgKTPiKLQXZx1OeaeDpmog/3VGYy"], ["created_at", "2015-11-04 13:14:51.889248"], ["updated_at", "2015-11-04 13:14:51.889248"]]
   [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilot_race_laps_on_lap_time' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilot_race_laps_on_lap_time' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilot_race_laps_on_lap_num' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilot_race_laps_on_lap_num' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilot_race_laps_on_pilot_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilot_race_laps_on_pilot_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilots_on_deleted_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilots_on_deleted_at' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.0ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'admin@easyracelaptimer.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+
+
+Started GET "/" for ::1 at 2015-11-07 16:00:27 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 401 Unauthorized in 26ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2015-11-07 16:00:27 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (17.5ms)
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (Inconsistent indentation: 11 spaces used for indentation, but the rest of the document was indented using 2 spaces.):
+    17:             %span.icon-bar
+    18:             %span.icon-bar
+    19:           %a.navbar-brand{:href => "/"}
+    20:            = image_tag('logo_big.png')
+    21:         #navbar.collapse.navbar-collapse
+    22:           %ul.nav.navbar-nav
+    23:             %li.active
+  app/views/layouts/application.html.haml:20
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.6ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (50.9ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (42.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (98.5ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2015-11-07 16:00:35 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 395ms (Views: 394.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-112a0bf3f55af9d6ab3c578a9e4cadfbeb52b9dc6476ee7a1e75e5d50f5f6193.css?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:00:36 +0100
+
+
+Started GET "/users/sign_in" for ::1 at 2015-11-07 16:01:49 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 1717ms (Views: 1716.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-e79e3c21e50ecb868b2b88d1a5cfa0250221149ba21661900da6d24b0a1f6f26.css?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:01:50 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:01:51 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:01:51 +0100
+
+
+Started GET "/users/sign_in" for ::1 at 2015-11-07 16:02:02 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 1732ms (Views: 1731.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:02:03 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:02:04 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:02:04 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:02:04 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:02:04 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:02:04 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:02:07 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mRaceSession Load (0.3ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  Rendered monitor/_view.html.haml (3.5ms)
+  Rendered monitor/index.html.haml within layouts/application (5.8ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.5ms)
+
+ActionView::Template::Error (undefined method `listing' for nil:NilClass):
+    14:       %th
+    15:         laps
+    16:   %tbody
+    17:     - @current_race_session.listing.each_with_index do |entry,index|
+    18:       %tr
+    19:         %td
+    20:           = index + 1
+  app/views/monitor/_view.html.haml:17:in `_app_views_monitor__view_html_haml__126905720200298702_70305170994180'
+  app/views/monitor/index.html.haml:2:in `_app_views_monitor_index_html_haml___4483709562532443326_70305179108560'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (46.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (43.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (93.0ms)
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:02:07 +0100
+Processing by MonitorController#index as HTML
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  Rendered monitor/_view.html.haml (3.4ms)
+  Rendered monitor/index.html.haml within layouts/application (5.0ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.1ms)
+
+ActionView::Template::Error (undefined method `listing' for nil:NilClass):
+    14:       %th
+    15:         laps
+    16:   %tbody
+    17:     - @current_race_session.listing.each_with_index do |entry,index|
+    18:       %tr
+    19:         %td
+    20:           = index + 1
+  app/views/monitor/_view.html.haml:17:in `_app_views_monitor__view_html_haml__126905720200298702_70305194967640'
+  app/views/monitor/index.html.haml:2:in `_app_views_monitor_index_html_haml___4483709562532443326_70305167925180'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.5ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (47.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (40.5ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (93.4ms)
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:03:39 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  Rendered monitor/index.html.haml within layouts/application (0.9ms)
+Completed 200 OK in 111ms (Views: 110.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:03:39 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:03:40 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:03:40 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:03:40 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:03:40 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:03:48 +0100
+Processing by MonitorController#index as HTML
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  Rendered monitor/index.html.haml within layouts/application (1.0ms)
+Completed 200 OK in 107ms (Views: 105.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:03:48 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:03:49 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:03:49 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:03:49 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:03:49 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:03:49 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:03:49 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:03:49 +0100
+
+
+Started GET "/" for ::1 at 2015-11-07 16:03:58 +0100
+Processing by SystemController#index as HTML
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2015-11-07 16:03:58 +0100
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/shared/_links.html.erb (0.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 130ms (Views: 129.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2015-11-07 16:04:12 +0100
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ix55MouBqK9NpOHFXPUPORXu7qPkD3xGZg0qeupli44ADxca5jmUNZ+xPB0zyY/jsqCzKF0I8TjTtuRu6C6H/Q==", "user"=>{"email"=>"admin@easyracelaptimer.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."email" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["email", "admin@easyracelaptimer.com"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["last_sign_in_at", "2015-11-07 15:04:12.446848"], ["current_sign_in_at", "2015-11-07 15:04:12.446848"], ["last_sign_in_ip", "::1"], ["current_sign_in_ip", "::1"], ["sign_in_count", 1], ["updated_at", "2015-11-07 15:04:12.447664"], ["id", 1]]
+  [1m[35m (0.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 81ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:04:12 +0100
+Processing by SystemController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (7.6ms)
+Completed 200 OK in 176ms (Views: 171.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-07 16:04:12 +0100
+
+
+Started GET "/" for ::1 at 2015-11-07 16:10:06 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.4) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.4) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.4) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.4) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.4) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.4) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.4) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.4) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.4) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.4) lib/rails/engine.rb:518:in `call'
+  railties (4.2.4) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (2.14.0) lib/puma/server.rb:541:in `handle_request'
+  puma (2.14.0) lib/puma/server.rb:388:in `process_client'
+  puma (2.14.0) lib/puma/server.rb:270:in `block in run'
+  puma (2.14.0) lib/puma/thread_pool.rb:106:in `call'
+  puma (2.14.0) lib/puma/thread_pool.rb:106:in `block in spawn_thread'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.9ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (48.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (40.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (92.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateStyleSettings (20151107150456)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "style_settings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "own_logo_image" varchar) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151107150456"]]
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilot_race_laps_on_lap_time' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilot_race_laps_on_lap_time' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilot_race_laps_on_lap_num' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilot_race_laps_on_lap_num' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilot_race_laps_on_pilot_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilot_race_laps_on_pilot_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilots_on_deleted_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilots_on_deleted_at' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+
+
+Started GET "/" for ::1 at 2015-11-07 16:10:32 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 0.4ms)
+
+NameError (uninitialized constant StyleSetting::OwnImageLogoUploader):
+  app/models/style_setting.rb:2:in `<class:StyleSetting>'
+  app/models/style_setting.rb:1:in `<top (required)>'
+  app/controllers/system_controller.rb:35:in `get_style_settings'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (53.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (43.4ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (100.5ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:10:47 +0100
+Processing by SystemController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 0.6ms)
+
+LoadError (cannot load such file -- mini_magick (You may need to install the mini_magick gem)):
+  app/uploaders/own_logo_image_uploader.rb:7:in `include'
+  app/uploaders/own_logo_image_uploader.rb:7:in `<class:OwnLogoImageUploader>'
+  app/uploaders/own_logo_image_uploader.rb:3:in `<top (required)>'
+  app/models/style_setting.rb:2:in `<class:StyleSetting>'
+  app/models/style_setting.rb:1:in `<top (required)>'
+  app/controllers/system_controller.rb:35:in `get_style_settings'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.0ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (48.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (42.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (95.3ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:11:21 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 0.4ms)
+
+NoMethodError (undefined method `find_or_create' for #<Class:0x007fb7e35aa4e0>):
+  app/controllers/system_controller.rb:35:in `get_style_settings'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.0ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (46.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (40.9ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (92.4ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:11:23 +0100
+Processing by SystemController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.1ms)
+
+NoMethodError (undefined method `find_or_create' for #<Class:0x007fb7e35aa4e0>):
+  app/controllers/system_controller.rb:35:in `get_style_settings'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.7ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (47.4ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (1.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (41.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (92.1ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:11:58 +0100
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "style_settings" ("id", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["id", 1], ["created_at", "2015-11-07 15:11:58.983426"], ["updated_at", "2015-11-07 15:11:58.983426"]]
+  [1m[35m (2.3ms)[0m  commit transaction
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (27.2ms)
+Completed 200 OK in 297ms (Views: 268.3ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-07 16:11:59 +0100
+
+
+Started GET "/" for ::1 at 2015-11-07 16:12:24 +0100
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (8.5ms)
+Completed 200 OK in 139ms (Views: 136.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-07 16:12:24 +0100
+
+
+Started GET "/" for ::1 at 2015-11-07 16:12:49 +0100
+Processing by SystemController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (5.7ms)
+Completed 200 OK in 119ms (Views: 117.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-07 16:12:49 +0100
+
+
+Started GET "/" for ::1 at 2015-11-07 16:13:16 +0100
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (14.4ms)
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (undefined method `file_input' for #<ActionView::Helpers::FormBuilder:0x007fb7e8ce7b90>):
+    30:     %h2
+    31:       Style Settings
+    32:     = form_for(@style_setting,url: url_for(action: 'update_style')) do |f|
+    33:       = f.file_input :own_logo_image
+    34:       = f.submit
+  app/views/system/index.html.haml:33:in `block in _app_views_system_index_html_haml__1074130347182696771_70213930613940'
+  app/views/system/index.html.haml:32:in `_app_views_system_index_html_haml__1074130347182696771_70213930613940'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.5ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (51.0ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (39.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (89.5ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:13:38 +0100
+Processing by SystemController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (8.1ms)
+Completed 200 OK in 117ms (Views: 115.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-07 16:13:38 +0100
+
+
+Started GET "/" for ::1 at 2015-11-07 16:14:16 +0100
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (10.2ms)
+Completed 200 OK in 152ms (Views: 149.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-07 16:14:17 +0100
+
+
+Started PATCH "/system/update_style" for ::1 at 2015-11-07 16:15:40 +0100
+
+ActionController::RoutingError (No route matches [PATCH] "/system/update_style"):
+  actionpack (4.2.4) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.2.1) lib/web_console/middleware.rb:39:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.4) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.4) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.4) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.4) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.4) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.4) lib/rails/engine.rb:518:in `call'
+  railties (4.2.4) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (2.14.0) lib/puma/server.rb:541:in `handle_request'
+  puma (2.14.0) lib/puma/server.rb:388:in `process_client'
+  puma (2.14.0) lib/puma/server.rb:270:in `block in run'
+  puma (2.14.0) lib/puma/thread_pool.rb:106:in `call'
+  puma (2.14.0) lib/puma/thread_pool.rb:106:in `block in spawn_thread'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (4.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (73.2ms)
+Cannot render console with content type multipart/form-dataAllowed content types: [#<Mime::Type:0x007fb7e2d31930 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x007fb7e2d30fa8 @synonyms=[], @symbol=:text, @string="text/plain">, #<Mime::Type:0x007fb7e2d283d0 @synonyms=[], @symbol=:url_encoded_form, @string="application/x-www-form-urlencoded">]
+
+
+Started PATCH "/system/update_style" for ::1 at 2015-11-07 16:15:52 +0100
+Processing by SystemController#update_style as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"eYBUZYnKVaEIBkrM917WS1EgG7MQUCGoSJWY4mC+FooCO3SJvmAS/ffwCzXoTHKAAUrSGrKupySO52XP/0PASw==", "style_setting"=>{"own_logo_image"=>#<ActionDispatch::Http::UploadedFile:0x007fb7e8c071a8 @tempfile=#<Tempfile:/var/folders/8d/hy3g71fd4szdqvk9l55q_08r0000gn/T/RackMultipart20151107-9952-1iycxyn.png>, @original_filename="airbirds_weblogo_200.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"style_setting[own_logo_image]\"; filename=\"airbirds_weblogo_200.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Update Style setting"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mStyleSetting Load (0.2ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "style_settings" SET "own_logo_image" = ?, "updated_at" = ? WHERE "style_settings"."id" = ?[0m  [["own_logo_image", "airbirds_weblogo_200.png"], ["updated_at", "2015-11-07 15:15:52.828086"], ["id", 1]]
+  [1m[35m (0.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 100ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:15:52 +0100
+Processing by SystemController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (5.2ms)
+Completed 200 OK in 130ms (Views: 123.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-07 16:15:53 +0100
+
+
+Started PATCH "/system/update_style" for ::1 at 2015-11-07 16:16:23 +0100
+Processing by SystemController#update_style as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QswkXZ1VcLM+uubbRER82GMjHFAmzLkRpY18Iz8VjvA5dwSxqv8378FMpyJbVtgTM0nV+YQyP51j/4EOoOhYMQ==", "style_setting"=>{"own_logo_image"=>#<ActionDispatch::Http::UploadedFile:0x007fb7ea3597c0 @tempfile=#<Tempfile:/var/folders/8d/hy3g71fd4szdqvk9l55q_08r0000gn/T/RackMultipart20151107-9952-7ehkgk.png>, @original_filename="airbirds_weblogo_200.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"style_setting[own_logo_image]\"; filename=\"airbirds_weblogo_200.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"Update Style setting"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mStyleSetting Load (0.2ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mSQL (0.2ms)[0m  UPDATE "style_settings" SET "own_logo_image" = ?, "updated_at" = ? WHERE "style_settings"."id" = ?  [["own_logo_image", "airbirds_weblogo_200.png"], ["updated_at", "2015-11-07 15:16:23.639923"], ["id", 1]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 90ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:16:23 +0100
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.2ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (5.2ms)
+Completed 200 OK in 128ms (Views: 120.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:16:59 +0100
+Processing by SystemController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.2ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (9.2ms)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.3ms)
+
+ActionView::Template::Error (undefined method `own_logo_image' for nil:NilClass):
+    34:         %label{:for => ""}
+    35:           = t('style_setting.own_logo_image')
+    36:         - if !@style_setting.own_logo_image.blank?
+    37:           = image_tag(@style_Setting.own_logo_image.mini_thumb.url)
+    38:         = f.file_field :own_logo_image
+    39:       = f.submit
+  app/views/system/index.html.haml:37:in `block in _app_views_system_index_html_haml__1074130347182696771_70213961882160'
+  app/views/system/index.html.haml:32:in `_app_views_system_index_html_haml__1074130347182696771_70213961882160'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (58.5ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (39.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (88.0ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:17:06 +0100
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.2ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (9.3ms)
+Completed 200 OK in 132ms (Views: 129.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-07 16:17:06 +0100
+
+
+Started GET "/" for ::1 at 2015-11-07 16:17:28 +0100
+Processing by SystemController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.0ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  Rendered system/index.html.haml within layouts/application (6.0ms)
+Completed 200 OK in 100ms (Views: 98.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:17:28 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:17:29 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:17:29 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:17:29 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:17:29 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:17:29 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:17:29 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:17:29 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:17:29 +0100
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-07 16:17:29 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:17:35 +0100
+Processing by MonitorController#index as HTML
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  Rendered monitor/index.html.haml within layouts/application (1.1ms)
+Completed 200 OK in 119ms (Views: 118.1ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/system/start_race_session" for ::1 at 2015-11-07 16:17:41 +0100
+Processing by SystemController#start_race_session as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"JS/fosSSwnsOCWLMt6jcLLZhnWCoWkpso1IwMzrcw8ZelP9O8ziFJ/H/IzWounjn5gtUyQqkzOBlIM0epSEVBw==", "race_session"=>{"title"=>"Easy Race"}}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.0ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "race_sessions" ("title", "active", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "Easy Race"], ["active", "t"], ["created_at", "2015-11-07 15:17:41.246421"], ["updated_at", "2015-11-07 15:17:41.246421"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 5ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/" for ::1 at 2015-11-07 16:17:41 +0100
+Processing by SystemController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", true]]
+  Rendered system/index.html.haml within layouts/application (4.6ms)
+Completed 200 OK in 114ms (Views: 112.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:17:43 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35m (0.1ms)[0m  SELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (16.7ms)
+  Rendered monitor/index.html.haml within layouts/application (17.7ms)
+Completed 200 OK in 126ms (Views: 124.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:17:43 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:18:08 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35m (0.1ms)[0m  SELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (2.8ms)
+  Rendered monitor/index.html.haml within layouts/application (3.9ms)
+Completed 200 OK in 117ms (Views: 116.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:18:08 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:18:12 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35m (0.1ms)[0m  SELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (2.6ms)
+  Rendered monitor/index.html.haml within layouts/application (3.6ms)
+Completed 200 OK in 105ms (Views: 104.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:18:12 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:19:13 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC[0m  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (5.9ms)
+  Rendered monitor/index.html.haml within layouts/application (6.9ms)
+Completed 200 OK in 130ms (Views: 116.6ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:19:13 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:20:21 +0100
+Processing by MonitorController#index as HTML
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.0ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  Rendered monitor/_view.html.haml (1.3ms)
+  Rendered monitor/index.html.haml within layouts/application (2.4ms)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.1ms)
+
+ActionView::Template::Error (Illegal nesting: content can't be both given on the same line as %div and nested within it.):
+    1: .row
+    2:   .col-md-2.col-md-offset-5"
+    3:     - if !@style_setting.own_logo_image.blank?
+    4:       = image_tag(@style_setting.own_logo_image.thumb.url)
+    5:     %h1
+    6:       =@current_race_session.title
+  app/views/monitor/_view.html.haml:3
+  app/views/monitor/index.html.haml:3:in `_app_views_monitor_index_html_haml___1231983547659028271_70213936927680'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.5ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (55.0ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (38.6ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (91.7ms)
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:20:26 +0100
+Processing by MonitorController#index as HTML
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.0ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35m (0.1ms)[0m  SELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (4.1ms)
+  Rendered monitor/index.html.haml within layouts/application (5.3ms)
+Completed 200 OK in 116ms (Views: 114.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:20:26 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:20:33 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC[0m  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (4.0ms)
+  Rendered monitor/index.html.haml within layouts/application (5.1ms)
+Completed 200 OK in 118ms (Views: 115.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:20:33 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:21:25 +0100
+Processing by MonitorController#index as HTML
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.0ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35m (0.0ms)[0m  SELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (4.4ms)
+  Rendered monitor/index.html.haml within layouts/monitor (5.4ms)
+Completed 200 OK in 113ms (Views: 111.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:21:25 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:22:03 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.0ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC[0m  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (1.5ms)
+  Rendered monitor/index.html.haml within layouts/monitor (2.6ms)
+Completed 500 Internal Server Error in 1603ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (Asset filtered out and will not be served: add `Rails.application.config.assets.precompile += %w( monitor.css )` to `config/initializers/assets.rb` and restart your server):
+    4:     %title
+    5:       EasyRaceLapTimer
+    6: 
+    7:     = stylesheet_link_tag    'monitor', media: 'all', 'data-turbolinks-track' => true
+    8:     = javascript_include_tag 'application'
+    9:     = csrf_meta_tags
+   10:   %body
+  app/views/layouts/monitor.html.haml:7:in `_app_views_layouts_monitor_html_haml___2401745374812580297_70213943133120'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.0ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (48.5ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (43.6ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (91.9ms)
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:22:26 +0100
+Processing by MonitorController#index as HTML
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.0ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35m (0.0ms)[0m  SELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (1.3ms)
+  Rendered monitor/index.html.haml within layouts/monitor (2.2ms)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (Asset filtered out and will not be served: add `Rails.application.config.assets.precompile += %w( monitor.css )` to `config/initializers/assets.rb` and restart your server):
+    4:     %title
+    5:       EasyRaceLapTimer
+    6: 
+    7:     = stylesheet_link_tag    'monitor', media: 'all', 'data-turbolinks-track' => true
+    8:     = javascript_include_tag 'application'
+    9:     = csrf_meta_tags
+   10:   %body
+  app/views/layouts/monitor.html.haml:7:in `_app_views_layouts_monitor_html_haml___2401745374812580297_70213943133120'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.6ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (48.4ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (41.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (90.7ms)
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:25:09 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by MonitorController#index as HTML
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35m (0.2ms)[0m  SELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (12.1ms)
+  Rendered monitor/index.html.haml within layouts/monitor (14.8ms)
+Completed 200 OK in 340ms (Views: 318.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/monitor.self-2384de13d2d1cb66573806fb8289d2f7bfbc967415dbedad8c728c9be3867a6a.css?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:25:10 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:26:49 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.0ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  [1m[36m (0.0ms)[0m  [1mSELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC[0m  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (1.5ms)
+  Rendered monitor/index.html.haml within layouts/monitor (2.5ms)
+Completed 200 OK in 129ms (Views: 127.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/monitor.self-2384de13d2d1cb66573806fb8289d2f7bfbc967415dbedad8c728c9be3867a6a.css?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:26:49 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:26:56 +0100
+Processing by MonitorController#index as HTML
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35m (0.1ms)[0m  SELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (1.8ms)
+  Rendered monitor/index.html.haml within layouts/monitor (3.1ms)
+Completed 200 OK in 121ms (Views: 119.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/monitor.self-2384de13d2d1cb66573806fb8289d2f7bfbc967415dbedad8c728c9be3867a6a.css?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:26:56 +0100
+
+
+Started GET "/monitor" for ::1 at 2015-11-07 16:26:59 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.0ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC[0m  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (1.3ms)
+  Rendered monitor/index.html.haml within layouts/monitor (2.2ms)
+Completed 200 OK in 121ms (Views: 119.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/monitor.self-2384de13d2d1cb66573806fb8289d2f7bfbc967415dbedad8c728c9be3867a6a.css?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:27:00 +0100
