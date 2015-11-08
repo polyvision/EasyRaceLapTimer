@@ -10,6 +10,7 @@ What you get with EasyRaceLaptimer:
 
 * host system for tracking the laps
 * IR transponders (code & schematic files for building them)
+* update transponders with new code (Arduino hardware needed)
 * setup guide for building your Raspberry PI host station
 * monitoring mode, you can watch the stats with your mobile phones
 * and much more comming soon!
