@@ -1,3 +1,5 @@
+![alt text](http://www.airbirds.de/wp-content/uploads/2015/11/logo_big.png "EasyRaceLapTimer")
+
 # EasyRaceLapTimer
 
 EasyRaceLapTimer is a complete open source IR lap time tracker all-in-one solution for FPV racing quads.
@@ -10,8 +12,16 @@ What you get with EasyRaceLaptimer:
 * IR transponders (code & schematic files for building them)
 * setup guide for building your Raspberry PI host station
 * monitoring mode, you can watch the stats with your mobile phones
-* and many more comming soon!
+* and much more comming soon!
 
+
+**Important notices**
+
+EasyRaceLapTimer works basicly with any IR transponder, as long as you provide code for interpreting the IR pulses. Just have a look at the *ir_daemon* tool.
+
+Be sure to use the full size of your SD card on the Raspberry PI
+
+    sudo raspi-config
 
 # file structure
 
@@ -27,44 +37,20 @@ all arduino sketches
 
 the cpp daemon for receiving the IR pulses
 
-# API
+**/datasheets**
 
-**tracking a lap**
-
-    POST http://localhost:3000/api/v1/lap_track
-
-or
-
-    GET http://localhost:3000/api/v1/lap_track/create
-
-needed params
- * transponder_token
- * lap_time_in_ms
+schematic files and more for transponders etc.
 
 
-## Rails Webapp setup
+# Installation
 
-    rake db:create
-    rake db:migrate
-    rake db:seed
+fetch the source via git with the following command
 
-default credentials are:
+    git clone git@github.com:polyvision/EasyRaceLapTimer.git
 
-    user: admin@easyracelaptimer.com
-    password: defaultpw
+more details of each indivial package can be found in the *docs* folder
 
 
-## Rails Webapp development
-for running rails in dev mode, you need to run these two commands in seperate processes (e.g. terminal windows). The app uses sqlite for it's database
+**development and sponsoring by [AirBirds](http://www.airbirds.de)**
 
-    ./bin/cable
-    rails s
-
-## ir_daemon compilation
-QT5 & libCurl is required for compilation
-
-**ir_daemon**
-
-    qmake ir_daemon.pro
-    make
-    ./ir_daemon
+![alt text](http://www.airbirds.de/wp-content/uploads/2015/08/airbirds_weblogo_200.png "Logo Title Text 1")

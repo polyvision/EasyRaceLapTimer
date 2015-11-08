@@ -21,6 +21,7 @@ gem "paranoia", "~> 2.0"
 gem 'carrierwave'
 gem 'actioncable', github: 'rails/actioncable'
 gem 'puma'
+gem 'mini_magick'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

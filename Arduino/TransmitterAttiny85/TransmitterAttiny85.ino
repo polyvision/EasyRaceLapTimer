@@ -1,17 +1,18 @@
-
-#define ZERO          160
-#define ONE           425
-#define SPACE         270
-#define SIGNAL_SPACE   20
-
 #define LED_PIN PB0
+#define BIT_SET(a,b) ((a) |= (1<<(b)))
+#define BIT_CLEAR(a,b) ((a) &= ~(1<<(b)))
+#define BIT_FLIP(a,b) ((a) ^= (1<<(b)))
+#define BIT_CHECK(a,b) ((a) & (1<<(b)))
 
 
-void setup() {
-  pinMode(LED_PIN,OUTPUT);
-}
+#define NUM_BITS  7
+#define TRANSPONDER_ID 15
+#define ZERO 300
+#define ONE  600
 
-void pulseIR(long microsecs) {
+unsigned int buffer[NUM_BITS];
+
+void send_pulse(long microsecs) {
  
   cli(); 
 
@@ -27,24 +28,57 @@ void pulseIR(long microsecs) {
   sei();  // this turns them back on
 }
 
-void send_zero(){
-  pulseIR(ZERO);
-}
-
-void send_one(){
-  pulseIR(ONE);
-}
-
-void loop()
-{
-  // startbits
-  //send_zero();
-  //send_one();
-  for(int i =0; i < 3; i++){
-    pulseIR(1000);
-    pulseIR(500);
+void send_space(long microsecs){
+  while (microsecs > 0) { // 38 kHz is about 13 microseconds high and 13 microseconds low
+    delayMicroseconds(26);
+   // so 26 microseconds altogether
+   microsecs -= 26;
   }
-  delay(100);
+}
+
+unsigned int get_pulse_width_for_buffer(int bit){
+  if(BIT_CHECK(TRANSPONDER_ID,bit)){
+    return ONE;
+  }
+
+  return ZERO;
+}
+
+unsigned int control_bit(){
+  if(TRANSPONDER_ID % 2 >= 1){
+    return ONE;  
+  }else{
+    return ZERO;
+  }
+}
+
+void setup() {
+  pinMode(TRANSPONDER_ID,OUTPUT);
+  
+  /*buffer[0] = ZERO;    
+  buffer[1] = ZERO;    
+  buffer[2] = get_pulse_width_for_buffer(3);
+  buffer[3] = get_pulse_width_for_buffer(2);
+  buffer[4] = get_pulse_width_for_buffer(1);
+  buffer[5] = get_pulse_width_for_buffer(0);
+  buffer[6] = control_bit();  **/
+
+  for(int i = 0; i < NUM_BITS; i++){
+    buffer[i] = ONE;
+  }
+}
+
+void loop() {
+   for(int i = 0; i < 3; i++){
+    for(int i = 0; i < NUM_BITS; i++){
+      if(buffer[i] % 2 == 0){
+        send_pulse(buffer[i]);
+      }else{
+        send_space(buffer[i]);
+      }
+    }
+   }
+   delay(100);
 }
 
 
