@@ -30,17 +30,29 @@
 #define BIT_CHECK(a,b) ((a) & (1<<(b)))
 
 #define	IR_LED_1	1
+#define	IR_LED_2	4
+#define	IR_LED_3	5
+#define BUZZER_PIN	6
 
 #define PULSE_ONE	500
 #define PULSE_MIN 100
 #define PULSE_MAX 1000
 
 #define DATA_BIT_LENGTH 7
+#define BUZZER_ACTIVE_TIME_IN_MS	40
 
-int sensor_state[1];
-unsigned int sensor_pulse[1];
-unsigned int sensor_start_lap_time[1];
-QList<int> sensor_data[1];
+int sensor_state[3];
+unsigned int sensor_pulse[3];
+unsigned int sensor_start_lap_time[3];
+QList<int> sensor_data[3];
+unsigned int buzzer_start_time;
+
+void activate_buzzer(){
+	if(buzzer_start_time == 0){
+		buzzer_start_time = millis();
+		digitalWrite(BUZZER_PIN,HIGH);
+	}
+}
 
 void post_request(int token,unsigned int lap_time){
     CURL *curl;
@@ -79,7 +91,7 @@ void print_binary_list(QList<int>& list){
 	printf("\n");
 }
 
-void push_to_service(QList<int>& list,unsigned int delta_time,int control_bit){
+void push_to_service(int sensor_i,QList<int>& list,unsigned int delta_time,int control_bit){
 	unsigned int val_to_push = 0;
 	print_binary_list(list);
 	
@@ -100,10 +112,11 @@ void push_to_service(QList<int>& list,unsigned int delta_time,int control_bit){
 	//qDebug() << "result binary:" << QString::number(val_to_push,2) << "\n";
 	
 	if(control_bit == (int)val_to_push % 2){
-		printf("token: %u time: %u\n",val_to_push,delta_time);
+		printf("sensor: %i token: %u time: %u\n",sensor_i,val_to_push,delta_time);
+		activate_buzzer();
         post_request(val_to_push,delta_time); // this sends the request to the rails web app
 	}else{
-		printf("control bit wrong: %i token: %u\n",control_bit,val_to_push);
+		printf("sensor: %i control bit wrong: %i token: %u\n",sensor_i,control_bit,val_to_push);
 	}
 }
 
@@ -128,7 +141,7 @@ void push_bit_to_sensor_data(unsigned int pulse_width,int sensor_i){
 			// if yes, push it
 			if(sensor_start_lap_time[sensor_i] != 0)
 			{
-				push_to_service(sensor_data[sensor_i],millis() - sensor_start_lap_time[sensor_i],sensor_data[sensor_i].last());
+				push_to_service(sensor_i,sensor_data[sensor_i],millis() - sensor_start_lap_time[sensor_i],sensor_data[sensor_i].last());
 				sensor_start_lap_time[sensor_i] = 0;
 			}
 			else
@@ -154,34 +167,64 @@ int main(int argc, char *argv[])
 #ifndef __APPLE__
 	wiringPiSetup () ;
     pinMode(IR_LED_1,INPUT);
+	pinMode(IR_LED_2,INPUT);
+	pinMode(IR_LED_3,INPUT);
+	
+	pinMode(BUZZER_PIN,OUTPUT);
 #else
     // just for testing on osx
     post_request(12,1000);
     return 0;
 #endif
 
-	sensor_state[0] = 0;
-	sensor_pulse[0] = 0;
-	sensor_start_lap_time[0] = 0;
+	for(int sensor_i = 0; sensor_i < 3; sensor_i++){
+		sensor_state[sensor_i] = 0;
+		sensor_pulse[sensor_i] = 0;
+		sensor_start_lap_time[sensor_i] = 0;
+	}
 	
 	while(1){
-        #ifndef __APPLE__
-            int state = digitalRead(IR_LED_1);
-        #else
-            int state = 0;
-        #endif
-		if(state != sensor_state[0]){
-			sensor_state[0] = state;
-			unsigned int c_time = micros();
-			unsigned int c_pulse = c_time - sensor_pulse[0];
+		for(int sensor_i = 0; sensor_i < 3; sensor_i++){
+			#ifndef __APPLE__
 			
-			//printf("pulse %i\n",c_pulse);
-			if(c_pulse >= PULSE_MIN && c_pulse <= PULSE_MAX){
-				push_bit_to_sensor_data(c_pulse,0);
-			}else{
-				sensor_data[0].clear();
+			int pid_input = IR_LED_1;
+			switch(sensor_i){
+				case 0:
+					pid_input = IR_LED_1;
+					break;
+				case 1:
+					pid_input = IR_LED_2;
+					break;
+				case 2:
+					pid_input = IR_LED_3;
+					break;
 			}
-			sensor_pulse[0] = c_time;
+			
+            int state = digitalRead(pid_input);
+			#else
+				int state = 0;
+			#endif
+			if(state != sensor_state[sensor_i]){
+				sensor_state[sensor_i] = state;
+				unsigned int c_time = micros();
+				unsigned int c_pulse = c_time - sensor_pulse[sensor_i];
+				
+				//printf("sensor %i: pulse %i\n",sensor_i,c_pulse);
+				if(c_pulse >= PULSE_MIN && c_pulse <= PULSE_MAX){
+					push_bit_to_sensor_data(c_pulse,sensor_i);
+				}else{
+					sensor_data[sensor_i].clear();
+				}
+				sensor_pulse[sensor_i] = c_time;
+			}
+		}
+		
+		// calculating buzzer stuff
+		if(buzzer_start_time != 0){
+			if(millis() - buzzer_start_time > BUZZER_ACTIVE_TIME_IN_MS){
+				digitalWrite(BUZZER_PIN,LOW);
+				buzzer_start_time = 0;
+			}
 		}
 	}
 
