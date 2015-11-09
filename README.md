@@ -13,8 +13,8 @@ What you get with EasyRaceLaptimer:
 * update transponders with new code (Arduino hardware needed)
 * setup guide for building your Raspberry PI host station
 * monitoring mode, you can watch the stats with your mobile phones
+* add your own team logo to the monitoring mode
 * and much more comming soon!
-
 
 **Important notices**
 
@@ -25,6 +25,9 @@ Be sure to use the full size of your SD card on the Raspberry PI
     sudo raspi-config
 
 # file structure
+
+**/docs**
+  documentation of nearly every part of the package
 
 **/web**
 
