@@ -7,6 +7,7 @@
     1x Infrared LED 950nm (example: LD 274-3)
     1x Resistor 56 Ohm
     1x Resistor 330 Ohm
+    1x Transistor NPN TO-92 45V 0,1A 0,5W
     1x ATTINY 85-20 PU, DIP-8
     1x IC socket for the ATTINY
 
