@@ -5,9 +5,9 @@
       EasyRaceLapTimer
 
     = stylesheet_link_tag    'monitor', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
+    #host_data{"data-rails-cable-ip" => @RAILS_CABLE_IP}
     .container
       .row
         .col-xs-12.center
@@ -27,3 +27,5 @@
         .col-md-6.col-md-offset-3
           = link_to(url: {action: 'index', controller: '/system'}) do
             = image_tag('logo_big.png')
+
+    = javascript_include_tag 'application'

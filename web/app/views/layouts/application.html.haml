@@ -8,6 +8,7 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
+
     %nav.navbar.navbar-inverse.navbar-fixed-top
       .container
         .navbar-header
@@ -33,3 +34,4 @@
               %button.close{"data-dismiss" => "alert"} ×
               = message
       = yield
+    = javascript_include_tag 'application'
