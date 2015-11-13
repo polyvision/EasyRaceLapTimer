@@ -63,7 +63,7 @@ void post_request(int token,unsigned int lap_time){
         /* First set the URL that is about to receive our POST. This URL can
            just as well be a https:// URL if that is what should receive the
            data. */
-        curl_easy_setopt(curl, CURLOPT_URL, QString("http://localhost:3000/api/v1/lap_track/create?transponder_token=%1&lap_time_in_ms=%2").arg(token).arg(lap_time).toStdString().c_str());
+        curl_easy_setopt(curl, CURLOPT_URL, QString("http://localhost/api/v1/lap_track/create?transponder_token=%1&lap_time_in_ms=%2").arg(token).arg(lap_time).toStdString().c_str());
 
 
 
@@ -164,18 +164,15 @@ int main(int argc, char *argv[])
 
     printf("starting ir_daemon\n");
 
-#ifndef __APPLE__
+
 	wiringPiSetup () ;
     pinMode(IR_LED_1,INPUT);
 	pinMode(IR_LED_2,INPUT);
 	pinMode(IR_LED_3,INPUT);
 	
 	pinMode(BUZZER_PIN,OUTPUT);
-#else
-    // just for testing on osx
-    post_request(12,1000);
-    return 0;
-#endif
+	digitalWrite(BUZZER_PIN,LOW);
+
 
 	for(int sensor_i = 0; sensor_i < 3; sensor_i++){
 		sensor_state[sensor_i] = 0;
@@ -185,7 +182,6 @@ int main(int argc, char *argv[])
 	
 	while(1){
 		for(int sensor_i = 0; sensor_i < 3; sensor_i++){
-			#ifndef __APPLE__
 			
 			int pid_input = IR_LED_1;
 			switch(sensor_i){
@@ -201,15 +197,14 @@ int main(int argc, char *argv[])
 			}
 			
             int state = digitalRead(pid_input);
-			#else
-				int state = 0;
-			#endif
+
 			if(state != sensor_state[sensor_i]){
 				sensor_state[sensor_i] = state;
 				unsigned int c_time = micros();
 				unsigned int c_pulse = c_time - sensor_pulse[sensor_i];
 				
 				//printf("sensor %i: pulse %i\n",sensor_i,c_pulse);
+				//activate_buzzer();
 				if(c_pulse >= PULSE_MIN && c_pulse <= PULSE_MAX){
 					push_bit_to_sensor_data(c_pulse,sensor_i);
 				}else{
