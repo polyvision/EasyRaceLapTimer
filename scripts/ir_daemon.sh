@@ -10,7 +10,7 @@ DAEMON=ir_daemon
 DAEMONOPTS="-my opts"
 
 NAME=ir_daemon
-DESC="EasyRaceLapTimer daemon"
+DESC="EasyRaceLapTimer IR daemon"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 
