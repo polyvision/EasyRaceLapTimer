@@ -17,6 +17,8 @@
 #include <QDebug>
 #include <curl/curl.h>
 
+#define VERSION "0.1"
+
 #ifndef __APPLE__
     #include <wiringPi.h>
 #else
@@ -162,7 +164,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     curl_global_init(CURL_GLOBAL_ALL);
 
-    printf("starting ir_daemon\n");
+    printf("starting ir_daemon v%s\n",VERSION);
 
 
 	wiringPiSetup () ;
