@@ -7,7 +7,7 @@
   %li
     = link_to('Pilots',{action: 'index', controller: '/system/pilot'})
 
-= form_for(@pilot,url: {action: 'update', id: @pilot.id},html: {class: 'form-inline'}) do |f|
+= form_for(@pilot,url: {action: 'update', id: @pilot.id},html: {class: ''}) do |f|
   .form-group
     %label{:for => "exampleInputName2"}
       = t('pilot.name')
@@ -16,6 +16,10 @@
     %label{:for => "exampleInputEmail2"}
       = t('pilot.transponder_token')
     = f.text_field(:transponder_token, placeholder: "XXXXXX", class: 'form-control', required: true)
+  .form-group
+    %label{:for => "exampleInputEmail2"}
+      = t('pilot.quad')
+    = f.text_field(:quad, placeholder: "ZMR 250 4S", class: 'form-control', required: true)
   .form-group
     %label{:for => "exampleInputEmail2"}
       = t('pilot.image')

@@ -1,0 +1,29 @@
+%h1
+  Pilots
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+      %th
+        = t('pilot.name')
+      %th
+        = t('pilot.quad')
+      %th
+        = t('pilot.total_races')
+      %th
+        = t('pilot.total_laps')
+  %tbody
+    - @pilots.each do |pilot|
+      %tr
+        %td
+          - if pilot.image
+            = image_tag(pilot.image.url,width: 50,height:50)
+        %td
+          = pilot.name
+        %td
+          = pilot.quad
+        %td
+          = pilot.total_races
+        %td
+          = link_to(pilot.total_laps,{action: 'laps', id: pilot.id})

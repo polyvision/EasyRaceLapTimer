@@ -1,6 +1,6 @@
 %h1
   Pilots
-  
+
 %ol.breadcrumb
   %li
     = link_to('Configuration',{action: 'index', controller: '/system'})
@@ -14,6 +14,10 @@
     %label{:for => "exampleInputEmail2"}
       = t('pilot.transponder_token')
     = f.text_field(:transponder_token, placeholder: "XXXXXX", class: 'form-control', required: true)
+  .form-group
+    %label{:for => "exampleInputEmail2"}
+      = t('pilot.quad')
+    = f.text_field(:quad, placeholder: "ZMR 250 4S", class: 'form-control', required: true)
   %button.btn.btn-default{:type => "submit"}
     = t('actions.create')
 
@@ -40,5 +44,12 @@
         %td
           = pilot.transponder_token
         %th
-          = link_to(t('actions.edit'),{action: 'edit', id: pilot.id})
-          = link_to(t('actions.delete'),{action: 'delete', id: pilot.id},method: 'delete')
+          = link_to(url_for(action: 'deactivate_token', id: pilot.id)) do
+            %button.btn.btn-danger
+              = t('actions.deactivate_token')
+          = link_to(url_for(action: 'edit', id: pilot.id)) do
+            %button.btn.btn-primary
+              = t('actions.edit')
+          = link_to(url_for(action: 'delete', id: pilot.id)) do
+            %button.btn.btn-warning
+              = t('actions.delete')

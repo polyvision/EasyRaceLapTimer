@@ -23,3 +23,4 @@ en:
   actions:
     delete: "delete"
     edit: "edit"
+    deactivate_token: "remove token"

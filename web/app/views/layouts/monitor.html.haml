@@ -18,5 +18,12 @@
       = yield
       .row
         .col-md-6.col-md-offset-3
+          =link_to('Configuration',{action: 'index',controller: '/system'})
+          |
+          =link_to('Pilots',{action: 'index',controller: '/pilots'})
+          |
+          =link_to('History',{action: 'index',controller: '/monitor'})
+      .row
+        .col-md-6.col-md-offset-3
           = link_to(url: {action: 'index', controller: '/system'}) do
             = image_tag('logo_big.png')

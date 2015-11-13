@@ -11550,3 +11550,1589 @@ Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702
 
 
 Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-07 16:27:00 +0100
+
+
+Started GET "/" for ::1 at 2015-11-13 18:14:02 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", true]]
+  Rendered system/index.html.haml within layouts/application (34.6ms)
+Completed 200 OK in 320ms (Views: 285.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:14:02 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:14:02 +0100
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-13 18:14:02 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:14:16 +0100
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.2ms)[0m  SELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC
+  Rendered system/pilot/index.html.haml within layouts/application (15.1ms)
+Completed 200 OK in 159ms (Views: 148.2ms | ActiveRecord: 0.4ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to PilotQuad (20151113171431)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "pilots" ADD "quad" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151113171431"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilot_race_laps_on_lap_time' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilot_race_laps_on_lap_time' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilot_race_laps_on_lap_num' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilot_race_laps_on_lap_num' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilot_race_laps_on_pilot_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilot_race_laps_on_pilot_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_pilots_on_deleted_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_pilots_on_deleted_at' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:17:47 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:18:08 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.2ms)[0m  SELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC
+  Rendered system/pilot/index.html.haml within layouts/application (31.4ms)
+Completed 200 OK in 333ms (Views: 299.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:18:09 +0100
+
+
+Started POST "/system/pilot/create" for ::1 at 2015-11-13 18:18:24 +0100
+Processing by System::PilotController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"V9MWlDqNWUUZkaluYxdwBExW3iSs9Mqra9IqP8b5VVksaDZ4DSceGeZn6Jd8BdTPHDwXjQ4KTCetoNcSWQSDmA==", "pilot"=>{"name"=>"Jon Doe", "transponder_token"=>"13", "quad"=>"ZMR 250"}}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "pilots" ("name", "transponder_token", "quad") VALUES (?, ?, ?)  [["name", "Jon Doe"], ["transponder_token", "13"], ["quad", "ZMR 250"]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/system/pilot
+Completed 302 Found in 6ms (ActiveRecord: 0.9ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:18:24 +0100
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.2ms)[0m  SELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC
+  Rendered system/pilot/index.html.haml within layouts/application (7.4ms)
+Completed 200 OK in 142ms (Views: 139.4ms | ActiveRecord: 0.3ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:18:24 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:18:24 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/system/pilot/edit/1" for ::1 at 2015-11-13 18:18:29 +0100
+Processing by System::PilotController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.1ms)[0m  [1mSELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered system/pilot/edit.html.haml within layouts/application (6.6ms)
+Completed 200 OK in 129ms (Views: 127.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/system/pilot/edit/1" for ::1 at 2015-11-13 18:18:39 +0100
+Processing by System::PilotController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.0ms)[0m  SELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered system/pilot/edit.html.haml within layouts/application (5.6ms)
+Completed 200 OK in 132ms (Views: 129.8ms | ActiveRecord: 0.2ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:18:39 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:18:40 +0100
+
+
+Started GET "/system/pilot/edit/1" for ::1 at 2015-11-13 18:18:58 +0100
+Processing by System::PilotController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.0ms)[0m  [1mSELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered system/pilot/edit.html.haml within layouts/application (6.8ms)
+Completed 200 OK in 132ms (Views: 130.1ms | ActiveRecord: 0.2ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:18:58 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:18:58 +0100
+
+
+Started PATCH "/system/pilot/update/1" for ::1 at 2015-11-13 18:19:11 +0100
+Processing by System::PilotController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Bo5oDlJqTG+LerkYsCYNZROumW8sA+eJ7qsvHhLpIrx9NUjiZcALM3SM+OGvNKmuQ8RQxo79YQUo2dIzjRT0fQ==", "pilot"=>{"name"=>"Jon Doe", "transponder_token"=>"13", "quad"=>"ZMR 250", "image"=>#<ActionDispatch::Http::UploadedFile:0x007fcc7d3c9190 @tempfile=#<Tempfile:/var/folders/8d/hy3g71fd4szdqvk9l55q_08r0000gn/T/RackMultipart20151113-17446-dn8zl7.jpg>, @original_filename="alex_2015.jpg", @content_type="image/jpeg", @headers="Content-Disposition: form-data; name=\"pilot[image]\"; filename=\"alex_2015.jpg\"\r\nContent-Type: image/jpeg\r\n">}, "id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.1ms)[0m  SELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPilot Load (0.1ms)[0m  SELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "pilots" SET "image" = ? WHERE "pilots"."id" = ?[0m  [["image", "alex_2015.jpg"], ["id", 1]]
+  [1m[35m (0.3ms)[0m  commit transaction
+Redirected to http://localhost:3000/system/pilot
+Completed 302 Found in 9ms (ActiveRecord: 1.0ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:19:11 +0100
+Processing by System::PilotController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.1ms)[0m  [1mSELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC[0m
+  Rendered system/pilot/index.html.haml within layouts/application (5.6ms)
+Completed 200 OK in 132ms (Views: 130.0ms | ActiveRecord: 0.3ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:19:12 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:19:12 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:20:26 +0100
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  Rendered system/pilot/index.html.haml within layouts/application (4.0ms)
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 0.9ms)
+
+SyntaxError (/Users/ghostrifle/Dropbox/code/EasyRaceLapTimer/web/app/views/system/pilot/index.html.haml:47: syntax error, unexpected ':', expecting '}'
+haml_temp =  link_to(url_for{action: 'edit', id: pilot.id}) do
+                                    ^
+/Users/ghostrifle/Dropbox/code/EasyRaceLapTimer/web/app/views/system/pilot/index.html.haml:47: syntax error, unexpected ',', expecting '}'
+haml_temp =  link_to(url_for{action: 'edit', id: pilot.id}) do
+                                            ^):
+  app/views/system/pilot/index.html.haml:47: syntax error, unexpected ':', expecting '}'
+  app/views/system/pilot/index.html.haml:47: syntax error, unexpected ',', expecting '}'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (51.0ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (40.0ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (94.3ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:20:26 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:20:39 +0100
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.1ms)[0m  SELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC
+  Rendered system/pilot/index.html.haml within layouts/application (9.3ms)
+Completed 200 OK in 134ms (Views: 131.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:20:39 +0100
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:21:31 +0100
+Processing by System::PilotController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.1ms)[0m  [1mSELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC[0m
+  Rendered system/pilot/index.html.haml within layouts/application (9.4ms)
+Completed 200 OK in 135ms (Views: 133.1ms | ActiveRecord: 0.3ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:21:31 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:21:31 +0100
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:22:55 +0100
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.2ms)[0m  SELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC
+  Rendered system/pilot/index.html.haml within layouts/application (10.5ms)
+Completed 200 OK in 175ms (Views: 154.7ms | ActiveRecord: 1.0ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:22:55 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:22:55 +0100
+
+
+Started GET "/system/pilot/deactivate_token/1" for ::1 at 2015-11-13 18:22:57 +0100
+Processing by System::PilotController#deactivate_token as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.1ms)[0m  [1mSELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "pilots" SET "transponder_token" = ? WHERE "pilots"."id" = ?[0m  [["transponder_token", ""], ["id", 1]]
+  [1m[35m (2.1ms)[0m  commit transaction
+Redirected to http://localhost:3000/system/pilot
+Completed 302 Found in 7ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:22:57 +0100
+Processing by System::PilotController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.1ms)[0m  [1mSELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC[0m
+  Rendered system/pilot/index.html.haml within layouts/application (10.8ms)
+Completed 200 OK in 146ms (Views: 143.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:23:38 +0100
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.1ms)[0m  SELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC
+  Rendered system/pilot/index.html.haml within layouts/application (10.1ms)
+Completed 200 OK in 140ms (Views: 137.3ms | ActiveRecord: 0.3ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:23:38 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:23:38 +0100
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:24:02 +0100
+Processing by System::PilotController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.2ms)[0m  [1mSELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC[0m
+  Rendered system/pilot/index.html.haml within layouts/application (37.9ms)
+Completed 200 OK in 176ms (Views: 154.1ms | ActiveRecord: 1.1ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:24:02 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:24:02 +0100
+
+
+Started GET "/system/pilot/deactivate_token/1" for ::1 at 2015-11-13 18:24:04 +0100
+Processing by System::PilotController#deactivate_token as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.1ms)[0m  SELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/system/pilot
+Completed 302 Found in 4ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:24:04 +0100
+Processing by System::PilotController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.2ms)[0m  [1mSELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC[0m
+  Rendered system/pilot/index.html.haml within layouts/application (10.4ms)
+Completed 200 OK in 133ms (Views: 131.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/system/pilot/edit/1" for ::1 at 2015-11-13 18:24:05 +0100
+Processing by System::PilotController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.0ms)[0m  SELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered system/pilot/edit.html.haml within layouts/application (7.1ms)
+Completed 200 OK in 138ms (Views: 135.2ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/system/pilot/update/1" for ::1 at 2015-11-13 18:24:08 +0100
+Processing by System::PilotController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z63JQlumY44vjcWsy6VS3wUEObK7J2g6YyAdCdY6+pa0FumubAwk0tB7hFXUt/YUVW7wGxnZ7ralUuAkSccsVw==", "pilot"=>{"name"=>"Jon Doe", "transponder_token"=>"13", "quad"=>"ZMR 250"}, "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.1ms)[0m  [1mSELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mPilot Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "pilots" WHERE ("pilots"."transponder_token" = '13' AND "pilots"."id" != 1) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "pilots" SET "transponder_token" = ? WHERE "pilots"."id" = ?  [["transponder_token", "13"], ["id", 1]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/system/pilot
+Completed 302 Found in 15ms (ActiveRecord: 1.2ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:24:08 +0100
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.2ms)[0m  SELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC
+  Rendered system/pilot/index.html.haml within layouts/application (13.5ms)
+Completed 200 OK in 155ms (Views: 152.4ms | ActiveRecord: 0.3ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:24:08 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:24:09 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started POST "/system/pilot/create" for ::1 at 2015-11-13 18:24:23 +0100
+Processing by System::PilotController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"V2zGMmtL7zVCPZs7UOUYA7K9fe6M7H0JzN84vnSdk5Qs1+beXOGoab3L2sJP97zI4te0Ry4S+4UKrcWT62BFVQ==", "pilot"=>{"name"=>"The Bino", "transponder_token"=>"12", "quad"=>"inimini-H"}}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPilot Exists (0.1ms)[0m  SELECT  1 AS one FROM "pilots" WHERE "pilots"."transponder_token" = '12' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "pilots" ("name", "transponder_token", "quad") VALUES (?, ?, ?)[0m  [["name", "The Bino"], ["transponder_token", "12"], ["quad", "inimini-H"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+Redirected to http://localhost:3000/system/pilot
+Completed 302 Found in 5ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:24:23 +0100
+Processing by System::PilotController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.1ms)[0m  [1mSELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC[0m
+  Rendered system/pilot/index.html.haml within layouts/application (6.2ms)
+Completed 200 OK in 140ms (Views: 137.5ms | ActiveRecord: 0.3ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:24:24 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:24:24 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/system/pilot/edit/2" for ::1 at 2015-11-13 18:24:27 +0100
+Processing by System::PilotController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.1ms)[0m  SELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered system/pilot/edit.html.haml within layouts/application (4.7ms)
+Completed 200 OK in 133ms (Views: 131.1ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/system/pilot/update/2" for ::1 at 2015-11-13 18:24:29 +0100
+Processing by System::PilotController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4ixB8AJcEjy27LLfPPbs/HA7htGEvPoD+H/mZP0aOqiZl2EcNfZVYEka8yYj5Eg3IFFPeCZCfI8+DRtJYufsaQ==", "pilot"=>{"name"=>"The Bino", "transponder_token"=>"13", "quad"=>"inimini-H"}, "id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.0ms)[0m  [1mSELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mPilot Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "pilots" WHERE ("pilots"."transponder_token" = '13' AND "pilots"."id" != 2) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Redirected to http://localhost:3000/system/pilot
+Completed 302 Found in 5ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:24:29 +0100
+Processing by System::PilotController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.1ms)[0m  [1mSELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC[0m
+  Rendered system/pilot/index.html.haml within layouts/application (6.4ms)
+Completed 200 OK in 142ms (Views: 140.5ms | ActiveRecord: 0.2ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:24:29 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:24:29 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:25:20 +0100
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.1ms)[0m  SELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC
+  Rendered system/pilot/index.html.haml within layouts/application (18.3ms)
+Completed 200 OK in 203ms (Views: 170.8ms | ActiveRecord: 1.1ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:25:20 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:25:20 +0100
+
+
+Started GET "/system/pilot/edit/2" for ::1 at 2015-11-13 18:25:22 +0100
+Processing by System::PilotController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.1ms)[0m  [1mSELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered system/pilot/edit.html.haml within layouts/application (3.6ms)
+Completed 200 OK in 127ms (Views: 124.6ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/system/pilot/update/2" for ::1 at 2015-11-13 18:25:24 +0100
+Processing by System::PilotController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"qr26r0p6fw+y4BUn4d90PnHMATIzwNvkJNGAbLXCdNzRBppDfdA4U00WVN7+zdD1IabIm5E+XWjio31BKj+iHQ==", "pilot"=>{"name"=>"The Bino", "transponder_token"=>"13", "quad"=>"inimini-H"}, "id"=>"2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.1ms)[0m  SELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mPilot Exists (0.1ms)[0m  SELECT  1 AS one FROM "pilots" WHERE ("pilots"."transponder_token" = '13' AND "pilots"."id" != 2) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.3ms)
+
+NoMethodError (undefined method `pry' for #<Binding:0x007fcc7ed793b0>):
+  app/controllers/system/pilot_controller.rb:15:in `update'
+
+
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.8ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/ghostrifle/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (52.5ms)
+Cannot render console with content type multipart/form-dataAllowed content types: [#<Mime::Type:0x007fcc7a6d2dd0 @synonyms=["application/xhtml+xml"], @symbol=:html, @string="text/html">, #<Mime::Type:0x007fcc7a6d2628 @synonyms=[], @symbol=:text, @string="text/plain">, #<Mime::Type:0x007fcc7a6c1af8 @synonyms=[], @symbol=:url_encoded_form, @string="application/x-www-form-urlencoded">]
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:25:24 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started PATCH "/system/pilot/update/2" for ::1 at 2015-11-13 18:26:17 +0100
+Processing by System::PilotController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"qr26r0p6fw+y4BUn4d90PnHMATIzwNvkJNGAbLXCdNzRBppDfdA4U00WVN7+zdD1IabIm5E+XWjio31BKj+iHQ==", "pilot"=>{"name"=>"The Bino", "transponder_token"=>"13", "quad"=>"inimini-H"}, "id"=>"2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.1ms)[0m  SELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mPilot Exists (0.1ms)[0m  SELECT  1 AS one FROM "pilots" WHERE ("pilots"."transponder_token" = '13' AND "pilots"."id" != 2) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Redirected to http://localhost:3000/system/pilot
+Completed 302 Found in 26ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:26:17 +0100
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.1ms)[0m  SELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC
+  Rendered system/pilot/index.html.haml within layouts/application (6.6ms)
+Completed 200 OK in 138ms (Views: 135.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-b939141abe5191ae7e05aee7924f6aff400aa057e332a11ddeb395bb316160f0.css?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/affix.self-f7aef9d98ee5ece34a6a92a6a15bba777d93e8d908b75c95a85088277f394200.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/alert.self-896ab026e6823f5cef2441e07dac53d0692a5b772ac58b1ce20aa624c342d3f4.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/button.self-d19f3e2bcd3a7a4d75c11b9141b3fabd2c11987da1e99c85548ec3ecf8db30c3.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/carousel.self-b2e5e14483e6c31343a83861b7d487620f143d6fc2d07d5ae7544b6b225ba6be.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/collapse.self-93820e9b486e375a7fb4477602def3a6f8381fa6d50938d5378297ffbe4a1248.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/dropdown.self-30536ae4d54b2685c26b5787ed0eb549a9075717fe690cce6270873bedf2df00.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/tab.self-9b77df34cbbb08ec93a806d6cdb741f04e3dbf3389978a0679146f2d2987bc89.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/transition.self-9616c4e856b57659b67da3c6f2adcd584b5601ef4bebcdadab8ebb387d80bb25.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/scrollspy.self-c5c6ed008955656d345067e9821d79f1216b8383134d08465d4aa1a33a2b93b4.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/modal.self-bcfe54f3132bf16a8c5ce4289e47eba488f6522a08f49f378a037061c6c7aa4c.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/tooltip.self-3aa41fbe871573b34e0ebddf31598cd5a11a9841ca85f90934ea46326e46626d.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap/popover.self-b73e9c9111d01148e24bbc46e096782e024dc5db630e7078cf11ed2587ef8551.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/cable.self-509e503637e0e2b020016ebcd5567869ba6c82ff40eaa196823546423c152c7e.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/cable/connection.self-7c374a0bc1f938d6a76c36acf410be75a9fb616bcc6575aba302434f2c313720.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/cable/connection_monitor.self-b97f65ce5d64bb8cab2f72a6a11c5b13abdc9ad621fad02d80807e66842b2b32.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/cable/subscriptions.self-650baca4751e69f25c7d6b9877a52facc362691e6750edf2a3e875d11b177c83.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/cable/subscription.self-92f981e131de63b8e79495e68da94b035e24b5e33bec0c6f86f808cd8eb72806.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/cable/consumer.self-1805ed78559b1ea88141fdc954fdda1d08b98b6a1de15cd9a3209fdb568ea3cd.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/channels/index.self-97183e635f62724a3cc167508d7a9faef2ff1f0d35b7b43ecdf783e68c8f4cef.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/channels/monitor.self-cec7f2dbfbdb7a3cb3507f4327d8ced1087f44e8d59d52135da2e627642d0171.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/api.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/assets/system/pilot.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/application.self-7862a8a8b42407b4741a1adeeea35f0d13ddc4f702ec532adb0674491d296495.js?body=1" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/assets/logo_big-f335279cc7bc4d0c50cb8d01ca3d475cc8759436b39f1719e7139beed396cd4c.png" for ::1 at 2015-11-13 18:26:18 +0100
+
+
+Started GET "/system/pilot/deactivate_token/1" for ::1 at 2015-11-13 18:26:27 +0100
+Processing by System::PilotController#deactivate_token as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.0ms)[0m  [1mSELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "pilots" SET "transponder_token" = ? WHERE "pilots"."id" = ?[0m  [["transponder_token", ""], ["id", 1]]
+  [1m[35m (2.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/system/pilot
+Completed 302 Found in 7ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:26:27 +0100
+Processing by System::PilotController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.5ms)[0m  [1mSELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC[0m
+  Rendered system/pilot/index.html.haml within layouts/application (12.5ms)
+Completed 200 OK in 141ms (Views: 138.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/system/pilot/edit/2" for ::1 at 2015-11-13 18:26:28 +0100
+Processing by System::PilotController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.0ms)[0m  SELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered system/pilot/edit.html.haml within layouts/application (3.9ms)
+Completed 200 OK in 130ms (Views: 127.6ms | ActiveRecord: 0.2ms)
+
+
+Started PATCH "/system/pilot/update/2" for ::1 at 2015-11-13 18:26:30 +0100
+Processing by System::PilotController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"W62IEDRnf34Jk2g2imCYzlTixutyNxMp3ApZLfjETDEgFqj8A804IvZlKc+VcjwFBIgPQtDJlaUaeKQAZzma8A==", "pilot"=>{"name"=>"The Bino", "transponder_token"=>"13", "quad"=>"inimini-H"}, "id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.0ms)[0m  [1mSELECT  "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL AND "pilots"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mPilot Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "pilots" WHERE ("pilots"."transponder_token" = '13' AND "pilots"."id" != 2) LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  UPDATE "pilots" SET "transponder_token" = ? WHERE "pilots"."id" = ?  [["transponder_token", "13"], ["id", 2]]
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/system/pilot
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:26:30 +0100
+Processing by System::PilotController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mPilot Load (0.1ms)[0m  SELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC
+  Rendered system/pilot/index.html.haml within layouts/application (6.6ms)
+Completed 200 OK in 139ms (Views: 136.4ms | ActiveRecord: 0.3ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:26:31 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:26:31 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications
+
+
+Started GET "/" for ::1 at 2015-11-13 18:26:35 +0100
+Processing by SystemController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", true]]
+  Rendered system/index.html.haml within layouts/application (8.4ms)
+Completed 200 OK in 142ms (Views: 134.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/font-awesome/fontawesome-webfont-3c4a1bb7ce3234407184f0d80cc4dec075e4ad616b44dcc5778e1cfb1bc24019.woff2" for ::1 at 2015-11-13 18:26:35 +0100
+
+
+Started GET "/system/pilot" for ::1 at 2015-11-13 18:26:37 +0100
+Processing by System::PilotController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mStyleSetting Load (0.0ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mPilot Load (0.1ms)[0m  [1mSELECT "pilots".* FROM "pilots" WHERE "pilots"."deleted_at" IS NULL  ORDER BY name ASC[0m
+  Rendered system/pilot/index.html.haml within layouts/application (6.7ms)
+Completed 200 OK in 127ms (Views: 124.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2015-11-13 18:26:46 +0100
+Processing by SystemController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ?  ORDER BY "users"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mStyleSetting Load (0.0ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", true]]
+  Rendered system/index.html.haml within layouts/application (3.9ms)
+Completed 200 OK in 127ms (Views: 125.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/monitor" for ::1 at 2015-11-13 18:26:48 +0100
+Processing by MonitorController#index as HTML
+  [1m[35mStyleSetting Load (0.1ms)[0m  SELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1  [["id", 1]]
+  [1m[36mRaceSession Load (0.1ms)[0m  [1mSELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1[0m  [["active", "t"]]
+  [1m[35m (0.2ms)[0m  SELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (15.4ms)
+  Rendered monitor/index.html.haml within layouts/monitor (18.5ms)
+Completed 200 OK in 194ms (Views: 192.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/monitor" for ::1 at 2015-11-13 18:26:49 +0100
+Processing by MonitorController#index as HTML
+  [1m[36mStyleSetting Load (0.1ms)[0m  [1mSELECT  "style_settings".* FROM "style_settings" WHERE "style_settings"."id" = ?  ORDER BY "style_settings"."id" ASC LIMIT 1[0m  [["id", 1]]
+  [1m[35mRaceSession Load (0.1ms)[0m  SELECT  "race_sessions".* FROM "race_sessions" WHERE "race_sessions"."active" = ?  ORDER BY "race_sessions"."id" ASC LIMIT 1  [["active", "t"]]
+  [1m[36m (0.1ms)[0m  [1mSELECT "pilot_race_laps"."pilot_id" FROM "pilot_race_laps" WHERE "pilot_race_laps"."race_session_id" = ? GROUP BY "pilot_race_laps"."pilot_id"  ORDER BY lap_time ASC[0m  [["race_session_id", 1]]
+  Rendered monitor/_view.html.haml (4.9ms)
+  Rendered monitor/index.html.haml within layouts/monitor (7.4ms)
+Completed 200 OK in 138ms (Views: 135.8ms | ActiveRecord: 0.2ms)
+Finished "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:26:49 +0100
+MonitorUpdateChannel stopped streaming from monitor_notifications
+
+
+Started GET "/assets/monitor.self-2384de13d2d1cb66573806fb8289d2f7bfbc967415dbedad8c728c9be3867a6a.css?body=1" for ::1 at 2015-11-13 18:26:49 +0100
+Started GET "/" [WebSocket] for 127.0.0.1 at 2015-11-13 18:26:49 +0100
+MonitorUpdateChannel is transmitting the subscription confirmation
+MonitorUpdateChannel is streaming from monitor_notifications

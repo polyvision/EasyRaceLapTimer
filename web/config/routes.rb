@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/system/pilot/edit/:id' => 'system/pilot#edit'
   patch '/system/pilot/update/:id' => 'system/pilot#update'
   delete '/system/pilot/delete/:id' => 'system/pilot#delete'
+  get '/system/pilot/deactivate_token/:id' => 'system/pilot#deactivate_token'
 
   get '/system/stop_race_session' => 'system#stop_race_session'
   post '/system/start_race_session' => 'system#start_race_session'
@@ -21,6 +22,9 @@ Rails.application.routes.draw do
 
   get '/monitor' => 'monitor#index'
   get '/monitor/view' => 'monitor#view'
+
+  get '/pilots' => 'pilots#index'
+  get '/pilots/:id/laps' => 'pilots#laps'
 
   root 'system#index'
 

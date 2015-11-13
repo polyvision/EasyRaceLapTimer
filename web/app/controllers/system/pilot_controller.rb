@@ -11,7 +11,15 @@ class System::PilotController < SystemController
 
   def update
     @pilot = Pilot.find(params[:id])
-    @pilot.update_attributes(strong_params_pilot)
+    if !@pilot.update_attributes(strong_params_pilot)
+      flash[:error] = @pilot.errors.full_messages.to_sentence
+    end
+    redirect_to action: 'index'
+  end
+
+  def deactivate_token
+    @pilot = Pilot.find(params[:id])
+    @pilot.update_attribute(:transponder_token, "")
     redirect_to action: 'index'
   end
 
@@ -32,6 +40,6 @@ class System::PilotController < SystemController
   end
 
   def strong_params_pilot
-    params.require(:pilot).permit(:name,:transponder_token,:image)
+    params.require(:pilot).permit(:name,:transponder_token,:image,:quad)
   end
 end

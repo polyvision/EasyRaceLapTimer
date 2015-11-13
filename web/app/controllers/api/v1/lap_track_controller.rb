@@ -24,7 +24,12 @@ class Api::V1::LapTrackController < Api::V1Controller
 
     pilot_race_lap = @race_session.add_lap(@pilot,params[:lap_time_in_ms])
 
-    ActionCable.server.broadcast 'monitor_notifications',type: "updated_stats"
+    begin
+      ActionCable.server.broadcast 'monitor_notifications',type: "updated_stats"
+    rescue Exception => ex
+      logger.fatal(ex.message)
+      logger.fatal(ex.backtrace.join("n"))
+    end
 
     render json: pilot_race_lap.to_json
   end

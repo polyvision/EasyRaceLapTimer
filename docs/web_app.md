@@ -8,13 +8,14 @@ this setup is based on Raspian JESSIE
 
 switch to the **web** folder in your EasyRaceLapTimer folder
 
-    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev libaprutil1-dev
+    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev libaprutil1-dev  imagemagick
     sudo gem install bundler
     bundle config build.nokogiri --use-system-libraries
     sudo  gem install nokogiri
     bundle
     sudo gem install passenger
     sudo passenger-install-apache2-module
+    RAILS_ENV=production rake assets:precompile
 
 ## Apache setup
 

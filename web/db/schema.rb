@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107150456) do
+ActiveRecord::Schema.define(version: 20151113171431) do
 
   create_table "pilot_race_laps", force: :cascade do |t|
     t.datetime "created_at",      null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20151107150456) do
     t.string   "image"
     t.string   "transponder_token"
     t.datetime "deleted_at"
+    t.string   "quad"
   end
 
   add_index "pilots", ["deleted_at"], name: "index_pilots_on_deleted_at"
