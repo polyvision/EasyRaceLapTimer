@@ -11,3 +11,5 @@
 /web/log/*
 !/web/log/.keep
 /web/tmp
+/web/db/easy_race_lap_timer.sqlite3
+web/public/uploads/
