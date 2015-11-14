@@ -4,10 +4,29 @@
     %title
       EasyRaceLapTimer
 
-    = stylesheet_link_tag    'monitor', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    = render file: '/shared/_favicon'
   %body
     #host_data{"data-rails-cable-ip" => @RAILS_CABLE_IP}
+    %nav.navbar.navbar-default.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "/"}
+            EasyRaceLapTimer
+        #navbar.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li
+              =link_to('Configuration',{action: 'index',controller: '/system'})
+            %li
+              =link_to('Pilots',{action: 'index',controller: '/pilots'})
+            %li
+              =link_to('History',{action: 'index',controller: '/monitor'})
     .container
       .row
         .col-xs-12.center
@@ -16,16 +35,7 @@
               %button.close{"data-dismiss" => "alert"} ×
               = message
       = yield
-      .row
-        .col-md-6.col-md-offset-3
-          =link_to('Configuration',{action: 'index',controller: '/system'})
-          |
-          =link_to('Pilots',{action: 'index',controller: '/pilots'})
-          |
-          =link_to('History',{action: 'index',controller: '/monitor'})
-      .row
-        .col-md-6.col-md-offset-3
-          = link_to(url: {action: 'index', controller: '/system'}) do
-            = image_tag('logo_big.png')
+      = render file: '/shared/_footer'
+
 
     = javascript_include_tag 'application'

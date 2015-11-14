@@ -22,6 +22,13 @@ class Api::V1::LapTrackController < Api::V1Controller
       return
     end
 
+    # check if the lap tracking was too fast
+    last_track = @race_session.pilot_race_laps(pilot_id: @pilot.id).order("ID DESC").first
+    if last_track && last_track.created_at + 5.seconds > Time.now 
+      render status: 200, text: 'request successfull but tracking was too fast concering the last track'
+      return
+    end
+
     pilot_race_lap = @race_session.add_lap(@pilot,params[:lap_time_in_ms])
 
     begin

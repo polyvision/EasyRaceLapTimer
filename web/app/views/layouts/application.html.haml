@@ -7,9 +7,10 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application'
     = csrf_meta_tags
+    = render file: '/shared/_favicon'
   %body
 
-    %nav.navbar.navbar-inverse.navbar-fixed-top
+    %navbar.navbar-default.navbar-fixed-top
       .container
         .navbar-header
           %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
@@ -18,7 +19,7 @@
             %span.icon-bar
             %span.icon-bar
           %a.navbar-brand{:href => "/"}
-            = image_tag('logo_big.png')
+            EasyRaceLapTimer
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li.active
@@ -34,4 +35,5 @@
               %button.close{"data-dismiss" => "alert"} ×
               = message
       = yield
+      = render file: '/shared/_footer'
     = javascript_include_tag 'application'

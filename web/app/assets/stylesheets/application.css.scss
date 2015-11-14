@@ -3,10 +3,23 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+@import "_variables";
+@import "_bootswatch";
 body {
-  padding-top: 110px;
+  padding-top: 50px;
 }
 
-.navbar{
-  min-height: 110px;
+footer {
+  margin: 5em 0;
+
+  li {
+    float: left;
+    margin-right: 1.5em;
+    margin-bottom: 1.5em;
+  }
+
+  p {
+    clear: left;
+    margin-bottom: 0;
+  }
 }
