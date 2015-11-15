@@ -50,6 +50,7 @@
           Other
       .panel-body
         = link_to(url_for(action: 'index', controller: '/system/pilot')) do
-          %button.btn.btn-large
-            %i.fa.fa-gamepad.fa-6
-              Pilots Configuration
+          %button.btn.btn-primary.btn-large
+            Pilots Configuration
+  .col-xs-6
+    = render partial: 'config_values'

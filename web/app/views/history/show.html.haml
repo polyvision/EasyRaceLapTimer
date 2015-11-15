@@ -1,0 +1,7 @@
+%ol.breadcrumb
+  %li
+    = link_to('History',{action: 'index', controller: '/history'})
+  %li
+    = @current_race_session.title
+    
+=render file:'/monitor/_view.html.haml'

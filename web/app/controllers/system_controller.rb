@@ -29,6 +29,12 @@ class SystemController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def set_config_val
+    c = ConfigValue.where(id: params[:id]).first
+    c.update_attribute(:value,params[:value])
+    redirect_to action: 'index'
+  end
+
   private
 
   def get_style_settings

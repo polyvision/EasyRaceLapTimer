@@ -20,10 +20,13 @@
           - if pilot.image
             = image_tag(pilot.image.url,width: 50,height:50)
         %td
-          = pilot.name
+          %strong
+            = pilot.name
         %td
-          = pilot.quad
+          %strong
+            = pilot.quad
         %td
-          = pilot.total_races
+          %strong
+            = pilot.total_races
         %td
-          = link_to(pilot.total_laps,{action: 'laps', id: pilot.id})
+          = link_to(pilot.total_laps,{action: 'laps', id: pilot.id},class: 'btn btn-primary')

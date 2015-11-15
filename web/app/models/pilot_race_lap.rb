@@ -3,6 +3,6 @@ class PilotRaceLap < ActiveRecord::Base
   belongs_to :pilot
 
   def formated_lap_time
-    return (self.lap_time / 1000.0).round(4)
+    return ((self.lap_time / 1000.0) / 60.0).round(4)
   end
 end

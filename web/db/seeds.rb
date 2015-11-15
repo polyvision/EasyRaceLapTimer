@@ -11,3 +11,5 @@ t.email = "admin@easyracelaptimer.com"
 t.password = "defaultpw"
 t.password_confirmation = "defaultpw"
 t.save
+
+ConfigValue::set_value("lap_timeout_in_seconds","4")

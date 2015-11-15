@@ -5,7 +5,7 @@ class Pilot < ActiveRecord::Base
   mount_uploader :image, PilotImageUploader
 
   def total_races
-    return 0
+    return self.pilot_race_laps.group(:race_session_id).count.count
   end
 
   def total_laps

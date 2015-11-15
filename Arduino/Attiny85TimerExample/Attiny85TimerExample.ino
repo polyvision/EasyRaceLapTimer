@@ -20,7 +20,7 @@
 
 
 #define NUM_BITS  7
-#define TRANSPONDER_ID 3
+#define TRANSPONDER_ID 5
 #define ZERO 300
 #define ONE  700
 

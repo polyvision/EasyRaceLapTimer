@@ -4,12 +4,14 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  get 'system' => 'system#index'
   get '/system/pilot' => 'system/pilot#index'
   post '/system/pilot/create' => 'system/pilot#create'
   get '/system/pilot/edit/:id' => 'system/pilot#edit'
   patch '/system/pilot/update/:id' => 'system/pilot#update'
   delete '/system/pilot/delete/:id' => 'system/pilot#delete'
   get '/system/pilot/deactivate_token/:id' => 'system/pilot#deactivate_token'
+  post '/system/set_config_val/:id' => 'system#set_config_val'
 
   get '/system/stop_race_session' => 'system#stop_race_session'
   post '/system/start_race_session' => 'system#start_race_session'
@@ -26,7 +28,10 @@ Rails.application.routes.draw do
   get '/pilots' => 'pilots#index'
   get '/pilots/:id/laps' => 'pilots#laps'
 
-  root 'system#index'
+  get '/history' =>  'history#index'
+  get '/history/show/:id' =>  'history#show'
+
+  root 'monitor#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

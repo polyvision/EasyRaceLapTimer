@@ -1,0 +1,41 @@
+%h1
+  History
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+      %th
+      %th Session
+      %th Pilots
+      %th Total Laps
+      %th Fastest Lap
+      %th Fastest Pilot
+      %th Avg Lap Time
+  %tbody
+    -  @race_sessions.each do |session|
+      %tr
+        %td
+          %strong
+            = session.id
+        %td
+          %strong
+            = session.created_at().to_s(:long)
+        %td
+          %strong
+            = link_to(session.title,{action: 'show', id: session.id})
+        %td
+          %strong
+            = session.num_pilots
+        %td
+          %strong
+            = session.total_laps
+        %td
+          %strong
+            = formated_lap_time(session.fastest_lap_time)
+        %td
+          %strong
+            = session.fastest_pilot.name
+        %td
+          %strong
+            = formated_lap_time(session.average_lap_time)

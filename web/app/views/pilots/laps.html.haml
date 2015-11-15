@@ -27,10 +27,14 @@
     - @pilot.pilot_race_laps.order("id DESC").each do |lap_entry|
       %tr
         %td
-          = lap_entry.created_at.to_s(:long)
+          %strong
+            = lap_entry.created_at.to_s(:long)
         %td
-          = lap_entry.race_session.title
+          %strong
+            = lap_entry.race_session.title
         %td
-          = lap_entry.lap_num
+          %strong
+            = lap_entry.lap_num
         %td
-          = lap_entry.formated_lap_time
+          %strong
+            = formated_lap_time(lap_entry.lap_time)

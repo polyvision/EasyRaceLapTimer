@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151113171431) do
+ActiveRecord::Schema.define(version: 20151115193305) do
+
+  create_table "config_values", force: :cascade do |t|
+    t.string "name"
+    t.string "value"
+  end
 
   create_table "pilot_race_laps", force: :cascade do |t|
     t.datetime "created_at",      null: false

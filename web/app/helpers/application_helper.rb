@@ -17,4 +17,8 @@ module ApplicationHelper
         flash_type.to_s
     end
   end
+
+  def formated_lap_time(t) # convert to seconds
+    return "#{(t / 1000.0).round(4)}s"
+  end
 end
