@@ -6,3 +6,4 @@ local: &local
   :inline: true
 development: *local
 test: *local
+production: *local

@@ -143,8 +143,11 @@ void push_bit_to_sensor_data(unsigned int pulse_width,int sensor_i){
 			// if yes, push it
 			if(sensor_start_lap_time[sensor_i] != 0)
 			{
-				push_to_service(sensor_i,sensor_data[sensor_i],millis() - sensor_start_lap_time[sensor_i],sensor_data[sensor_i].last());
-				sensor_start_lap_time[sensor_i] = 0;
+				unsigned int diff = millis() - sensor_start_lap_time[sensor_i];
+				if(diff > 1000 * 2){ // only push if there's difference of 2 seconds between tracking
+					push_to_service(sensor_i,sensor_data[sensor_i],diff,sensor_data[sensor_i].last());
+					sensor_start_lap_time[sensor_i] = 0;
+				}
 			}
 			else
 			{
