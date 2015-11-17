@@ -17,13 +17,14 @@ class RaceSession < ActiveRecord::Base
   def listing
     listing_data = Array.new
 
-    self.pilot_race_laps.order("lap_time ASC").group(:pilot_id).pluck(:pilot_id).each do |pilot_id|
+    self.pilot_race_laps.order("lap_time ASC").group(:pilot_id).pluck(:pilot_id).each_with_index do |pilot_id,index|
       c_pilot = Pilot.find(pilot_id)
       data = Hash.new
+      data['position'] = index + 1
       data['pilot'] = c_pilot
       data['lap_count'] = self.lap_count_of_pilot(c_pilot)
       data['avg_lap_time'] = self.avg_lap_time_of_pilot(c_pilot)
-      
+
       data['fastest_lap'] = Hash.new
       data['fastest_lap']['lap_num'] = self.fastest_lap_of_pilot(c_pilot).lap_num
       data['fastest_lap']['lap_time'] = self.fastest_lap_of_pilot(c_pilot).lap_time
