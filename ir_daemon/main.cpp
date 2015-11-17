@@ -15,9 +15,10 @@
 #include <QProcess>
 #include <QTextStream>
 #include <QDebug>
+#include <QtConcurrent>
 #include <curl/curl.h>
 
-#define VERSION "0.1"
+#define VERSION "0.2"
 
 #ifndef __APPLE__
     #include <wiringPi.h>
@@ -40,7 +41,7 @@
 #define PULSE_MIN 100
 #define PULSE_MAX 1000
 
-#define DATA_BIT_LENGTH 7
+#define DATA_BIT_LENGTH 9
 #define BUZZER_ACTIVE_TIME_IN_MS	40
 
 int sensor_state[3];
@@ -48,6 +49,7 @@ unsigned int sensor_pulse[3];
 unsigned int sensor_start_lap_time[3];
 QList<int> sensor_data[3];
 unsigned int buzzer_start_time;
+bool debug_mode = false;
 
 void activate_buzzer(){
 	if(buzzer_start_time == 0){
@@ -116,7 +118,8 @@ void push_to_service(int sensor_i,QList<int>& list,unsigned int delta_time,int c
 	if(control_bit == (int)val_to_push % 2){
 		printf("sensor: %i token: %u time: %u\n",sensor_i,val_to_push,delta_time);
 		activate_buzzer();
-        post_request(val_to_push,delta_time); // this sends the request to the rails web app
+		QtConcurrent::run(post_request,val_to_push,delta_time);
+        //post_request(val_to_push,delta_time); // this sends the request to the rails web app
 	}else{
 		printf("sensor: %i control bit wrong: %i token: %u\n",sensor_i,control_bit,val_to_push);
 	}
@@ -144,7 +147,7 @@ void push_bit_to_sensor_data(unsigned int pulse_width,int sensor_i){
 			if(sensor_start_lap_time[sensor_i] != 0)
 			{
 				unsigned int diff = millis() - sensor_start_lap_time[sensor_i];
-				if(diff > 1000 * 2){ // only push if there's difference of 2 seconds between tracking
+				if(diff > 1000){ // only push if there's difference of 2 seconds between tracking
 					push_to_service(sensor_i,sensor_data[sensor_i],diff,sensor_data[sensor_i].last());
 					sensor_start_lap_time[sensor_i] = 0;
 				}
@@ -167,8 +170,15 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     curl_global_init(CURL_GLOBAL_ALL);
 
+	
     printf("starting ir_daemon v%s\n",VERSION);
 
+	if(a.arguments().count() > 1){
+		if(a.arguments().at(1).compare("--debug") == 0){
+			debug_mode = true;
+			printf("enabled debug mode\n");
+		}
+	}
 
 	wiringPiSetup () ;
     pinMode(IR_LED_1,INPUT);
@@ -208,8 +218,10 @@ int main(int argc, char *argv[])
 				unsigned int c_time = micros();
 				unsigned int c_pulse = c_time - sensor_pulse[sensor_i];
 				
-				//printf("sensor %i: pulse %i\n",sensor_i,c_pulse);
-				//activate_buzzer();
+				if(debug_mode){
+					printf("sensor %i: pulse %i\n",sensor_i,c_pulse);
+					//activate_buzzer();
+				}
 				if(c_pulse >= PULSE_MIN && c_pulse <= PULSE_MAX){
 					push_bit_to_sensor_data(c_pulse,sensor_i);
 				}else{
