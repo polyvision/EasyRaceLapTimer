@@ -18,9 +18,14 @@
 #define BIT_FLIP(a,b) ((a) ^= (1<<(b)))
 #define BIT_CHECK(a,b) ((a) & (1<<(b)))
 
+// CHANGE HERE THE ID OF TRANSPONDER 
+// possible values are 1 to 63 
+#define TRANSPONDER_ID 63
+
+
+
 
 #define NUM_BITS  9
-#define TRANSPONDER_ID 63
 #define ZERO 250
 #define ONE  650
 
