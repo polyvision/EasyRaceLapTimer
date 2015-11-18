@@ -27,6 +27,14 @@ Be sure to use the full size of your SD card on the Raspberry PI
 
     sudo raspi-config
 
+# Stable Version 0.1
+
+You can download a SD card image for the PI of EasyRaceLapTimer on the following page:
+
+http://www.airbirds.de/2015/11/18/easyracelaptimer-stable-v0-1-open-source-ir-time-tracking-system/
+
+There's also an introduction video to the system.
+
 # file structure
 
 **/docs**
