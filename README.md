@@ -9,7 +9,7 @@ What you get with EasyRaceLaptimer:
 **Features:**
 
 * host system for tracking the laps
-* IR transponders (code & schematic files for building them)
+* IR transponders (code & schematic files for building them) with a transmitting range of 2 to 4 meters
 * 63 available transponder IDs when using the project transponders
 * update transponders with new code (Arduino hardware needed)
 * setup guide for building your Raspberry PI host station
@@ -57,6 +57,9 @@ fetch the source via git with the following command
 
 more details of each indivial package can be found in the *docs* folder
 
+**license**
+
+The complete project uses the [GPL V3 license](http://www.gnu.org/licenses/gpl-3.0.de.html)
 
 **development and sponsoring by [AirBirds](http://www.airbirds.de)**
 
