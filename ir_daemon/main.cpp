@@ -18,7 +18,7 @@
 #include <QtConcurrent>
 #include <curl/curl.h>
 
-#define VERSION "0.2"
+#define VERSION "0.2.1"
 
 #ifndef __APPLE__
     #include <wiringPi.h>
@@ -56,6 +56,16 @@ void activate_buzzer(){
 		buzzer_start_time = millis();
 		digitalWrite(BUZZER_PIN,HIGH);
 	}
+}
+
+unsigned int num_ones_in_buffer(QList<int>& list){
+	unsigned int t= 0;
+	for(int i=0; i < list.length(); i++){ // -1 because we don't count the last bit.. it's the checksum bit!
+		if(list[i] == 1){
+			t += 1;
+		}
+	}
+	return t;
 }
 
 void post_request(int token,unsigned int lap_time){
@@ -114,14 +124,16 @@ void push_to_service(int sensor_i,QList<int>& list,unsigned int delta_time,int c
 	//printf("after: ");
 	//print_binary_list(list);
 	//qDebug() << "result binary:" << QString::number(val_to_push,2) << "\n";
+	//qDebug() << "ones in buffer " << num_ones_in_buffer(list) << "\n";
+	int own_control_bit = (int)num_ones_in_buffer(list) % 2;
 	
-	if(control_bit == (int)val_to_push % 2){
+	if(control_bit == own_control_bit){
 		printf("sensor: %i token: %u time: %u\n",sensor_i,val_to_push,delta_time);
 		activate_buzzer();
 		QtConcurrent::run(post_request,val_to_push,delta_time);
         //post_request(val_to_push,delta_time); // this sends the request to the rails web app
 	}else{
-		printf("sensor: %i control bit wrong: %i token: %u\n",sensor_i,control_bit,val_to_push);
+		printf("sensor: %i control bit wrong: %i own_control_bit: %i, token: %u\n",sensor_i,control_bit,own_control_bit,val_to_push);
 	}
 }
 
