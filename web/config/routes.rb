@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get '/system/pilot/deactivate_token/:id' => 'system/pilot#deactivate_token'
   post '/system/set_config_val/:id' => 'system#set_config_val'
 
+  get 'system/soundfile' => 'system/soundfile#index'
+  patch 'system/soundfile/:id' => 'system/soundfile#update'
+  
   get '/system/stop_race_session' => 'system#stop_race_session'
   post '/system/start_race_session' => 'system#start_race_session'
 
@@ -21,6 +24,7 @@ Rails.application.routes.draw do
   post 'api/v1/lap_track' => 'api/v1/lap_track#create'
   get 'api/v1/lap_track/create' => 'api/v1/lap_track#create'
   get 'api/v1/monitor' => 'api/v1/monitor#index'
+
 
   get '/monitor' => 'monitor#index'
   get '/monitor/view' => 'monitor#view'

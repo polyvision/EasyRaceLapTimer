@@ -52,5 +52,8 @@
         = link_to(url_for(action: 'index', controller: '/system/pilot')) do
           %button.btn.btn-primary.btn-large
             Pilots Configuration
+        = link_to(url_for(action: 'index', controller: '/system/soundfile')) do
+          %button.btn.btn-primary.btn-large
+            Sound Configuration
   .col-xs-6
     = render partial: 'config_values'

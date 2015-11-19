@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115193305) do
+ActiveRecord::Schema.define(version: 20151119204917) do
 
   create_table "config_values", force: :cascade do |t|
     t.string "name"
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(version: 20151115193305) do
     t.datetime "updated_at", null: false
     t.string   "title"
     t.boolean  "active"
+  end
+
+  create_table "soundfiles", force: :cascade do |t|
+    t.string "name"
+    t.string "file"
   end
 
   create_table "style_settings", force: :cascade do |t|

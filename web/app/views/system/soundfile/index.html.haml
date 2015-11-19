@@ -1,0 +1,17 @@
+%h1
+  Soundfiles
+
+%table.table.table-striped
+  %thead
+  %tbody
+    - @soundfiles.each do |soundfile|
+      = form_for(soundfile,url: {action: 'update', id: soundfile.id}) do |f|
+        %tr
+          %td
+            = soundfile.name
+          %td
+            = soundfile.file.path if soundfile.file
+          %td
+            = f.file_field :file
+          %td
+            = f.submit 'upload', class: 'btn btn-primary'
