@@ -17,6 +17,7 @@ What you get with EasyRaceLaptimer:
 * monitoring mode, you can watch the stats with your mobile phones
 * add your own team logo to the monitoring mode
 * detailed stats about pilots and races
+* sound effects for various events in a race
 * and much more comming soon
 
 **Important notices**

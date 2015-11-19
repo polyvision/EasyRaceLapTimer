@@ -10,7 +10,7 @@ With 9 bits, we have 6 data bits, so 63 transponder IDs in total.
 the length of a ZERO and ONE pulse can be found for example in
 
 
-    Arduino/nano_ir_test/nano_ir_test.ino
+    Arduino/TransmitterAttiny85v0.2
 
 *remember that each second pulse is actual a space for the ir receiver*
 
@@ -26,7 +26,7 @@ the length of a ZERO and ONE pulse can be found for example in
 
 **9 PULSE**
 
-  checksum bit. Set it to 1 if the id is even otherwise not
+  checksum bit. Set it to 1 if the number of ONES in the data bits is uneven
 
 
 ## example

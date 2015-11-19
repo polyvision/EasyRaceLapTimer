@@ -4,6 +4,8 @@
  * Author: Alexander B. Bierbrauer
  *
  * This file is part of EasyRaceLapTimer.
+ * 
+ * Vresion: 0.2
  *
  * OpenRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -30,9 +32,11 @@
 #define ONE  650
 
 unsigned int buffer[NUM_BITS];
+unsigned int num_one_pulses = 0;
 
 unsigned int get_pulse_width_for_buffer(int bit){
   if(BIT_CHECK(TRANSPONDER_ID,bit)){
+    num_one_pulses += 1;
     return ONE;
   }
 
@@ -40,7 +44,7 @@ unsigned int get_pulse_width_for_buffer(int bit){
 }
 
 unsigned int control_bit(){
-  if(TRANSPONDER_ID % 2 >= 1){
+  if(num_one_pulses % 2 >= 1){
     return ONE;  
   }else{
     return ZERO;
@@ -142,6 +146,6 @@ void loop(){
       ir_pulse_off();
     } // going through the buffer
     
-    delay(20);
+    delay(20 + random(0, 5));
   } // 3 times
 } // end of main loop
