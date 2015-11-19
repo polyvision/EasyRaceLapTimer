@@ -30,7 +30,7 @@ class Api::V1::LapTrackController < Api::V1Controller
     end
 
     pilot_race_lap = @race_session.add_lap(@pilot,params[:lap_time_in_ms])
-
+    Soundfile::play("sfx_lap_beep")
     begin
       ActionCable.server.broadcast 'monitor_notifications',type: "updated_stats"
     rescue Exception => ex
