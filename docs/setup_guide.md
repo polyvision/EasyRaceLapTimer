@@ -30,7 +30,7 @@ get the code
 
      cd ~/EasyRaceLapTimer/web/
      sudo apt-get update
-     sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev imagemagick libsqlite3-dev bridge-utils hostapd
+     sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev imagemagick libsqlite3-dev bridge-utils hostapd dnsmasq
      sudo gem install bundler
      bundle config build.nokogiri --use-system-libraries
      sudo  gem install nokogiri -v "1.6.6.2"
@@ -83,6 +83,39 @@ this part comes from http://www.daveconroy.com/turn-your-raspberry-pi-into-a-wif
     sudo chmod 755 /usr/sbin/hostapd
     cd ~/EasyRaceLapTimer
     sudo cp config_files/hostapd.conf /etc/hostapd/
+
+We should be finished now, and afer a reboot
+
+    sudo reboot
+
+you can test your configuration using the following command
+
+    sudo hostapd -dd /etc/hostapd/hostapd.conf
+
+If it runs as expected, you can add it to startup by editing
+
+    sudo nano /etc/default/hostapd
+
+and uncommenting and updating the following line
+
+    DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+
+editing the dns for getting ip addresses
+
+    sudo nano /etc/dnsmasq.conf
+
+set
+
+    interface=wlan0
+
+and add
+
+    dhcp-range=192.168.42.2,192.168.42.100,255.255.255.0,12h    
+
+to the file. Now the last step
+
+    sudo nano /etc/rc.local
 
 copy the following in the last line before "exit"
 
