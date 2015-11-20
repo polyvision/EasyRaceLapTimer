@@ -12,17 +12,17 @@ iface lo inet loopback
 iface eth0 inet manual
 
 ##### DISABLE IN ACCESS POINT MODE
-allow-hotplug wlan0
-iface wlan0 inet manual
-    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+#allow-hotplug wlan0
+#iface wlan0 inet manual
+#    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 ########################
 
 ########## UNCOMMENT THE FOLLOWING LINES TO ENABLE THE WIFI ACCESS POINT MODE ####
-#auto wlan0
-#allow-hotplug wlan0
-#iface wlan0 inet static
-#address    192.168.42.1
-#netmask    255.255.255.0
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet static
+address    192.168.42.1
+netmask    255.255.255.0
 
 ######### END OF ACCESS POINT MODE
 
