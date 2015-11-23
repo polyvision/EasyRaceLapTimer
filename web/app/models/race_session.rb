@@ -75,7 +75,7 @@ class RaceSession < ActiveRecord::Base
   end
 
   def last_lap_of_pilot(pilot)
-    return self.pilot_race_laps.where(pilot_id: pilot.id).order("id ASC").first
+    return self.pilot_race_laps.where(pilot_id: pilot.id).order("id DESC").first
   end
 
   def avg_lap_time_of_pilot(pilot)
