@@ -13,6 +13,7 @@ t.password_confirmation = "defaultpw"
 t.save
 
 ConfigValue::set_value("lap_timeout_in_seconds","4")
+ConfigValue::set_value("lap_max_lap_time_in_seconds","60")
 
 Soundfile.create(name: 'sfx_lap_beep')
 Soundfile.create(name: 'sfx_start_race')

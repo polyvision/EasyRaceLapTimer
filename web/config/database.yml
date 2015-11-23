@@ -9,3 +9,9 @@ production:
   database: db/easy_race_lap_timer.sqlite3
   pool: 5
   timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: db/easy_race_lap_timer_test.sqlite3
+  pool: 5
+  timeout: 5000
