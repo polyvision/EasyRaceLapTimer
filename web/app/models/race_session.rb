@@ -5,6 +5,13 @@ class RaceSession < ActiveRecord::Base
     return RaceSession.where(active: true).first
   end
 
+  def self.stop_open_session
+    t = RaceSession::get_open_session()
+    if t && t.active
+      t.update_attribute(:active, false)
+    end
+  end
+
   def add_lap(pilot,lap_time)
 
     pilot_race_lap = PilotRaceLap.new(pilot_id: pilot.id,race_session_id: self.id)

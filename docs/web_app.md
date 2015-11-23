@@ -60,6 +60,8 @@ for running rails in dev mode, you need to run these two commands in seperate pr
 
 ## API
 
+be sure to change **localhost:3000** to the correct ip of the host station
+
 **tracking a lap**
 
     POST http://localhost:3000/api/v1/lap_track
@@ -67,6 +69,14 @@ for running rails in dev mode, you need to run these two commands in seperate pr
 or
 
     GET http://localhost:3000/api/v1/lap_track/create
+
+**starting a new race**
+
+    GET http://localhost:3000/api/v1/race_session/new
+
+**getting data of the current race session**
+
+    GET http://localhost:3000/api/v1/monitor
 
 needed params
  * transponder_token

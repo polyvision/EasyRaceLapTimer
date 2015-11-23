@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get 'system/soundfile' => 'system/soundfile#index'
   patch 'system/soundfile/:id' => 'system/soundfile#update'
-  
+
   get '/system/stop_race_session' => 'system#stop_race_session'
   post '/system/start_race_session' => 'system#start_race_session'
 
@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'api/v1/lap_track/create' => 'api/v1/lap_track#create'
   get 'api/v1/monitor' => 'api/v1/monitor#index'
 
+  get 'api/v1/race_session/new' => 'api/v1/race_session#new'
 
   get '/monitor' => 'monitor#index'
   get '/monitor/view' => 'monitor#view'
