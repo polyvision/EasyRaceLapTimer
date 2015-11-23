@@ -45,8 +45,12 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = main.cpp 
-OBJECTS       = main.o
+SOURCES       = main.cpp \
+		restart_button_input.cpp \
+		buzzer.cpp 
+OBJECTS       = main.o \
+		restart_button_input.o \
+		buzzer.o
 DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/unix.conf \
@@ -101,7 +105,9 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/lex.prf \
-		ir_daemon.pro main.cpp
+		ir_daemon.pro main.cpp \
+		restart_button_input.cpp \
+		buzzer.cpp
 QMAKE_TARGET  = ir_daemon
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = ir_daemon
@@ -262,7 +268,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/ir_daemon1.0.0 || mkdir -p .tmp/ir_daemon1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/ir_daemon1.0.0/ && $(COPY_FILE) --parents main.cpp .tmp/ir_daemon1.0.0/ && (cd `dirname .tmp/ir_daemon1.0.0` && $(TAR) ir_daemon1.0.0.tar ir_daemon1.0.0 && $(COMPRESS) ir_daemon1.0.0.tar) && $(MOVE) `dirname .tmp/ir_daemon1.0.0`/ir_daemon1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/ir_daemon1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/ir_daemon1.0.0/ && $(COPY_FILE) --parents restart_button_input.h buzzer.h .tmp/ir_daemon1.0.0/ && $(COPY_FILE) --parents main.cpp restart_button_input.cpp buzzer.cpp .tmp/ir_daemon1.0.0/ && (cd `dirname .tmp/ir_daemon1.0.0` && $(TAR) ir_daemon1.0.0.tar ir_daemon1.0.0 && $(COMPRESS) ir_daemon1.0.0.tar) && $(MOVE) `dirname .tmp/ir_daemon1.0.0`/ir_daemon1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/ir_daemon1.0.0
 
 
 clean:compiler_clean 
@@ -301,8 +307,16 @@ compiler_clean:
 
 ####### Compile
 
-main.o: main.cpp 
+main.o: main.cpp restart_button_input.h \
+		buzzer.h \
+		singleton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+
+restart_button_input.o: restart_button_input.cpp restart_button_input.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o restart_button_input.o restart_button_input.cpp
+
+buzzer.o: buzzer.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buzzer.o buzzer.cpp
 
 ####### Install
 

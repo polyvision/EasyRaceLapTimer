@@ -17,8 +17,10 @@
 #include <QDebug>
 #include <QtConcurrent>
 #include <curl/curl.h>
+#include "restart_button_input.h"
+#include "buzzer.h"
 
-#define VERSION "0.2.1"
+#define VERSION "0.3"
 
 #ifndef __APPLE__
     #include <wiringPi.h>
@@ -36,6 +38,7 @@
 #define	IR_LED_2	4
 #define	IR_LED_3	5
 #define BUZZER_PIN	6
+#define RESTART_BUTTON_PIN 14
 
 #define PULSE_ONE	500
 #define PULSE_MIN 100
@@ -48,15 +51,9 @@ int sensor_state[3];
 unsigned int sensor_pulse[3];
 unsigned int sensor_start_lap_time[3];
 QList<int> sensor_data[3];
-unsigned int buzzer_start_time;
-bool debug_mode = false;
 
-void activate_buzzer(){
-	if(buzzer_start_time == 0){
-		buzzer_start_time = millis();
-		digitalWrite(BUZZER_PIN,HIGH);
-	}
-}
+bool debug_mode = false;
+RestartButtonInput *pRestartButton = new RestartButtonInput(RESTART_BUTTON_PIN);
 
 unsigned int num_ones_in_buffer(QList<int>& list){
 	unsigned int t= 0;
@@ -129,7 +126,7 @@ void push_to_service(int sensor_i,QList<int>& list,unsigned int delta_time,int c
 	
 	if(control_bit == own_control_bit){
 		printf("sensor: %i token: %u time: %u\n",sensor_i,val_to_push,delta_time);
-		activate_buzzer();
+		Buzzer::instance()->activate(BUZZER_ACTIVE_TIME_IN_MS);
 		QtConcurrent::run(post_request,val_to_push,delta_time);
         //post_request(val_to_push,delta_time); // this sends the request to the rails web app
 	}else{
@@ -198,6 +195,7 @@ int main(int argc, char *argv[])
 	pinMode(IR_LED_3,INPUT);
 	
 	pinMode(BUZZER_PIN,OUTPUT);
+	Buzzer::instance()->setPin(BUZZER_PIN);
 	digitalWrite(BUZZER_PIN,LOW);
 
 
@@ -232,7 +230,6 @@ int main(int argc, char *argv[])
 				
 				if(debug_mode){
 					printf("sensor %i: pulse %i\n",sensor_i,c_pulse);
-					//activate_buzzer();
 				}
 				if(c_pulse >= PULSE_MIN && c_pulse <= PULSE_MAX){
 					push_bit_to_sensor_data(c_pulse,sensor_i);
@@ -243,13 +240,9 @@ int main(int argc, char *argv[])
 			}
 		}
 		
-		// calculating buzzer stuff
-		if(buzzer_start_time != 0){
-			if(millis() - buzzer_start_time > BUZZER_ACTIVE_TIME_IN_MS){
-				digitalWrite(BUZZER_PIN,LOW);
-				buzzer_start_time = 0;
-			}
-		}
+		
+		Buzzer::instance()->update();
+		pRestartButton->update();
 	}
 
     curl_global_cleanup();

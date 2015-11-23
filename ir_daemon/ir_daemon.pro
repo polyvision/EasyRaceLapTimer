@@ -13,7 +13,7 @@ CONFIG   += console
 CONFIG   -= app_bundle
 
 
-SOURCES += main.cpp
-HEADERS +=
+SOURCES += main.cpp restart_button_input.cpp buzzer.cpp
+HEADERS += restart_button_input.h buzzer.h
 
 LIBS= -lcurl -lwiringPi
