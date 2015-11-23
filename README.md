@@ -4,6 +4,8 @@
 
 EasyRaceLapTimer is a complete open source IR lap time tracker all-in-one solution for FPV racing quads.
 
+[![Circle CI](https://circleci.com/gh/polyvision/EasyRaceLapTimer.svg?style=svg)](https://circleci.com/gh/polyvision/EasyRaceLapTimer)
+
 What you get with EasyRaceLaptimer:
 
 **Features:**
