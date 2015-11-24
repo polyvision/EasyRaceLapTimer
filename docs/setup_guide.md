@@ -106,6 +106,7 @@ If you are using another WiFi interface with your Pi, you should look at the fol
 to learn how to configure your interface for AP mode.
 
 * http://jacobsalmela.com/raspberry-pi-and-routing-turning-a-pi-into-a-router/
+* http://elinux.org/RPI-Wireless-Hotspot
 
 You will then want to adapt the instructions below for your adapter.
 
