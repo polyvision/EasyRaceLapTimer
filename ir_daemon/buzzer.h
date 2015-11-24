@@ -1,5 +1,5 @@
 /**
- * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschr‰nkt)
+ * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschr√§nkt)
  *
  * Author: Alexander B. Bierbrauer
  *

@@ -30,7 +30,7 @@ Be sure to use the full size of your SD card on the Raspberry PI
 
     sudo raspi-config
 
-# Stable Version 0.2
+# Stable Version 0.9
 
 You can download a SD card image for the PI of EasyRaceLapTimer on the following pages:
 
