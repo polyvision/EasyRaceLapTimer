@@ -20,7 +20,9 @@ SOURCES += main.cpp restart_button_input.cpp buzzer.cpp \
     networkserver.cpp \
     qextserialport/qextserialenumerator.cpp \
     qextserialport/qextserialport.cpp \
-    serialconnection.cpp
+    serialconnection.cpp \
+    configuration.cpp
+    
 HEADERS += restart_button_input.h buzzer.h \
     hoststation.h \
     gpioreader.h \
@@ -33,7 +35,8 @@ HEADERS += restart_button_input.h buzzer.h \
     qextserialport/qextserialport_global.h \
     qextserialport/qextserialport_p.h \
     singleton.h \
-    serialconnection.h
+    serialconnection.h \
+    configuration.h
 
 macx {
   SOURCES += qextserialport/qextserialenumerator_osx.cpp \
@@ -43,6 +46,7 @@ macx {
   LIBS += -framework IOKit -framework CoreFoundation
 }
 
-#unix {
-#  LIBS= -lcurl -lwiringPi
-#}
+unix {
+  SOURCES += qextserialport/qextserialport_unix.cpp qextserialport/qextserialenumerator_linux.cpp
+  LIBS= -lcurl -lwiringPi -ludev
+}

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   delete '/system/pilot/delete/:id' => 'system/pilot#delete'
   get '/system/pilot/deactivate_token/:id' => 'system/pilot#deactivate_token'
   post '/system/set_config_val/:id' => 'system#set_config_val'
+  get '/system/shutdown' => 'system#shutdown'
 
   get 'system/soundfile' => 'system/soundfile#index'
   patch 'system/soundfile/:id' => 'system/soundfile#update'

@@ -15,6 +15,7 @@
 #include "networkserver.h"
 #include "restart_button_input.h"
 #include "serialconnection.h"
+#include "gpioreader.h"
 #include <curl/curl.h>
 
 HostStation::HostStation(QObject *parent) : QObject(parent)
@@ -25,15 +26,19 @@ HostStation::HostStation(QObject *parent) : QObject(parent)
 void HostStation::eventStartNewRace(){
     GPIOReader::instance()->reset();
     QtConcurrent::run(this, &HostStation::webRequestStartNewRace);
+    SerialConnection::instance()->write("RESET#\n");
+    printf("HostStation::eventStartNewRace\n");
 }
 
 void HostStation::eventReset(){
     GPIOReader::instance()->reset();
+    printf("HostStation::eventReset\n");
 }
 
 void HostStation::setup(){
     NetworkServer *pNetworkServer = NetworkServer::instance();
     SerialConnection *pSerialConnection = SerialConnection::instance();
+    GPIOReader *pGPIOReader = GPIOReader::instance();
 
     // network connection signals
     connect(pNetworkServer,SIGNAL(startNewRaceEvent()),this,SLOT(eventStartNewRace()));
@@ -44,6 +49,9 @@ void HostStation::setup(){
     connect(pSerialConnection,SIGNAL(startNewRaceEvent()),this,SLOT(eventStartNewRace()));
     connect(pSerialConnection,SIGNAL(resetEvent()),this,SLOT(eventReset()));
     connect(pSerialConnection,SIGNAL(newLapTimeEvent(QString,unsigned int)),this,SLOT(eventNewLapTime(QString,unsigned int)));
+
+    //gpio reader connection signals
+    connect(pGPIOReader,SIGNAL(newLapTimeEvent(QString,unsigned int)),this,SLOT(eventNewLapTime(QString,unsigned int)));
 
     connect(RestartButtonInput::instance(),SIGNAL(restartEvent()),this,SLOT(eventStartNewRace()));
 
@@ -64,7 +72,7 @@ void HostStation::webRequestLapTimeTracked(QString token,unsigned int ms){
         /* First set the URL that is about to receive our POST. This URL can
            just as well be a https:// URL if that is what should receive the
            data. */
-        curl_easy_setopt(curl, CURLOPT_URL, QString("http://localhost:3000/api/v1/lap_track/create?transponder_token=%1&lap_time_in_ms=%2").arg(token).arg(ms).toStdString().c_str());
+        curl_easy_setopt(curl, CURLOPT_URL, QString("http://localhost/api/v1/lap_track/create?transponder_token=%1&lap_time_in_ms=%2").arg(token).arg(ms).toStdString().c_str());
 
 
 
@@ -90,7 +98,7 @@ void HostStation::webRequestStartNewRace(){
         /* First set the URL that is about to receive our POST. This URL can
            just as well be a https:// URL if that is what should receive the
            data. */
-        curl_easy_setopt(curl, CURLOPT_URL, QString("http://localhost:3000/api/v1/race_session/new").toStdString().c_str());
+        curl_easy_setopt(curl, CURLOPT_URL, QString("http://localhost/api/v1/race_session/new").toStdString().c_str());
 
 
 

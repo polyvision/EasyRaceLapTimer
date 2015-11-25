@@ -1,6 +1,6 @@
 class Pilot < ActiveRecord::Base
   validates :transponder_token, uniqueness: true
-  has_many :pilot_race_laps
+  has_many :pilot_race_laps, :dependent => :destroy
   acts_as_paranoid
   mount_uploader :image, PilotImageUploader
 

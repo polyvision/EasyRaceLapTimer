@@ -15,10 +15,11 @@
 #include <QObject>
 #include "singleton.h"
 
-class GPIOReader: public Singleton<GPIOReader>
+class GPIOReader: public QObject, public Singleton<GPIOReader>
 {
     friend class Singleton<GPIOReader>;
-
+    Q_OBJECT
+    
 public:
     GPIOReader();
     void setDebug(bool);
@@ -29,6 +30,7 @@ public:
     void push_bit_to_sensor_data(unsigned int pulse_width,int sensor_i);
     void reset();
 signals:
+    void    newLapTimeEvent(QString,unsigned int);
 
 public slots:
 private:

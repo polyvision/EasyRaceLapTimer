@@ -11,6 +11,8 @@
  **/
 #include "gpioreader.h"
 #include <wiring_pi.h>
+#include "buzzer.h"
+#include <stdio.h>
 
 #define	IR_LED_1	1
 #define	IR_LED_2	4
@@ -21,6 +23,8 @@
 #define PULSE_MAX 1000
 
 #define DATA_BIT_LENGTH 9
+
+#define BUZZER_ACTIVE_TIME_IN_MS 100
 
 GPIOReader::GPIOReader()
 {
@@ -96,9 +100,8 @@ void GPIOReader::push_to_service(int sensor_i,QList<int>& list,unsigned int delt
 
     if(control_bit == own_control_bit){
         printf("sensor: %i token: %u time: %u\n",sensor_i,val_to_push,delta_time);
-        //Buzzer::instance()->activate(BUZZER_ACTIVE_TIME_IN_MS);
-        //QtConcurrent::run(post_request,val_to_push,delta_time);
-        //post_request(val_to_push,delta_time); // this sends the request to the rails web app
+        Buzzer::instance()->activate(BUZZER_ACTIVE_TIME_IN_MS);
+        emit newLapTimeEvent(QString("%1").arg(val_to_push),delta_time);
     }else{
         printf("sensor: %i control bit wrong: %i own_control_bit: %i, token: %u\n",sensor_i,control_bit,own_control_bit,val_to_push);
     }

@@ -13,6 +13,7 @@
 #include "networkserver.h"
 #include "networkconnection.h"
 #include <QTcpSocket>
+#include <QProcess>
 
 NetworkServer::NetworkServer(QObject *parent) : QObject(parent)
 {
@@ -28,6 +29,16 @@ void NetworkServer::incommingConnection(){
 }
 
 void NetworkServer::incommingCommand(QString data){
+    if(data.compare("SHUTDOWN#") == 0){
+      QString program = "shutdown";
+      QStringList arguments;
+      arguments << "-h" << "now";
+
+      QProcess *myProcess = new QProcess(this);
+      myProcess->start(program, arguments);
+      return;
+    }
+
     // we shall start a new race
     if(data.compare("START_NEW_RACE#") == 0){
         emit startNewRaceEvent();

@@ -23,8 +23,6 @@ public:
 
 signals:
     void incommingCommand(QString);
-    void startNewRaceEvent();
-    void resetEvent();
 
 public slots:
     void    readyRead();

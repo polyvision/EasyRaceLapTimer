@@ -26,7 +26,7 @@ public:
     static void listAvailablePorts();
     void setup();
     void setDebug(bool);
-
+    void write(QString);
 signals:
     void    startNewRaceEvent();
     void    resetEvent();
@@ -36,6 +36,8 @@ public slots:
     void onReadyRead();
     void onDsrChanged(bool);
 private:
+    void processCmdString(QString);
+    QString m_strIncommingData;
     QextSerialPort *m_pSerialPort;
     bool    m_bDebug;
 };

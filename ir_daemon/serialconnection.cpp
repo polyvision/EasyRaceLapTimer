@@ -67,26 +67,50 @@ void SerialConnection::onReadyRead()
         qDebug() << "bytes:" << bytes;
     }
 
-    QString data = QString(bytes).replace("\r","").replace("\n","");
-    if(data.compare("START_NEW_RACE#") == 0){
-        emit startNewRaceEvent();
-        return;
-    }
+    m_strIncommingData.append(QString(bytes).replace("\r","").replace("\n",""));
+    //qDebug() << "before m_strIncommingData: " << m_strIncommingData;
 
-    if(data.compare("RESET#") == 0){
-        emit resetEvent();
-    }
-
-    // LAPTIME <TOKEN> <MS>
-    if(data.contains("LAP_TIME")){
-        QStringList list = data.split(" ");
-        if(list.length() == 3){
-            QString token = list[1];
-            unsigned int ms = (unsigned int)list[2].replace("#","").toInt();
-            emit newLapTimeEvent(token,ms);
+    if(m_strIncommingData.contains("#")){
+        QStringList list = m_strIncommingData.split("#");
+        for(int i=0; i < list.length(); i++){
+          QString t = list[i];
+          if(t.length() > 0){
+              this->processCmdString(t);
+              m_strIncommingData = m_strIncommingData.remove(0,t.length()+1);
+          }
         }
-    }
 
+    }
+    //qDebug() << "after m_strIncommingData: " << m_strIncommingData;
+}
+
+void SerialConnection::write(QString data){
+  if(this->m_pSerialPort->isWritable()){
+      this->m_pSerialPort->write(data.toLatin1());
+  }
+}
+
+void SerialConnection::processCmdString(QString data){
+  //qDebug() << "SerialConnection::processCmdString: " << data;
+
+  if(data.compare("START_NEW_RACE") == 0){
+      emit startNewRaceEvent();
+      return;
+  }
+
+  if(data.compare("RESET") == 0){
+      emit resetEvent();
+  }
+
+  // LAPTIME <TOKEN> <MS>
+  if(data.contains("LAP_TIME")){
+      QStringList list = data.split(" ");
+      if(list.length() == 3){
+          QString token = list[1];
+          unsigned int ms = (unsigned int)list[2].replace("#","").toInt();
+          emit newLapTimeEvent(token,ms);
+      }
+  }
 }
 
 void SerialConnection::onDsrChanged(bool status)

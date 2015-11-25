@@ -50,6 +50,6 @@
           = link_to(url_for(action: 'edit', id: pilot.id)) do
             %button.btn.btn-primary
               = t('actions.edit')
-          = link_to(url_for(action: 'delete', id: pilot.id)) do
+          = link_to(url_for(action: 'delete', id: pilot.id),{"data-confirm" => "Sure?", method: :delete}) do
             %button.btn.btn-warning
               = t('actions.delete')

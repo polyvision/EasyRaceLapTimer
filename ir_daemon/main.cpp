@@ -23,6 +23,7 @@
 #include "networkserver.h"
 #include "hoststation.h"
 #include "serialconnection.h"
+#include "configuration.h"
 
 #define VERSION "0.9"
 
@@ -35,6 +36,10 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+    QCoreApplication::setOrganizationName("polyvision UG");
+    QCoreApplication::setOrganizationDomain("polyvision.org");
+    QCoreApplication::setApplicationName("ir_daemon");
+
     curl_global_init(CURL_GLOBAL_ALL);
 
 	
@@ -43,6 +48,7 @@ int main(int argc, char *argv[])
 	if(a.arguments().count() > 1){
 		if(a.arguments().at(1).compare("--debug") == 0){
             GPIOReader::instance()->setDebug(true);
+            SerialConnection::instance()->setDebug(true);
 			printf("enabled debug mode\n");
 		}
 
@@ -51,6 +57,10 @@ int main(int argc, char *argv[])
             return 0;
         }
 
+        if(a.arguments().at(1).compare("--setcomportindex") == 0){
+            Configuration::instance()->setComPortIndex(a.arguments().at(2).toInt());
+            return 0;
+        }
 	}
 
     //initialization
@@ -59,7 +69,6 @@ int main(int argc, char *argv[])
     Buzzer::instance()->setPin(BUZZER_PIN);
     RestartButtonInput::instance()->setPin(RESTART_BUTTON_PIN);
 
-    SerialConnection::listAvailablePorts();
     SerialConnection::instance()->setup();
 	while(1){
 

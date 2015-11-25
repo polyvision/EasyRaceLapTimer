@@ -5,7 +5,7 @@
   %thead
   %tbody
     - @soundfiles.each do |soundfile|
-      = form_for(soundfile,url: {action: 'update', id: soundfile.id}) do |f|
+      = form_for(soundfile,url: {action: 'update', id: soundfile.id},html: {multipart: true}) do |f|
         %tr
           %td
             = soundfile.name

@@ -35,7 +35,7 @@
             = formated_lap_time(session.fastest_lap_time)
         %td
           %strong
-            = session.fastest_pilot.name
+            = session.fastest_pilot.name if session.fastest_pilot
         %td
           %strong
             = formated_lap_time(session.average_lap_time)
