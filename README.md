@@ -20,6 +20,7 @@ What you get with EasyRaceLaptimer:
 * add your own team logo to the monitoring mode
 * detailed stats about pilots and races
 * sound effects for various events in a race
+* TCP/IP and serial connections support for receiving lap times and commands from other time tracking systems
 * and much more comming soon
 
 **Important notices**
@@ -30,7 +31,7 @@ Be sure to use the full size of your SD card on the Raspberry PI
 
     sudo raspi-config
 
-# Stable Version 0.9
+# Stable Version 0.3
 
 You can download a SD card image for the PI of EasyRaceLapTimer on the following pages:
 
@@ -69,7 +70,10 @@ fetch the source via git with the following command
 
 more details of each indivial package can be found in the *docs* folder
 
-**license**
+
+# Contributors
+ * [Peter Provost](https://github.com/PProvost)
+# license
 
 The complete project uses the [GPL V3 license](http://www.gnu.org/licenses/gpl-3.0.de.html)
 
