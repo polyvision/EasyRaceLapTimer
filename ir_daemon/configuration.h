@@ -9,25 +9,18 @@
  * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
- 
-#ifndef BUZZER_H
-#define BUZZER_H
+ #ifndef CONFIGURATION_H
+ #define CONFIGURATION_H
 
-#include "singleton.h"
+ #include "singleton.h"
 
-class Buzzer: public Singleton<Buzzer>{
-	friend class Singleton<Buzzer>;
-	
-	public:
-		Buzzer();
-		~Buzzer();
-		void setPin(int);
-		void activate(unsigned int ms);
-		void update();
-		
-	private:
-		int mi_OutputPin;
-		unsigned int mui_activeTime;
-		unsigned int mui_BuzzerStartTime;
-};
-#endif
+ class Configuration: public Singleton<Configuration>{
+ 	friend class Singleton<Configuration>;
+ public:
+ 	Configuration();
+
+ 	void setComPortIndex(int);
+ 	int comPortIndex();
+ private:
+ };
+ #endif

@@ -1,9 +1,0 @@
-I"³(function() {
-  App.messages = App.cable.subscriptions.create("MonitorUpdateChannel", {
-    received: function(data) {
-      return console.log(data);
-    }
-  });
-
-}).call(this);
-:ET

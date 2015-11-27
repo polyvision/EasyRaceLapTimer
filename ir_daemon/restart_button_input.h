@@ -1,5 +1,5 @@
 /**
- * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschr‰nkt)
+ * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschr√§nkt)
  *
  * Author: Alexander B. Bierbrauer
  *
@@ -12,15 +12,27 @@
 #ifndef RESTART_BUTTON_INPUT_H
 #define RESTART_BUTTON_INPUT_H
 
-class RestartButtonInput{
-	
-	public:
-		RestartButtonInput(int pin);
-		void update();
-	private:		
-		int 	m_iInputPin;
-		unsigned int m_uiPushedButtonTime;
-		unsigned int m_uiPushedButtonLastAt;
-		bool		m_bActive;
+#include <QObject>
+#include "singleton.h"
+
+class RestartButtonInput: public QObject, public Singleton<RestartButtonInput>{
+    friend class Singleton<RestartButtonInput>;
+    Q_OBJECT
+
+public:
+    explicit RestartButtonInput(QObject *parent = 0);
+    void setPin(int);
+    void update();
+
+signals:
+    void restartEvent();
+
+public slots:
+
+private:
+    int 	m_iInputPin;
+    unsigned int m_uiPushedButtonTime;
+    unsigned int m_uiPushedButtonLastAt;
+    bool		m_bActive;
 };
 #endif

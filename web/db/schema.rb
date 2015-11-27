@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119204917) do
+ActiveRecord::Schema.define(version: 20151127104521) do
 
   create_table "config_values", force: :cascade do |t|
     t.string "name"
@@ -25,8 +25,10 @@ ActiveRecord::Schema.define(version: 20151119204917) do
     t.integer  "lap_num"
     t.integer  "lap_time"
     t.integer  "race_session_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "pilot_race_laps", ["deleted_at"], name: "index_pilot_race_laps_on_deleted_at"
   add_index "pilot_race_laps", ["lap_num"], name: "index_pilot_race_laps_on_lap_num"
   add_index "pilot_race_laps", ["lap_time"], name: "index_pilot_race_laps_on_lap_time"
   add_index "pilot_race_laps", ["pilot_id"], name: "index_pilot_race_laps_on_pilot_id"
@@ -42,10 +44,11 @@ ActiveRecord::Schema.define(version: 20151119204917) do
   add_index "pilots", ["deleted_at"], name: "index_pilots_on_deleted_at"
 
   create_table "race_sessions", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "title"
     t.boolean  "active"
+    t.integer  "mode",       default: 0
   end
 
   create_table "soundfiles", force: :cascade do |t|
@@ -60,12 +63,12 @@ ActiveRecord::Schema.define(version: 20151119204917) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",   null: false
+    t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -74,11 +77,12 @@ ActiveRecord::Schema.define(version: 20151119204917) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",        default: 0,  null: false
+    t.integer  "failed_attempts",        default: 0,    null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "pin_code",               default: 1234
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

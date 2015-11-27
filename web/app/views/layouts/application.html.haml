@@ -4,8 +4,9 @@
     %title
       EasyRaceLapTimer
 
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'application', media: 'all'
     = csrf_meta_tags
+    %meta{name:"viewport", content:"width=device-width", "initial-scale"=>1}
     = render file: '/shared/_favicon'
   %body
     #host_data{"data-rails-cable-ip" => @RAILS_CABLE_IP}
@@ -30,7 +31,7 @@
             %li
               =link_to('History',{action: 'index',controller: '/history'})
         / /.nav-collapse
-    .container
+    .container-fluid
       .row
         .col-xs-12.center
           - flash.each do |type, message|

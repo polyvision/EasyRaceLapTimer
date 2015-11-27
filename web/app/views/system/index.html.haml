@@ -2,21 +2,7 @@
   Configuration
 
 .row
-  .col-xs-6
-    .panel.panel-default
-      .panel-heading
-        %h2
-          Style Settings
-      .panel-body
-        = form_for(@style_setting,url: url_for(action: 'update_style')) do |f|
-          .form-group
-            %label{:for => ""}
-              = t('style_setting.own_logo_image')
-            = f.file_field :own_logo_image
-            - if !@style_setting.own_logo_image.blank?
-              = image_tag(@style_setting.own_logo_image.mini_thumb.url)
-          = f.submit class: "btn btn-default"
-  .col-xs-6
+  .col-xs-12.col-md-12.col-sm-12.col-lg-12
     .panel.panel-default
       .panel-heading
         %h2
@@ -43,7 +29,7 @@
               = t('actions.start_race_session')
 
 .row
-  .col-xs-6
+  .col-xs-12.col-md-12.col-sm-12.col-lg-12
     .panel.panel-default
       .panel-heading
         %h2
@@ -55,5 +41,26 @@
         = link_to(url_for(action: 'index', controller: '/system/soundfile')) do
           %button.btn.btn-primary.btn-large
             Sound Configuration
-  .col-xs-6
+.row
+  .col-xs-12.col-md-12.col-sm-12.col-lg-12
     = render partial: 'config_values'
+.row
+  .col-xs-12.col-md-12.col-sm-12.col-lg-12
+    .panel.panel-default
+      .panel-heading
+        %h2
+          Style Settings
+      .panel-body
+        = form_for(@style_setting,url: url_for(action: 'update_style')) do |f|
+          .form-group
+            %label{:for => ""}
+              = t('style_setting.own_logo_image')
+            = f.file_field :own_logo_image
+            - if !@style_setting.own_logo_image.blank?
+              = image_tag(@style_setting.own_logo_image.mini_thumb.url)
+          = f.submit class: "btn btn-default"
+.row
+  .col-xs-12.col-md-12.col-sm-12.col-lg-12
+    .panel.panel-default
+      .panel-body
+        = link_to('SHUTDOWN',{action: 'shutdown'},{"data-confirm" => 'shutting down system?',class: 'btn btn-large btn-danger'})

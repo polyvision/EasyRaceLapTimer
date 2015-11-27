@@ -25,22 +25,24 @@ class RaceSession < ActiveRecord::Base
     listing_data = Array.new
 
     self.pilot_race_laps.order("lap_time ASC").group(:pilot_id).pluck(:pilot_id).each_with_index do |pilot_id,index|
-      c_pilot = Pilot.find(pilot_id)
-      data = Hash.new
-      data['position'] = index + 1
-      data['pilot'] = c_pilot
-      data['lap_count'] = self.lap_count_of_pilot(c_pilot)
-      data['avg_lap_time'] = self.avg_lap_time_of_pilot(c_pilot)
+      c_pilot = Pilot.where(id: pilot_id).first
+      if c_pilot
+        data = Hash.new
+        data['position'] = index + 1
+        data['pilot'] = c_pilot
+        data['lap_count'] = self.lap_count_of_pilot(c_pilot)
+        data['avg_lap_time'] = self.avg_lap_time_of_pilot(c_pilot)
 
-      data['fastest_lap'] = Hash.new
-      data['fastest_lap']['lap_num'] = self.fastest_lap_of_pilot(c_pilot).lap_num
-      data['fastest_lap']['lap_time'] = self.fastest_lap_of_pilot(c_pilot).lap_time
+        data['fastest_lap'] = Hash.new
+        data['fastest_lap']['lap_num'] = self.fastest_lap_of_pilot(c_pilot).lap_num
+        data['fastest_lap']['lap_time'] = self.fastest_lap_of_pilot(c_pilot).lap_time
 
-      data['last_lap'] = Hash.new
-      data['last_lap']['lap_num'] = self.last_lap_of_pilot(c_pilot).lap_num
-      data['last_lap']['lap_time'] = self.last_lap_of_pilot(c_pilot).lap_time
+        data['last_lap'] = Hash.new
+        data['last_lap']['lap_num'] = self.last_lap_of_pilot(c_pilot).lap_num
+        data['last_lap']['lap_time'] = self.last_lap_of_pilot(c_pilot).lap_time
 
-      listing_data << data
+        listing_data << data
+      end
     end
 
     return listing_data
@@ -55,15 +57,23 @@ class RaceSession < ActiveRecord::Base
   end
 
   def fastest_lap_time
-    self.pilot_race_laps.order("lap_time ASC").first.lap_time
+    t = self.pilot_race_laps.order("lap_time ASC").first
+    return t.lap_time if t
+    return 0
   end
 
-  def fastest_pilot
-    self.pilot_race_laps.order("lap_time ASC").first.pilot
+   def fastest_pilot
+    t = self.pilot_race_laps.order("lap_time ASC").first
+    return t.pilot if t
+    return nil
   end
 
   def average_lap_time
-    self.pilot_race_laps.sum(:lap_time) / self.pilot_race_laps.count
+    begin
+      self.pilot_race_laps.sum(:lap_time) / self.pilot_race_laps.count
+    rescue Exception => ex
+      return 0
+    end
   end
 
   def lap_count_of_pilot(pilot)

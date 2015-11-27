@@ -9,25 +9,21 @@
  * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
- 
-#ifndef BUZZER_H
-#define BUZZER_H
+ #include "configuration.h"
+ #include <QSettings>
+ #include <stdio.h>
 
-#include "singleton.h"
+ Configuration::Configuration(){
 
-class Buzzer: public Singleton<Buzzer>{
-	friend class Singleton<Buzzer>;
-	
-	public:
-		Buzzer();
-		~Buzzer();
-		void setPin(int);
-		void activate(unsigned int ms);
-		void update();
-		
-	private:
-		int mi_OutputPin;
-		unsigned int mui_activeTime;
-		unsigned int mui_BuzzerStartTime;
-};
-#endif
+ }
+
+ void Configuration::setComPortIndex(int index){
+ 	QSettings settings;
+ 	settings.setValue("serial_connection/com_port_index", index);
+ 	printf("Configuration::setComPortIndex: %i\n",comPortIndex());
+ }
+
+ int Configuration::comPortIndex(){
+ 	 QSettings settings;
+ 	 return settings.value("serial_connection/com_port_index",0).toInt();
+ }

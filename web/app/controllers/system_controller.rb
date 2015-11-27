@@ -36,6 +36,12 @@ class SystemController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def shutdown
+    load "#{Rails.root}/lib/ir_daemon_cmd.rb"
+    IRDaemonCmd::send("SHUTDOWN#\n")
+    redirect_to action: 'index'
+  end
+
   private
 
   def get_style_settings

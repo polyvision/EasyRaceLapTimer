@@ -1,5 +1,5 @@
 /**
- * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschr‰nkt)
+ * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschr√§nkt)
  *
  * Author: Alexander B. Bierbrauer
  *
@@ -9,7 +9,7 @@
  * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
- #include <wiringPi.h>
+ #include <wiring_pi.h>
  #include "buzzer.h"
  
  Buzzer::Buzzer(){
@@ -24,6 +24,8 @@
  
  void Buzzer::setPin(int p){
 	 mi_OutputPin = p;
+     pinMode(mi_OutputPin,OUTPUT);
+     digitalWrite(mi_OutputPin,LOW);
  }
  
  void Buzzer::activate(unsigned int ms){
