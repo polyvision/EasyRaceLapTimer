@@ -25,6 +25,8 @@ class System::PilotController < SystemController
 
   def delete
     @pilot = Pilot.find(params[:id])
+    @pilot.transponder_token = nil
+    @pilot.save(validate: false)
     @pilot.delete
     redirect_to action: 'index'
   end
@@ -42,4 +44,5 @@ class System::PilotController < SystemController
   def strong_params_pilot
     params.require(:pilot).permit(:name,:transponder_token,:image,:quad)
   end
+  
 end
