@@ -14,7 +14,8 @@
 #include "networkconnection.h"
 #include <QTcpSocket>
 #include <QProcess>
-
+#include <QDebug>
+ 
 NetworkServer::NetworkServer(QObject *parent) : QObject(parent)
 {
     this->m_pTcpServer = new QTcpServer(this);
@@ -29,6 +30,8 @@ void NetworkServer::incommingConnection(){
 }
 
 void NetworkServer::incommingCommand(QString data){
+    qDebug() << "incommingCommand:" << data;
+
     if(data.compare("SHUTDOWN#") == 0){
       QString program = "shutdown";
       QStringList arguments;
