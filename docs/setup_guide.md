@@ -2,7 +2,7 @@
 
 # Complete Setup Guide
 
-This guide will walk you through manually setting up the software on your Raspberry Pi. You will 
+This guide will walk you through manually setting up the software on your Raspberry Pi. You will
 need to have your Pi connected to the internet to perform these steps.
 
 As an alternative, you can use the provided Raspbian disk image file if you have the exact same
@@ -18,13 +18,13 @@ The next thing is to ensure that you are using all of your SD card. Execute the 
 
     sudo raspi-config
 
-and choose "Expand Filesystem". 
+and choose "Expand Filesystem".
 
 If you used NOOBS to install Raspbian, you can probably skip this step, but if you're unsure, try it anyway
 and it will tell you if there is nothing to do.
 
 While you are in raspi-config, you might also want to change whether the Pi boots to a desktop (GUI) or to
-the command line. Since the system runs "headless", not running the full GUI can free up resources. If you're 
+the command line. Since the system runs "headless", not running the full GUI can free up resources. If you're
 unsure, leave it set to the default.
 
 ## Get the Code
@@ -42,7 +42,7 @@ a web API.
 To build it, perform the following steps:
 
     cd ~/EasyRaceLapTimer/ir_daemon
-    sudo apt-get install  qt5-default libcurl4-openssl-dev
+    sudo apt-get install  qt5-default libcurl4-openssl-dev libudev-dev
     qmake ir_daemon.pro
     make
 

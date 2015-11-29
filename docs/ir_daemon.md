@@ -6,7 +6,7 @@ The ir_daemon is a C++ daemon running in the background of your Raspberry PI. It
 
 ## requirements
 
-    sudo apt-get install  qt5-default libcurl4-openssl-dev
+    sudo apt-get install  qt5-default libcurl4-openssl-dev libudev-dev
 
 ## compilation
 
