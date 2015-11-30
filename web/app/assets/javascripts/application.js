@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require channels
+//= main.js
+//= require react_ujs
 //= require_tree .

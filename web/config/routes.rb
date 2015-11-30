@@ -22,11 +22,14 @@ Rails.application.routes.draw do
 
   patch 'system/update_style' => 'system#update_style'
 
+  get 'api/v1/pilot' => 'api/v1/pilot#index'
+  
   post 'api/v1/lap_track' => 'api/v1/lap_track#create'
   get 'api/v1/lap_track/create' => 'api/v1/lap_track#create'
   get 'api/v1/monitor' => 'api/v1/monitor#index'
 
   get 'api/v1/race_session/new' => 'api/v1/race_session#new'
+  post 'api/v1/race_session/new_competition' => 'api/v1/race_session#new_competition'
 
   get '/monitor' => 'monitor#index'
   get '/monitor/view' => 'monitor#view'

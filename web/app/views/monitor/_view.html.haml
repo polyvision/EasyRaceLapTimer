@@ -26,7 +26,7 @@
       %th
         avg lap time
   %tbody
-    - @current_race_session.listing.each_with_index do |entry,index|
+    - @current_race_session_adapter.listing.each_with_index do |entry,index|
       %tr
         %td
           %strong

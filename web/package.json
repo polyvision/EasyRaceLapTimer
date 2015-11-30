@@ -1,0 +1,28 @@
+{
+  "name": "EasyRaceLapTimer",
+  "version": "1.0.0",
+  "description": "== README",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "author": "",
+  "license": "GPLv3",
+  "dependencies": {
+    "alt": "^0.16.4",
+    "babel-loader": "^5.0.0",
+    "classnames": "^2.1.1",
+    "expose-loader": "^0.6.0",
+    "jsx-loader": "^0.13.2",
+    "lodash": "^3.9.3",
+    "node-fetch": "^1.2.1",
+    "node-libs-browser": "^0.5.0",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "superagent": "^1.2.0",
+    "webpack": "^1.9.3"
+  }
+}

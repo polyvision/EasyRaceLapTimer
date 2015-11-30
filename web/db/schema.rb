@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129161302) do
+ActiveRecord::Schema.define(version: 20151130091605) do
 
   create_table "config_values", force: :cascade do |t|
     t.string "name"
@@ -43,12 +43,19 @@ ActiveRecord::Schema.define(version: 20151129161302) do
 
   add_index "pilots", ["deleted_at"], name: "index_pilots_on_deleted_at"
 
+  create_table "race_attendees", force: :cascade do |t|
+    t.integer "race_session_id"
+    t.integer "pilot_id"
+    t.string  "transponder_token"
+  end
+
   create_table "race_sessions", force: :cascade do |t|
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.string   "title"
     t.boolean  "active"
     t.integer  "mode",       default: 0
+    t.integer  "max_laps",   default: 0
   end
 
   create_table "soundfiles", force: :cascade do |t|

@@ -6,10 +6,11 @@ class Api::V1::MonitorController < Api::V1Controller
       return
     end
 
+    race_session_adapater = RaceSessionAdapter.new(@race_session)
     json_data = Hash.new
     json_data['session'] = Hash.new#
     json_data['session']['title'] = @race_session.title
-    json_data['data'] = @race_session.listing
+    json_data['data'] = race_session_adapater.listing
     render json: json_data
   end
 end

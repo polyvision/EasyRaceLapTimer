@@ -14,3 +14,4 @@
 /web/db/easy_race_lap_timer.sqlite3
 web/public/uploads/
 web/public/assets
+web/node_modules
