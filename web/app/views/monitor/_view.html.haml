@@ -6,6 +6,15 @@
 %h1
   =@current_race_session.title
 
+- if @current_race_session.mode == "competition"
+  .panel.panel-default
+    .panel-body
+      %strong
+        Max Laps:
+        = @current_race_session.max_laps
+        Current Laps:
+        = @current_race_session_adapter.current_lap_count
+
 %table.table.table-striped
   %thead
     %tr

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130091605) do
+ActiveRecord::Schema.define(version: 20151201111515) do
 
   create_table "config_values", force: :cascade do |t|
     t.string "name"
@@ -56,7 +56,10 @@ ActiveRecord::Schema.define(version: 20151130091605) do
     t.boolean  "active"
     t.integer  "mode",       default: 0
     t.integer  "max_laps",   default: 0
+    t.datetime "deleted_at"
   end
+
+  add_index "race_sessions", ["deleted_at"], name: "index_race_sessions_on_deleted_at"
 
   create_table "soundfiles", force: :cascade do |t|
     t.string "name"

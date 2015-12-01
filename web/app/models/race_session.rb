@@ -1,4 +1,6 @@
 class RaceSession < ActiveRecord::Base
+  acts_as_paranoid
+  
   has_many :pilot_race_laps
   has_many :race_attendees
   enum mode:[:standard,:competition]

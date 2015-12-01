@@ -1,6 +1,4 @@
 class Api::V1::LapTrackController < Api::V1Controller
-  protect_from_forgery except: :create
-
   def create
 
     @race_session =  RaceSession::get_open_session

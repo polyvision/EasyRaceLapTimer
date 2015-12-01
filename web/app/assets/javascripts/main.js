@@ -48,8 +48,8 @@
 	'use strict';
 
 	var RaceSessionCompetitionDialogComponent = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(182);
-	var React = __webpack_require__(184);
+	var ReactDOM = __webpack_require__(185);
+	var React = __webpack_require__(187);
 
 /***/ },
 /* 1 */
@@ -62,26 +62,47 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
+	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM *//**
+	 * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschränkt)
+	 *
+	 * Author: Alexander B. Bierbrauer
+	 *
+	 * This file is part of EasyRaceLapTimer.
+	 *
+	 * OpenRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+	 * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+	 * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
+	 **/
+	'use strict';
 
 	var PilotsStore = __webpack_require__(160);
+	var RaceSessionCompetitionStore = __webpack_require__(181);
+
 	var PilotsActions = __webpack_require__(176);
-	var RaceSessionCompetitionDialogEntryComponent = __webpack_require__(181);
+	var RaceSessionActions = __webpack_require__(182);
+
+	var RaceSessionCompetitionDialogEntryComponent = __webpack_require__(184);
 
 
 	var RaceSessionCompetitionDialogComponent = React.createClass({displayName: "RaceSessionCompetitionDialogComponent",
 	  getInitialState: function(){
-	      return {pilots_data: [],pilots_listing: []};
+	      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition"};
 	  },
 
 	  componentDidMount: function(){
 	    PilotsStore.listen(this._handleStoreUpdate);
+	    RaceSessionCompetitionStore.listen(this._handleRaceSessionStoreUpdate);
 
 	    PilotsActions.list(); // fetch the pilots list
 	  },
 
 	  _handleStoreUpdate: function(){
 	    this.setState({pilots_data: PilotsStore.getState().data});
+	  },
+
+	  _handleRaceSessionStoreUpdate: function(){
+	    // this is not the REACT way ... but well... it works for now
+	    window.location = "/monitor";
 	  },
 
 	  _addPilot: function(){
@@ -113,26 +134,90 @@
 	    var t_pilots_listing = this.state.pilots_listing;
 
 	    for(var i = 0; i < t_pilots_listing.length; i++){
-	      if(t_pilots_listing[i].id != parseInt(id,10)){
-	        t_pilots_listing[i] = token;
+	      if(t_pilots_listing[i].id == parseInt(id,10)){
+	        t_pilots_listing[i].transponder_token = token;
 	      }
 	    }
 	    this.setState({pilots_listing: t_pilots_listing});
 	  },
 
+	  _changeMaxLaps: function(e){
+	    this.setState({max_laps: e.target.value});
+	  },
+
+	  _changeTitle: function(e){
+	    this.setState({title: e.target.value});
+	  },
+
+	  _createCompetition: function(e){
+	    e.preventDefault();
+
+	    if(this._pilotValidateUniqueTokens() == false){
+	      alert("transponder tokens must be unique, please change them!");
+	    }else{
+	        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.pilots_listing);
+	    }
+
+	  },
+
+	  _pilotAlreadySelected: function(id){
+	    for(var i = 0; i < this.state.pilots_listing.length; i++){
+	      if(this.state.pilots_listing[i].id == parseInt(id,10)){
+	        return true;
+	      }
+	    }
+	    return false;
+	  },
+
+	  _pilotValidateUniqueTokens: function(){
+	    var check = true;
+
+	    var used_tokens = [];
+	    for(var i = 0; i < this.state.pilots_listing.length; i++){
+
+	      for(var t = 0; t < used_tokens.length; t++){
+	        if(used_tokens[t] == this.state.pilots_listing[i].transponder_token){
+	          check = false;
+	        }
+	      }
+	      used_tokens.push(this.state.pilots_listing[i].transponder_token);
+	    }
+
+	    return check;
+	  },
+
 	  render: function(){
 	    var select_content = this.state.pilots_data.map(function(entry){
-	      return (React.createElement("option", {value: entry.id}, entry.name, " - ", entry.quad))
+	      if(this._pilotAlreadySelected(entry.id) == false){
+	          return (React.createElement("option", {value: entry.id}, entry.name, " - ", entry.quad))
+	      }
 	    }.bind(this));
 
 	    var table_content = this.state.pilots_listing.map(function(entry){
-	      return (React.createElement(RaceSessionCompetitionDialogEntryComponent, {pName: entry.name, pQuad: entry.quad, pTransponderToken: entry.transponder_token, id: entry.id, onChangeToken: this._changePilotToken, onRemove: this._removePilot}))
+	      return (React.createElement(RaceSessionCompetitionDialogEntryComponent, {pName: entry.name, pQuad: entry.quad, pTransponderToken: entry.transponder_token, pId: entry.id, onChangeToken: this._changePilotToken, onRemove: this._removePilot}))
 	    }.bind(this));
 
 	    return (
 	      React.createElement("div", null, 
-	        React.createElement("select", {id: "pilot_comp_selection", className: "form-control"}, select_content), 
-	        React.createElement("button", {onClick: this._addPilot, className: "btn"}, "Add"), 
+	        React.createElement("div", {className: "row"}, 
+	          React.createElement("div", {className: "col-xs-8"}, 
+	            React.createElement("div", {className: "form-group"}, 
+	              React.createElement("label", null, "Pilots:"), 
+	              React.createElement("select", {id: "pilot_comp_selection", className: "form-control"}, select_content)
+	            )
+	          ), 
+	          React.createElement("div", {className: "col-xs-4"}, 
+	            React.createElement("button", {onClick: this._addPilot, className: "btn"}, "Add")
+	          )
+	        ), 
+	        React.createElement("div", {className: "form-group"}, 
+	          React.createElement("label", null, "Title:"), 
+	          React.createElement("input", {className: "form-control", type: "text", onChange: this._changeTitle, defaultValue: "Competition", value: this.state.title})
+	        ), 
+	        React.createElement("div", {className: "form-group"}, 
+	          React.createElement("label", null, "Max laps:"), 
+	          React.createElement("input", {className: "form-control", type: "text", onChange: this._changeMaxLaps, value: this.state.max_laps})
+	        ), 
 
 	        React.createElement("table", {className: "table table-striped"}, 
 	          React.createElement("thead", null, 
@@ -147,7 +232,7 @@
 	            table_content
 	          )
 	        ), 
-	        React.createElement("button", {className: "btn btn-primary btn-warning"}, "start competition")
+	        React.createElement("button", {className: "btn btn-primary btn-warning", onClick: this._createCompetition}, "start competition")
 	      ));
 	  }
 	});
@@ -19742,6 +19827,17 @@
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/**
+	 * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschränkt)
+	 *
+	 * Author: Alexander B. Bierbrauer
+	 *
+	 * This file is part of EasyRaceLapTimer.
+	 *
+	 * OpenRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+	 * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+	 * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
+	 **/
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
@@ -21830,6 +21926,17 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/**
+	 * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschränkt)
+	 *
+	 * Author: Alexander B. Bierbrauer
+	 *
+	 * This file is part of EasyRaceLapTimer.
+	 *
+	 * OpenRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+	 * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+	 * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
+	 **/
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
@@ -21876,6 +21983,17 @@
 /* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/**
+	 * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschränkt)
+	 *
+	 * Author: Alexander B. Bierbrauer
+	 *
+	 * This file is part of EasyRaceLapTimer.
+	 *
+	 * OpenRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+	 * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+	 * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
+	 **/
 	'use strict';
 
 	var request = __webpack_require__(178);
@@ -23255,7 +23373,163 @@
 /* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM */'use strict';
+	/**
+	 * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschränkt)
+	 *
+	 * Author: Alexander B. Bierbrauer
+	 *
+	 * This file is part of EasyRaceLapTimer.
+	 *
+	 * OpenRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+	 * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+	 * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
+	 **/
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var _alt = __webpack_require__(161);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var RaceSessionActions = __webpack_require__(182);
+
+	var RaceSessionCompetitionStore = (function () {
+	  function RaceSessionCompetitionStore() {
+	    _classCallCheck(this, RaceSessionCompetitionStore);
+
+	    this.bindAction(RaceSessionActions.createCompetition, this.onCreatedCompetition);
+
+	    this.data = [];
+	  }
+
+	  _createClass(RaceSessionCompetitionStore, [{
+	    key: 'onCreatedCompetition',
+	    value: function onCreatedCompetition(data) {}
+	  }]);
+
+	  return RaceSessionCompetitionStore;
+	})();
+
+	exports['default'] = _alt2['default'].createStore(RaceSessionCompetitionStore, 'RaceSessionCompetitionStore');
+	module.exports = exports['default'];
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschränkt)
+	 *
+	 * Author: Alexander B. Bierbrauer
+	 *
+	 * This file is part of EasyRaceLapTimer.
+	 *
+	 * OpenRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+	 * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+	 * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
+	 **/
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var _alt = __webpack_require__(161);
+
+	var _alt2 = _interopRequireDefault(_alt);
+
+	var RaceSessionAPI = __webpack_require__(183);
+
+	var RaceSessionActions = (function () {
+	  function RaceSessionActions() {
+	    _classCallCheck(this, RaceSessionActions);
+	  }
+
+	  _createClass(RaceSessionActions, [{
+	    key: 'createCompetition',
+	    value: function createCompetition(title, max_laps, pilot_data) {
+	      // transforming pilot data in correct post data
+	      var pilot_post_data = [];
+	      for (var i = 0; i < pilot_data.length; i++) {
+	        pilot_post_data.push({ pilot_id: pilot_data[i].id, transponder_token: pilot_data[i].transponder_token });
+	      }
+
+	      var self = this;
+	      RaceSessionAPI.createCompetition(title, max_laps, pilot_post_data, function (err, result) {
+	        if (!err) {
+	          self.dispatch(result.body);
+	        }
+	      });
+	    }
+	  }]);
+
+	  return RaceSessionActions;
+	})();
+
+	exports['default'] = _alt2['default'].createActions(RaceSessionActions);
+	module.exports = exports['default'];
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschränkt)
+	 *
+	 * Author: Alexander B. Bierbrauer
+	 *
+	 * This file is part of EasyRaceLapTimer.
+	 *
+	 * OpenRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+	 * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+	 * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
+	 **/
+	"use strict";
+
+	var request = __webpack_require__(178);
+	var RaceSessionApi = {};
+
+	// retrieves a list of all pilots
+	RaceSessionApi.createCompetition = function (title, max_laps, pilot_data, callback) {
+
+	  request.post("/api/v1/race_session/new_competition").send("data=" + JSON.stringify({ "title": title, "max_laps": max_laps, "pilots": pilot_data })).end(function (err, result) {
+	    callback(err, result);
+	  });
+	};
+
+	module.exports = RaceSessionApi;
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(React) {/** @jsx React.DOM *//**
+	 * EasyRaceLapTimer - Copyright 2015-2016 by airbirds.de, a project of polyvision UG (haftungsbeschränkt)
+	 *
+	 * Author: Alexander B. Bierbrauer
+	 *
+	 * This file is part of EasyRaceLapTimer.
+	 *
+	 * OpenRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+	 * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+	 * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
+	 **/
+	'use strict';
 
 	var PilotsStore = __webpack_require__(160);
 	var PilotsActions = __webpack_require__(176);
@@ -23269,12 +23543,12 @@
 	  },
 
 	  clickedRemove: function(){
-	    this.props.onRemove(this.props.id);
+	    this.props.onRemove(this.props.pId);
 	  },
 
 	  changePilotToken: function(e){
-	    this.setState({token: e.val});
-	    this.props.onChangeToken(this.props.id,e.val);
+	    this.setState({token: e.target.value});
+	    this.props.onChangeToken(this.props.pId,e.target.value);
 	  },
 
 	  render: function(){
@@ -23303,14 +23577,14 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 182 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["ReactDOM"] = __webpack_require__(183);
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["ReactDOM"] = __webpack_require__(186);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 183 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23318,7 +23592,7 @@
 	module.exports = __webpack_require__(5);
 
 /***/ },
-/* 184 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["React"] = __webpack_require__(3);

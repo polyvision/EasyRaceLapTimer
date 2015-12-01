@@ -10,6 +10,8 @@ class Api::V1::MonitorController < Api::V1Controller
     json_data = Hash.new
     json_data['session'] = Hash.new#
     json_data['session']['title'] = @race_session.title
+    json_data['session']['maps_laps'] = @race_session.max_laps
+    json_data['session']['current_lap_count'] = race_session_adapater.current_lap_count
     json_data['data'] = race_session_adapater.listing
     render json: json_data
   end

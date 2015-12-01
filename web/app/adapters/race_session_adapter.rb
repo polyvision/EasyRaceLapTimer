@@ -23,6 +23,12 @@ class RaceSessionAdapter
     end
   end
 
+  def current_lap_count
+    t = self.race_session.pilot_race_laps.order("lap_num DESC").first
+    return t.lap_num if t
+    return ""
+  end
+
   def listing_standard_mode
     listing_data = Array.new
 

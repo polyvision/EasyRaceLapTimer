@@ -58,6 +58,13 @@ for running rails in dev mode, you need to run these two commands in seperate pr
     ./bin/cable
     rails s
 
+
+starting with v0.4, REACT gets used for various parts
+
+    cd web
+    npm install  (installing node modules)
+    webpack (compiles the JS to app/assets/javascripts/main.js)
+    
 ## API
 
 be sure to change **localhost:3000** to the correct ip of the host station
