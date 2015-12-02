@@ -36,6 +36,7 @@ public slots:
 private:
     bool m_bDebugMode;
     int sensor_state[3];
+    int sensor_pins[3];
     unsigned int sensor_pulse[3];
     unsigned int sensor_start_lap_time[3];
     QList<int> sensor_data[3];

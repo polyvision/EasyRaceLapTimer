@@ -9,43 +9,26 @@
  * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
- #include <wiring_pi.h>
- #include <stdio.h>
- #include "buzzer.h"
- 
- Buzzer::Buzzer(){
-	mui_activeTime = 0;
-	mui_BuzzerStartTime = 0;
-	mi_OutputPin = 0;
- }
- 
- Buzzer::~Buzzer(){
-	 
- }
- 
- void Buzzer::setPin(int p){
- 	printf("Buzzer using pin %i\n",p);
-	 mi_OutputPin = p;
-     pinMode(mi_OutputPin,OUTPUT);
-     digitalWrite(mi_OutputPin,LOW);
- }
- 
- void Buzzer::activate(unsigned int ms){
-	 mui_BuzzerStartTime = millis();
-	 mui_activeTime = ms;
-	 digitalWrite(mi_OutputPin,HIGH);
- }
- 
- void Buzzer::update(){
-	 if(mui_activeTime == 0){
-		return; 
-	 }
-	 
-	 if(mui_BuzzerStartTime +  mui_activeTime < millis()){
-		digitalWrite(mi_OutputPin,LOW);
-		mui_activeTime = 0;
-	 }else{
-		digitalWrite(mi_OutputPin,HIGH);
-	 }
-	 
- }
+#ifndef INFOSERVER_H
+#define INFOSERVER_H
+
+#include <QObject>
+#include <QTcpSocket>
+#include <QTcpServer>
+#include <QList>
+#include "singleton.h"
+
+class InfoServer: public QObject,public Singleton<InfoServer>{
+	friend class Singleton<InfoServer>;
+	Q_OBJECT
+
+public:
+	InfoServer();
+	void broadcastMessage(QString);
+public slots:
+    void newConnection();
+private:
+	QTcpServer			*m_pTcpServer;
+	QList<QTcpSocket*>	m_pClientConnections;
+};
+#endif

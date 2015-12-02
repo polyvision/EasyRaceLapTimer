@@ -21,7 +21,8 @@ SOURCES += main.cpp restart_button_input.cpp buzzer.cpp \
     qextserialport/qextserialenumerator.cpp \
     qextserialport/qextserialport.cpp \
     serialconnection.cpp \
-    configuration.cpp
+    configuration.cpp \
+    infoserver.cpp
     
 HEADERS += restart_button_input.h buzzer.h \
     hoststation.h \
@@ -36,7 +37,8 @@ HEADERS += restart_button_input.h buzzer.h \
     qextserialport/qextserialport_p.h \
     singleton.h \
     serialconnection.h \
-    configuration.h
+    configuration.h \
+    infoserver.h
 
 macx {
   SOURCES += qextserialport/qextserialenumerator_osx.cpp \

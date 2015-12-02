@@ -17,6 +17,7 @@
 #include "serialconnection.h"
 #include "gpioreader.h"
 #include <curl/curl.h>
+#include "infoserver.h"
 
 HostStation::HostStation(QObject *parent) : QObject(parent)
 {
@@ -87,6 +88,8 @@ void HostStation::webRequestLapTimeTracked(QString token,unsigned int ms){
         /* always cleanup */
         curl_easy_cleanup(curl);
       }
+
+      InfoServer::instance()->broadcastMessage(QString("NEW_LAP_TIME %1 %2").arg(token).arg(ms));
 }
 
 void HostStation::webRequestStartNewRace(){

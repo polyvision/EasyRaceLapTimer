@@ -12,11 +12,12 @@
 #include "gpioreader.h"
 #include <wiring_pi.h>
 #include "buzzer.h"
+#include "configuration.h"
 #include <stdio.h>
 
-#define	IR_LED_1	1
-#define	IR_LED_2	4
-#define	IR_LED_3	5
+//#define	IR_LED_1	1
+//#define	IR_LED_2	4
+//#define	IR_LED_3	5
 
 #define PULSE_ONE	500
 #define PULSE_MIN 100
@@ -28,10 +29,18 @@
 
 GPIOReader::GPIOReader()
 {
+	this->sensor_pins[0] = Configuration::instance()->sensorPin(0);
+	this->sensor_pins[1] = Configuration::instance()->sensorPin(1);
+	this->sensor_pins[2] = Configuration::instance()->sensorPin(2);
+
+	printf("GPIOReader:: sensor pin 1: %i\n",this->sensor_pins[0]);
+	printf("GPIOReader:: sensor pin 2: %i\n",this->sensor_pins[1]);
+	printf("GPIOReader:: sensor pin 3: %i\n",this->sensor_pins[2]);
+
     this->m_bDebugMode = false;
-    pinMode(IR_LED_1,INPUT);
-    pinMode(IR_LED_2,INPUT);
-    pinMode(IR_LED_3,INPUT);
+    pinMode(this->sensor_pins[0],INPUT);
+    pinMode(this->sensor_pins[1],INPUT);
+    pinMode(this->sensor_pins[2],INPUT);
 
     for(int sensor_i = 0; sensor_i < 3; sensor_i++){
         this->sensor_state[sensor_i] = 0;
@@ -149,16 +158,16 @@ void GPIOReader::push_bit_to_sensor_data(unsigned int pulse_width,int sensor_i){
 void GPIOReader::update(){
     for(int sensor_i = 0; sensor_i < 3; sensor_i++){
 
-        int pid_input = IR_LED_1;
+        int pid_input = this->sensor_pins[0];
         switch(sensor_i){
             case 0:
-                pid_input = IR_LED_1;
+                pid_input = this->sensor_pins[0];
                 break;
             case 1:
-                pid_input = IR_LED_2;
+                pid_input = this->sensor_pins[1];
                 break;
             case 2:
-                pid_input = IR_LED_3;
+                pid_input = this->sensor_pins[2];
                 break;
         }
 
@@ -170,7 +179,7 @@ void GPIOReader::update(){
             unsigned int c_pulse = c_time - sensor_pulse[sensor_i];
 
             if(this->m_bDebugMode){
-                printf("sensor %i: pulse %i\n",sensor_i,c_pulse);
+                printf("sensor %i(%i): pulse %i\n",sensor_i,pid_input,c_pulse);
             }
             if(c_pulse >= PULSE_MIN && c_pulse <= PULSE_MAX){
                 push_bit_to_sensor_data(c_pulse,sensor_i);
