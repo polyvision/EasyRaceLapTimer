@@ -10,6 +10,7 @@ Instructions for updating to the next stable version. After updating the system,
     cd ~/EasyRaceLapTimer/ir_daemon
     qmake ir_daemon.pro
     make
+    sudo ./ir_daemon --use_standard_gpio_sensor_pins (call this cmd after the update, this sets the standard pin layout for the sensors etc)
 
     cd ~/EasyRaceLapTimer/web
     bundle

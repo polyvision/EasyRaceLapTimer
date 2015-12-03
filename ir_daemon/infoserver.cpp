@@ -9,43 +9,26 @@
  * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
- #include <wiring_pi.h>
- #include <stdio.h>
- #include "buzzer.h"
- 
- Buzzer::Buzzer(){
-	mui_activeTime = 0;
-	mui_BuzzerStartTime = 0;
-	mi_OutputPin = 0;
- }
- 
- Buzzer::~Buzzer(){
-	 
- }
- 
- void Buzzer::setPin(int p){
- 	printf("Buzzer using pin %i\n",p);
-	 mi_OutputPin = p;
-     pinMode(mi_OutputPin,OUTPUT);
-     digitalWrite(mi_OutputPin,LOW);
- }
- 
- void Buzzer::activate(unsigned int ms){
-	 mui_BuzzerStartTime = millis();
-	 mui_activeTime = ms;
-	 digitalWrite(mi_OutputPin,HIGH);
- }
- 
- void Buzzer::update(){
-	 if(mui_activeTime == 0){
-		return; 
-	 }
-	 
-	 if(mui_BuzzerStartTime +  mui_activeTime < millis()){
-		digitalWrite(mi_OutputPin,LOW);
-		mui_activeTime = 0;
-	 }else{
-		digitalWrite(mi_OutputPin,HIGH);
-	 }
-	 
- }
+ #include "infoserver.h"
+
+InfoServer::InfoServer() : QObject(0)
+{
+	this->m_pTcpServer = new QTcpServer(this);
+    this->m_pTcpServer->listen(QHostAddress::Any,3007);
+    connect(m_pTcpServer, SIGNAL(newConnection()), this, SLOT(newConnection()));
+    printf("InfoServer startup done, listening on port 3007\n");
+}
+
+void InfoServer::newConnection(){
+	this->m_pClientConnections.append(this->m_pTcpServer->nextPendingConnection());
+}
+
+void InfoServer::broadcastMessage(QString msg){
+	for (int i = 0; i < this->m_pClientConnections.size(); ++i) {
+		if(m_pClientConnections[i]->state() == QAbstractSocket::ConnectedState){
+			m_pClientConnections[i]->write(QString("%1#\n").arg(msg).toLocal8Bit());
+    		m_pClientConnections[i]->flush();
+    		m_pClientConnections[i]->waitForBytesWritten(1000);
+		}
+	}
+}

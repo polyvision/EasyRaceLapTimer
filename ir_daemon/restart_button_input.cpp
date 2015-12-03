@@ -12,6 +12,7 @@
 
 #include "restart_button_input.h"
 #include <QDebug>
+#include <stdio.h>
 #include <curl/curl.h>
 #include <QtConcurrent>
 #include "buzzer.h"
@@ -25,6 +26,7 @@ RestartButtonInput::RestartButtonInput(QObject *parent) : QObject(parent){
 }
 
 void RestartButtonInput::setPin(int pin){
+	printf("restart button using pin %i\n",pin);
     this->m_iInputPin = pin;
     pinMode(this->m_iInputPin,INPUT);
 }

@@ -21,6 +21,12 @@
 
  	void setComPortIndex(int);
  	int comPortIndex();
+ 	void setSensorPin(int,int);
+ 	int  sensorPin(int);
+ 	void setBuzzerPin(int);
+ 	int buzzerPin();
+ 	void setRestartButtonPin(int);
+ 	int restartButtonPin();
  private:
  };
  #endif

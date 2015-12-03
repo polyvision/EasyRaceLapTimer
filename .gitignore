@@ -15,3 +15,5 @@
 web/public/uploads/
 web/public/assets
 web/node_modules
+*.o
+moc_*
