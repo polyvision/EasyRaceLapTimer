@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get 'system/soundfile' => 'system/soundfile#index'
   patch 'system/soundfile/:id' => 'system/soundfile#update'
+  get 'system/soundfile/clear/:id' => 'system/soundfile#clear'
 
   get '/system/stop_race_session' => 'system#stop_race_session'
   post '/system/start_race_session' => 'system#start_race_session'
@@ -39,6 +40,7 @@ Rails.application.routes.draw do
 
   get '/history' =>  'history#index'
   get '/history/show/:id' =>  'history#show'
+  get '/history/export_to_xlsx/:id' =>  'history#export_to_xlsx'
   delete '/history/delete/:id' =>  'history#delete'
 
   root 'monitor#index'

@@ -29,6 +29,14 @@ class RaceSessionAdapter
     return ""
   end
 
+  def pilot_ids
+    if self.race_session.mode == "standard"
+      self.race_session.pilot_race_laps.group(:pilot_id).pluck(:pilot_id)
+    else
+      self.race_session.race_attendees.group(:pilot_id).pluck(:pilot_id)
+    end
+  end
+
   def listing_standard_mode
     listing_data = Array.new
 

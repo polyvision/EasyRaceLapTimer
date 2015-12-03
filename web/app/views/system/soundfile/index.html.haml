@@ -14,4 +14,5 @@
           %td
             = f.file_field :file
           %td
-            = f.submit 'upload', class: 'btn btn-primary'
+            = f.submit 'upload WAV', class: 'btn btn-primary'
+            = link_to('clear',{action: 'clear',id: soundfile.id},{class: 'btn btn-warning'})

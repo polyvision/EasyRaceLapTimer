@@ -27,6 +27,8 @@
       %th
         quad
       %th
+        team
+      %th
         fasted lap time
       %th
         last lap time
@@ -48,6 +50,9 @@
         %td
           %strong
             = entry['pilot'].quad
+        %td
+          %strong
+            = entry['pilot'].team
         %td
           %strong
             = formated_lap_time(entry['fastest_lap']['lap_time'])

@@ -45,6 +45,7 @@ To build it, perform the following steps:
     sudo apt-get install  qt5-default libcurl4-openssl-dev libudev-dev
     qmake ir_daemon.pro
     make
+    sudo ./ir_daemon --use_standard_gpio_sensor_pins
 
 ## Build the Rails App
 
