@@ -21,6 +21,7 @@ What you get with EasyRaceLaptimer:
 * detailed stats about pilots and races
 * sound effects for various events in a race
 * TCP/IP and serial connections support for receiving lap times and commands from other time tracking systems
+* export race events to spreadsheets
 * and much more comming soon
 
 **Important notices**
