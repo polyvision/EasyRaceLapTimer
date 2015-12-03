@@ -13,6 +13,7 @@ The ir_daemon is a C++ daemon running in the background of your Raspberry PI. It
     cd ir_daemon
     qmake ir_daemon.pro
     make
+    sudo ./ir_daemon --use_standard_gpio_sensor_pins
     sudo ./ir_daemon [for starting]
 
 
@@ -24,7 +25,23 @@ show some debug output
 
 listing available serial ports
 
-    --listserialports
+    --list_serial_ports
+
+set serial port
+
+        --set_com_port_index INDEX
+
+set buzzer pin
+
+        --set_buzzer_pin PIN
+
+use standard pin layout
+
+        --use_standard_gpio_sensor_pins
+
+use pin layout for displayotron 3k HATs
+
+        --use_dot3k_hat_pin_setup
 
 ## data sources
 
