@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203121301) do
+ActiveRecord::Schema.define(version: 20151204094002) do
 
   create_table "config_values", force: :cascade do |t|
     t.string "name"
@@ -51,16 +51,29 @@ ActiveRecord::Schema.define(version: 20151203121301) do
   end
 
   create_table "race_sessions", force: :cascade do |t|
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "title"
     t.boolean  "active"
-    t.integer  "mode",       default: 0
-    t.integer  "max_laps",   default: 0
+    t.integer  "mode",                       default: 0
+    t.integer  "max_laps",                   default: 0
     t.datetime "deleted_at"
+    t.integer  "num_satellites",             default: 0
+    t.integer  "time_penalty_per_satellite", default: 2500
   end
 
   add_index "race_sessions", ["deleted_at"], name: "index_race_sessions_on_deleted_at"
+
+  create_table "satellite_check_points", force: :cascade do |t|
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "race_session_id"
+    t.integer  "race_attendee_id"
+    t.integer  "num_lap",          default: 0
+  end
+
+  add_index "satellite_check_points", ["race_attendee_id"], name: "index_satellite_check_points_on_race_attendee_id"
+  add_index "satellite_check_points", ["race_session_id"], name: "index_satellite_check_points_on_race_session_id"
 
   create_table "soundfiles", force: :cascade do |t|
     t.string "name"

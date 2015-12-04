@@ -22,7 +22,7 @@ var RaceSessionCompetitionDialogEntryComponent = require('../components/race_ses
 
 var RaceSessionCompetitionDialogComponent = React.createClass({
   getInitialState: function(){
-      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition"};
+      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition",num_satellites: 0, time_penalty_per_satellite: 2500};
   },
 
   componentDidMount: function(){
@@ -85,13 +85,21 @@ var RaceSessionCompetitionDialogComponent = React.createClass({
     this.setState({title: e.target.value});
   },
 
+  _changeTimePenaltyPerSatellite: function(e){
+    this.setState({time_penalty_per_satellite: e.target.value});
+  },
+
+  _changeNumSatellites: function(e){
+    this.setState({num_satellites: e.target.value});
+  },
+
   _createCompetition: function(e){
     e.preventDefault();
 
     if(this._pilotValidateUniqueTokens() == false){
       alert("transponder tokens must be unique, please change them!");
     }else{
-        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.pilots_listing);
+        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.num_satellites,this.state.time_penalty_per_satellite,this.state.pilots_listing);
     }
 
   },
@@ -148,11 +156,19 @@ var RaceSessionCompetitionDialogComponent = React.createClass({
         </div>
         <div className="form-group">
           <label>Title:</label>
-          <input className="form-control" type="text" onChange={this._changeTitle} defaultValue="Competition" value={this.state.title}></input>
+          <input className="form-control" type="text" onChange={this._changeTitle} defaultValue="Competition" value={this.state.title} required={true}></input>
         </div>
         <div className="form-group">
           <label>Max laps:</label>
-          <input className="form-control" type="text" onChange={this._changeMaxLaps} value={this.state.max_laps}></input>
+          <input className="form-control" type="text" onChange={this._changeMaxLaps} value={this.state.max_laps} required={true}></input>
+        </div>
+        <div className="form-group">
+          <label>Num Satellites:</label>
+          <input className="form-control" type="text" onChange={this._changeNumSatellites} value={this.state.num_satellites} required={true}></input>
+        </div>
+        <div className="form-group">
+          <label>Time Penalty per Satellite microseconds:</label>
+          <input className="form-control" type="text" onChange={this._changeTimePenaltyPerSatellite} value={this.state.time_penalty_per_satellite} required={true}></input>
         </div>
 
         <table className="table table-striped">

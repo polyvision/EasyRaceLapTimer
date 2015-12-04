@@ -86,7 +86,7 @@
 
 	var RaceSessionCompetitionDialogComponent = React.createClass({displayName: "RaceSessionCompetitionDialogComponent",
 	  getInitialState: function(){
-	      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition"};
+	      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition",num_satellites: 0, time_penalty_per_satellite: 2500};
 	  },
 
 	  componentDidMount: function(){
@@ -149,13 +149,21 @@
 	    this.setState({title: e.target.value});
 	  },
 
+	  _changeTimePenaltyPerSatellite: function(e){
+	    this.setState({time_penalty_per_satellite: e.target.value});
+	  },
+
+	  _changeNumSatellites: function(e){
+	    this.setState({num_satellites: e.target.value});
+	  },
+
 	  _createCompetition: function(e){
 	    e.preventDefault();
 
 	    if(this._pilotValidateUniqueTokens() == false){
 	      alert("transponder tokens must be unique, please change them!");
 	    }else{
-	        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.pilots_listing);
+	        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.num_satellites,this.state.time_penalty_per_satellite,this.state.pilots_listing);
 	    }
 
 	  },
@@ -212,11 +220,19 @@
 	        ), 
 	        React.createElement("div", {className: "form-group"}, 
 	          React.createElement("label", null, "Title:"), 
-	          React.createElement("input", {className: "form-control", type: "text", onChange: this._changeTitle, defaultValue: "Competition", value: this.state.title})
+	          React.createElement("input", {className: "form-control", type: "text", onChange: this._changeTitle, defaultValue: "Competition", value: this.state.title, required: true})
 	        ), 
 	        React.createElement("div", {className: "form-group"}, 
 	          React.createElement("label", null, "Max laps:"), 
-	          React.createElement("input", {className: "form-control", type: "text", onChange: this._changeMaxLaps, value: this.state.max_laps})
+	          React.createElement("input", {className: "form-control", type: "text", onChange: this._changeMaxLaps, value: this.state.max_laps, required: true})
+	        ), 
+	        React.createElement("div", {className: "form-group"}, 
+	          React.createElement("label", null, "Num Satellites:"), 
+	          React.createElement("input", {className: "form-control", type: "text", onChange: this._changeNumSatellites, value: this.state.num_satellites, required: true})
+	        ), 
+	        React.createElement("div", {className: "form-group"}, 
+	          React.createElement("label", null, "Time Penalty per Satellite microseconds:"), 
+	          React.createElement("input", {className: "form-control", type: "text", onChange: this._changeTimePenaltyPerSatellite, value: this.state.time_penalty_per_satellite, required: true})
 	        ), 
 
 	        React.createElement("table", {className: "table table-striped"}, 
@@ -23462,7 +23478,7 @@
 
 	  _createClass(RaceSessionActions, [{
 	    key: 'createCompetition',
-	    value: function createCompetition(title, max_laps, pilot_data) {
+	    value: function createCompetition(title, max_laps, num_satellites, time_penalty_per_satellite, pilot_data) {
 	      // transforming pilot data in correct post data
 	      var pilot_post_data = [];
 	      for (var i = 0; i < pilot_data.length; i++) {
@@ -23470,7 +23486,7 @@
 	      }
 
 	      var self = this;
-	      RaceSessionAPI.createCompetition(title, max_laps, pilot_post_data, function (err, result) {
+	      RaceSessionAPI.createCompetition(title, max_laps, num_satellites, time_penalty_per_satellite, pilot_post_data, function (err, result) {
 	        if (!err) {
 	          self.dispatch(result.body);
 	        }
@@ -23505,9 +23521,9 @@
 	var RaceSessionApi = {};
 
 	// retrieves a list of all pilots
-	RaceSessionApi.createCompetition = function (title, max_laps, pilot_data, callback) {
+	RaceSessionApi.createCompetition = function (title, max_laps, num_satellites, time_penalty_per_satellite, pilot_data, callback) {
 
-	  request.post("/api/v1/race_session/new_competition").send("data=" + JSON.stringify({ "title": title, "max_laps": max_laps, "pilots": pilot_data })).end(function (err, result) {
+	  request.post("/api/v1/race_session/new_competition").send("data=" + JSON.stringify({ "title": title, "max_laps": max_laps, "pilots": pilot_data, "num_satellites": num_satellites, "time_penalty_per_satellite": time_penalty_per_satellite })).end(function (err, result) {
 	    callback(err, result);
 	  });
 	};

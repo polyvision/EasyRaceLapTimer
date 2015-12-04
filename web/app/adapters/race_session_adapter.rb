@@ -15,11 +15,29 @@ class RaceSessionAdapter
     end
   end
 
+  def current_lap_for_pilot_by_token(token)
+    pilot = self.get_pilot_by_token(token)
+    t = self.race_session.pilot_race_laps.where(pilot_id: pilot.id).order("lap_num DESC").first
+
+    return t.lap_num+1 if t
+    return 1
+  end
+
+  def get_pilot_by_token(token)
+    pilot = nil
+    if self.race_session.mode == "standard"
+      return Pilot.where(transponder_token: token).first
+    else
+      return self.race_session.race_attendees.where(transponder_token: token).first.pilot
+    end
+    return false
+  end
+
   def listing
     if self.race_session.mode == "standard"
       return self.listing_standard_mode
     elsif self.race_session.mode == "competition"
-      return self.listing_competition_mode
+      return self.sort_list_by_time_penalties
     end
   end
 
@@ -65,6 +83,7 @@ class RaceSessionAdapter
   end
 
   def listing_competition_mode
+
     listing_data = Array.new
 
     self.race_session.pilot_race_laps.order("lap_num DESC,created_at ASC").group(:pilot_id).pluck(:pilot_id).each_with_index do |pilot_id,index|
@@ -91,12 +110,74 @@ class RaceSessionAdapter
     return listing_data
   end
 
+  def sort_list_by_time_penalties()
+    listing_data = Array.new
+
+    pilot_time_sum_up = Hash.new
+    self.race_session.pilot_race_laps.order("created_at ASC").each do |lap|
+      pilot = Pilot.find(lap.pilot_id)
+
+      if !pilot_time_sum_up[lap.pilot_id]
+        pilot_time_sum_up[lap.pilot_id] = Hash.new
+        pilot_time_sum_up[lap.pilot_id]['race_time_sum_in_ms'] = 0
+        pilot_time_sum_up[lap.pilot_id]['race_time_sum_in_ms_without_penalty'] = 0
+        pilot_time_sum_up[lap.pilot_id]['num_time_penalties'] = 0
+        pilot_time_sum_up[lap.pilot_id]['sum_time_penalties_in_ms'] = 0
+      end
+
+      pilot_time_sum_up[lap.pilot_id]['race_time_sum_in_ms'] += lap.lap_time
+      pilot_time_sum_up[lap.pilot_id]['race_time_sum_in_ms_without_penalty'] += lap.lap_time
+
+      if self.time_penalty_for_lap?(pilot,lap.lap_num)
+        pilot_time_sum_up[lap.pilot_id]['num_time_penalties'] += self.num_time_penalties_for_lap(pilot,lap.lap_num)
+        pilot_time_sum_up[lap.pilot_id]['race_time_sum_in_ms'] += self.num_time_penalties_for_lap(pilot,lap.lap_num) * self.race_session.time_penalty_per_satellite
+        pilot_time_sum_up[lap.pilot_id]['sum_time_penalties_in_ms'] += self.num_time_penalties_for_lap(pilot,lap.lap_num) * self.race_session.time_penalty_per_satellite
+      end
+    end
+
+    # let's alter the listing according to the racing times with penalties etc
+    listing_data = self.listing_competition_mode
+    listing_data.each_with_index do |entry,index|
+      listing_data[index]['race_time_sum_in_ms'] = pilot_time_sum_up[entry['pilot']['id']]['race_time_sum_in_ms']
+      listing_data[index]['race_time_sum_in_ms_without_penalty'] = pilot_time_sum_up[entry['pilot']['id']]['race_time_sum_in_ms_without_penalty']
+      listing_data[index]['num_time_penalties'] = pilot_time_sum_up[entry['pilot']['id']]['num_time_penalties']
+      listing_data[index]['sum_time_penalties_in_ms'] = pilot_time_sum_up[entry['pilot']['id']]['sum_time_penalties_in_ms']
+    end
+
+    #listing_data = listing_data.sort!{|a,b| a['race_time_sum_in_ms'] <=> b['race_time_sum_in_ms']}
+    listing_data = listing_data.sort_by{|a| [a['lap_count'], a['race_time_sum_in_ms']]}.reverse!
+    return listing_data
+  end
+
   def track_lap_time(transponder_token,delta_time_in_ms)
     if self.race_session.mode == "standard"
       return self.track_lap_time_standard_mode(transponder_token,delta_time_in_ms)
     elsif self.race_session.mode == "competition"
       return self.track_lap_time_competition_mode(transponder_token,delta_time_in_ms)
     end
+  end
+
+  def track_satellite_check_point(token)
+    ra = self.race_session.race_attendees.where(transponder_token: token).first
+    return SatelliteCheckPoint.create(race_session_id: self.race_session.id,race_attendee_id: ra.id,num_lap: self.current_lap_for_pilot_by_token(token))
+  end
+
+  def num_satellite_check_points_for_lap(pilot,lap_num)
+    return SatelliteCheckPoint.joins(:race_attendee).where(race_session_id: self.race_session.id, num_lap: lap_num).where("race_attendees.pilot_id = ?",pilot.id).count
+  end
+
+  def time_penalty_for_lap?(pilot,lap_num)
+    if self.num_satellite_check_points_for_lap(pilot,lap_num) < self.race_session.num_satellites.to_i
+      return true
+    end
+    return false
+  end
+
+  def num_time_penalties_for_lap(pilot,lap_num)
+    if self.num_satellite_check_points_for_lap(pilot,lap_num) < self.race_session.num_satellites
+      return self.race_session.num_satellites - self.num_satellite_check_points_for_lap(pilot,lap_num)
+    end
+    return 0
   end
 
   # tracking a lap in standard mode

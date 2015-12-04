@@ -1,4 +1,4 @@
-class Api::V1::PilotController < ApplicationController
+class Api::V1::PilotController < Api::V1Controller
   def index
     json_data = Array.new
     Pilot.all.each do |p|
