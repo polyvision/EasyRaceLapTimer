@@ -1,11 +1,3 @@
-.row
-  .col-md-4.col-md-offset-5
-    - if !@style_setting.own_logo_image.blank?
-      = image_tag(@style_setting.own_logo_image.thumb.url)
-
-%h1
-  =@current_race_session.title
-
 - if @current_race_session.mode == "competition"
   .panel.panel-default
     .panel-body
@@ -19,13 +11,14 @@
         Time penalty:
         = formated_lap_time(@current_race_session.time_penalty_per_satellite)
 
-%table.table.table-striped
+%h2
+  Results
+
+%table.table.table-striped.table-bordered
   %thead
     %tr
       %th
         place
-      %th
-
       %th
         race time
       %th
@@ -50,12 +43,10 @@
         time without penalties
   %tbody
     - @current_race_session_adapter.listing.each_with_index do |entry,index|
-      %tr{class: "#{"success" if entry['latest_tracked']}"}
+      %tr
         %td
           %strong
             = index + 1
-        %td
-          = image_tag(entry['pilot'].image.url,width: 50,height: 50)
         %td
           %strong
             = formated_lap_time(entry['race_time_sum_in_ms'])

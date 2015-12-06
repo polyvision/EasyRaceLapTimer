@@ -25,6 +25,7 @@ gem 'mini_magick'
 gem 'react-rails', '~> 1.5.0'
 gem 'axlsx', '~> 2.0.1'
 gem 'axlsx_rails'
+gem 'wicked_pdf'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

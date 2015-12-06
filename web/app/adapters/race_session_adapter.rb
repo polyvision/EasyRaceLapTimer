@@ -74,6 +74,7 @@ class RaceSessionAdapter
         data['last_lap'] = Hash.new
         data['last_lap']['lap_num'] = self.race_session.last_lap_of_pilot(c_pilot).lap_num
         data['last_lap']['lap_time'] = self.race_session.last_lap_of_pilot(c_pilot).lap_time
+        data['latest_tracked'] = self.race_session.last_lap_of_pilot_is_lasted_tracked_time_of_race?(c_pilot)
 
         listing_data << data
       end
@@ -102,6 +103,8 @@ class RaceSessionAdapter
         data['last_lap'] = Hash.new
         data['last_lap']['lap_num'] = self.race_session.last_lap_of_pilot(c_pilot).lap_num
         data['last_lap']['lap_time'] = self.race_session.last_lap_of_pilot(c_pilot).lap_time
+        data['laps_left'] = self.race_session.max_laps.to_i - data['last_lap']['lap_num'].to_i
+        data['latest_tracked'] = self.race_session.last_lap_of_pilot_is_lasted_tracked_time_of_race?(c_pilot)
 
         listing_data << data
       end
@@ -145,7 +148,7 @@ class RaceSessionAdapter
     end
 
     #listing_data = listing_data.sort!{|a,b| a['race_time_sum_in_ms'] <=> b['race_time_sum_in_ms']}
-    listing_data = listing_data.sort_by{|a| [a['lap_count'], a['race_time_sum_in_ms']]}.reverse!
+    listing_data = listing_data.sort_by{|a| [a['laps_left'], a['race_time_sum_in_ms']]}
     return listing_data
   end
 

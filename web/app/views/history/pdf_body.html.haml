@@ -1,0 +1,8 @@
+%h1
+  = @current_race_session.title
+
+- if @current_race_session.mode == "competition"
+  = render partial: 'pdf_results_competition_mode'
+
+.page-break
+  test

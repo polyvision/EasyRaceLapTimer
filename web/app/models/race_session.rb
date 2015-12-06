@@ -1,6 +1,6 @@
 class RaceSession < ActiveRecord::Base
   acts_as_paranoid
-  
+
   has_many :pilot_race_laps
   has_many :race_attendees
   enum mode:[:standard,:competition]
@@ -63,6 +63,12 @@ class RaceSession < ActiveRecord::Base
 
   def last_lap_of_pilot(pilot)
     return self.pilot_race_laps.where(pilot_id: pilot.id).order("id DESC").first
+  end
+
+  def last_lap_of_pilot_is_lasted_tracked_time_of_race?(pilot)
+    t=  self.pilot_race_laps.where(pilot_id: pilot.id).order("id DESC").first
+    return t.latest if t
+    return false
   end
 
   def avg_lap_time_of_pilot(pilot)

@@ -5,6 +5,7 @@ class PilotRaceLap < ActiveRecord::Base
   belongs_to :pilot
 
   after_create :filter_fastest_lap
+  after_create :filter_mark_latest
 
   def formated_lap_time
     return ((self.lap_time / 1000.0) / 60.0).round(4)
@@ -15,6 +16,14 @@ class PilotRaceLap < ActiveRecord::Base
   	if t.id == self.id
   		Soundfile::play("sfx_fastet_lap")
   	end
+  end
+
+  def filter_mark_latest
+    RaceSession.find(self.race_session_id).pilot_race_laps.each do |l|
+      l.update_attribute(:latest,false)
+    end
+
+    self.update_attribute(:latest,true)
   end
 
   def to_json

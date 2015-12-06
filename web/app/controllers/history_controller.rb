@@ -23,4 +23,25 @@ class HistoryController < ApplicationController
     t.destroy
     redirect_to action: 'index'
   end
+
+  def pdf
+    @current_race_session = RaceSession.find(params[:id])
+    @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session)
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "race_session_#{@current_race_session.id}.pdf",
+        page_size: 'A4',
+        show_as_html: params.key?('debug'),
+        template: 'history/pdf_body.html.haml',
+        layout: 'pdf.html'
+      end
+    end
+  end
+
+  def pdf_body
+    @current_race_session = RaceSession.find(params[:id])
+    @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session)
+  end
 end
