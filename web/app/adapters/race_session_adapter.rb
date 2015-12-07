@@ -162,7 +162,11 @@ class RaceSessionAdapter
 
   def track_satellite_check_point(token)
     ra = self.race_session.race_attendees.where(transponder_token: token).first
-    return SatelliteCheckPoint.create(race_session_id: self.race_session.id,race_attendee_id: ra.id,num_lap: self.current_lap_for_pilot_by_token(token))
+    if ra
+      return SatelliteCheckPoint.create(race_session_id: self.race_session.id,race_attendee_id: ra.id,num_lap: self.current_lap_for_pilot_by_token(token))
+    else
+      return false
+    end
   end
 
   def num_satellite_check_points_for_lap(pilot,lap_num)

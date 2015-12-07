@@ -19,10 +19,17 @@
 #include <curl/curl.h>
 #include "infoserver.h"
  #include <wiring_pi.h>
+ #include "configuration.h"
 
 HostStation::HostStation(QObject *parent) : QObject(parent)
 {
     m_bDebug = false;
+    m_bSatelliteMode = false;
+
+    m_bSatelliteMode = Configuration::instance()->satelliteMode();
+    if(m_bSatelliteMode){
+        printf("HostStation:: started in satellite mode\n");    
+    }
 }
 
 void HostStation::setDebug(bool v){
@@ -66,9 +73,16 @@ void HostStation::setup(){
 
 void HostStation::eventNewLapTime(QString token, unsigned int ms){
     if(m_hashLastTokenPush[token] + 2000 < millis()){ // filter, so we don't push too much data to the webservice
-        printf("HostStation::eventNewLapTime %s %u\n",token.toStdString().c_str(),ms);
         m_hashLastTokenPush[token] = millis();
-        QtConcurrent::run(this, &HostStation::webRequestLapTimeTracked,token,ms);    
+
+        if(!this->m_bSatelliteMode){
+            printf("HostStation::eventNewLapTime %s %u\n",token.toStdString().c_str(),ms);
+            QtConcurrent::run(this, &HostStation::webRequestLapTimeTracked,token,ms);    
+        }else{
+            printf("HostStation::eventNewLapTime (satellite mode) %s %u\n",token.toStdString().c_str(),ms);
+            QtConcurrent::run(this, &HostStation::webRequestSatelliteTracked,token,ms);    
+        }
+        
     }else{
         if(this->m_bDebug){
             qDebug() << "HostStation::eventNewLapTime: blocked sending new lap time, time too short token: " <<  token;    
@@ -76,6 +90,34 @@ void HostStation::eventNewLapTime(QString token, unsigned int ms){
         
     }
     
+}
+
+void HostStation::webRequestSatelliteTracked(QString token,unsigned int ms){
+    CURL *curl;
+    CURLcode res;
+
+    curl = curl_easy_init();
+      if(curl) {
+        /* First set the URL that is about to receive our POST. This URL can
+           just as well be a https:// URL if that is what should receive the
+           data. */
+        curl_easy_setopt(curl, CURLOPT_URL, QString("%1/api/v1/satellite?transponder_token=%2&lap_time_in_ms=%3").arg(Configuration::instance()->webHost()).arg(token).arg(ms).toStdString().c_str());
+
+
+
+        /* Perform the request, res will get the return code */
+        res = curl_easy_perform(curl);
+        /* Check for errors */
+        if(res != CURLE_OK){
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+        }
+
+
+        /* always cleanup */
+        curl_easy_cleanup(curl);
+      }
+
+      InfoServer::instance()->broadcastMessage(QString("NEW_LAP_TIME %1 %2").arg(token).arg(ms));
 }
 
 void HostStation::webRequestLapTimeTracked(QString token,unsigned int ms){
@@ -87,7 +129,7 @@ void HostStation::webRequestLapTimeTracked(QString token,unsigned int ms){
         /* First set the URL that is about to receive our POST. This URL can
            just as well be a https:// URL if that is what should receive the
            data. */
-        curl_easy_setopt(curl, CURLOPT_URL, QString("http://localhost/api/v1/lap_track/create?transponder_token=%1&lap_time_in_ms=%2").arg(token).arg(ms).toStdString().c_str());
+        curl_easy_setopt(curl, CURLOPT_URL, QString("%1/api/v1/lap_track/create?transponder_token=%2&lap_time_in_ms=%3").arg(Configuration::instance()->webHost()).arg(token).arg(ms).toStdString().c_str());
 
 
 
@@ -115,7 +157,7 @@ void HostStation::webRequestStartNewRace(){
         /* First set the URL that is about to receive our POST. This URL can
            just as well be a https:// URL if that is what should receive the
            data. */
-        curl_easy_setopt(curl, CURLOPT_URL, QString("http://localhost/api/v1/race_session/new").toStdString().c_str());
+        curl_easy_setopt(curl, CURLOPT_URL, QString("%1/api/v1/race_session/new").arg(Configuration::instance()->webHost()).toStdString().c_str());
 
 
 
