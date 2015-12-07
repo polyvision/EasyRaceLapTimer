@@ -12,7 +12,8 @@
  #ifndef CONFIGURATION_H
  #define CONFIGURATION_H
 
- #include "singleton.h"
+#include <QString>
+#include "singleton.h"
 
  class Configuration: public Singleton<Configuration>{
  	friend class Singleton<Configuration>;
@@ -27,6 +28,10 @@
  	int buzzerPin();
  	void setRestartButtonPin(int);
  	int restartButtonPin();
+ 	QString webHost();
+ 	void setWebHost(QString);
+ 	void setSatelliteMode(bool);
+ 	bool satelliteMode();
  private:
  };
  #endif

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   post 'api/v1/lap_track' => 'api/v1/lap_track#create'
   post 'api/v1/satellite' => 'api/v1/satellite#create'
+  get 'api/v1/satellite' => 'api/v1/satellite#create'
   get 'api/v1/lap_track/create' => 'api/v1/lap_track#create'
   get 'api/v1/monitor' => 'api/v1/monitor#index'
 

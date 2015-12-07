@@ -60,8 +60,23 @@ int main(int argc, char *argv[])
             return 0;
         }
 
+        if(a.arguments().at(1).compare("--set_web_host") == 0){
+            Configuration::instance()->setWebHost(a.arguments().at(2));
+            return 0;
+        }
+
         if(a.arguments().at(1).compare("--set_buzzer_pin") == 0){
             Configuration::instance()->setBuzzerPin(a.arguments().at(2).toInt());
+            return 0;
+        }
+
+        if(a.arguments().at(1).compare("--enable_satellite_mode") == 0){
+            Configuration::instance()->setSatelliteMode(true);
+            return 0;
+        }
+
+        if(a.arguments().at(1).compare("--disable_satellite_mode") == 0){
+            Configuration::instance()->setSatelliteMode(false);
             return 0;
         }
 

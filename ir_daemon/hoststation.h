@@ -33,10 +33,12 @@ public:
     void setup();
 
 private:
+    void webRequestSatelliteTracked(QString token,unsigned int ms);
     void webRequestLapTimeTracked(QString token,unsigned int ms);
     void webRequestStartNewRace();
     QHash<QString, unsigned int> m_hashLastTokenPush;
     bool m_bDebug;
+    bool m_bSatelliteMode;
 };
 
 #endif // HOSTSTATION_H

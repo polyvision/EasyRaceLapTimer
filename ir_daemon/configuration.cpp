@@ -60,3 +60,25 @@ int Configuration::restartButtonPin(){
 	QSettings settings;
 	return settings.value("buttons/restart_button_pin",14).toInt(); // 14 is the default pin	
 }
+
+QString Configuration::webHost(){
+	QSettings settings;
+	return settings.value("urls/webhost","http://localhost/").toString();
+}
+
+void Configuration::setWebHost(QString v){
+	QSettings settings;
+ 	settings.setValue("urls/webhost", v);
+ 	printf("Configuration::setWebHost: %s\n",webHost().toStdString().c_str());
+}
+
+void Configuration::setSatelliteMode(bool v){
+	QSettings settings;
+ 	settings.setValue("mode/satellite", v);
+ 	printf("Configuration::setSatelliteMode: %i\n",satelliteMode());
+}
+
+bool Configuration::satelliteMode(){
+	QSettings settings;
+	return settings.value("mode/satellite",false).toBool();
+}
