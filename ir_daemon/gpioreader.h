@@ -14,6 +14,7 @@
 
 #include <QObject>
 #include "singleton.h"
+#include <QHash>
 
 class GPIOReader: public QObject, public Singleton<GPIOReader>
 {
@@ -26,7 +27,7 @@ public:
     void update();
     unsigned int num_ones_in_buffer(QList<int>& list);
     void print_binary_list(QList<int>& list);
-    void push_to_service(int sensor_i,QList<int>& list,unsigned int delta_time,int control_bit);
+    void push_to_service(int sensor_i,QList<int>& list,int control_bit);
     void push_bit_to_sensor_data(unsigned int pulse_width,int sensor_i);
     void reset();
 signals:
@@ -39,6 +40,7 @@ private:
     int sensor_pins[3];
     unsigned int sensor_pulse[3];
     unsigned int sensor_start_lap_time[3];
+    QHash<QString, unsigned int> m_sensoredTimes;
     QList<int> sensor_data[3];
 };
 

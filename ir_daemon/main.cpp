@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
 		if(a.arguments().at(1).compare("--debug") == 0){
             GPIOReader::instance()->setDebug(true);
             SerialConnection::instance()->setDebug(true);
+            HostStation::instance()->setDebug(true);
 			printf("enabled debug mode\n");
 		}
 

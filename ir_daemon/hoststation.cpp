@@ -18,10 +18,15 @@
 #include "gpioreader.h"
 #include <curl/curl.h>
 #include "infoserver.h"
+ #include <wiring_pi.h>
 
 HostStation::HostStation(QObject *parent) : QObject(parent)
 {
+    m_bDebug = false;
+}
 
+void HostStation::setDebug(bool v){
+    this->m_bDebug = v;
 }
 
 void HostStation::eventStartNewRace(){
@@ -60,8 +65,17 @@ void HostStation::setup(){
 }
 
 void HostStation::eventNewLapTime(QString token, unsigned int ms){
-    printf("HostStation::eventNewLapTime %s %u\n",token.toStdString().c_str(),ms);
-    QtConcurrent::run(this, &HostStation::webRequestLapTimeTracked,token,ms);
+    if(m_hashLastTokenPush[token] + 2000 < millis()){ // filter, so we don't push too much data to the webservice
+        printf("HostStation::eventNewLapTime %s %u\n",token.toStdString().c_str(),ms);
+        m_hashLastTokenPush[token] = millis();
+        QtConcurrent::run(this, &HostStation::webRequestLapTimeTracked,token,ms);    
+    }else{
+        if(this->m_bDebug){
+            qDebug() << "HostStation::eventNewLapTime: blocked sending new lap time, time too short token: " <<  token;    
+        }
+        
+    }
+    
 }
 
 void HostStation::webRequestLapTimeTracked(QString token,unsigned int ms){

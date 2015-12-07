@@ -45,7 +45,6 @@ GPIOReader::GPIOReader()
     for(int sensor_i = 0; sensor_i < 3; sensor_i++){
         this->sensor_state[sensor_i] = 0;
         this->sensor_pulse[sensor_i] = 0;
-        this->sensor_start_lap_time[sensor_i] = 0;
     }
 }
 
@@ -53,9 +52,9 @@ void GPIOReader::reset(){
     for(int sensor_i = 0; sensor_i < 3; sensor_i++){
         this->sensor_state[sensor_i] = 0;
         this->sensor_pulse[sensor_i] = 0;
-        this->sensor_start_lap_time[sensor_i] = 0;
         this->sensor_data[sensor_i].clear();
     }
+    m_sensoredTimes.clear();
     printf("GPIOReader::resetted\n");
 }
 
@@ -85,9 +84,11 @@ void GPIOReader::print_binary_list(QList<int>& list){
     printf("\n");
 }
 
-void GPIOReader::push_to_service(int sensor_i,QList<int>& list,unsigned int delta_time,int control_bit){
+void GPIOReader::push_to_service(int sensor_i,QList<int>& list,int control_bit){
     unsigned int val_to_push = 0;
-    print_binary_list(list);
+    if(this->m_bDebugMode){
+    	print_binary_list(list);
+    }
 
     list.removeFirst();
     list.removeFirst();
@@ -108,9 +109,15 @@ void GPIOReader::push_to_service(int sensor_i,QList<int>& list,unsigned int delt
     int own_control_bit = (int)num_ones_in_buffer(list) % 2;
 
     if(control_bit == own_control_bit){
-        printf("sensor: %i token: %u time: %u\n",sensor_i,val_to_push,delta_time);
-        Buzzer::instance()->activate(BUZZER_ACTIVE_TIME_IN_MS);
-        emit newLapTimeEvent(QString("%1").arg(val_to_push),delta_time);
+        QString token = QString("%1").arg(val_to_push);
+
+        if(m_sensoredTimes[token] + 1000 < millis()){
+        	unsigned int delta_time = millis() - m_sensoredTimes[token];
+        	Buzzer::instance()->activate(BUZZER_ACTIVE_TIME_IN_MS);
+        	emit newLapTimeEvent(token,delta_time);
+        	m_sensoredTimes[token] = 0;
+        }
+        
     }else{
         printf("sensor: %i control bit wrong: %i own_control_bit: %i, token: %u\n",sensor_i,control_bit,own_control_bit,val_to_push);
     }
@@ -131,23 +138,7 @@ void GPIOReader::push_bit_to_sensor_data(unsigned int pulse_width,int sensor_i){
         // first two bytes have to be zero
         if(sensor_data[sensor_i][0] == 0 && sensor_data[sensor_i][1] == 0){
             //print_binary_list(sensor_data[sensor_i]);
-
-
-            // check if there's a tracked time for the current sensor_data
-            // if yes, push it
-            if(sensor_start_lap_time[sensor_i] != 0)
-            {
-                unsigned int diff = millis() - sensor_start_lap_time[sensor_i];
-                if(diff > 1000){ // only push if there's difference of 2 seconds between tracking
-                    push_to_service(sensor_i,sensor_data[sensor_i],diff,sensor_data[sensor_i].last());
-                    sensor_start_lap_time[sensor_i] = 0;
-                }
-            }
-            else
-            {
-                sensor_start_lap_time[sensor_i] = millis();
-            }
-
+            push_to_service(sensor_i,sensor_data[sensor_i],sensor_data[sensor_i].last());
             sensor_data[sensor_i].clear();
         }else{
             sensor_data[sensor_i].removeFirst();
