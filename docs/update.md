@@ -4,6 +4,7 @@ Instructions for updating to the next stable version. After updating the system,
 
 # updating from v0.3 to v0.4
 
+    sudo apt-get install wkhtmltopdf
     cd ~/EasyRaceLapTimer
     git pull origin master
 

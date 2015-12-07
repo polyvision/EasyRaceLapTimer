@@ -43,6 +43,21 @@ use pin layout for displayotron 3k HATs
 
         --use_dot3k_hat_pin_setup
 
+enable satellite mode
+
+        --enable_satellite_mode
+
+disable satellite mode
+
+        --disable_satellite_mode
+
+set web host URL, used for the satellite to set the right IP of the main station
+
+        --set_web_host http://<IP>/
+
+        default:
+
+        --set_web_host http://localhost/
 ## data sources
 
    The ir_daemon can read data from TCP/IP sockets, serial connections and of course from the GPIO interface of the Raspberry PI.
