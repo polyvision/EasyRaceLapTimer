@@ -41,7 +41,6 @@ Rails.application.routes.draw do
 
   get '/history' =>  'history#index'
   get '/history/show/:id' =>  'history#show'
-  get '/history/export_to_xlsx/:id' =>  'history#export_to_xlsx'
   get '/history/pdf_body/:id' =>  'history#pdf_body'
   get '/history/pdf/:id.:format' => 'history#pdf'
   delete '/history/delete/:id' =>  'history#delete'

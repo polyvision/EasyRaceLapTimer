@@ -6,7 +6,7 @@
     .panel.panel-default
       .panel-heading
         %h2
-          Race Tracking
+          Standard Race Tracking
       .panel-body
         - if RaceSession::get_open_session
           .row
@@ -38,9 +38,15 @@
 
                 %button.btn.btn-success{:type => "submit"}
                   = t('actions.start_standard_race_session')
-          .row
-            .col-xs-12
-              = render partial: 'race_session_competition_modal'
+
+.row
+  .col-xs-12.col-md-12.col-sm-12.col-lg-12
+    .panel.panel-default
+      .panel-heading
+        %h2
+          Competition Race
+      .panel-body
+        = render partial: 'race_session_competition_modal'
 
 .row
   .col-xs-12.col-md-12.col-sm-12.col-lg-12

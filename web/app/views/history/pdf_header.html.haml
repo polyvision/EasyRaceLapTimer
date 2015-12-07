@@ -1,0 +1,9 @@
+%div{style: "padding-bottom:10px"}
+  .row
+    .col-xs-6
+      %h1
+        = @current_race_session.title
+    .col-xs-6
+      .pull-right
+        - if !@style_setting.own_logo_image.blank?
+          = wicked_pdf_image_tag(@style_setting.own_logo_image.thumb.url, height: 75)

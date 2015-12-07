@@ -1,0 +1,70 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+        place
+      %th
+
+      %th
+        race time
+      %th
+        pilot
+      %th
+        quad
+      %th
+        team
+      %th
+        fasted lap time
+      %th
+        last lap time
+      %th
+        laps
+      %th
+        avg lap time
+      %th
+        penalties
+      %th
+        penalty time
+      %th
+        time without penalties
+  %tbody
+    - race_session_adapter.listing.each_with_index do |entry,index|
+      %tr{class: "#{"success" if entry['latest_tracked']}"}
+        %td
+          %strong
+            = index + 1
+        %td
+          = image_tag(entry['pilot'].image.url,width: 50,height: 50)
+        %td
+          %strong
+            = formated_lap_time(entry['race_time_sum_in_ms'])
+        %td
+          %strong
+            = entry['pilot'].name
+        %td
+          %strong
+            = entry['pilot'].quad
+        %td
+          %strong
+            = entry['pilot'].team
+        %td
+          %strong
+            = formated_lap_time(entry['fastest_lap']['lap_time'])
+        %td
+          %strong
+            = formated_lap_time(entry['last_lap']['lap_time'])
+        %td
+          %strong
+            = entry['lap_count']
+        %td
+          %strong
+            = formated_lap_time(entry['avg_lap_time'])
+        %td
+          %strong
+            = entry['num_time_penalties']
+        %td
+          %strong
+            = formated_lap_time(entry['sum_time_penalties_in_ms'])
+        %td
+          %strong
+            = formated_lap_time(entry['race_time_sum_in_ms_without_penalty'])

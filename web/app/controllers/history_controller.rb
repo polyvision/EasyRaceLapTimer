@@ -25,6 +25,7 @@ class HistoryController < ApplicationController
   end
 
   def pdf
+    @style_setting = StyleSetting.where(id: 1).first_or_create
     @current_race_session = RaceSession.find(params[:id])
     @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session)
 
@@ -35,7 +36,18 @@ class HistoryController < ApplicationController
         page_size: 'A4',
         show_as_html: params.key?('debug'),
         template: 'history/pdf_body.html.haml',
-        layout: 'pdf.html'
+        layout: 'pdf.html',
+        orientation: 'landscape',
+        footer:  {
+          html: {
+            template:'history/pdf_footer.html.haml'
+          }
+        },
+        header:  {
+          html: {
+            template:'history/pdf_header.html.haml'
+          }
+        }
       end
     end
   end
