@@ -1,0 +1,21 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+body { margin:0; padding:0; width:100%;
+ /* Turn off kerning to prevent odd spacing problem
+    when copying and pasting from PDFs on Windows */
+      text-rendering: optimize-speed; }
+body, table { font-size: 13px; }
+.page-numbers { text-align:right; }
+div.alwaysbreak { page-break-before: always; }
+div.nobreak:before { clear:both; }
+div.nobreak{ page-break-inside: avoid;
+ /* http://code.google.com/p/wkhtmltopdf/issues/detail?id=9#c21 */
+}
+
+thead th {
+    background-color: #006DCC;
+    color: white;
+}

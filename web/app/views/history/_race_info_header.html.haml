@@ -1,0 +1,34 @@
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Mode
+      %th Num Pilots
+      %th Total Laps
+      %th Fastest Lap Time
+      %th Fastest Pilot
+      %th Avg Lap time
+      - if @current_race_session.mode == "competition"
+        %th Max Laps
+        %th Checkpoints
+        %th Time penalty
+  %tbody
+    %tr
+      %td
+        = @current_race_session.mode
+      %td
+        = @current_race_session.num_pilots
+      %td
+        = @current_race_session.total_laps
+      %td
+        = formated_lap_time(@current_race_session.fastest_lap_time)
+      %td
+        = @current_race_session.fastest_pilot.name if @current_race_session.fastest_pilot
+      %td
+        = formated_lap_time(@current_race_session.average_lap_time)
+      - if @current_race_session.mode == "competition"
+        %td
+          = @current_race_session.max_laps
+        %td
+          = @current_race_session.num_satellites.to_i
+        %td
+          = formated_lap_time(@current_race_session.time_penalty_per_satellite)

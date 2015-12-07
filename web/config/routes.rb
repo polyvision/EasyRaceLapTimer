@@ -16,17 +16,22 @@ Rails.application.routes.draw do
 
   get 'system/soundfile' => 'system/soundfile#index'
   patch 'system/soundfile/:id' => 'system/soundfile#update'
+  get 'system/soundfile/clear/:id' => 'system/soundfile#clear'
 
   get '/system/stop_race_session' => 'system#stop_race_session'
   post '/system/start_race_session' => 'system#start_race_session'
 
   patch 'system/update_style' => 'system#update_style'
 
+  get 'api/v1/pilot' => 'api/v1/pilot#index'
+
   post 'api/v1/lap_track' => 'api/v1/lap_track#create'
+  post 'api/v1/satellite' => 'api/v1/satellite#create'
   get 'api/v1/lap_track/create' => 'api/v1/lap_track#create'
   get 'api/v1/monitor' => 'api/v1/monitor#index'
 
   get 'api/v1/race_session/new' => 'api/v1/race_session#new'
+  post 'api/v1/race_session/new_competition' => 'api/v1/race_session#new_competition'
 
   get '/monitor' => 'monitor#index'
   get '/monitor/view' => 'monitor#view'
@@ -36,6 +41,9 @@ Rails.application.routes.draw do
 
   get '/history' =>  'history#index'
   get '/history/show/:id' =>  'history#show'
+  get '/history/pdf_body/:id' =>  'history#pdf_body'
+  get '/history/pdf/:id.:format' => 'history#pdf'
+  delete '/history/delete/:id' =>  'history#delete'
 
   root 'monitor#index'
 

@@ -21,6 +21,7 @@ What you get with EasyRaceLaptimer:
 * detailed stats about pilots and races
 * sound effects for various events in a race
 * TCP/IP and serial connections support for receiving lap times and commands from other time tracking systems
+* export race events to spreadsheets
 * and much more comming soon
 
 **Important notices**
@@ -30,6 +31,13 @@ EasyRaceLapTimer works basicly with any IR transponder, as long as you provide c
 Be sure to use the full size of your SD card on the Raspberry PI
 
     sudo raspi-config
+
+# Latest Version 0.4 Beta1
+
+You can download a SD card image for the PI of EasyRaceLapTimer on the following pages:
+
+http://www.airbirds.de
+http://www.easyracelaptimer.com
 
 # Stable Version 0.3
 

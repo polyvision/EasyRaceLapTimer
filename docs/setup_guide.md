@@ -45,6 +45,7 @@ To build it, perform the following steps:
     sudo apt-get install  qt5-default libcurl4-openssl-dev libudev-dev
     qmake ir_daemon.pro
     make
+    sudo ./ir_daemon --use_standard_gpio_sensor_pins
 
 ## Build the Rails App
 
@@ -54,7 +55,7 @@ To build it, perform the following steps (note: some of these steps will take a 
 
     cd ~/EasyRaceLapTimer/web/
     sudo apt-get update
-    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev imagemagick libsqlite3-dev bridge-utils hostapd dnsmasq
+    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev imagemagick libsqlite3-dev bridge-utils wkhtmltopdf hostapd dnsmasq
     sudo gem install bundler
     bundle config build.nokogiri --use-system-libraries
     sudo  gem install nokogiri -v "1.6.6.2"

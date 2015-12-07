@@ -18,6 +18,10 @@
     %label{:for => "exampleInputEmail2"}
       = t('pilot.quad')
     = f.text_field(:quad, placeholder: "ZMR 250 4S", class: 'form-control', required: true)
+  .form-group
+    %label{:for => "exampleInputEmail2"}
+      = t('pilot.team')
+    = f.text_field(:team, placeholder: "", class: 'form-control', required: false)
   %button.btn.btn-primary{:type => "submit"}
     = t('actions.create')
 
@@ -31,6 +35,10 @@
       %th
         = t('pilot.transponder_token')
       %th
+        = t('pilot.quad')
+      %th
+        = t('pilot.team')
+      %th
   %tbody
     - @pilots.each do |pilot|
       %tr
@@ -43,6 +51,10 @@
           = pilot.name
         %td
           = pilot.transponder_token
+        %td
+          = pilot.quad
+        %td
+          = pilot.team
         %th
           = link_to(url_for(action: 'deactivate_token', id: pilot.id)) do
             %button.btn.btn-danger

@@ -1,5 +1,9 @@
 class RaceSession < ActiveRecord::Base
+  acts_as_paranoid
+
   has_many :pilot_race_laps
+  has_many :race_attendees
+  enum mode:[:standard,:competition]
 
   def self.get_open_session
     return RaceSession.where(active: true).first
@@ -19,33 +23,6 @@ class RaceSession < ActiveRecord::Base
     pilot_race_lap.lap_num = PilotRaceLap.where(pilot_id: pilot.id,race_session_id: self.id).count + 1
     pilot_race_lap.save
     return pilot_race_lap
-  end
-
-  def listing
-    listing_data = Array.new
-
-    self.pilot_race_laps.order("lap_time ASC").group(:pilot_id).pluck(:pilot_id).each_with_index do |pilot_id,index|
-      c_pilot = Pilot.where(id: pilot_id).first
-      if c_pilot
-        data = Hash.new
-        data['position'] = index + 1
-        data['pilot'] = c_pilot
-        data['lap_count'] = self.lap_count_of_pilot(c_pilot)
-        data['avg_lap_time'] = self.avg_lap_time_of_pilot(c_pilot)
-
-        data['fastest_lap'] = Hash.new
-        data['fastest_lap']['lap_num'] = self.fastest_lap_of_pilot(c_pilot).lap_num
-        data['fastest_lap']['lap_time'] = self.fastest_lap_of_pilot(c_pilot).lap_time
-
-        data['last_lap'] = Hash.new
-        data['last_lap']['lap_num'] = self.last_lap_of_pilot(c_pilot).lap_num
-        data['last_lap']['lap_time'] = self.last_lap_of_pilot(c_pilot).lap_time
-
-        listing_data << data
-      end
-    end
-
-    return listing_data
   end
 
   def num_pilots
@@ -86,6 +63,12 @@ class RaceSession < ActiveRecord::Base
 
   def last_lap_of_pilot(pilot)
     return self.pilot_race_laps.where(pilot_id: pilot.id).order("id DESC").first
+  end
+
+  def last_lap_of_pilot_is_lasted_tracked_time_of_race?(pilot)
+    t=  self.pilot_race_laps.where(pilot_id: pilot.id).order("id DESC").first
+    return t.latest if t
+    return false
   end
 
   def avg_lap_time_of_pilot(pilot)

@@ -27,3 +27,36 @@
  	 QSettings settings;
  	 return settings.value("serial_connection/com_port_index",0).toInt();
  }
+
+ void Configuration::setSensorPin(int sensor,int pin){
+ 	QSettings settings;
+ 	settings.setValue(QString("gpio_reader/pin_%1").arg(sensor), pin);
+ 	printf("Configuration::setSensorPin: sensor: %i pin: %i\n",sensor+1,sensorPin(sensor));
+ }
+
+ int  Configuration::sensorPin(int sensor){
+ 	QSettings settings;
+ 	return settings.value(QString("gpio_reader/pin_%1").arg(sensor),0).toInt();
+ }
+
+ void Configuration::setBuzzerPin(int pin){
+ 	QSettings settings;
+ 	settings.setValue("buzzer/pin", pin);
+ 	printf("Configuration::setBuzzerPin: %i\n",buzzerPin());
+ }
+
+ int Configuration::buzzerPin(){
+	QSettings settings;
+	return settings.value("buzzer/pin",6).toInt(); // 6 is the default pin
+ }
+
+ void Configuration::setRestartButtonPin(int pin){
+ 	QSettings settings;
+ 	settings.setValue("buttons/restart_button_pin", pin);
+ 	printf("Configuration::setRestartButtonPin: %i\n",restartButtonPin());
+ }
+
+int Configuration::restartButtonPin(){
+	QSettings settings;
+	return settings.value("buttons/restart_button_pin",14).toInt(); // 14 is the default pin	
+}

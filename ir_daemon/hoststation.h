@@ -13,6 +13,7 @@
 #define HOSTSTATION_H
 
 #include <QObject>
+#include <QHash>
 #include "singleton.h"
 
 class HostStation : public QObject, public Singleton<HostStation>
@@ -21,7 +22,7 @@ class HostStation : public QObject, public Singleton<HostStation>
     Q_OBJECT
 public:
     explicit HostStation(QObject *parent = 0);
-
+    void setDebug(bool);
 signals:
 
 public slots:
@@ -34,6 +35,8 @@ public:
 private:
     void webRequestLapTimeTracked(QString token,unsigned int ms);
     void webRequestStartNewRace();
+    QHash<QString, unsigned int> m_hashLastTokenPush;
+    bool m_bDebug;
 };
 
 #endif // HOSTSTATION_H

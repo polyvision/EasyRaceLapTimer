@@ -1,0 +1,28 @@
+%h2
+  = pilot.name
+  %small
+    = pilot.quad
+    = pilot.team
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        lap
+      %th
+        time
+      %th
+        penalties
+      %th
+        penalty time
+  %tbody
+    - @current_race_session.pilot_race_laps.where(pilot_id: pilot.id).order("lap_num ASC").each do |lap|
+      %tr
+        %td
+          = lap.lap_num
+        %td
+          = formated_lap_time(lap.lap_time)
+        %td
+          = @current_race_session_adapter.num_time_penalties_for_lap(pilot,lap.lap_num)
+        %td
+          = formated_lap_time(@current_race_session_adapter.num_time_penalties_for_lap(pilot,lap.lap_num) * @current_race_session.time_penalty_per_satellite)

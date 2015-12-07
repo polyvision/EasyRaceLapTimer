@@ -7,11 +7,13 @@
       %th
       %th
       %th Session
+      %th Mode
       %th Pilots
       %th Total Laps
       %th Fastest Lap
       %th Fastest Pilot
       %th Avg Lap Time
+      %th
   %tbody
     -  @race_sessions.each do |session|
       %tr
@@ -24,6 +26,8 @@
         %td
           %strong
             = link_to(session.title,{action: 'show', id: session.id})
+        %td
+          = session.mode
         %td
           %strong
             = session.num_pilots
@@ -39,3 +43,8 @@
         %td
           %strong
             = formated_lap_time(session.average_lap_time)
+        %td
+          - if current_user
+            = link_to('Delete',url_for(action: 'delete', id: session.id),{method: 'DELETE', class: 'btn btn-warning', "data-confirm" => 'Are you sure?'})
+          -#= link_to('XLSX Export',url_for(action: 'export_to_xlsx', id: session.id),{class: 'btn btn-success'})
+          = link_to('PDF Export',url_for(action: 'pdf', id: session.id, format: :pdf),{class: 'btn btn-success'})

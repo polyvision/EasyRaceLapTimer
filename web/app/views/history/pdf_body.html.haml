@@ -1,0 +1,4 @@
+- if @current_race_session.mode == "competition"
+  = render partial: 'pdf_results_competition_mode'
+- else
+  = render partial: 'pdf_results_standard_mode'
