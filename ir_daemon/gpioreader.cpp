@@ -111,11 +111,13 @@ void GPIOReader::push_to_service(int sensor_i,QList<int>& list,int control_bit){
     if(control_bit == own_control_bit){
         QString token = QString("%1").arg(val_to_push);
 
-        if(m_sensoredTimes[token] + 1000 < millis()){
+        if(m_sensoredTimes[token] == 0){
+        	m_sensoredTimes[token] = millis();
+        }else if(m_sensoredTimes[token] + 1000 < millis()){
         	unsigned int delta_time = millis() - m_sensoredTimes[token];
         	Buzzer::instance()->activate(BUZZER_ACTIVE_TIME_IN_MS);
         	emit newLapTimeEvent(token,delta_time);
-        	m_sensoredTimes[token] = 0;
+        	m_sensoredTimes[token] = millis();
         }
         
     }else{

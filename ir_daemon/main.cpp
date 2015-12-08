@@ -84,6 +84,8 @@ int main(int argc, char *argv[])
             Configuration::instance()->setSensorPin(0,1);
             Configuration::instance()->setSensorPin(1,4);
             Configuration::instance()->setSensorPin(2,5);
+            Configuration::instance()->setBuzzerPin(6);
+            Configuration::instance()->setRestartButtonPin(14);
             return 0;
         }
 
