@@ -13,6 +13,7 @@
  #define CONFIGURATION_H
 
 #include <QString>
+#include <QSettings>
 #include "singleton.h"
 
  class Configuration: public Singleton<Configuration>{
@@ -33,5 +34,6 @@
  	void setSatelliteMode(bool);
  	bool satelliteMode();
  private:
+   QSettings *mp_Settings;
  };
  #endif
