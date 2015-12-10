@@ -26,7 +26,11 @@
           %strong
             = index + 1
         %td
-          = image_tag(entry['pilot'].image.url,width: 50,height: 50)
+          - if !entry['pilot'].image.blank?
+            - if @current_format == :pdf
+              = wicked_pdf_image_tag(entry['pilot'].image.url,width: 50,height: 50)
+            - else
+              = image_tag(entry['pilot'].image.url,width: 50,height: 50)
         %td
           %strong
             = entry['pilot'].name

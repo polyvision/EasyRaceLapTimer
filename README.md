@@ -83,6 +83,8 @@ more details of each indivial package can be found in the *docs* folder
 
 # Contributors
  * [Peter Provost](https://github.com/PProvost)
+ * [Peisel](https://github.com/peisel)
+
 # license
 
 The complete project uses the [GPL V3 license](http://www.gnu.org/licenses/gpl-3.0.de.html)

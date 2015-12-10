@@ -32,6 +32,7 @@ class HistoryController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
+        @current_format = :pdf
         render pdf: "race_session_#{@current_race_session.id}.pdf",
         page_size: 'A4',
         show_as_html: params.key?('debug'),
