@@ -16,32 +16,36 @@
 #include "singleton.h"
 #include <QHash>
 
-class GPIOReader: public QObject, public Singleton<GPIOReader>
-{
-    friend class Singleton<GPIOReader>;
+class GPIOReader: public QObject, public Singleton<GPIOReader> {
     Q_OBJECT
-    
+    Q_DISABLE_COPY(GPIOReader)
 public:
     GPIOReader();
+
+    bool init();
+
     void setDebug(bool);
     void update();
-    unsigned int num_ones_in_buffer(QList<int>& list);
-    void print_binary_list(QList<int>& list);
-    void push_to_service(int sensor_i,QList<int>& list,int control_bit);
-    void push_bit_to_sensor_data(unsigned int pulse_width,int sensor_i);
+    unsigned int num_ones_in_buffer(QList<int> &list);
+    void print_binary_list(QList<int> &list);
+    void push_to_service(int sensor_i,QList<int> &list, int control_bit);
+    void push_bit_to_sensor_data(unsigned int pulse_width, int sensor_i);
     void reset();
-signals:
-    void    newLapTimeEvent(QString,unsigned int);
 
-public slots:
+Q_SIGNALS:
+    void newLapTimeEvent(QString,unsigned int);
+
 private:
+    int m_sensorCount;
     bool m_bDebugMode;
-    int sensor_state[3];
-    int sensor_pins[3];
-    unsigned int sensor_pulse[3];
-    unsigned int sensor_start_lap_time[3];
+    QList<int> m_sensorState;
+    QList<int> m_sensorPins;
+    QList<unsigned int> m_sensorPulse;
     QHash<QString, unsigned int> m_sensoredTimes;
-    QList<int> sensor_data[3];
+    QList<QList<int> > m_sensorData;
+
+    friend class Singleton<GPIOReader>;
 };
 
 #endif // GPIOREADER_H
+

@@ -15,11 +15,12 @@
 
 #include <stdlib.h>
 
+
 template <typename T>
 class Singleton
 {
 public:
-	static T*	instance()
+    static T* instance()
 	{
 		if(m_pInstance == NULL)
 		{
@@ -27,7 +28,7 @@ public:
 		}
 
 		return m_pInstance;
-	};
+    }
 
 	static void	delInstance()
 	{
@@ -36,15 +37,16 @@ public:
 			delete m_pInstance;
 			m_pInstance = NULL;
 		}
-	};
+    }
 
 protected:
-	Singleton(){};
-	virtual ~Singleton(){};
+    Singleton() {}
+    virtual ~Singleton() {}
 
 private:
-	static T	*m_pInstance;
+    static T *m_pInstance;
 };
 
 template <typename T> T* Singleton<T>::m_pInstance = NULL;
 #endif
+

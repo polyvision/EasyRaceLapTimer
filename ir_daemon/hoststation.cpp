@@ -28,7 +28,7 @@ HostStation::HostStation(QObject *parent) : QObject(parent)
 
     m_bSatelliteMode = Configuration::instance()->satelliteMode();
     if(m_bSatelliteMode){
-        printf("HostStation:: started in satellite mode\n");    
+        LOG_INFOS(LOG_FACILTIY_COMMON, "HostStation:: started in satellite mode");
     }
 }
 
@@ -40,12 +40,12 @@ void HostStation::eventStartNewRace(){
     GPIOReader::instance()->reset();
     QtConcurrent::run(this, &HostStation::webRequestStartNewRace);
     SerialConnection::instance()->write("RESET#\n");
-    printf("HostStation::eventStartNewRace\n");
+    LOG_INFOS(LOG_FACILTIY_COMMON, "HostStation::eventStartNewRace");
 }
 
 void HostStation::eventReset(){
     GPIOReader::instance()->reset();
-    printf("HostStation::eventReset\n");
+    LOG_INFOS(LOG_FACILTIY_COMMON, "HostStation::eventReset");
 }
 
 void HostStation::setup(){
@@ -68,7 +68,7 @@ void HostStation::setup(){
 
     connect(RestartButtonInput::instance(),SIGNAL(restartEvent()),this,SLOT(eventStartNewRace()));
 
-    printf("HostStation setup done\n");
+    LOG_INFOS(LOG_FACILTIY_COMMON, "HostStation setup done");
 }
 
 void HostStation::eventNewLapTime(QString token, unsigned int ms){
@@ -76,16 +76,16 @@ void HostStation::eventNewLapTime(QString token, unsigned int ms){
         m_hashLastTokenPush[token] = millis();
 
         if(!this->m_bSatelliteMode){
-            printf("HostStation::eventNewLapTime %s %u\n",token.toStdString().c_str(),ms);
+            LOG_INFO(LOG_FACILTIY_COMMON, "HostStation::eventNewLapTime %s %u",token.toStdString().c_str(),ms);
             QtConcurrent::run(this, &HostStation::webRequestLapTimeTracked,token,ms);    
         }else{
-            printf("HostStation::eventNewLapTime (satellite mode) %s %u\n",token.toStdString().c_str(),ms);
+            LOG_INFO(LOG_FACILTIY_COMMON, "HostStation::eventNewLapTime (satellite mode) %s %u",token.toStdString().c_str(),ms);
             QtConcurrent::run(this, &HostStation::webRequestSatelliteTracked,token,ms);    
         }
         
     }else{
         if(this->m_bDebug){
-            qDebug() << "HostStation::eventNewLapTime: blocked sending new lap time, time too short token: " <<  token;    
+            LOG_DBG(LOG_FACILTIY_COMMON, "HostStation::eventNewLapTime: blocked sending new lap time, time too short token: %s", qPrintable(token));
         }
         
     }

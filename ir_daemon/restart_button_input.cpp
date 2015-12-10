@@ -11,13 +11,12 @@
  **/
 
 #include "restart_button_input.h"
-#include <QDebug>
 #include <stdio.h>
 #include <curl/curl.h>
 #include <QtConcurrent>
 #include "buzzer.h"
 #include "wiring_pi.h"
-
+#include "logger.h"
 
 RestartButtonInput::RestartButtonInput(QObject *parent) : QObject(parent){
 	m_uiPushedButtonTime = 0;
@@ -26,7 +25,7 @@ RestartButtonInput::RestartButtonInput(QObject *parent) : QObject(parent){
 }
 
 void RestartButtonInput::setPin(int pin){
-	printf("restart button using pin %i\n",pin);
+    LOG_INFO(LOG_FACILTIY_COMMON, "restart button using pin %i", pin);
     this->m_iInputPin = pin;
     pinMode(this->m_iInputPin,INPUT);
 }
@@ -47,7 +46,7 @@ void RestartButtonInput::update(){
 		m_bActive = false;
 		m_uiPushedButtonTime = 0;
 		m_uiPushedButtonLastAt = millis();
-        emit restartEvent();
+        Q_EMIT restartEvent();
 	}
 
 }

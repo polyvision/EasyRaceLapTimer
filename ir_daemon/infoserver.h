@@ -18,17 +18,20 @@
 #include <QList>
 #include "singleton.h"
 
-class InfoServer: public QObject,public Singleton<InfoServer>{
-	friend class Singleton<InfoServer>;
-	Q_OBJECT
-
+class InfoServer: public QObject,public Singleton<InfoServer> {
+    Q_OBJECT
+    Q_DISABLE_COPY(InfoServer)
 public:
-	InfoServer();
-	void broadcastMessage(QString);
-public slots:
+    InfoServer();
+    void broadcastMessage(QString);
+
+public Q_SLOTS:
     void newConnection();
+
 private:
-	QTcpServer			*m_pTcpServer;
-	QList<QTcpSocket*>	m_pClientConnections;
+    QTcpServer *m_pTcpServer;
+    QList<QTcpSocket*>m_pClientConnections;
+
+    friend class Singleton<InfoServer>;
 };
 #endif
