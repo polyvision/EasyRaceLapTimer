@@ -54,6 +54,17 @@ GEM
     autoprefixer-rails (6.0.3)
       execjs
       json
+    axlsx (2.0.1)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.0.0)
+    axlsx_rails (0.4.0)
+      axlsx (>= 2.0.1)
+      rails (>= 3.1)
+    babel-source (5.8.34)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -76,6 +87,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    connection_pool (2.2.0)
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     devise (3.5.2)
@@ -104,6 +116,7 @@ GEM
       tilt
     hiredis (0.5.2)
     hitimes (1.2.3)
+    htmlentities (4.3.4)
     i18n (0.7.0)
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
@@ -158,6 +171,13 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
+    react-rails (1.5.0)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      rails (>= 3.2)
+      tilt
     redis (3.2.1)
     ref (2.0.0)
     responders (2.1.0)
@@ -179,6 +199,7 @@ GEM
       rspec-mocks (~> 3.3.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
+    rubyzip (1.0.0)
     sass (3.4.19)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -221,12 +242,15 @@ GEM
     websocket-driver (0.6.2)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    wicked_pdf (1.0.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   actioncable!
+  axlsx (~> 2.0.1)
+  axlsx_rails
   bootstrap-sass (~> 3.3.5)
   byebug
   carrierwave
@@ -242,6 +266,7 @@ DEPENDENCIES
   paranoia (~> 2.0)
   puma
   rails (= 4.2.4)
+  react-rails (~> 1.5.0)
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
@@ -251,6 +276,7 @@ DEPENDENCIES
   timecop
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+  wicked_pdf
 
 BUNDLED WITH
    1.10.6

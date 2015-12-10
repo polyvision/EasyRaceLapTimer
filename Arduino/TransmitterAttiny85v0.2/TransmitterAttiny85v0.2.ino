@@ -22,7 +22,7 @@
 
 // CHANGE HERE THE ID OF TRANSPONDER 
 // possible values are 1 to 63 
-#define TRANSPONDER_ID 12
+#define TRANSPONDER_ID 2
 
 
 

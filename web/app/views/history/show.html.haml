@@ -1,7 +1,20 @@
+
 %ol.breadcrumb
   %li
     = link_to('History',{action: 'index', controller: '/history'})
   %li
     = @current_race_session.title
-    
-=render file:'/monitor/_view.html.haml'
+
+.row
+  .col-md-4.col-md-offset-5
+    - if !@style_setting.own_logo_image.blank?
+      = image_tag(@style_setting.own_logo_image.thumb.url)
+
+.row
+  .col-xs-12
+    = render file: 'history/_race_info_header'
+
+- if @current_race_session.mode == "competition"
+  = render file: '/shared/_table_race_results_competition_mode', locals: {race_session: @current_race_session, race_session_adapter: @current_race_session_adapter}
+-else
+  = render file: '/shared/_table_race_results_standard_mode', locals: {race_session: @current_race_session, race_session_adapter: @current_race_session_adapter}

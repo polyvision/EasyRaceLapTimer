@@ -10,6 +10,7 @@
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
  #include <wiring_pi.h>
+ #include <stdio.h>
  #include "buzzer.h"
  
  Buzzer::Buzzer(){
@@ -23,6 +24,7 @@
  }
  
  void Buzzer::setPin(int p){
+ 	printf("Buzzer using pin %i\n",p);
 	 mi_OutputPin = p;
      pinMode(mi_OutputPin,OUTPUT);
      digitalWrite(mi_OutputPin,LOW);

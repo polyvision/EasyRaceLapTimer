@@ -24,14 +24,11 @@
 #include "hoststation.h"
 #include "serialconnection.h"
 #include "configuration.h"
+#include "infoserver.h"
 
-#define VERSION "0.9"
+#define VERSION "0.4"
 
 #include <wiring_pi.h>
-
-
-#define RESTART_BUTTON_PIN 14
-#define BUZZER_PIN	6
 
 int main(int argc, char *argv[])
 {
@@ -49,16 +46,55 @@ int main(int argc, char *argv[])
 		if(a.arguments().at(1).compare("--debug") == 0){
             GPIOReader::instance()->setDebug(true);
             SerialConnection::instance()->setDebug(true);
+            HostStation::instance()->setDebug(true);
 			printf("enabled debug mode\n");
 		}
 
-        if(a.arguments().at(1).compare("--listserialports") == 0){
+        if(a.arguments().at(1).compare("--list_serial_ports") == 0){
             SerialConnection::listAvailablePorts();
             return 0;
         }
 
-        if(a.arguments().at(1).compare("--setcomportindex") == 0){
+        if(a.arguments().at(1).compare("--set_com_port_index") == 0){
             Configuration::instance()->setComPortIndex(a.arguments().at(2).toInt());
+            return 0;
+        }
+
+        if(a.arguments().at(1).compare("--set_web_host") == 0){
+            Configuration::instance()->setWebHost(a.arguments().at(2));
+            return 0;
+        }
+
+        if(a.arguments().at(1).compare("--set_buzzer_pin") == 0){
+            Configuration::instance()->setBuzzerPin(a.arguments().at(2).toInt());
+            return 0;
+        }
+
+        if(a.arguments().at(1).compare("--enable_satellite_mode") == 0){
+            Configuration::instance()->setSatelliteMode(true);
+            return 0;
+        }
+
+        if(a.arguments().at(1).compare("--disable_satellite_mode") == 0){
+            Configuration::instance()->setSatelliteMode(false);
+            return 0;
+        }
+
+        if(a.arguments().at(1).compare("--use_standard_gpio_sensor_pins") == 0){
+            Configuration::instance()->setSensorPin(0,1);
+            Configuration::instance()->setSensorPin(1,4);
+            Configuration::instance()->setSensorPin(2,5);
+            Configuration::instance()->setBuzzerPin(6);
+            Configuration::instance()->setRestartButtonPin(14);
+            return 0;
+        }
+
+        if(a.arguments().at(1).compare("--use_dot3k_hat_pin_setup") == 0){
+            Configuration::instance()->setSensorPin(0,21);
+            Configuration::instance()->setSensorPin(1,22);
+            Configuration::instance()->setSensorPin(2,23);
+            Configuration::instance()->setBuzzerPin(24);
+            Configuration::instance()->setRestartButtonPin(25);
             return 0;
         }
 	}
@@ -66,8 +102,9 @@ int main(int argc, char *argv[])
     //initialization
     wiringPiSetup ();
     HostStation::instance()->setup();
-    Buzzer::instance()->setPin(BUZZER_PIN);
-    RestartButtonInput::instance()->setPin(RESTART_BUTTON_PIN);
+    Buzzer::instance()->setPin(Configuration::instance()->buzzerPin());
+    RestartButtonInput::instance()->setPin(Configuration::instance()->restartButtonPin());
+    InfoServer::instance();
 
     SerialConnection::instance()->setup();
 	while(1){

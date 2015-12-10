@@ -22,14 +22,27 @@
             EasyRaceLapTimer
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
-            %li
-              =link_to('Configuration',{action: 'index',controller: '/system'})
+            %li.dropdown
+              %a{href:"#", class:"dropdown-toggle", "data-toggle"=>"dropdown", role:"button", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
+                Configuration
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  =link_to('System',{action: 'index',controller: '/system'})
+                %li
+                  =link_to('Pilots',{action: 'index',controller: '/system/pilot'})
+                %li
+                  =link_to('Soundeffects',{action: 'index',controller: '/system/soundfile'})
             %li
               =link_to('Monitor',{action: 'index',controller: '/monitor'})
             %li
               =link_to('Pilots',{action: 'index',controller: '/pilots'})
             %li
               =link_to('History',{action: 'index',controller: '/history'})
+            %li
+              %a{href:"#"}
+                Version
+                = ERLT_VERSION
         / /.nav-collapse
     .container-fluid
       .row

@@ -42,7 +42,7 @@ class System::PilotController < SystemController
   end
 
   def strong_params_pilot
-    params.require(:pilot).permit(:name,:transponder_token,:image,:quad)
+    params.require(:pilot).permit(:name,:transponder_token,:image,:quad,:team)
   end
-  
+
 end

@@ -1,0 +1,14 @@
+%hr
+  .row
+    .col-xs-6
+      %strong
+        = @current_race_session.title
+        held on
+        = @current_race_session.created_at.to_s(:long)
+    .col-xs-6
+      .pull-right
+        %small
+          = link_to("EasyRaceLapTimer","http://www.easyracelaptimer.com")
+          = "-"
+          made & sponsored by
+          = link_to('AirBirds.de',"http://www.airbirds.de")

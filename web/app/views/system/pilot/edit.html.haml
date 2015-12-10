@@ -22,6 +22,10 @@
     = f.text_field(:quad, placeholder: "ZMR 250 4S", class: 'form-control', required: true)
   .form-group
     %label{:for => "exampleInputEmail2"}
+      = t('pilot.team')
+    = f.text_field(:team, placeholder: "", class: 'form-control', required: false)
+  .form-group
+    %label{:for => "exampleInputEmail2"}
       = t('pilot.image')
     = f.file_field(:image, class: 'form-control')
   %button.btn.btn-default{:type => "submit"}

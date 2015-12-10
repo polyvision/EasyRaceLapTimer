@@ -1,6 +1,4 @@
 class Api::V1::LapTrackController < Api::V1Controller
-  protect_from_forgery except: :create
-
   def create
 
     @race_session =  RaceSession::get_open_session
@@ -17,26 +15,20 @@ class Api::V1::LapTrackController < Api::V1Controller
     end
 
     # max lap time
-    if params[:lap_time_in_ms].to_f >= (ConfigValue::get_value("lap_max_lap_time_in_seconds").value.to_f * 1000.0)
-      render status: 403, text: 'request successfull but lap time reached max lap time'
+    max_t = ConfigValue::get_value("lap_max_lap_time_in_seconds").value.to_f * 1000.0
+    if params[:lap_time_in_ms].to_f >= max_t
+      render status: 403, text: "request successfull but lap time reached max lap time max: #{max_t} t: #{params[:lap_time_in_ms].to_f}"
       return
     end
 
-    @pilot = Pilot.where(transponder_token: params[:transponder_token]).first
-    if !@pilot
-      render status: 409, text: "no registered pilot with the transponder token #{params[:transponder_token]}"
+    begin
+      race_session_adapter = RaceSessionAdapter.new(@race_session)
+      pilot_race_lap = race_session_adapter.track_lap_time(params[:transponder_token],params[:lap_time_in_ms])
+    rescue Exception => ex
+      render status: 403, text: ex.message
       return
     end
 
-    # check if the lap tracking was too fast
-    last_track = @race_session.pilot_race_laps(pilot_id: @pilot.id).order("ID DESC").first
-    if last_track && last_track.created_at + ConfigValue::get_value("lap_timeout_in_seconds").value.to_i.seconds > Time.now
-      render status: 403, text: 'request successfull but tracking was too fast concering the last track'
-      return
-    end
-
-    pilot_race_lap = @race_session.add_lap(@pilot,params[:lap_time_in_ms])
-    Soundfile::play("sfx_lap_beep")
     begin
       ActionCable.server.broadcast 'monitor_notifications',type: "updated_stats"
     rescue Exception => ex

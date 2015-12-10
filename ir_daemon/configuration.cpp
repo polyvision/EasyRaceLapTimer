@@ -12,18 +12,69 @@
  #include "configuration.h"
  #include <QSettings>
  #include <stdio.h>
+#include <QDebug>
 
  Configuration::Configuration(){
-
+   mp_Settings = new QSettings("/etc/ir_daemon.ini",QSettings::IniFormat);
+   qDebug() << "Configuration using file " << mp_Settings->fileName();
  }
 
  void Configuration::setComPortIndex(int index){
- 	QSettings settings;
- 	settings.setValue("serial_connection/com_port_index", index);
+ 	mp_Settings->setValue("serial_connection/com_port_index", index);
+  mp_Settings->sync();
  	printf("Configuration::setComPortIndex: %i\n",comPortIndex());
  }
 
  int Configuration::comPortIndex(){
- 	 QSettings settings;
- 	 return settings.value("serial_connection/com_port_index",0).toInt();
+ 	 return mp_Settings->value("serial_connection/com_port_index",0).toInt();
  }
+
+ void Configuration::setSensorPin(int sensor,int pin){
+ 	mp_Settings->setValue(QString("gpio_reader/pin_%1").arg(sensor), pin);
+  mp_Settings->sync();
+ 	printf("Configuration::setSensorPin: sensor: %i pin: %i\n",sensor+1,sensorPin(sensor));
+ }
+
+ int  Configuration::sensorPin(int sensor){
+ 	return mp_Settings->value(QString("gpio_reader/pin_%1").arg(sensor),0).toInt();
+ }
+
+ void Configuration::setBuzzerPin(int pin){
+ 	mp_Settings->setValue("buzzer/pin", pin);
+  mp_Settings->sync();
+ 	printf("Configuration::setBuzzerPin: %i\n",buzzerPin());
+ }
+
+ int Configuration::buzzerPin(){
+	return mp_Settings->value("buzzer/pin",6).toInt(); // 6 is the default pin
+ }
+
+ void Configuration::setRestartButtonPin(int pin){
+ 	mp_Settings->setValue("buttons/restart_button_pin", pin);
+  mp_Settings->sync();
+ 	printf("Configuration::setRestartButtonPin: %i\n",restartButtonPin());
+ }
+
+int Configuration::restartButtonPin(){
+	return mp_Settings->value("buttons/restart_button_pin",14).toInt(); // 14 is the default pin
+}
+
+QString Configuration::webHost(){
+	return mp_Settings->value("urls/webhost","http://localhost/").toString();
+}
+
+void Configuration::setWebHost(QString v){
+ 	mp_Settings->setValue("urls/webhost", v);
+  mp_Settings->sync();
+ 	printf("Configuration::setWebHost: %s\n",webHost().toStdString().c_str());
+}
+
+void Configuration::setSatelliteMode(bool v){
+ 	mp_Settings->setValue("mode/satellite", v);
+  mp_Settings->sync();
+ 	printf("Configuration::setSatelliteMode: %i\n",satelliteMode());
+}
+
+bool Configuration::satelliteMode(){
+	return mp_Settings->value("mode/satellite",false).toBool();
+}

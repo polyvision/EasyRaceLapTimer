@@ -15,6 +15,6 @@ t.save
 ConfigValue::set_value("lap_timeout_in_seconds","4")
 ConfigValue::set_value("lap_max_lap_time_in_seconds","60")
 
-Soundfile.create(name: 'sfx_lap_beep')
-Soundfile.create(name: 'sfx_start_race')
-Soundfile.create(name: 'sfx_fastet_lap')
+Soundfile.where(name: 'sfx_lap_beep').first_or_create
+Soundfile.where(name: 'sfx_start_race').first_or_create
+Soundfile.where(name: 'sfx_fastet_lap').first_or_create

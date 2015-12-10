@@ -1,0 +1,11 @@
+= render partial:'race_info_header'
+
+
+%h2
+  Results
+
+= render file: '/shared/_table_race_results_standard_mode', locals: {race_session: @current_race_session, race_session_adapter: @current_race_session_adapter}
+
+-@current_race_session_adapter.pilot_ids.each do |pilot_id|
+  .alwaysbreak
+    = render partial: 'competition_mode_pilot', locals: {pilot: Pilot.find(pilot_id)}

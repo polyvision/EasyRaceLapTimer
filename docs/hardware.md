@@ -24,7 +24,7 @@ If you choose the Arduino ISP solution, here's an example [how to accomplish thi
 ## Host Station
 
     3x TSOP 31238 38kHz
-    1x Raspberry PI 2 (Raspberry PI 1 should also work)
+    1x Raspberry PI 2 (Raspberry PI 1 are not officially supported)
     long wires to connect the TSOP IR sensors to the Raspberry GPIO ports
     1x WiFi stick
     power supply for the Raspberry PI, eg: a powerbank
