@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <QProcess>
 #include <QTextStream>
-#include <QDebug>
 #include <QtConcurrent>
 #include <curl/curl.h>
 #include "restart_button_input.h"
@@ -25,6 +24,7 @@
 #include "serialconnection.h"
 #include "configuration.h"
 #include "infoserver.h"
+#include "logger.h"
 
 #define VERSION "0.4"
 
@@ -39,15 +39,14 @@ int main(int argc, char *argv[])
 
     curl_global_init(CURL_GLOBAL_ALL);
 
+    Logger::instance()->init();
 	
-    printf("starting ir_daemon v%s\n",VERSION);
+    LOG_INFO(LOG_FACILTIY_COMMON, "starting ir_daemon v%s\n", VERSION);
 
 	if(a.arguments().count() > 1){
-		if(a.arguments().at(1).compare("--debug") == 0){
-            GPIOReader::instance()->setDebug(true);
-            SerialConnection::instance()->setDebug(true);
-            HostStation::instance()->setDebug(true);
-			printf("enabled debug mode\n");
+        if(a.arguments().at(1).compare("--debug") == 0){
+            Configuration::instance()->setDebug(true);
+            LOG_DBGS(LOG_FACILTIY_COMMON, "enabled debug mode");
 		}
 
         if(a.arguments().at(1).compare("--list_serial_ports") == 0){
@@ -81,6 +80,7 @@ int main(int argc, char *argv[])
         }
 
         if(a.arguments().at(1).compare("--use_standard_gpio_sensor_pins") == 0){
+            Configuration::instance()->setSensorCount(3);
             Configuration::instance()->setSensorPin(0,1);
             Configuration::instance()->setSensorPin(1,4);
             Configuration::instance()->setSensorPin(2,5);
@@ -90,6 +90,7 @@ int main(int argc, char *argv[])
         }
 
         if(a.arguments().at(1).compare("--use_dot3k_hat_pin_setup") == 0){
+            Configuration::instance()->setSensorCount(3);
             Configuration::instance()->setSensorPin(0,21);
             Configuration::instance()->setSensorPin(1,22);
             Configuration::instance()->setSensorPin(2,23);
@@ -107,9 +108,12 @@ int main(int argc, char *argv[])
     InfoServer::instance();
 
     SerialConnection::instance()->setup();
-	while(1){
 
-		
+    if(!GPIOReader::instance()->init()) {
+        return -1;
+    }
+
+	while(1){
         GPIOReader::instance()->update();
 		Buzzer::instance()->update();
         RestartButtonInput::instance()->update();

@@ -22,7 +22,8 @@ SOURCES += main.cpp restart_button_input.cpp buzzer.cpp \
     qextserialport/qextserialport.cpp \
     serialconnection.cpp \
     configuration.cpp \
-    infoserver.cpp
+    infoserver.cpp \
+    logger.cpp
     
 HEADERS += restart_button_input.h buzzer.h \
     hoststation.h \
@@ -38,7 +39,8 @@ HEADERS += restart_button_input.h buzzer.h \
     singleton.h \
     serialconnection.h \
     configuration.h \
-    infoserver.h
+    infoserver.h \
+    logger.h
 
 macx {
   SOURCES += qextserialport/qextserialenumerator_osx.cpp \
@@ -48,7 +50,21 @@ macx {
   LIBS += -framework IOKit -framework CoreFoundation
 }
 
+QMAKE_CFLAGS += -fno-strict-aliasing -pipe
+QMAKE_CXXFLAGS += -fno-strict-aliasing -pipe -std=c++11  #-save-temps
+QMAKE_CXXFLAGS_DEBUG += -fstack-protector-all
+
 unix {
   SOURCES += qextserialport/qextserialport_unix.cpp qextserialport/qextserialenumerator_linux.cpp
   LIBS= -lcurl -lwiringPi -ludev
+
+  target.path = /usr/bin
+
+  config.path = /etc/
+  config.files += $$PWD/ir_daemon.ini
+
+  INSTALLS += target config
 }
+
+OTHER_FILES += \
+    ir_daemon.ini

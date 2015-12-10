@@ -16,10 +16,9 @@
 #include <singleton.h>
 #include "qextserialport/qextserialport.h"
 
-class SerialConnection : public QObject, public Singleton<SerialConnection>
-{
-    friend class Singleton<SerialConnection>;
+class SerialConnection : public QObject, public Singleton<SerialConnection> {
     Q_OBJECT
+    Q_DISABLE_COPY(SerialConnection)
 public:
     explicit SerialConnection(QObject *parent = 0);
 
@@ -27,19 +26,26 @@ public:
     void setup();
     void setDebug(bool);
     void write(QString);
-signals:
-    void    startNewRaceEvent();
-    void    resetEvent();
-    void    newLapTimeEvent(QString,unsigned int);
 
-public slots:
+Q_SIGNALS:
+    void startNewRaceEvent();
+    void resetEvent();
+    void newLapTimeEvent(QString,unsigned int);
+
+public Q_SLOTS:
     void onReadyRead();
     void onDsrChanged(bool);
+
 private:
-    void processCmdString(QString);
     QString m_strIncommingData;
     QextSerialPort *m_pSerialPort;
-    bool    m_bDebug;
+    bool m_bDebug;
+
+private:
+    void processCmdString(QString);
+
+    friend class Singleton<SerialConnection>;
 };
 
 #endif // SERIALCONNECTION_H
+

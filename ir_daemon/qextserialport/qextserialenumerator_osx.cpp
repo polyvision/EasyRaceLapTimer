@@ -31,7 +31,6 @@
 
 #include "qextserialenumerator.h"
 #include "qextserialenumerator_p.h"
-#include <QtCore/QDebug>
 #include <IOKit/serial/IOSerialKeys.h>
 #include <CoreFoundation/CFNumber.h>
 #include <sys/param.h>

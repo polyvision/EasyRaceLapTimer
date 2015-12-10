@@ -9,14 +9,15 @@
  * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
- #include "infoserver.h"
+#include "infoserver.h"
+#include "logger.h"
 
 InfoServer::InfoServer() : QObject(0)
 {
 	this->m_pTcpServer = new QTcpServer(this);
     this->m_pTcpServer->listen(QHostAddress::Any,3007);
     connect(m_pTcpServer, SIGNAL(newConnection()), this, SLOT(newConnection()));
-    printf("InfoServer startup done, listening on port 3007\n");
+    LOG_INFOS(LOG_FACILTIY_COMMON, "InfoServer startup done, listening on port 3007\n");
 }
 
 void InfoServer::newConnection(){
@@ -32,3 +33,4 @@ void InfoServer::broadcastMessage(QString msg){
 		}
 	}
 }
+

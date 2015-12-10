@@ -53,6 +53,7 @@
     \endcode
 */
 
+
 QextSerialPortPrivate::QextSerialPortPrivate(QextSerialPort *q)
     :lock(QReadWriteLock::Recursive), q_ptr(q)
 {

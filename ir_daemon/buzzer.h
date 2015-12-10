@@ -9,25 +9,29 @@
  * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
- 
+
 #ifndef BUZZER_H
 #define BUZZER_H
 
 #include "singleton.h"
+#include "logger.h"
+#include <QObject>
 
-class Buzzer: public Singleton<Buzzer>{
-	friend class Singleton<Buzzer>;
-	
-	public:
-		Buzzer();
-		~Buzzer();
-		void setPin(int);
-		void activate(unsigned int ms);
-		void update();
-		
-	private:
-		int mi_OutputPin;
-		unsigned int mui_activeTime;
-		unsigned int mui_BuzzerStartTime;
+class Buzzer: public Singleton<Buzzer> {
+    Q_DISABLE_COPY(Buzzer)
+public:
+    Buzzer();
+    ~Buzzer();
+    void setPin(int);
+    void activate(unsigned int ms);
+    void update();
+
+private:
+    int mi_outputPin;
+    unsigned int mui_activeTime;
+    unsigned int mui_buzzerStartTime;
+
+    friend class Singleton<Buzzer>;
 };
 #endif
+

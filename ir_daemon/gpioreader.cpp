@@ -29,33 +29,50 @@
 
 GPIOReader::GPIOReader()
 {
-	this->sensor_pins[0] = Configuration::instance()->sensorPin(0);
-	this->sensor_pins[1] = Configuration::instance()->sensorPin(1);
-	this->sensor_pins[2] = Configuration::instance()->sensorPin(2);
+    m_sensorCount = Configuration::instance()->sensorCount();
+    for(int i = 0; i < m_sensorCount; i++) {
 
-	printf("GPIOReader:: sensor pin 1: %i\n",this->sensor_pins[0]);
-	printf("GPIOReader:: sensor pin 2: %i\n",this->sensor_pins[1]);
-	printf("GPIOReader:: sensor pin 3: %i\n",this->sensor_pins[2]);
-
-    this->m_bDebugMode = false;
-    pinMode(this->sensor_pins[0],INPUT);
-    pinMode(this->sensor_pins[1],INPUT);
-    pinMode(this->sensor_pins[2],INPUT);
-
-    for(int sensor_i = 0; sensor_i < 3; sensor_i++){
-        this->sensor_state[sensor_i] = 0;
-        this->sensor_pulse[sensor_i] = 0;
     }
 }
 
+bool GPIOReader::init()
+{
+    for(int i = 0; i < m_sensorCount; i++) {
+        m_sensorPins.append(Configuration::instance()->sensorPin(i));
+        if(this->m_sensorPins[i] < 0) {
+            LOG_ERROR(LOG_FACILTIY_COMMON, "GPIOReader:: invalid sensor pin configuration at gpio_reader/pin_%d", i);
+            return false;
+        }
+    }
+
+    for(int i = 0; i < m_sensorCount; i++)
+        LOG_INFO(LOG_FACILTIY_COMMON, "GPIOReader:: sensor pin %d: %i",this->m_sensorPins[i], i+1);
+
+    this->m_bDebugMode = false;
+    for(int i = 0; i < m_sensorCount; i++)
+        pinMode(this->m_sensorPins[i],INPUT);
+
+    for(int sensor_i = 0; sensor_i < m_sensorCount; sensor_i++){
+        m_sensorState.append(sensor_i);
+        m_sensorPulse.append(sensor_i);
+
+        this->m_sensorState[sensor_i] = 0;
+        this->m_sensorPulse[sensor_i] = 0;
+
+        m_sensorData.append(QList<int>());
+    }
+
+    return true;
+}
+
 void GPIOReader::reset(){
-    for(int sensor_i = 0; sensor_i < 3; sensor_i++){
-        this->sensor_state[sensor_i] = 0;
-        this->sensor_pulse[sensor_i] = 0;
-        this->sensor_data[sensor_i].clear();
+    for(int sensor_i = 0; sensor_i < m_sensorCount; sensor_i++){
+        this->m_sensorState[sensor_i] = 0;
+        this->m_sensorPulse[sensor_i] = 0;
+        this->m_sensorData[sensor_i].clear();
     }
     m_sensoredTimes.clear();
-    printf("GPIOReader::resetted\n");
+    LOG_INFOS(LOG_FACILTIY_COMMON, "GPIOReader::resetted");
 }
 
 void GPIOReader::setDebug(bool v){
@@ -76,12 +93,11 @@ unsigned int GPIOReader::num_ones_in_buffer(QList<int>& list){
 void GPIOReader::print_binary_list(QList<int>& list){
     for(int i=0; i < list.length(); i++){
         if(list[i] == 1){
-            printf("1");
+            LOG_DBGS(LOG_FACILTIY_COMMON, "1");
         }else{
-            printf("0");
+            LOG_DBGS(LOG_FACILTIY_COMMON, "0");
         }
     }
-    printf("\n");
 }
 
 void GPIOReader::push_to_service(int sensor_i,QList<int>& list,int control_bit){
@@ -93,7 +109,7 @@ void GPIOReader::push_to_service(int sensor_i,QList<int>& list,int control_bit){
     list.removeFirst();
     list.removeFirst();
     list.removeLast();
-    //printf("list length: %i\n",list.length());
+
     for(int i=0; i < list.length(); i++){
         if(list[i] == 1){
             BIT_SET(val_to_push,list.length() - i -1);
@@ -102,10 +118,6 @@ void GPIOReader::push_to_service(int sensor_i,QList<int>& list,int control_bit){
         }
     }
 
-    //printf("after: ");
-    //print_binary_list(list);
-    //qDebug() << "result binary:" << QString::number(val_to_push,2) << "\n";
-    //qDebug() << "ones in buffer " << num_ones_in_buffer(list) << "\n";
     int own_control_bit = (int)num_ones_in_buffer(list) % 2;
 
     if(control_bit == own_control_bit){
@@ -121,65 +133,50 @@ void GPIOReader::push_to_service(int sensor_i,QList<int>& list,int control_bit){
         }
         
     }else{
-        printf("sensor: %i control bit wrong: %i own_control_bit: %i, token: %u\n",sensor_i,control_bit,own_control_bit,val_to_push);
+        LOG_WARN(LOG_FACILTIY_COMMON, "sensor: %i control bit wrong: %i own_control_bit: %i, token: %u",sensor_i,control_bit,own_control_bit,val_to_push);
     }
 }
 
 void GPIOReader::push_bit_to_sensor_data(unsigned int pulse_width,int sensor_i){
     if(pulse_width >= PULSE_ONE){
-
-        sensor_data[sensor_i] << 1;
-        //printf("ONE %i\n",pulse_width);
-    }else{
-
-        //printf("ZERO %i\n",pulse_width);
-        sensor_data[sensor_i] << 0;
+        m_sensorData[sensor_i] << 1;
+    } else {
+        m_sensorData[sensor_i] << 0;
     }
 
-    if(sensor_data[sensor_i].length() == DATA_BIT_LENGTH){
+    if(m_sensorData[sensor_i].length() == DATA_BIT_LENGTH){
         // first two bytes have to be zero
-        if(sensor_data[sensor_i][0] == 0 && sensor_data[sensor_i][1] == 0){
+        if(m_sensorData[sensor_i][0] == 0 && m_sensorData[sensor_i][1] == 0){
             //print_binary_list(sensor_data[sensor_i]);
-            push_to_service(sensor_i,sensor_data[sensor_i],sensor_data[sensor_i].last());
-            sensor_data[sensor_i].clear();
+            push_to_service(sensor_i,m_sensorData[sensor_i],m_sensorData[sensor_i].last());
+            m_sensorData[sensor_i].clear();
         }else{
-            sensor_data[sensor_i].removeFirst();
+            m_sensorData[sensor_i].removeFirst();
         }
     }
 }
 
 void GPIOReader::update(){
-    for(int sensor_i = 0; sensor_i < 3; sensor_i++){
+    for(int sensor_i = 0; sensor_i < m_sensorCount; sensor_i++){
 
-        int pid_input = this->sensor_pins[0];
-        switch(sensor_i){
-            case 0:
-                pid_input = this->sensor_pins[0];
-                break;
-            case 1:
-                pid_input = this->sensor_pins[1];
-                break;
-            case 2:
-                pid_input = this->sensor_pins[2];
-                break;
-        }
+        int pid_input = this->m_sensorPins[sensor_i];
 
         int state = digitalRead(pid_input);
 
-        if(state != sensor_state[sensor_i]){
-            sensor_state[sensor_i] = state;
+        if(state != m_sensorState[sensor_i]){
+            m_sensorState[sensor_i] = state;
             unsigned int c_time = micros();
-            unsigned int c_pulse = c_time - sensor_pulse[sensor_i];
+            unsigned int c_pulse = c_time - m_sensorPulse[sensor_i];
 
             if(this->m_bDebugMode){
-                printf("sensor %i(%i): pulse %i\n",sensor_i,pid_input,c_pulse);
+                LOG_DBG(LOG_FACILTIY_COMMON, "sensor %i(%i): pulse %i",sensor_i, pid_input, c_pulse);
             }
             if(c_pulse >= PULSE_MIN && c_pulse <= PULSE_MAX){
                 push_bit_to_sensor_data(c_pulse,sensor_i);
             }else{
-                sensor_data[sensor_i].clear();
+                m_sensorData[sensor_i].clear();
             }
-            sensor_pulse[sensor_i] = c_time;
+            m_sensorPulse[sensor_i] = c_time;
         }
     }
 }
