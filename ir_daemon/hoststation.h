@@ -16,29 +16,31 @@
 #include <QHash>
 #include "singleton.h"
 
-class HostStation : public QObject, public Singleton<HostStation>
-{
-    friend class Singleton<HostStation>;
+class HostStation : public QObject, public Singleton<HostStation> {
     Q_OBJECT
+    Q_DISABLE_COPY(HostStation)
 public:
     explicit HostStation(QObject *parent = 0);
     void setDebug(bool);
-signals:
+    void setup();
 
-public slots:
+public Q_SLOTS:
     void eventStartNewRace();
     void eventReset();
     void eventNewLapTime(QString token, unsigned int ms);
-public:
-    void setup();
 
 private:
     void webRequestSatelliteTracked(QString token,unsigned int ms);
     void webRequestLapTimeTracked(QString token,unsigned int ms);
     void webRequestStartNewRace();
+
+private:
     QHash<QString, unsigned int> m_hashLastTokenPush;
     bool m_bDebug;
     bool m_bSatelliteMode;
+
+    friend class Singleton<HostStation>;
 };
 
 #endif // HOSTSTATION_H
+

@@ -9,43 +9,42 @@
  * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
- #include <wiring_pi.h>
- #include <stdio.h>
- #include "buzzer.h"
- 
- Buzzer::Buzzer(){
-	mui_activeTime = 0;
-	mui_BuzzerStartTime = 0;
-	mi_OutputPin = 0;
- }
- 
- Buzzer::~Buzzer(){
-	 
- }
- 
- void Buzzer::setPin(int p){
- 	printf("Buzzer using pin %i\n",p);
-	 mi_OutputPin = p;
-     pinMode(mi_OutputPin,OUTPUT);
-     digitalWrite(mi_OutputPin,LOW);
- }
- 
- void Buzzer::activate(unsigned int ms){
-	 mui_BuzzerStartTime = millis();
-	 mui_activeTime = ms;
-	 digitalWrite(mi_OutputPin,HIGH);
- }
- 
- void Buzzer::update(){
-	 if(mui_activeTime == 0){
-		return; 
-	 }
-	 
-	 if(mui_BuzzerStartTime +  mui_activeTime < millis()){
-		digitalWrite(mi_OutputPin,LOW);
-		mui_activeTime = 0;
-	 }else{
-		digitalWrite(mi_OutputPin,HIGH);
-	 }
-	 
- }
+#include <wiring_pi.h>
+#include <stdio.h>
+#include "buzzer.h"
+
+Buzzer::Buzzer() {
+    mui_activeTime = 0;
+    mui_buzzerStartTime = 0;
+    mi_outputPin = 0;
+}
+
+Buzzer::~Buzzer() {
+}
+
+void Buzzer::setPin(int p) {
+    LOG_DBG(LOG_FACILTIY_COMMON, "Buzzer using pin %i\n",p);
+    mi_outputPin = p;
+    pinMode(mi_outputPin,OUTPUT);
+    digitalWrite(mi_outputPin,LOW);
+}
+
+void Buzzer::activate(unsigned int ms) {
+    mui_buzzerStartTime = millis();
+    mui_activeTime = ms;
+    digitalWrite(mi_outputPin,HIGH);
+}
+
+void Buzzer::update() {
+    if(mui_activeTime == 0) {
+        return;
+    }
+
+    if(mui_buzzerStartTime +  mui_activeTime < millis()) {
+        digitalWrite(mi_outputPin,LOW);
+        mui_activeTime = 0;
+    } else {
+        digitalWrite(mi_outputPin,HIGH);
+    }
+}
+

@@ -11,7 +11,7 @@
  **/
 
 #include "networkconnection.h"
-#include <QDebug>
+
 NetworkConnection::NetworkConnection(QTcpSocket *socket,QObject *parent) : QObject(parent)
 {
     this->m_pSocketConnection = socket;
@@ -27,3 +27,4 @@ void NetworkConnection::readyRead(){
         emit incommingCommand(data);
     }
 }
+

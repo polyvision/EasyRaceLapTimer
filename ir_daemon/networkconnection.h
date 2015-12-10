@@ -15,19 +15,20 @@
 #include <QObject>
 #include <QTcpSocket>
 
-class NetworkConnection : public QObject
-{
+class NetworkConnection : public QObject {
     Q_OBJECT
+    Q_DISABLE_COPY(NetworkConnection)
 public:
     explicit NetworkConnection(QTcpSocket *socket,QObject *parent = 0);
 
 signals:
     void incommingCommand(QString);
 
-public slots:
-    void    readyRead();
+public Q_SLOTS:
+    void readyRead();
+
 private:
-    QTcpSocket  *m_pSocketConnection;
+    QTcpSocket *m_pSocketConnection;
 };
 
 #endif // NETWORKCONNECTION_H

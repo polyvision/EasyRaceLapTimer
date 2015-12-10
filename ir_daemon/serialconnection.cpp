@@ -12,6 +12,7 @@
 #include "serialconnection.h"
 #include "qextserialport/qextserialenumerator.h"
 #include <QDebug>
+#include "logger.h"
 
 SerialConnection::SerialConnection(QObject *parent) : QObject(parent)
 {
@@ -26,7 +27,7 @@ void SerialConnection::setDebug(bool v){
 void SerialConnection::listAvailablePorts(){
     QList<QextPortInfo> portList = QextSerialEnumerator::getPorts();
     for(int i = 0; i < portList.size(); i++){
-        printf("%i\t%s\t%s\n",i,portList.at(i).portName.toStdString().c_str(),portList.at(i).friendName.toStdString().c_str());
+        LOG_INFO(LOG_FACILTIY_COMMON, "%i\t%s\t%s",i,portList.at(i).portName.toStdString().c_str(),portList.at(i).friendName.toStdString().c_str());
     }
 }
 
@@ -45,13 +46,12 @@ void SerialConnection::setup(){
         connect(m_pSerialPort, SIGNAL(dsrChanged(bool)), this, SLOT(onDsrChanged(bool)));
 
         if (!(m_pSerialPort->lineStatus() & LS_DSR)){
-           qDebug() << "warning: device is not turned on";
+           LOG_WARNS(LOG_FACILTIY_COMMON, "warning: device is not turned on");
         }
-        qDebug() << "listening for data on" << m_pSerialPort->portName();
-
+        LOG_INFO(LOG_FACILTIY_COMMON, "listening for data on %s", qPrintable(m_pSerialPort->portName()));
     }
     else {
-        qDebug() << "device failed to open:" << m_pSerialPort->errorString();
+       LOG_ERROR(LOG_FACILTIY_COMMON, "device failed to open: %s", qPrintable(m_pSerialPort->errorString()));
     }
 }
 
@@ -63,12 +63,11 @@ void SerialConnection::onReadyRead()
     this->m_pSerialPort->read(bytes.data(), bytes.size());
 
     if(this->m_bDebug){
-        qDebug() << "bytes read:" << bytes.size();
-        qDebug() << "bytes:" << bytes;
+        LOG_TRACE(LOG_FACILTIY_COMMON, "bytes read: %d", bytes.size());
+        LOG_TRACE(LOG_FACILTIY_COMMON, "bytes: %s", qPrintable(bytes.toHex()));
     }
 
     m_strIncommingData.append(QString(bytes).replace("\r","").replace("\n",""));
-    //qDebug() << "before m_strIncommingData: " << m_strIncommingData;
 
     if(m_strIncommingData.contains("#")){
         QStringList list = m_strIncommingData.split("#");
@@ -81,7 +80,6 @@ void SerialConnection::onReadyRead()
         }
 
     }
-    //qDebug() << "after m_strIncommingData: " << m_strIncommingData;
 }
 
 void SerialConnection::write(QString data){
@@ -91,8 +89,6 @@ void SerialConnection::write(QString data){
 }
 
 void SerialConnection::processCmdString(QString data){
-  //qDebug() << "SerialConnection::processCmdString: " << data;
-
   if(data.compare("START_NEW_RACE") == 0){
       emit startNewRaceEvent();
       return;
@@ -116,7 +112,7 @@ void SerialConnection::processCmdString(QString data){
 void SerialConnection::onDsrChanged(bool status)
 {
     if (status)
-        qDebug() << "device was turned on";
+        LOG_INFOS(LOG_FACILTIY_COMMON, "device was turned on");
     else
-        qDebug() << "device was turned off";
+        LOG_INFOS(LOG_FACILTIY_COMMON, "device was turned off");
 }

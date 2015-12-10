@@ -14,14 +14,14 @@
 #include "networkconnection.h"
 #include <QTcpSocket>
 #include <QProcess>
-#include <QDebug>
+#include "logger.h"
  
 NetworkServer::NetworkServer(QObject *parent) : QObject(parent)
 {
     this->m_pTcpServer = new QTcpServer(this);
     this->m_pTcpServer->listen(QHostAddress::Any,3006);
     connect(m_pTcpServer, SIGNAL(newConnection()), this, SLOT(incommingConnection()));
-    printf("NetworkServer startup done, listening on port 3006\n");
+    LOG_INFOS(LOG_FACILTIY_COMMON, "NetworkServer startup done, listening on port 3006\n");
 }
 
 void NetworkServer::incommingConnection(){
@@ -30,7 +30,7 @@ void NetworkServer::incommingConnection(){
 }
 
 void NetworkServer::incommingCommand(QString data){
-    qDebug() << "incommingCommand:" << data;
+    LOG_DBG(LOG_FACILTIY_COMMON, "incommingCommand: %s", qPrintable(data));
 
     if(data.compare("SHUTDOWN#") == 0){
       QString program = "shutdown";
@@ -44,7 +44,7 @@ void NetworkServer::incommingCommand(QString data){
 
     // we shall start a new race
     if(data.compare("START_NEW_RACE#") == 0){
-        emit startNewRaceEvent();
+        Q_EMIT startNewRaceEvent();
         return;
     }
 
