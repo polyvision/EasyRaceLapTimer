@@ -9,7 +9,12 @@ class MonitorController < ApplicationController
   def view
     @current_race_session = RaceSession::get_open_session
     @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session)
-    render layout: false
+
+    if !@current_race_session
+      render text: ""
+    else
+      render layout: false
+    end
   end
 
   private

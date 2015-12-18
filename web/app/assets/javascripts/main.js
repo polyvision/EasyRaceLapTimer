@@ -86,7 +86,7 @@
 
 	var RaceSessionCompetitionDialogComponent = React.createClass({displayName: "RaceSessionCompetitionDialogComponent",
 	  getInitialState: function(){
-	      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition",num_satellites: 0, time_penalty_per_satellite: 2500};
+	      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition",num_satellites: 0, time_penalty_per_satellite: 2500,hot_seat_enabled: false};
 	  },
 
 	  componentDidMount: function(){
@@ -157,13 +157,17 @@
 	    this.setState({num_satellites: e.target.value});
 	  },
 
+	  _changeHotSeatEnabled: function(e){
+	    this.setState({hot_seat_enabled: e.target.checked});
+	  },
+
 	  _createCompetition: function(e){
 	    e.preventDefault();
 
 	    if(this._pilotValidateUniqueTokens() == false){
 	      alert("transponder tokens must be unique, please change them!");
 	    }else{
-	        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.num_satellites,this.state.time_penalty_per_satellite,this.state.pilots_listing);
+	        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.num_satellites,this.state.time_penalty_per_satellite,this.state.pilots_listing,this.state.hot_seat_enabled);
 	    }
 
 	  },
@@ -234,7 +238,10 @@
 	          React.createElement("label", null, "Time Penalty per Satellite microseconds:"), 
 	          React.createElement("input", {className: "form-control", type: "text", onChange: this._changeTimePenaltyPerSatellite, value: this.state.time_penalty_per_satellite, required: true})
 	        ), 
-
+	        React.createElement("div", {className: "form-group"}, 
+	          React.createElement("label", null, "Hot seat enabled:"), 
+	          React.createElement("input", {className: "form-control", type: "checkbox", onClick: this._changeHotSeatEnabled, checked: this.state.hot_seat_enabled, required: true})
+	        ), 
 	        React.createElement("table", {className: "table table-striped"}, 
 	          React.createElement("thead", null, 
 	            React.createElement("tr", null, 
@@ -23478,7 +23485,7 @@
 
 	  _createClass(RaceSessionActions, [{
 	    key: 'createCompetition',
-	    value: function createCompetition(title, max_laps, num_satellites, time_penalty_per_satellite, pilot_data) {
+	    value: function createCompetition(title, max_laps, num_satellites, time_penalty_per_satellite, pilot_data, hot_seat_enabled) {
 	      // transforming pilot data in correct post data
 	      var pilot_post_data = [];
 	      for (var i = 0; i < pilot_data.length; i++) {
@@ -23486,7 +23493,7 @@
 	      }
 
 	      var self = this;
-	      RaceSessionAPI.createCompetition(title, max_laps, num_satellites, time_penalty_per_satellite, pilot_post_data, function (err, result) {
+	      RaceSessionAPI.createCompetition(title, max_laps, num_satellites, time_penalty_per_satellite, pilot_post_data, hot_seat_enabled, function (err, result) {
 	        if (!err) {
 	          self.dispatch(result.body);
 	        }
@@ -23521,9 +23528,9 @@
 	var RaceSessionApi = {};
 
 	// retrieves a list of all pilots
-	RaceSessionApi.createCompetition = function (title, max_laps, num_satellites, time_penalty_per_satellite, pilot_data, callback) {
+	RaceSessionApi.createCompetition = function (title, max_laps, num_satellites, time_penalty_per_satellite, pilot_data, hot_seat_enabled, callback) {
 
-	  request.post("/api/v1/race_session/new_competition").send("data=" + JSON.stringify({ "title": title, "max_laps": max_laps, "pilots": pilot_data, "num_satellites": num_satellites, "time_penalty_per_satellite": time_penalty_per_satellite })).end(function (err, result) {
+	  request.post("/api/v1/race_session/new_competition").send("data=" + JSON.stringify({ "title": title, "max_laps": max_laps, "pilots": pilot_data, "num_satellites": num_satellites, "time_penalty_per_satellite": time_penalty_per_satellite, "hot_seat_enabled": hot_seat_enabled })).end(function (err, result) {
 	    callback(err, result);
 	  });
 	};

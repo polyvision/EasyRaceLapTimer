@@ -13,10 +13,10 @@ var request = require('superagent');
 var RaceSessionApi = {};
 
 // retrieves a list of all pilots
-RaceSessionApi.createCompetition = function(title,max_laps,num_satellites,time_penalty_per_satellite,pilot_data,callback){
+RaceSessionApi.createCompetition = function(title,max_laps,num_satellites,time_penalty_per_satellite,pilot_data,hot_seat_enabled,callback){
 
   request.post("/api/v1/race_session/new_competition")
-    .send("data="+JSON.stringify({"title": title, "max_laps": max_laps, "pilots": pilot_data,"num_satellites": num_satellites, "time_penalty_per_satellite": time_penalty_per_satellite}))
+    .send("data="+JSON.stringify({"title": title, "max_laps": max_laps, "pilots": pilot_data,"num_satellites": num_satellites, "time_penalty_per_satellite": time_penalty_per_satellite,"hot_seat_enabled": hot_seat_enabled}))
     .end(function(err,result){
       callback(err,result);
     })

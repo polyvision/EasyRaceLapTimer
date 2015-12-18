@@ -24,6 +24,9 @@
                 %label{:for => "exampleInputName2"}
                   Time Penalty Per Satellite:
                 = RaceSession::get_open_session.time_penalty_per_satellite
+                %label{:for => "exampleInputName2"}
+                  Hot seat:
+                = RaceSession::get_open_session.hot_seat_enabled
           .row
             .col-xs-12
               = link_to(t('actions.stop_race_session'),{action: 'stop_race_session'},{confirm: 'sure?',class: 'btn btn-danger btn-large'})

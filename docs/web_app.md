@@ -55,7 +55,6 @@ default credentials are:
 ## Rails Webapp development
 for running rails in dev mode, you need to run these two commands in seperate processes (e.g. terminal windows). The app uses sqlite for it's database
 
-    ./bin/cable
     rails s
 
 

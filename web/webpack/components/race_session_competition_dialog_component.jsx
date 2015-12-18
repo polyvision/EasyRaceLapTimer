@@ -22,7 +22,7 @@ var RaceSessionCompetitionDialogEntryComponent = require('../components/race_ses
 
 var RaceSessionCompetitionDialogComponent = React.createClass({
   getInitialState: function(){
-      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition",num_satellites: 0, time_penalty_per_satellite: 2500};
+      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition",num_satellites: 0, time_penalty_per_satellite: 2500,hot_seat_enabled: false};
   },
 
   componentDidMount: function(){
@@ -93,13 +93,17 @@ var RaceSessionCompetitionDialogComponent = React.createClass({
     this.setState({num_satellites: e.target.value});
   },
 
+  _changeHotSeatEnabled: function(e){
+    this.setState({hot_seat_enabled: e.target.checked});
+  },
+
   _createCompetition: function(e){
     e.preventDefault();
 
     if(this._pilotValidateUniqueTokens() == false){
       alert("transponder tokens must be unique, please change them!");
     }else{
-        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.num_satellites,this.state.time_penalty_per_satellite,this.state.pilots_listing);
+        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.num_satellites,this.state.time_penalty_per_satellite,this.state.pilots_listing,this.state.hot_seat_enabled);
     }
 
   },
@@ -170,7 +174,10 @@ var RaceSessionCompetitionDialogComponent = React.createClass({
           <label>Time Penalty per Satellite microseconds:</label>
           <input className="form-control" type="text" onChange={this._changeTimePenaltyPerSatellite} value={this.state.time_penalty_per_satellite} required={true}></input>
         </div>
-
+        <div className="form-group">
+          <label>Hot seat enabled:</label>
+          <input className="form-control" type="checkbox" onClick={this._changeHotSeatEnabled} checked={this.state.hot_seat_enabled} required={true}></input>
+        </div>
         <table className="table table-striped">
           <thead>
             <tr>
