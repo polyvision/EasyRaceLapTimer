@@ -12,7 +12,8 @@ t.password = "defaultpw"
 t.password_confirmation = "defaultpw"
 t.save
 
-ConfigValue::set_value("lap_timeout_in_seconds","4")
+ConfigValue::set_value("lap_min_lap_time_in_seconds","10")
+ConfigValue::set_value("time_between_lap_track_requests_in_seconds","4")
 ConfigValue::set_value("lap_max_lap_time_in_seconds","60")
 
 Soundfile.where(name: 'sfx_lap_beep').first_or_create

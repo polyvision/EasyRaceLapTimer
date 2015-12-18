@@ -196,7 +196,7 @@ class RaceSessionAdapter
 
     # check if the lap tracking was too fast
     last_track = self.race_session.pilot_race_laps.where(pilot_id: pilot.id).order("ID DESC").first
-    if last_track && last_track.created_at + ConfigValue::get_value("lap_timeout_in_seconds").value.to_i.seconds > Time.now
+    if last_track && last_track.created_at + ConfigValue::get_value("time_between_lap_track_requests_in_seconds").value.to_i.seconds > Time.now
       raise Exception, 'request successfull but tracking was too fast concering the last track'
     end
 
@@ -214,7 +214,7 @@ class RaceSessionAdapter
 
     # check if the lap tracking was too fast
     last_track = self.race_session.pilot_race_laps.where(pilot_id: ra.pilot.id).order("ID DESC").first
-    if last_track && last_track.created_at + ConfigValue::get_value("lap_timeout_in_seconds").value.to_i.seconds > Time.now
+    if last_track && last_track.created_at + ConfigValue::get_value("time_between_lap_track_requests_in_seconds").value.to_i.seconds > Time.now
       raise Exception, "request successfull but tracking was too fast concering the last track token: #{transponder_token} time: #{delta_time_in_ms} last track: #{last_track.to_json}"
     end
 

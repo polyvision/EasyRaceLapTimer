@@ -14,10 +14,17 @@ class Api::V1::LapTrackController < Api::V1Controller
       return
     end
 
+    # min lap time
+    min_t = ConfigValue::get_value("lap_min_lap_time_in_seconds").value.to_f * 1000.0
+    if params[:lap_time_in_ms].to_f < min_t
+      render status: 403, text: "NOT TRACKED: request successfull but lap time was less than min lap time: #{min_t} t: #{params[:lap_time_in_ms].to_f}"
+      return
+    end
+
     # max lap time
     max_t = ConfigValue::get_value("lap_max_lap_time_in_seconds").value.to_f * 1000.0
     if params[:lap_time_in_ms].to_f >= max_t
-      render status: 403, text: "request successfull but lap time reached max lap time max: #{max_t} t: #{params[:lap_time_in_ms].to_f}"
+      render status: 403, text: "NOT TRACKED: request successfull but lap time reached max lap time max: #{max_t} t: #{params[:lap_time_in_ms].to_f}"
       return
     end
 

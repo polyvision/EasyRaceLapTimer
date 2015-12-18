@@ -2,6 +2,10 @@ class ConfigValue < ActiveRecord::Base
     validates :name, presence: true
     def self.get_value(identifier)
       config_value = ConfigValue.where(name: identifier).first
+      if !config_value
+        puts "ConfigValue::get_value: #{identifier} not found"
+      end
+      return config_value
     end
 
     def self.set_value(identifier,value)

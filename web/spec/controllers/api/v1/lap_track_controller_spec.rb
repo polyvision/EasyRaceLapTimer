@@ -3,8 +3,10 @@ require 'rails_helper'
 RSpec.describe Api::V1::LapTrackController, :type => :controller do
   describe "track lap" do
     before(:each) do
-      ConfigValue::set_value("lap_timeout_in_seconds","4")
+      ConfigValue::set_value("time_between_lap_track_requests_in_seconds","4")
       ConfigValue::set_value("lap_max_lap_time_in_seconds","60")
+      ConfigValue::set_value("lap_min_lap_time_in_seconds","4")
+
     end
 
     it "no current race session" do
@@ -22,7 +24,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
     end
 
     it "check lap tracking timeout" do
-      ConfigValue::set_value("lap_timeout_in_seconds",4)
+      ConfigValue::set_value("time_between_lap_track_requests_in_seconds",4)
       pilot = Pilot.create(name: "Test", transponder_token: 63, quad:'ZMR')
       race_session = RaceSession.create(title: 'Session',active: true)
 
@@ -47,11 +49,11 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
     end
 
     it "check max lap time tracking" do
-      ConfigValue::set_value("lap_timeout_in_seconds",4)
+      # lap_max_lap_time_in_seconds is set to 60 seconds, so the first
       pilot = Pilot.create(name: "Test", transponder_token: 63, quad:'ZMR')
       race_session = RaceSession.create(title: 'Session',active: true)
 
-      # first lap
+      # should fail because of 60 seconds in lap_max_lap_time_in_seconds
       post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 60000
       expect(response.status).to eq 403
       race_session.reload
@@ -65,8 +67,28 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       expect(response.status).to eq 200
     end
 
+    it "check min lap time tracking" do
+      # lap_min_lap_time_in_seconds is set to 4 seconds, so the first
+      pilot = Pilot.create(name: "Test", transponder_token: 63, quad:'ZMR')
+      race_session = RaceSession.create(title: 'Session',active: true)
+
+      # should fail because of 4 seconds in lap_min_lap_time_in_seconds
+      post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 3000
+      expect(response.status).to eq 403
+      race_session.reload
+      expect(race_session.pilot_race_laps.count).to eq(0)
+
+
+      # now it should work again
+      post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 4000
+      expect(response.status).to eq 200
+      race_session.reload
+      expect(race_session.pilot_race_laps.count).to eq(1)
+      expect(response.status).to eq 200
+    end
+
     it "simulate a race in competition mode" ,:type => :request do
-      ConfigValue::set_value("lap_timeout_in_seconds",4)
+      ConfigValue::set_value("time_between_lap_track_requests_in_seconds",4)
       ConfigValue::set_value("lap_max_lap_time_in_seconds",60)
 
       Timecop.return
@@ -174,7 +196,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
     end
 
     it "simulate a race in competition mode with satellites" ,:type => :request do
-      ConfigValue::set_value("lap_timeout_in_seconds",4)
+      ConfigValue::set_value("time_between_lap_track_requests_in_seconds",4)
       ConfigValue::set_value("lap_max_lap_time_in_seconds",60)
 
       Timecop.return
