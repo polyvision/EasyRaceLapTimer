@@ -1,6 +1,0 @@
-#= require cable
-#= require_self
-#= require_tree .
-
-@App = {}
-App.cable = Cable.createConsumer 'ws://'+$('#host_data').data("rails-cable-ip")+':28080'

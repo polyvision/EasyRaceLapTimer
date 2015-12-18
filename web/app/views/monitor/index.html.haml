@@ -4,3 +4,10 @@
 - else
   .alert.alert-warning{role:"alert"}
     Sorry, there's no race at present going on.
+
+:javascript
+  setInterval(function() {
+    $.get("/monitor/view", function( data ){
+      $("#monitor_view").html(data);
+    });
+  },2000);

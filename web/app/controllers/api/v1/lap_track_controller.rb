@@ -29,13 +29,6 @@ class Api::V1::LapTrackController < Api::V1Controller
       return
     end
 
-    begin
-      ActionCable.server.broadcast 'monitor_notifications',type: "updated_stats"
-    rescue Exception => ex
-      logger.fatal(ex.message)
-      logger.fatal(ex.backtrace.join("n"))
-    end
-
     render json: pilot_race_lap.to_json
   end
 

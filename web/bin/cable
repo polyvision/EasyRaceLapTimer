@@ -1,2 +1,0 @@
-# /bin/bash
-bundle exec puma --bind=tcp://0.0.0.0 -p 28080 cable/config.ru
