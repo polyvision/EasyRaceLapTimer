@@ -208,9 +208,9 @@ class RaceSessionAdapter
   # tracking a lap in competition mode
   def track_lap_time_competition_mode(transponder_token,delta_time_in_ms)
     ra = self.race_session.race_attendees.where(transponder_token: transponder_token).first
-    if !ra && self.race_session.hot_sead_enabled == false
+    if !ra && self.race_session.hot_seat_enabled == false
       raise Exception,  "no registered pilot in competition mode with the transponder token #{transponder_token}"
-    elsif !ra && self.race_session.hot_sead_enabled == true
+    elsif !ra && self.race_session.hot_seat_enabled == true
       pilot = Pilot.where(transponder_token: transponder_token).first
       if !pilot
         raise Exception,  "no registered pilot in competition mode with the transponder token #{transponder_token}"
