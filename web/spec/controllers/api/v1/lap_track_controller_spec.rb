@@ -385,5 +385,118 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       open_race_session.reload
       expect(open_race_session.pilot_race_laps.count).to eq(9)
     end
+
+    it "simulate a race in competition mode with hot seat mode" ,:type => :request do
+      ConfigValue::set_value("time_between_lap_track_requests_in_seconds",4)
+      ConfigValue::set_value("lap_max_lap_time_in_seconds",60)
+
+      Timecop.return
+      # setting up the race data
+      pilot_1 = Pilot.create(name: "Pilot 1", transponder_token: 10, quad:'ZMR')
+      pilot_2 = Pilot.create(name: "Pilot 2", transponder_token: 20, quad:'ZMR')
+      pilot_3 = Pilot.create(name: "Pilot 3", transponder_token: 30, quad:'ZMR')
+
+      new_race_data = Hash.new
+      new_race_data[:title] = "new competition race"
+      new_race_data[:max_laps] = 3
+      new_race_data[:pilots] = Array.new
+      new_race_data[:hot_seat_enabled] = true # enabling hot seat mode
+
+      # we don't need to add pilots in competition mode with hot sead enabled, the system should add them by itself
+      #new_race_data[:pilots] << {pilot_id: pilot_1.id, transponder_token: 10}
+      #new_race_data[:pilots] << {pilot_id: pilot_2.id, transponder_token: 20}
+      #new_race_data[:pilots] << {pilot_id: pilot_3.id, transponder_token: 30}
+
+
+      post '/api/v1/race_session/new_competition', data: new_race_data.to_json
+
+      open_race_session = RaceSession::get_open_session
+      expect(open_race_session.mode).to eq("competition")
+      expect(open_race_session.active).to eq(true)
+      expect(open_race_session.hot_seat_enabled).to eq(true)
+
+
+      # first round
+      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
+      puts response.body
+      expect(response.status).to eq 200
+      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
+      expect(response.status).to eq 200
+      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 12000
+      expect(response.status).to eq 200
+
+      open_race_session.reload
+      expect(open_race_session.pilot_race_laps.count).to eq(3)
+
+
+      expect(RaceSessionAdapter.new(open_race_session).current_lap_for_pilot_by_token(10)).to eq(2)
+      expect(RaceSessionAdapter.new(open_race_session).current_lap_for_pilot_by_token(20)).to eq(2)
+      expect(RaceSessionAdapter.new(open_race_session).current_lap_for_pilot_by_token(30)).to eq(2)
+
+      get '/api/v1/monitor'
+      expect(response.status).to eq 200
+      json_monitor_data = JSON::parse(response.body)
+
+      expect(json_monitor_data['data'][0]['pilot']['name']).to eq("Pilot 1")
+      expect(json_monitor_data['data'][1]['pilot']['name']).to eq("Pilot 2")
+      expect(json_monitor_data['data'][2]['pilot']['name']).to eq("Pilot 3")
+
+
+
+      # second round
+      Timecop.travel(Time.now + 11.seconds)
+      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 10000
+      expect(response.status).to eq 200
+
+      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 10000
+      expect(response.status).to eq 200
+
+      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 13000
+      expect(response.status).to eq 200
+
+      open_race_session.reload
+      expect(open_race_session.pilot_race_laps.count).to eq(6)
+
+      get '/api/v1/monitor'
+      expect(response.status).to eq 200
+      json_monitor_data = JSON::parse(response.body)
+
+      expect(json_monitor_data['data'][0]['pilot']['name']).to eq("Pilot 2")
+      expect(json_monitor_data['data'][1]['pilot']['name']).to eq("Pilot 3")
+      expect(json_monitor_data['data'][2]['pilot']['name']).to eq("Pilot 1")
+
+      # third round
+      Timecop.travel(Time.now + 11.seconds)
+      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 14000
+      expect(response.status).to eq 200
+
+      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 12000
+      expect(response.status).to eq 200
+
+      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
+      expect(response.status).to eq 200
+
+      get '/api/v1/monitor'
+      expect(response.status).to eq 200
+      json_monitor_data = JSON::parse(response.body)
+
+      expect(json_monitor_data['data'][0]['pilot']['name']).to eq("Pilot 1")
+      expect(json_monitor_data['data'][1]['pilot']['name']).to eq("Pilot 3")
+      expect(json_monitor_data['data'][2]['pilot']['name']).to eq("Pilot 2")
+
+      open_race_session.reload
+      # 4 is here ok, max laps is 3.... they can't reach 4 laps but he counter should return 4
+      expect(RaceSessionAdapter.new(open_race_session).current_lap_for_pilot_by_token(10)).to eq(4)
+      expect(RaceSessionAdapter.new(open_race_session).current_lap_for_pilot_by_token(20)).to eq(4)
+      expect(RaceSessionAdapter.new(open_race_session).current_lap_for_pilot_by_token(30)).to eq(4)
+
+      # just one more round to check if more laps would be counted
+      Timecop.travel(Time.now + 11.seconds)
+      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
+      expect(response.status).to eq 403
+
+      open_race_session.reload
+      expect(open_race_session.pilot_race_laps.count).to eq(9)
+    end
   end
 end

@@ -215,7 +215,7 @@ class RaceSessionAdapter
       if !pilot
         raise Exception,  "no registered pilot in competition mode with the transponder token #{transponder_token}"
       else
-        self.add_pilots_to_competition_race({pilot_id: pilot.id, transponder_token: pilot.transponder_token})
+        self.add_pilots_to_competition_race([{'pilot_id' => pilot.id, 'transponder_token' => pilot.transponder_token}])
         ra = self.race_session.race_attendees.where(transponder_token: transponder_token).first
       end
     end
