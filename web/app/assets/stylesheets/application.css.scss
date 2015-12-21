@@ -6,19 +6,167 @@
 @import "_variables";
 @import "_bootswatch";
 
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);
+@import "_colors";
 
 
 body {
-  padding-top: 50px;
+  padding-top: 70px;
+}
+a, a:link, a:visited{
+  font-family: 'Oswald', sans-serif;
+  color: $primary;  
+}
+a:hover, a:focus{
+  color: darken($primary, 25%);
+  text-decoration: none;
 }
 
+
+.navbar-brand, h1, h2, h3, h4{
+  font-family: 'Oswald', sans-serif;
+}
+.navbar-default .navbar-brand{
+  color: $primary;
+  font-size: 1.7em;
+  letter-spacing: .025em;
+}
+.navbar-default {
+    background-color: rgb(255,255,255);
+    border-color: rgb(255, 255, 255);
+    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0, .4);
+    box-shadow:  0 0 3px 0 rgba(0,0,0, .4);
+}
+.navbar-nav > li > a {
+    line-height: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.navbar-default .navbar-nav > li > a , .navbar-default .navbar-nav .open .dropdown-menu > li > a{
+    color: rgb(40, 40, 80);
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+  background: $primary;
+  color: #fff;
+}
+.navbar-fixed-top .navbar-collapse, .navbar-fixed-bottom .navbar-collapse{
+  max-height: 90vh;
+}
+.navbar-nav .open .dropdown-menu > li > a{
+  font-size: 1.2em;
+  line-height: 2.1em;
+  border-bottom: 1px solid rgba($primary, .5);
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
+  background: $primary;
+  color: #fff;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+  border: none;
+}
+.navbar-default .navbar-toggle{
+  border: none;
+}
+.navbar-default .navbar-toggle .icon-bar{
+  background: $primary;
+}
+.navbar-toggle .icon-bar{
+  height: 4px;
+  width: 30px;
+  border-radius: 3px;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+    background: $primary;
+    
+    .icon-bar{
+	  background: #FFF;
+	}
+}
+
+
+@media (max-width: 600px) {
+.navbar-nav > li > a {
+    line-height: 30px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    font-size: 1.3em;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: .1em;
+	}
+}
+
+
+
+
+.btn{
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-size: 1.1em;
+  font-family: 'Oswald', sans-serif;
+  color: #FFF;
+}
+a.btn{
+  color: #FFF;
+} 
+.btn-primary{
+  background: $secondary;
+  color: #FFF;
+}
+.btn-primary:hover, .btn-primary:focus{
+	 background: darken($primary, 25%); 
+}
+.btn-warning {
+    background-color: $primary;
+    border-color: $primary;
+    color: rgb(255, 255, 255);
+}
+
+
+
+textarea:focus, textarea.form-control:focus, input.form-control:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="number"]:focus, .form-control[type="text"]:focus, .form-control[type="password"]:focus, .form-control[type="email"]:focus, .form-control[type="tel"]:focus, .form-control[contenteditable]:focus{
+  -webkit-box-shadow: 0 -2px 0 0 rgba($primary, 1) inset;
+  box-shadow: 0 -2px 0 0 rgba($primary, 1) inset;
+}
+
+
+
+
+/****** SPECIALS   ***/
+.shared-links a:link, .shared-links a:visited{
+  display: block;
+  float: left;
+  padding: 5px 20px 5px 0;
+  color: rgba($secondary, .5);
+}
+.shared-links a:hover, .shared-links a:focus{
+  color: $primary;
+}
+
+.panel-heading h2{
+ margin-top: 15px; 
+}
+
+.table-condensed tbody tr td.smalltd{
+  background: gray;
+  max-width: 110px;
+   white-space: normal;
+}
+
+
 footer {
-  margin: 5em 0;
+  margin: 2em 0 0 0;
+  padding: 2em 0 0 0;
 
   li {
     float: left;
-    margin-right: 1.5em;
-    margin-bottom: 1.5em;
+    margin-right: 0;
+    
+    a, a:link, a:visited {
+  		background: $primary;
+  		color: #FFF;
+  		font-size: 1.3em;
+  		padding: 0.8em 1.3em;
+	}
   }
 
   p {
@@ -26,3 +174,6 @@ footer {
     margin-bottom: 0;
   }
 }
+
+
+

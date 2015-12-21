@@ -22154,10 +22154,28 @@
 	  var pairs = [];
 	  for (var key in obj) {
 	    if (null != obj[key]) {
-	      pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+	      pushEncodedKeyValuePair(pairs, key, obj[key]);
 	    }
 	  }
 	  return pairs.join('&');
+	}
+
+	/**
+	 * Helps 'serialize' with serializing arrays.
+	 * Mutates the pairs array.
+	 *
+	 * @param {Array} pairs
+	 * @param {String} key
+	 * @param {Mixed} val
+	 */
+
+	function pushEncodedKeyValuePair(pairs, key, val) {
+	  if (Array.isArray(val)) {
+	    return val.forEach(function (v) {
+	      pushEncodedKeyValuePair(pairs, key, v);
+	    });
+	  }
+	  pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(val));
 	}
 
 	/**
@@ -22267,6 +22285,19 @@
 	  }
 
 	  return fields;
+	}
+
+	/**
+	 * Check if `mime` is json or has +json structured syntax suffix.
+	 *
+	 * @param {String} mime
+	 * @return {Boolean}
+	 * @api private
+	 */
+
+	function isJSON(mime) {
+	  return (/[\/+]json\b/.test(mime)
+	  );
 	}
 
 	/**
@@ -22398,20 +22429,6 @@
 	};
 
 	/**
-	 * Force given parser
-	 * 
-	 * Sets the body parser no matter type.
-	 * 
-	 * @param {Function}
-	 * @api public
-	 */
-
-	Response.prototype.parse = function (fn) {
-	  this.parser = fn;
-	  return this;
-	};
-
-	/**
 	 * Parse the given body `str`.
 	 *
 	 * Used for auto-parsing of bodies. Parsers
@@ -22423,7 +22440,7 @@
 	 */
 
 	Response.prototype.parseBody = function (str) {
-	  var parse = this.parser || request.parse[this.type];
+	  var parse = request.parse[this.type];
 	  return parse && str && (str.length || str instanceof Object) ? parse(str) : null;
 	};
 
@@ -22530,6 +22547,8 @@
 	      err = new Error('Parser is unable to parse the response');
 	      err.parse = true;
 	      err.original = e;
+	      // issue #675: return the raw response if the response parsing fails
+	      err.rawResponse = self.xhr && self.xhr.responseText ? self.xhr.responseText : null;
 	      return self.callback(err);
 	    }
 
@@ -22701,6 +22720,20 @@
 	};
 
 	/**
+	 * Force given parser
+	 *
+	 * Sets the body parser no matter type.
+	 *
+	 * @param {Function}
+	 * @api public
+	 */
+
+	Request.prototype.parse = function (fn) {
+	  this._parser = fn;
+	  return this;
+	};
+
+	/**
 	 * Set Accept to `type`, mapping values from `request.types`.
 	 *
 	 * Examples:
@@ -22825,7 +22858,7 @@
 	 *       // manual json
 	 *       request.post('/user')
 	 *         .type('json')
-	 *         .send('{"name":"tj"})
+	 *         .send('{"name":"tj"}')
 	 *         .end(callback)
 	 *
 	 *       // auto json
@@ -22904,8 +22937,13 @@
 	 */
 
 	Request.prototype.crossDomainError = function () {
-	  var err = new Error('Origin is not allowed by Access-Control-Allow-Origin');
+	  var err = new Error('Request has been terminated\nPossible causes: the network is offline, Origin is not allowed by Access-Control-Allow-Origin, the page is being unloaded, etc.');
 	  err.crossDomain = true;
+
+	  err.status = this.status;
+	  err.method = this.method;
+	  err.url = this.url;
+
 	  this.callback(err);
 	};
 
@@ -23021,7 +23059,8 @@
 	  if ('GET' != this.method && 'HEAD' != this.method && 'string' != typeof data && !isHost(data)) {
 	    // serialize stuff
 	    var contentType = this.getHeader('Content-Type');
-	    var serialize = request.serialize[contentType ? contentType.split(';')[0] : ''];
+	    var serialize = this._parser || request.serialize[contentType ? contentType.split(';')[0] : ''];
+	    if (!serialize && isJSON(contentType)) serialize = request.serialize['application/json'];
 	    if (serialize) data = serialize(data);
 	  }
 
@@ -23033,7 +23072,10 @@
 
 	  // send stuff
 	  this.emit('request', this);
-	  xhr.send(data);
+
+	  // IE11 xhr.send(undefined) sends 'undefined' string as POST payload (instead of nothing)
+	  // We need null here if data is undefined
+	  xhr.send(typeof data !== 'undefined' ? data : null);
 	  return this;
 	};
 
@@ -23131,11 +23173,14 @@
 	 * @api public
 	 */
 
-	request.del = function (url, fn) {
+	function del(url, fn) {
 	  var req = request('DELETE', url);
 	  if (fn) req.end(fn);
 	  return req;
 	};
+
+	request.del = del;
+	request['delete'] = del;
 
 	/**
 	 * PATCH `url` with optional `data` and callback `fn(res)`.

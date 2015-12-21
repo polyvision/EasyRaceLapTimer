@@ -1,9 +1,6 @@
 %footer
   .row
     .col-lg-12
-      %ul.list-unstyled
-        %li.pull-right
-          %a{:href => "#top"} Back to top
       %p
         Made & Sponsored by
         = succeed "." do
@@ -12,3 +9,7 @@
         Code released under the
         = succeed "." do
           %a{:href => "http://www.gnu.org/licenses/gpl-3.0.de.html"} GPL V3
+      %ul.list-unstyled
+        %li.pull-right
+          %a{:href => "#top", :class => "backtotop"} Back to top
+

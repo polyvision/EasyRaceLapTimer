@@ -1,50 +1,51 @@
 %h1
   History
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th
-      %th
-      %th Session
-      %th Mode
-      %th Pilots
-      %th Total Laps
-      %th Fastest Lap
-      %th Fastest Pilot
-      %th Avg Lap Time
-      %th
-  %tbody
-    -  @race_sessions.each do |session|
+.table-responsive
+  %table.table.table-striped.table-condensed
+    %thead
       %tr
-        %td
-          %strong
-            = session.id
-        %td
-          %strong
-            = session.created_at().to_s(:long)
-        %td
-          %strong
-            = link_to(session.title,{action: 'show', id: session.id})
-        %td
-          = session.mode
-        %td
-          %strong
-            = session.num_pilots
-        %td
-          %strong
-            = session.total_laps
-        %td
-          %strong
-            = formated_lap_time(session.fastest_lap_time)
-        %td
-          %strong
-            = session.fastest_pilot.name if session.fastest_pilot
-        %td
-          %strong
-            = formated_lap_time(session.average_lap_time)
-        %td
-          - if current_user
-            = link_to('Delete',url_for(action: 'delete', id: session.id),{method: 'DELETE', class: 'btn btn-warning', "data-confirm" => 'Are you sure?'})
-          -#= link_to('XLSX Export',url_for(action: 'export_to_xlsx', id: session.id),{class: 'btn btn-success'})
-          = link_to('PDF Export',url_for(action: 'pdf', id: session.id, format: :pdf),{class: 'btn btn-success'})
+        %th
+        %th
+        %th Session
+        %th Mode
+        %th Pilots
+        %th Total Laps
+        %th Fastest Lap
+        %th Fastest Pilot
+        %th Avg Lap Time
+        %th
+    %tbody
+      -  @race_sessions.each do |session|
+        %tr
+          %td
+            %strong
+              = session.id
+          %td.smalltd
+            %strong
+              = session.created_at().to_s(:long)
+          %td
+            %strong
+              = link_to(session.title,{action: 'show', id: session.id})
+          %td
+            = session.mode
+          %td
+            %strong
+              = session.num_pilots
+          %td
+            %strong
+              = session.total_laps
+          %td
+            %strong
+              = formated_lap_time(session.fastest_lap_time)
+          %td
+            %strong
+              = session.fastest_pilot.name if session.fastest_pilot
+          %td
+            %strong
+              = formated_lap_time(session.average_lap_time)
+          %td
+            - if current_user
+              = link_to('Delete',url_for(action: 'delete', id: session.id),{method: 'DELETE', class: 'btn btn-warning', "data-confirm" => 'Are you sure?'})
+            -#= link_to('XLSX Export',url_for(action: 'export_to_xlsx', id: session.id),{class: 'btn btn-success'})
+            = link_to('PDF Export',url_for(action: 'pdf', id: session.id, format: :pdf),{class: 'btn btn-default'})
