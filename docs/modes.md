@@ -3,3 +3,5 @@
 # EasyRaceLapTimer modes in detail
 
 ## standard mode aka practice / time trial mode
+
+## competition mode
