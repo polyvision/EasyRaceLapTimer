@@ -237,12 +237,13 @@ class RaceSessionAdapter
     return pilot_race_lap
   end
 
-  def monitor_json
+  def monitor_data
     json_data = Hash.new
     json_data['session'] = Hash.new#
     json_data['session']['title'] = self.race_session.title
     json_data['session']['maps_laps'] = self.race_session.max_laps
     json_data['session']['current_lap_count'] = self.current_lap_count
     json_data['data'] = self.listing
+    return json_data
   end
 end

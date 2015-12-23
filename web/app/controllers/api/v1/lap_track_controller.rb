@@ -50,7 +50,7 @@ class Api::V1::LapTrackController < Api::V1Controller
     addr = [ConfigValue::get_value("udp_broadcast_address").value, 33333]# broadcast address
     udp_socket = UDPSocket.new
     udp_socket.setsockopt(Socket::SOL_SOCKET, Socket::SO_BROADCAST, true)
-    udp_socket.send(RaceSessionAdapter.new(@race_session).monitor_json.to_s, 0, addr[0], addr[1])
+    udp_socket.send(RaceSessionAdapter.new(@race_session).monitor_data.to_json.to_s, 0, addr[0], addr[1])
     udp_socket.close
   end
 end
