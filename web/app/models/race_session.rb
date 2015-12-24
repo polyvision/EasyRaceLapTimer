@@ -4,6 +4,7 @@ class RaceSession < ActiveRecord::Base
   has_many :pilot_race_laps
   has_many :race_attendees
   enum mode:[:standard,:competition]
+  after_create :filter_reset_ir_daemon
 
   def self.get_open_session
     return RaceSession.where(active: true).first
@@ -14,6 +15,10 @@ class RaceSession < ActiveRecord::Base
     if t && t.active
       t.update_attribute(:active, false)
     end
+  end
+
+  def filter_reset_ir_daemon
+    IRDaemonCmd::send("RESET#\n")
   end
 
   def add_lap(pilot,lap_time)
