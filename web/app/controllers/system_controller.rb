@@ -21,6 +21,8 @@ class SystemController < ApplicationController
     @race_session = RaceSession::get_open_session
     if @race_session
       @race_session.update_attribute(:active,false)
+      load "#{Rails.root}/lib/ir_daemon_cmd.rb"
+      IRDaemonCmd::send("RESET#\n")
     end
     redirect_to action: 'index'
   end
