@@ -12,10 +12,21 @@ class PilotRaceLap < ActiveRecord::Base
   end
 
   def filter_fastest_lap
-	t = RaceSession.find(self.race_session_id).pilot_race_laps.order("lap_time ASC").first
+    t_fastest_lap = false
+	  t = RaceSession.find(self.race_session_id).pilot_race_laps.order("lap_time ASC").first
   	if t.id == self.id
-  		Soundfile::play("sfx_fastet_lap")
+      t_fastest_lap = true
+      SoundFileWorker.perform_async("sfx_fastet_lap")
+      return
   	end
+
+    # it was not the fastest lap in the race, but it might be a personal best time?
+    if t_fastest_lap == false
+      t = RaceSession.find(self.race_session_id).pilot_race_laps.where(pilot_id: self.pilot_id).order("lap_time ASC").first
+      if t.id == self.id
+        SoundFileWorker.perform_async("sfx_personal_fastet_lap")
+      end
+    end
   end
 
   def filter_mark_latest

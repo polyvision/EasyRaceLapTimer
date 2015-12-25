@@ -201,7 +201,7 @@ class RaceSessionAdapter
     end
 
     pilot_race_lap = self.race_session.add_lap(pilot,delta_time_in_ms)
-    Soundfile::play("sfx_lap_beep")
+    SoundFileWorker.perform_async("sfx_lap_beep")
     return pilot_race_lap
   end
 
@@ -233,7 +233,7 @@ class RaceSessionAdapter
     end
 
     pilot_race_lap = self.race_session.add_lap(ra.pilot,delta_time_in_ms)
-    Soundfile::play("sfx_lap_beep")
+    SoundFileWorker.perform_async("sfx_lap_beep")v
     return pilot_race_lap
   end
 

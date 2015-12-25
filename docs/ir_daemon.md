@@ -58,6 +58,7 @@ set web host URL, used for the satellite to set the right IP of the main station
         default:
 
         --set_web_host http://localhost/
+        
 ## data sources
 
    The ir_daemon can read data from TCP/IP sockets, serial connections and of course from the GPIO interface of the Raspberry PI.

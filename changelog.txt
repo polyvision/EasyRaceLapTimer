@@ -1,0 +1,7 @@
+version 0.4b2
+
+* webview monitor updates itself all 2 seconds
+* sending monitor UDP broadcast after tracking a lack via port 3333
+* renamed config values for better understanding
+* improved GUI (not finished yet)
+* added hot seat feature for competition mode

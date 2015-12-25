@@ -5,8 +5,8 @@
  *
  * This file is part of EasyRaceLapTimer.
  *
- * OpenRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
- * OpenRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * EasyRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ * EasyRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
 #include <QtConcurrent>
@@ -77,19 +77,19 @@ void HostStation::eventNewLapTime(QString token, unsigned int ms){
 
         if(!this->m_bSatelliteMode){
             LOG_INFO(LOG_FACILTIY_COMMON, "HostStation::eventNewLapTime %s %u",token.toStdString().c_str(),ms);
-            QtConcurrent::run(this, &HostStation::webRequestLapTimeTracked,token,ms);    
+            QtConcurrent::run(this, &HostStation::webRequestLapTimeTracked,token,ms);
         }else{
             LOG_INFO(LOG_FACILTIY_COMMON, "HostStation::eventNewLapTime (satellite mode) %s %u",token.toStdString().c_str(),ms);
-            QtConcurrent::run(this, &HostStation::webRequestSatelliteTracked,token,ms);    
+            QtConcurrent::run(this, &HostStation::webRequestSatelliteTracked,token,ms);
         }
-        
+
     }else{
         if(this->m_bDebug){
             LOG_DBG(LOG_FACILTIY_COMMON, "HostStation::eventNewLapTime: blocked sending new lap time, time too short token: %s", qPrintable(token));
         }
-        
+
     }
-    
+
 }
 
 void HostStation::webRequestSatelliteTracked(QString token,unsigned int ms){
