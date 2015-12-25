@@ -55,7 +55,7 @@ To build it, perform the following steps (note: some of these steps will take a 
 
     cd ~/EasyRaceLapTimer/web/
     sudo apt-get update
-    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev imagemagick libsqlite3-dev bridge-utils wkhtmltopdf hostapd dnsmasq
+    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev imagemagick redis-server libsqlite3-dev bridge-utils wkhtmltopdf hostapd dnsmasq
     sudo gem install bundler
     bundle config build.nokogiri --use-system-libraries
     sudo  gem install nokogiri -v "1.6.6.2"

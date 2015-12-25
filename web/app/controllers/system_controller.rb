@@ -11,7 +11,7 @@ class SystemController < ApplicationController
       @race_session = RaceSession.new(strong_params_race_session)
       @race_session.active = true
       @race_session.save
-      Soundfile::play("sfx_start_race")
+      SoundFileWorker.perform_async("sfx_start_race")
     end
 
     redirect_to action: 'index'
