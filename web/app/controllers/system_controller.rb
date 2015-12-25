@@ -38,7 +38,7 @@ class SystemController < ApplicationController
 
   def shutdown
     load "#{Rails.root}/lib/ir_daemon_cmd.rb"
-    IRDaemonCmd::send("SHUTDOWN#\n")
+    ::IRDaemonCmd::send("SHUTDOWN#\n")
     redirect_to action: 'index'
   end
 

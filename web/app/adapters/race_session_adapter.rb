@@ -233,7 +233,7 @@ class RaceSessionAdapter
     end
 
     pilot_race_lap = self.race_session.add_lap(ra.pilot,delta_time_in_ms)
-    SoundFileWorker.perform_async("sfx_lap_beep")v
+    SoundFileWorker.perform_async("sfx_lap_beep")
     return pilot_race_lap
   end
 
