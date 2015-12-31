@@ -12,10 +12,18 @@
 #include "configuration.h"
 #include <QSettings>
 #include <stdio.h>
+#include <fstream>
 
 Configuration::Configuration(){
-    mp_settings = new QSettings("/etc/ir_daemon.ini",QSettings::IniFormat);
-    LOG_DBG(LOG_CONFIG_FACILITY, "Configuration using file %s", qPrintable(mp_settings->fileName()));
+    std::ifstream infile("/etc/ir_daemon.ini");
+    
+    if (infile.good()){
+        mp_settings = QSettings("/etc/ir_daemon.ini",QSettings::IniFormat);
+        LOG_DBG(LOG_CONFIG_FACILITY, "Configuration using existing file %s", qPrintable(mp_settings->fileName()));
+    } else {
+        mp_settings = new QSettings("/etc/ir_daemon.ini",QSettings::IniFormat);
+        LOG_DBG(LOG_CONFIG_FACILITY, "Configuration using newly created file %s", qPrintable(mp_settings->fileName()));
+    }
 }
 
 void Configuration::setLogSeverity(Severity sev)
