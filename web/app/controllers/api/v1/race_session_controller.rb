@@ -3,7 +3,7 @@ class Api::V1::RaceSessionController < Api::V1Controller
     RaceSession::stop_open_session()
 
     race_session = RaceSession.create(title: "Race #{Time.now.to_s(:long)}",active: true)
-    SoundFileWorker.perform_async("sfx_start_race")
+    Soundfile::play("sfx_start_race")
     render json: race_session.to_json
   end
 

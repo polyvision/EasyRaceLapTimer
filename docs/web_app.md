@@ -8,7 +8,7 @@ this setup is based on Raspian JESSIE
 
 switch to the **web** folder in your EasyRaceLapTimer folder
 
-    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev  imagemagick wkhtmltopdf redis-server
+    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev  imagemagick wkhtmltopdf
     sudo gem install bundler
     bundle config build.nokogiri --use-system-libraries
     sudo  gem install nokogiri -v "1.6.6.2"

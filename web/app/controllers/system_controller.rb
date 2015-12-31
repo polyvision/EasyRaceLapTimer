@@ -11,7 +11,7 @@ class SystemController < ApplicationController
       @race_session = RaceSession.new(strong_params_race_session)
       @race_session.active = true
       @race_session.save
-      SoundFileWorker.perform_async("sfx_start_race")
+      Soundfile::play("sfx_start_race")
     end
 
     redirect_to action: 'index'
@@ -21,8 +21,6 @@ class SystemController < ApplicationController
     @race_session = RaceSession::get_open_session
     if @race_session
       @race_session.update_attribute(:active,false)
-      load "#{Rails.root}/lib/ir_daemon_cmd.rb"
-      IRDaemonCmd::send("RESET#\n")
     end
     redirect_to action: 'index'
   end
@@ -40,7 +38,7 @@ class SystemController < ApplicationController
 
   def shutdown
     load "#{Rails.root}/lib/ir_daemon_cmd.rb"
-    ::IRDaemonCmd::send("SHUTDOWN#\n")
+    IRDaemonCmd::send("SHUTDOWN#\n")
     redirect_to action: 'index'
   end
 
