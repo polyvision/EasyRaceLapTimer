@@ -6,7 +6,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       ConfigValue::set_value("time_between_lap_track_requests_in_seconds","4")
       ConfigValue::set_value("lap_max_lap_time_in_seconds","60")
       ConfigValue::set_value("lap_min_lap_time_in_seconds","4")
-
+      ConfigValue::set_value("udp_broadcast_address","127.0.0.1")
     end
 
     it "no current race session" do
@@ -329,7 +329,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       get '/api/v1/monitor'
       expect(response.status).to eq 200
       json_monitor_data = JSON::parse(response.body)
-      puts json_monitor_data
+      #puts json_monitor_data
 
       expect(json_monitor_data['data'][0]['pilot']['name']).to eq("Pilot 2")
       expect(json_monitor_data['data'][1]['pilot']['name']).to eq("Pilot 3")
@@ -418,7 +418,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
       # first round
       post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
-      puts response.body
+      #puts response.body
       expect(response.status).to eq 200
       post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
       expect(response.status).to eq 200

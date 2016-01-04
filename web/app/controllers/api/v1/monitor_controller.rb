@@ -6,6 +6,6 @@ class Api::V1::MonitorController < Api::V1Controller
       return
     end
 
-    render json: RaceSessionAdapter.new(@race_session).monitor_json
+    render json: RaceSessionAdapter.new(@race_session).monitor_data.to_json
   end
 end
