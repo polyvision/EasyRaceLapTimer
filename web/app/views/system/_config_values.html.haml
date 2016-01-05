@@ -6,9 +6,9 @@
     - ConfigValue.all.each do |config|
       = form_tag(url_for({action: 'set_config_val',id: config.id}),{class: 'form-horizontal'}) do
         .form-group
-          %label.col-sm-2.control-label
+          %label.col-sm-2
             = config.name
           .col-sm-10
             = text_field_tag :value, config.value, class: 'form-control'
         %td
-          = submit_tag 'save', class: 'btn btn-xs btn-primary'
+          = submit_tag 'save', class: 'btn btn-default'

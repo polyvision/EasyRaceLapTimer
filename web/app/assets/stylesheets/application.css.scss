@@ -6,12 +6,18 @@
 @import "_variables";
 @import "_bootswatch";
 
-@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);
+@import url(https://fonts.googleapis.com/css?family=Oswald:300,400,700);
 @import "_colors";
 
 
 body {
-  padding-top: 70px;
+  padding: 0;
+  background: $primary;
+}
+
+body > .container-fluid{
+  padding-top: 75px;
+  background: #FFF;
 }
 a, a:link, a:visited{
   font-family: 'Oswald', sans-serif;
@@ -25,6 +31,16 @@ a:hover, a:focus{
 
 .navbar-brand, h1, h2, h3, h4{
   font-family: 'Oswald', sans-serif;
+}
+
+.navbar-brand{
+  text-indent: -2000px;
+  width:280px;
+  height: 60px;
+  display: block;
+  margin-left: -15px;
+  padding: 10px;
+  background: $primary url(erltlogo.png) no-repeat right center;
 }
 .navbar-default .navbar-brand{
   color: $primary;
@@ -55,7 +71,7 @@ a:hover, a:focus{
 .navbar-nav .open .dropdown-menu > li > a{
   font-size: 1.2em;
   line-height: 2.1em;
-  border-bottom: 1px solid rgba($primary, .5);
+  border-bottom: 1px solid rgba($grey4, 1);
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus{
   background: $primary;
@@ -82,7 +98,9 @@ a:hover, a:focus{
 	  background: #FFF;
 	}
 }
-
+.dropdownmenu{
+  padding: 0;
+}
 
 @media (max-width: 600px) {
 .navbar-nav > li > a {
@@ -108,15 +126,19 @@ a:hover, a:focus{
 a.btn{
   color: #FFF;
 } 
+.btn-default{
+  background: $grey3;
+  color: #FFF;
+}
 .btn-primary{
-  background: $secondary;
+  background: $grey1;
   color: #FFF;
 }
 .btn-primary:hover, .btn-primary:focus{
-	 background: darken($primary, 25%); 
+	 background: $primary; 
 }
 .btn-warning {
-    background-color: $primary;
+    background: $primary;
     border-color: $primary;
     color: rgb(255, 255, 255);
 }
@@ -127,11 +149,18 @@ textarea:focus, textarea.form-control:focus, input.form-control:focus, input[typ
   -webkit-box-shadow: 0 -2px 0 0 rgba($primary, 1) inset;
   box-shadow: 0 -2px 0 0 rgba($primary, 1) inset;
 }
+label{
+    line-height: 36px;
+    margin-right: 10px; 
+}
 
 
+/****** SPECIALS ******/
+h1, .h1{
+  font-weight: 300;
+  margin: 45px 0 25px 0;
+}
 
-
-/****** SPECIALS   ***/
 .shared-links a:link, .shared-links a:visited{
   display: block;
   float: left;
@@ -142,15 +171,45 @@ textarea:focus, textarea.form-control:focus, input.form-control:focus, input[typ
   color: $primary;
 }
 
-.panel-heading h2{
- margin-top: 15px; 
+
+.panel.panel-default{
+  margin-bottom: 33px;
 }
 
-.table-condensed tbody tr td.smalltd{
-  background: gray;
-  max-width: 110px;
-   white-space: normal;
+.panel-heading h2{
+ margin-top: 5px; 
 }
+
+
+.table-condensed tbody tr td.smalltd{
+  max-width: 85px;
+  white-space: normal;
+}
+.table > thead > tr > td.success, .table > thead > tr > th.success, .table > thead > tr.success > td, .table > thead > tr.success > th, .table > tbody > tr > td.success, .table > tbody > tr > th.success, .table > tbody > tr.success > td, .table > tbody > tr.success > th, .table > tfoot > tr > td.success, .table > tfoot > tr > th.success, .table > tfoot > tr.success > td, .table > tfoot > tr.success > th {
+    background-color: $grey4;
+}
+
+.table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+    border-top: 1px solid #900;
+}
+
+.breadcrumb{
+ 	text-align: right;
+ 	background: none;
+ 	border: none;
+ 	border-bottom: 1px solid rgba($grey4, .4);
+ 	border-radius:0px;
+ 	weblit-border-radius: 0px;
+}
+
+.alert-danger {
+    background-color: $primary;
+}
+button.close{
+  margin-top:  -10px;
+}
+
+
 
 
 footer {
