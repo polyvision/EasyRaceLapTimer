@@ -11,7 +11,7 @@
   %body
     #host_data{"data-rails-cable-ip" => @RAILS_CABLE_IP}
     %navbar.navbar-default.navbar-fixed-top
-      .container
+      .container-fluid
         .navbar-header
           %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
             %span.sr-only Toggle navigation
@@ -21,7 +21,7 @@
           %a.navbar-brand{:href => "/"}
             EasyRaceLapTimer
         #navbar.collapse.navbar-collapse
-          %ul.nav.navbar-nav
+          %ul.nav.navbar-nav.navbar-right
             %li.dropdown
               %a{href:"#", class:"dropdown-toggle", "data-toggle"=>"dropdown", role:"button", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
                 Configuration
@@ -51,6 +51,7 @@
             %div{class: "alert #{bootstrap_class_for(type)} alert-danger fade in"}
               %button.close{"data-dismiss" => "alert"} ×
               = message
-      = yield
+        .col-xs-12      
+          = yield
       = render file: '/shared/_footer'
     = javascript_include_tag 'application'

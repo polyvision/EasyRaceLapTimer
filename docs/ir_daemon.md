@@ -1,4 +1,4 @@
-![alt text](http://www.airbirds.de/wp-content/uploads/2015/11/logo_big.png "EasyRaceLapTimer")
+![alt text](http://www.easyracelaptimer.com/wp-content/uploads/2016/01/easy_race_lap_timer_logo-1.png "EasyRaceLapTimer")
 
 # EasyRaceLapTimer IR_DAEMON
 
@@ -58,7 +58,7 @@ set web host URL, used for the satellite to set the right IP of the main station
         default:
 
         --set_web_host http://localhost/
-        
+
 ## data sources
 
    The ir_daemon can read data from TCP/IP sockets, serial connections and of course from the GPIO interface of the Raspberry PI.

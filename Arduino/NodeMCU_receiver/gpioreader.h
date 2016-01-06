@@ -12,10 +12,17 @@
 #ifndef GPIOREADER_H
 #define GPIOREADER_H
 
+#define NUM_MAX_SENSORS 1
+#define PULSE_ONE  500
+#define PULSE_MIN 100
+#define PULSE_MAX 1000
+
+#define DATA_BIT_LENGTH 9
+
 class GPIOReader{
     
 public:
-    GPIOReader(int num_sensors);
+    GPIOReader();
 
     void setSensor(int,int);
     void setDebug(bool);
@@ -23,16 +30,18 @@ public:
     //unsigned int num_ones_in_buffer(QList<int> &list);
     //void print_binary_list(QList<int> &list);
     //void push_to_service(int sensor_i,QList<int> &list, int control_bit);
-    void push_bit_to_sensor_data(unsigned int pulse_width, int sensor_i);
+    void pushBitToSensorData(unsigned long pulse_width, int sensor_i);
     void reset();
 
 
 private:
-    int m_sensorCount;
+    void resetSensor(int);
     bool m_bDebugMode;
-    int *mp_iSensorState;
-    int *mp_iSensorPin;
-    unsigned int *mp_uiSensorPulse;
+    int m_iSensorState[NUM_MAX_SENSORS];
+    int m_iSensorPin[NUM_MAX_SENSORS];
+    unsigned long m_uiSensorPulse[NUM_MAX_SENSORS];
+    unsigned int m_uiSensorData[NUM_MAX_SENSORS][DATA_BIT_LENGTH];
+    unsigned int m_uiSensorDataCount[NUM_MAX_SENSORS];
     
 };
 

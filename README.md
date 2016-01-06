@@ -1,4 +1,4 @@
-![alt text](http://www.airbirds.de/wp-content/uploads/2015/11/logo_big.png "EasyRaceLapTimer")
+![alt text](http://www.easyracelaptimer.com/wp-content/uploads/2016/01/easy_race_lap_timer_logo-1.png "EasyRaceLapTimer")
 
 # EasyRaceLapTimer
 
@@ -21,7 +21,7 @@ What you get with EasyRaceLaptimer:
 * detailed stats about pilots and races
 * sound effects for various events in a race
 * TCP/IP and serial connections support for receiving lap times and commands from other time tracking systems
-* export race events to spreadsheets
+* export race events to PDF
 * standard practice/ time trial mode
 * competition mode for racing events with time penalties (satellites needed)
 * and much more comming soon
@@ -34,7 +34,7 @@ Be sure to use the full size of your SD card on the Raspberry PI
 
     sudo raspi-config
 
-# Latest Version 0.4 Beta2
+# Unstable / Testing Version 0.4 RC1
 
 You can download a SD card image for the PI of EasyRaceLapTimer on the following pages:
 
@@ -85,6 +85,7 @@ more details of each indivial package can be found in the *docs* folder
  * [Peter Provost](https://github.com/PProvost)
  * [Peisel](https://github.com/peisel)
  * [p3root](https://github.com/p3root)
+ * [Sven Michel](https://github.com/svenmichel)
 
 # license
 
