@@ -1,4 +1,4 @@
-![alt text](http://www.airbirds.de/wp-content/uploads/2015/11/logo_big.png "EasyRaceLapTimer")
+![alt text](http://www.easyracelaptimer.com/wp-content/uploads/2016/01/easy_race_lap_timer_logo-1.png "EasyRaceLapTimer")
 
 # EasyRaceLapTimer - IR Pulses
 
@@ -41,3 +41,11 @@ if you log the output of your IR receiver you would get something like this for 
     id  3: PULSE 300 | SPACE 300 | SPACE 300 | SPACE 300 | PULSE 300 | SPACE 300 | PULSE 600 | SPACE 600 | PULSE 600
 
 please keep in mind that the pulse length differs a lot when using IR receivers, so they won't be 100% accurate
+
+## some statistics
+
+The longest time an ID (63) needs to be transmitted is 2x 250&#181;s + 7 * 650&#181;s = 5050&#181;s = 5.05ms
+
+Assuming your quad top speed is 120km/h, that's 33.33 m/s  =  3.33 cm/ms. So the distance needed to transmit the ID is 15cm.
+
+Distance needed with a speed of 90km/h = 25 m/s = 2,5 cm/ms -> 13.75 cm distance

@@ -1,10 +1,13 @@
-#include <ESP8266WiFi.h>
+//#include <ESP8266WiFi.h>
 #include "gpioreader.h"
 
-GPIOReader gpioReader(3);
+GPIOReader gpioReader;
  
 void setup() {
- gpioReader.setSensor(0,D1);
+  delay(10);
+  Serial.begin(115200);
+  gpioReader.setSensor(0,D4);
+  gpioReader.setDebug(true);
 }
  
 void loop() {
