@@ -166,6 +166,9 @@ Edit the following file:
 
 Then add the following to the bottom of the file, just before "exit":
 
-    _IR_DAEMON=$(/home/pi/EasyRaceLapTimer/ir_daemon/ir_daemon &)
+
+    (sleep 1; /home/pi/EasyRaceLapTimer/ir_daemon/ir_daemon > /var/log/ir_daemon.log 2>&1 &) || /bin/true
+    (sleep 1; /home/pi/EasyRaceLapTimer/web/start_sidekiq.sh > /var/log/sidekiq.log 2>&1 &) || /bin/true
+
 
 *You are done!*
