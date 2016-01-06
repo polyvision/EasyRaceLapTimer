@@ -40,7 +40,7 @@ a:hover, a:focus{
   display: block;
   margin-left: -15px;
   padding: 10px;
-  background: $primary url(erltlogo.png) no-repeat right center;
+  background: $primary image-url("erltlogo.png") no-repeat right center;
 }
 .navbar-default .navbar-brand{
   color: $primary;
