@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   post 'system/soundfile/create_custom' => 'system/soundfile#create_custom'
   delete 'system/soundfile/delete_custom/:id' => 'system/soundfile#delete_custom'
 
+  get 'system/soundfile/change_volume' => 'system/soundfile#change_volume'
+
   get '/system/stop_race_session' => 'system#stop_race_session'
   post '/system/start_race_session' => 'system#start_race_session'
 

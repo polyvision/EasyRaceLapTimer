@@ -7,12 +7,10 @@
       Volume Control
   .panel-body
     %p
-      %button.btn.btn-primary Increase Volume by 5%
-      %button.btn.btn-primary Increase Volume by 10%
-      %button.btn.btn-primary Increase Volume by 50%
-      %button.btn.btn-info Decrease Volume by 5%
-      %button.btn.btn-info Decrease Volume by 10%
-      %button.btn.btn-info Decrease Volume by 50%
+      = link_to('Set Volume to 25%',{action: 'change_volume',vol: "25%"},{class:'btn btn-primary'})
+      = link_to('Set Volume to 50%',{action: 'change_volume',vol: "50%"},{class:'btn btn-primary'})
+      = link_to('Set Volume to 75%',{action: 'change_volume',vol: "75%"},{class:'btn btn-primary'})
+      = link_to('Set Volume to 100%',{action: 'change_volume',vol: "100%"},{class:'btn btn-primary'})
     %p
       %button.btn.btn-info play test sound
 
