@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  get 'race_director' => 'race_director#index'
+  
   # You can have the root of your site routed with "root"
   get 'system' => 'system#index'
   get '/system/pilot' => 'system/pilot#index'
@@ -17,6 +19,9 @@ Rails.application.routes.draw do
   get 'system/soundfile' => 'system/soundfile#index'
   patch 'system/soundfile/:id' => 'system/soundfile#update'
   get 'system/soundfile/clear/:id' => 'system/soundfile#clear'
+
+  post 'system/soundfile/create_custom' => 'system/soundfile#create_custom'
+  delete 'system/soundfile/delete_custom/:id' => 'system/soundfile#delete_custom'
 
   get '/system/stop_race_session' => 'system#stop_race_session'
   post '/system/start_race_session' => 'system#start_race_session'

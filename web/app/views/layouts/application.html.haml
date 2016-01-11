@@ -22,6 +22,8 @@
             EasyRaceLapTimer
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav.navbar-right
+            %li
+              =link_to('Race Director',{action: 'index',controller: '/race_director'})
             %li.dropdown
               %a{href:"#", class:"dropdown-toggle", "data-toggle"=>"dropdown", role:"button", "aria-haspopup"=>"true", "aria-expanded"=>"false"}
                 Configuration
@@ -51,7 +53,7 @@
             %div{class: "alert #{bootstrap_class_for(type)} alert-danger fade in"}
               %button.close{"data-dismiss" => "alert"} ×
               = message
-        .col-xs-12      
+        .col-xs-12
           = yield
       = render file: '/shared/_footer'
     = javascript_include_tag 'application'

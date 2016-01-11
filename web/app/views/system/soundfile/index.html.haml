@@ -1,6 +1,23 @@
 %h1
   Soundfiles
 
+.panel.panel-default
+  .panel-heading
+    .h3
+      Volume Control
+  .panel-body
+    %p
+      %button.btn.btn-primary Increase Volume by 5%
+      %button.btn.btn-primary Increase Volume by 10%
+      %button.btn.btn-primary Increase Volume by 50%
+      %button.btn.btn-info Decrease Volume by 5%
+      %button.btn.btn-info Decrease Volume by 10%
+      %button.btn.btn-info Decrease Volume by 50%
+    %p
+      %button.btn.btn-info play test sound
+
+%h2
+  Race Event Soundeffects
 %table.table.table-striped
   %thead
   %tbody
@@ -16,3 +33,30 @@
           %td
             = f.submit 'upload WAV', class: 'btn btn-primary'
             = link_to('clear',{action: 'clear',id: soundfile.id},{class: 'btn btn-warning'})
+
+%h2
+  Custom Soundfiles
+
+= form_tag({action: 'create_custom'},{class: 'form-inline',multipart: true}) do
+  .form-group
+    %label
+      Title
+    = text_field_tag "custom_soundfile[title]",nil, placeholder: "title", class: "form-control", required: true
+  .form-group
+    %label
+      WAV file
+    = file_field_tag "custom_soundfile[file]",class: "form-control", required: true
+
+  = submit_tag 'upload', class: 'btn btn-primary'
+
+%table.table.table-striped
+  %thead
+  %tbody
+    - @custom_soundfiles.each do |soundfile|
+      %tr
+        %td
+          = soundfile.title
+        %td
+          = soundfile.file.path if soundfile.file
+        %td
+          = link_to('delete',{action: 'delete_custom',id: soundfile.id},{class: 'btn btn-warning', method: "delete"})

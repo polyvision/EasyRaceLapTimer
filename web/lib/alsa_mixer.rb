@@ -1,0 +1,2 @@
+class AlsaMixer
+end
