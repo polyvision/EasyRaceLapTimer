@@ -26,6 +26,6 @@
     %h2
       Soundeffects
     - @custom_soundfiles.each do |soundfile|
-      %button.btn.btn-primary
+      =link_to(url_for(action: 'play_custom', controller: 'api/v1/sound', id: soundfile.id),{remote: true, class: 'btn btn-primary'}) do
         .span.glyphicon.glyphicon-play
           = soundfile.title

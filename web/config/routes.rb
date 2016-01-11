@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get 'api/v1/satellite' => 'api/v1/satellite#create'
   get 'api/v1/lap_track/create' => 'api/v1/lap_track#create'
   get 'api/v1/monitor' => 'api/v1/monitor#index'
+  get 'api/v1/sound/play_custom/:id' => 'api/v1/sound#play_custom'
 
   get 'api/v1/race_session/new' => 'api/v1/race_session#new'
   post 'api/v1/race_session/new_competition' => 'api/v1/race_session#new_competition'
