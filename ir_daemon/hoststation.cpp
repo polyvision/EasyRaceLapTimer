@@ -25,11 +25,20 @@ HostStation::HostStation(QObject *parent) : QObject(parent)
 {
     m_bDebug = false;
     m_bSatelliteMode = false;
+    m_strLastScannedToken = "none";
 
     m_bSatelliteMode = Configuration::instance()->satelliteMode();
     if(m_bSatelliteMode){
         LOG_INFOS(LOG_FACILTIY_COMMON, "HostStation:: started in satellite mode");
     }
+}
+
+void HostStation::setLastScannedToken(QString v){
+	m_strLastScannedToken = v;
+}
+
+QString HostStation::lastScannedToken(){
+	return m_strLastScannedToken;
 }
 
 void HostStation::setDebug(bool v){

@@ -23,6 +23,8 @@ public:
     explicit HostStation(QObject *parent = 0);
     void setDebug(bool);
     void setup();
+    void setLastScannedToken(QString);
+    QString lastScannedToken();
 
 public Q_SLOTS:
     void eventStartNewRace();
@@ -38,6 +40,7 @@ private:
     QHash<QString, unsigned int> m_hashLastTokenPush;
     bool m_bDebug;
     bool m_bSatelliteMode;
+    QString	m_strLastScannedToken;
 
     friend class Singleton<HostStation>;
 };

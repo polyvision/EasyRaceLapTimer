@@ -14,6 +14,7 @@
 #include "buzzer.h"
 #include "configuration.h"
 #include <stdio.h>
+#include "hoststation.h"
 
 //#define	IR_LED_1	1
 //#define	IR_LED_2	4
@@ -123,6 +124,8 @@ void GPIOReader::push_to_service(int sensor_i,QList<int>& list,int control_bit){
     if(control_bit == own_control_bit){
         QString token = QString("%1").arg(val_to_push);
 
+        HostStation::instance()->setLastScannedToken(token);
+        
         if(m_sensoredTimes[token] == 0){
         	m_sensoredTimes[token] = millis();
         }else if(m_sensoredTimes[token] + 1000 < millis()){
