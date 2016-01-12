@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   get 'race_director' => 'race_director#index'
-  
+  get 'race_director/lap_times' => 'race_director#lap_times'
+
   # You can have the root of your site routed with "root"
   get 'system' => 'system#index'
   get '/system/pilot' => 'system/pilot#index'

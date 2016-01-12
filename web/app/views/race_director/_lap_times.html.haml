@@ -1,21 +1,27 @@
-%table.table
-  %thead
-    %tr
-      %th
-        Pilot
-      %th
-        Lap Time
-      %th
-        Lap
-      %th
-        Placement
-  %tbody
-    %tr
-      %td
-        Alex
-      %td
-        00:00:00
-      %td
-        2
-      %td
-        1
+- if @current_race_session_adapter
+  %table.table
+    %thead
+      %tr
+        %th
+          Pilot
+        %th
+          Lap Time
+        %th
+          Fastest Lap Time
+        %th
+          Lap
+        %th
+          Placement
+    %tbody
+      - @current_race_session_adapter.listing.each do |entry|
+        %tr
+          %td
+            = entry['pilot']['name']
+          %td
+            = entry['last_lap']['lap_time'] / 1000.0
+          %td
+            = entry['fastest_lap']['lap_time'] / 1000.0
+          %td
+            = entry['last_lap']['lap_num']
+          %td
+            = entry['position']
