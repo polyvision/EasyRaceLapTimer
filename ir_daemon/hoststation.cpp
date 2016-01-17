@@ -18,8 +18,9 @@
 #include "gpioreader.h"
 #include <curl/curl.h>
 #include "infoserver.h"
- #include <wiring_pi.h>
- #include "configuration.h"
+#include <wiring_pi.h>
+#include "configuration.h"
+#include <QMutexLocker>
 
 HostStation::HostStation(QObject *parent) : QObject(parent)
 {
@@ -34,10 +35,15 @@ HostStation::HostStation(QObject *parent) : QObject(parent)
 }
 
 void HostStation::setLastScannedToken(QString v){
-	m_strLastScannedToken = v;
+    QMutexLocker locker(&m_Mutex);
+    if(v.compare(m_strLastScannedToken) != 0){
+        m_strLastScannedToken = v;    
+    }
+	
 }
 
 QString HostStation::lastScannedToken(){
+    QMutexLocker locker(&m_Mutex);
 	return m_strLastScannedToken;
 }
 

@@ -14,7 +14,7 @@
           Placement
     %tbody
       - @current_race_session_adapter.listing.each do |entry|
-        %tr
+        %tr{class: "#{"success" if entry['latest_tracked']}"}
           %td
             = entry['pilot']['name']
           %td

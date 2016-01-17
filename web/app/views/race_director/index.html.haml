@@ -6,7 +6,7 @@
     %h2
       Last Scanned ID
     %h3
-      XX
+      #last_scanned_token
   .col-xs-3
     %h2
       Current Race
@@ -32,7 +32,7 @@
     - @custom_soundfiles.each do |soundfile|
       =link_to(url_for(action: 'play_custom', controller: 'api/v1/sound', id: soundfile.id),{remote: true, class: 'btn btn-primary'}) do
         .span.glyphicon.glyphicon-play
-          = soundfile.title
+        = soundfile.title
 
 :javascript
   setInterval(function() {
@@ -42,5 +42,9 @@
 
     $.get( "/race_director/lap_times", function( data ) {
       $("#lap_overview").html(data);
+    });
+
+    $.get( "/api/v1/info/last_scanned_token", function( data ) {
+      $("#last_scanned_token").html(data);
     });
   },2000);

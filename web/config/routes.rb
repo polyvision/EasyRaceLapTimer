@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -31,18 +34,6 @@ Rails.application.routes.draw do
 
   patch 'system/update_style' => 'system#update_style'
 
-  get 'api/v1/pilot' => 'api/v1/pilot#index'
-
-  post 'api/v1/lap_track' => 'api/v1/lap_track#create'
-  post 'api/v1/satellite' => 'api/v1/satellite#create'
-  get 'api/v1/satellite' => 'api/v1/satellite#create'
-  get 'api/v1/lap_track/create' => 'api/v1/lap_track#create'
-  get 'api/v1/monitor' => 'api/v1/monitor#index'
-  get 'api/v1/sound/play_custom/:id' => 'api/v1/sound#play_custom'
-
-  get 'api/v1/race_session/new' => 'api/v1/race_session#new'
-  post 'api/v1/race_session/new_competition' => 'api/v1/race_session#new_competition'
-
   get '/monitor' => 'monitor#index'
   get '/monitor/view' => 'monitor#view'
 
@@ -56,6 +47,21 @@ Rails.application.routes.draw do
   delete '/history/delete/:id' =>  'history#delete'
 
   root 'monitor#index'
+
+  ########### API
+  get 'api/v1/pilot' => 'api/v1/pilot#index'
+
+  post 'api/v1/lap_track' => 'api/v1/lap_track#create'
+  post 'api/v1/satellite' => 'api/v1/satellite#create'
+  get 'api/v1/satellite' => 'api/v1/satellite#create'
+  get 'api/v1/lap_track/create' => 'api/v1/lap_track#create'
+  get 'api/v1/monitor' => 'api/v1/monitor#index'
+  get 'api/v1/sound/play_custom/:id' => 'api/v1/sound#play_custom'
+
+  get 'api/v1/race_session/new' => 'api/v1/race_session#new'
+  post 'api/v1/race_session/new_competition' => 'api/v1/race_session#new_competition'
+
+  get 'api/v1/info/last_scanned_token' => 'api/v1/info#last_scanned_token'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

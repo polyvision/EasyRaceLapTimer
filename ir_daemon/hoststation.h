@@ -15,6 +15,7 @@
 #include <QObject>
 #include <QHash>
 #include "singleton.h"
+#include <QMutex>
 
 class HostStation : public QObject, public Singleton<HostStation> {
     Q_OBJECT
@@ -37,6 +38,7 @@ private:
     void webRequestStartNewRace();
 
 private:
+    QMutex m_Mutex;
     QHash<QString, unsigned int> m_hashLastTokenPush;
     bool m_bDebug;
     bool m_bSatelliteMode;

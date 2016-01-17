@@ -9,7 +9,7 @@ QT       += core network concurrent
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ir_daemon
-CONFIG   += console
+CONFIG   += console 
 CONFIG   -= app_bundle
 
 

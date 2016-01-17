@@ -85,3 +85,7 @@ The following commands are available for serial and TCP/IP connections
 *tracking a new lap time*
 
     LAP_TIME <TOKEN/ID> <MILLISECONDS>#
+
+* getting the last scanned token by the ir_daemon *
+
+    LAST_SCANNED_TOKEN#
