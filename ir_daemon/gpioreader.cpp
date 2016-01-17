@@ -30,6 +30,7 @@
 
 GPIOReader::GPIOReader()
 {
+    this->m_bDebugMode = false;
     m_sensorCount = Configuration::instance()->sensorCount();
     for(int i = 0; i < m_sensorCount; i++) {
 
@@ -49,7 +50,6 @@ bool GPIOReader::init()
     for(int i = 0; i < m_sensorCount; i++)
         LOG_INFO(LOG_FACILTIY_COMMON, "GPIOReader:: sensor pin %d: %i",this->m_sensorPins[i], i+1);
 
-    this->m_bDebugMode = false;
     for(int i = 0; i < m_sensorCount; i++)
         pinMode(this->m_sensorPins[i],INPUT);
 
@@ -78,6 +78,9 @@ void GPIOReader::reset(){
 
 void GPIOReader::setDebug(bool v){
     this->m_bDebugMode = v;
+    if(this->m_bDebugMode){
+        LOG_INFOS(LOG_FACILTIY_COMMON, "GPIOReader enabled debugging mode");
+    }
 }
 
 unsigned int GPIOReader::num_ones_in_buffer(QList<int>& list){
