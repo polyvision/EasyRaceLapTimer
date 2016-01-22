@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
 	if(a.arguments().count() > 1){
         if(a.arguments().at(1).compare("--debug") == 0){
             Configuration::instance()->setDebug(true);
+            GPIOReader::instance()->setDebug(true);
             LOG_DBGS(LOG_FACILTIY_COMMON, "enabled debug mode");
 		}
 

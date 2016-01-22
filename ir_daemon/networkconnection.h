@@ -20,12 +20,16 @@ class NetworkConnection : public QObject {
     Q_DISABLE_COPY(NetworkConnection)
 public:
     explicit NetworkConnection(QTcpSocket *socket,QObject *parent = 0);
+    ~NetworkConnection();
 
+    void write(QString);
 signals:
     void incommingCommand(QString);
+    void disconnectedSignal(NetworkConnection*);
 
 public Q_SLOTS:
     void readyRead();
+    void disconnected();
 
 private:
     QTcpSocket *m_pSocketConnection;
