@@ -40,5 +40,6 @@ RSpec.describe "the signin process", :type => :feature do
     open_race_session = RaceSession::get_open_session()
     expect(open_race_session.title).to eq("Standard")
     expect(page).to have_content 'Stop Race Session'
+    expect(page).to have_content 'Race Director' # we should land on the race director page
   end
 end

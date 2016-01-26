@@ -1,55 +1,7 @@
 %h1
   Configuration
 
-.row
-  .col-xs-12.col-md-12.col-sm-12.col-lg-12
-    .panel.panel-default
-      .panel-heading
-        %h2
-          Standard Race Tracking
-      .panel-body
-        - if RaceSession::get_open_session
-          .row
-            .col-xs-12
-              %strong
-                %label{:for => "exampleInputName2"}
-                  Active Session:
-                = RaceSession::get_open_session.title
-                %label{:for => "exampleInputName2"}
-                  Mode:
-                = RaceSession::get_open_session.mode
-                %label{:for => "exampleInputName2"}
-                  Num Satellites:
-                = RaceSession::get_open_session.num_satellites
-                %label{:for => "exampleInputName2"}
-                  Time Penalty Per Satellite:
-                = RaceSession::get_open_session.time_penalty_per_satellite
-                %label{:for => "exampleInputName2"}
-                  Hot seat:
-                = RaceSession::get_open_session.hot_seat_enabled
-          .row
-            .col-xs-12
-              = link_to(t('actions.stop_race_session'),{action: 'stop_race_session'},{confirm: 'sure?',class: 'btn btn-danger btn-large'})
-        - else
-          .row
-            .col-xs-12
-              = form_for(@race_session_prototype,url: {action: 'start_race_session'},html: {class: 'form-inline'}) do |f|
-                .form-group
-                  %label{:for => "exampleInputName2"}
-                    = t('pilot.name')
-                  = f.text_field(:title, placeholder: "Awesome race", class: 'form-control', required: true)
-
-                %button.btn.btn-success{:type => "submit"}
-                  = t('actions.start_standard_race_session')
-
-.row
-  .col-xs-12.col-md-12.col-sm-12.col-lg-12
-    .panel.panel-default
-      .panel-heading
-        %h2
-          Competition Race
-      .panel-body
-        = render partial: 'race_session_competition_modal'
+= render file: '/shared/_panel_race_session_control'
 
 .row
   .col-xs-12.col-md-12.col-sm-12.col-lg-12

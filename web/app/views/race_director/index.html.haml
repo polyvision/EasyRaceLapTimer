@@ -34,6 +34,9 @@
         .span.glyphicon.glyphicon-play
         = soundfile.title
 
+%hr
+= render file: '/shared/_panel_race_session_control'
+
 :javascript
   setInterval(function() {
     $.getJSON( "/api/v1/monitor", function( data ) {
