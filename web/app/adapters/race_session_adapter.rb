@@ -5,6 +5,10 @@ class RaceSessionAdapter
     self.race_session = race_session
   end
 
+  def race_mode
+    return self.race_session.mode
+  end
+
   def add_pilots_to_competition_race(params_pilots)
     params_pilots.each do |t|
       t_pilot = Pilot.find(t['pilot_id'])
@@ -154,10 +158,11 @@ class RaceSessionAdapter
 
   def track_lap_time(transponder_token,delta_time_in_ms)
     if self.race_session.mode == "standard"
-      return self.track_lap_time_standard_mode(transponder_token,delta_time_in_ms)
+      res = self.track_lap_time_standard_mode(transponder_token,delta_time_in_ms)
+      RaceSessionEventAdapter.new(self,transponder_token).perform
     elsif self.race_session.mode == "competition"
       res =  self.track_lap_time_competition_mode(transponder_token,delta_time_in_ms)
-      RaceSessionEventAdapter.new(self,transponder_token).perform
+      RaceSessionEventAdapter.new(self,transponder_token).performRaceSessionEventAdapter.new(self,transponder_token).perform
       return res
     end
   end
