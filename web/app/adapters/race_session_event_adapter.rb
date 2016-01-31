@@ -30,6 +30,7 @@ class RaceSessionEventAdapter
 
     if(max_laps_for_this_race > pilot_num_tracked_laps)
       # play the lap announcement for the last tracked lap count for this pilot
+      puts "RaceSessionEventAdapter::perform_for_competition_mode: triggering sound for lap #{pilot_num_tracked_laps}"
       RaceLapAnnouncerWorker.perform_async(pilot_num_tracked_laps)
     else
       #pilot finished race... let's see
@@ -41,7 +42,7 @@ class RaceSessionEventAdapter
       listing =  self.race_session_adapter.listing
       listing.each do |entry|
         if entry['pilot']['id'] == pilot_to_check.id
-          RacePilotPlacementAnnouncerWorker.perform_async(entry['position']) # let's play the position 
+          RacePilotPlacementAnnouncerWorker.perform_async(entry['position']) # let's play the position
         end
       end
     end
