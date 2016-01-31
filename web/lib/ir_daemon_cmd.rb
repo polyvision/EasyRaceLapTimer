@@ -8,6 +8,9 @@ require 'socket'
 
 class IRDaemonCmd
   def self.send(cmd)
+    if Rails.env == "test"
+      return
+    end
     begin
       s = TCPSocket.new 'localhost', 3006
       s.send cmd,0

@@ -2,6 +2,7 @@ class RaceDirectorController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @race_session_prototype = RaceSession.new
     @custom_soundfiles = CustomSoundfile.order("title ASC")
 
     @current_race_session = RaceSession::get_open_session

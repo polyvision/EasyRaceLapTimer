@@ -34,6 +34,9 @@
         .span.glyphicon.glyphicon-play
         = soundfile.title
 
+%hr
+= render file: '/shared/_panel_race_session_control'
+
 :javascript
   setInterval(function() {
     $.getJSON( "/api/v1/monitor", function( data ) {
@@ -47,4 +50,4 @@
     $.get( "/api/v1/info/last_scanned_token", function( data ) {
       $("#last_scanned_token").html(data);
     });
-  },2000);
+  },2000);*/

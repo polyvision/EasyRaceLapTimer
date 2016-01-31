@@ -14,7 +14,7 @@ class SystemController < ApplicationController
       SoundFileWorker.perform_async("sfx_start_race")
     end
 
-    redirect_to action: 'index'
+    redirect_to action: 'index', controller: '/race_director'
   end
 
   def stop_race_session
@@ -22,7 +22,7 @@ class SystemController < ApplicationController
     if @race_session
       @race_session.update_attribute(:active,false)
     end
-    redirect_to action: 'index'
+    redirect_to action: 'index', controller: '/race_director'
   end
 
   def update_style
