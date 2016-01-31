@@ -14,47 +14,58 @@
     %p
       %button.btn.btn-info play test sound
 
-%h2
-  Race Event Soundeffects
-%table.table.table-striped
-  %thead
-  %tbody
-    - @soundfiles.each do |soundfile|
-      = form_for(soundfile,url: {action: 'update', id: soundfile.id},html: {multipart: true}) do |f|
-        %tr
-          %td
-            = soundfile.name
-          %td
-            = soundfile.file.path if soundfile.file
-          %td
-            = f.file_field :file
-          %td
-            = f.submit 'upload WAV', class: 'btn btn-primary'
-            = link_to('clear',{action: 'clear',id: soundfile.id},{class: 'btn btn-warning'})
+%ul.nav.nav-tabs{role:"tablist"}
+  %li{role:"presentation", class:"active"}
+    %a{href:"#race_event_effects", "aria-controls"=>"home", role:"tab", "data-toggle"=>"tab"}
+      Race Event Soundeffects
+  %li{role:"presentation", class:""}
+    %a{href:"#custom_soundfiles", "aria-controls"=>"home", role:"tab", "data-toggle"=>"tab"}
+      Custom Soundfiles
 
-%h2
-  Custom Soundfiles
+.tab-content
+  .tab-pane.active{role:"tabpanel",id:"race_event_effects"}
+    %h2
+      Race Event Soundeffects
+    %table.table.table-striped
+      %thead
+      %tbody
+        - @soundfiles.each do |soundfile|
+          = form_for(soundfile,url: {action: 'update', id: soundfile.id},html: {multipart: true}) do |f|
+            %tr
+              %td
+                = soundfile.name
+              %td
+                = soundfile.file.path if soundfile.file
+              %td
+                = f.file_field :file
+              %td
+                = f.submit 'upload WAV', class: 'btn btn-primary'
+                = link_to('clear',{action: 'clear',id: soundfile.id},{class: 'btn btn-warning'})
 
-= form_tag({action: 'create_custom'},{class: 'form-inline',multipart: true}) do
-  .form-group
-    %label
-      Title
-    = text_field_tag "custom_soundfile[title]",nil, placeholder: "title", class: "form-control", required: true
-  .form-group
-    %label
-      WAV file
-    = file_field_tag "custom_soundfile[file]",class: "form-control", required: true
+  .tab-pane{role:"tabpanel",id:"custom_soundfiles"}
+    %h2
+      Custom Soundfiles
 
-  = submit_tag 'upload', class: 'btn btn-primary'
+    = form_tag({action: 'create_custom'},{class: 'form-inline',multipart: true}) do
+      .form-group
+        %label
+          Title
+        = text_field_tag "custom_soundfile[title]",nil, placeholder: "title", class: "form-control", required: true
+      .form-group
+        %label
+          WAV file
+        = file_field_tag "custom_soundfile[file]",class: "form-control", required: true
 
-%table.table.table-striped
-  %thead
-  %tbody
-    - @custom_soundfiles.each do |soundfile|
-      %tr
-        %td
-          = soundfile.title
-        %td
-          = soundfile.file.path if soundfile.file
-        %td
-          = link_to('delete',{action: 'delete_custom',id: soundfile.id},{class: 'btn btn-warning', method: "delete"})
+      = submit_tag 'upload', class: 'btn btn-primary'
+
+    %table.table.table-striped
+      %thead
+      %tbody
+        - @custom_soundfiles.each do |soundfile|
+          %tr
+            %td
+              = soundfile.title
+            %td
+              = soundfile.file.path if soundfile.file
+            %td
+              = link_to('delete',{action: 'delete_custom',id: soundfile.id},{class: 'btn btn-warning', method: "delete"})

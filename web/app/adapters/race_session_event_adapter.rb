@@ -1,6 +1,5 @@
 =begin
-adapter = RaceSessionAdapter.new(RaceSession.find(1))
-RaceSessionEventAdapter.new(adapter,12).perform
+RaceSessionEventAdapter.new(RaceSessionAdapter.new(RaceSession.find(6)),12).perform
 =end
 
 class RaceSessionEventAdapter
@@ -12,7 +11,7 @@ class RaceSessionEventAdapter
   end
 
   def perform
-    if self.race_session_adapter.race_mode == "competition_mode"
+    if self.race_session_adapter.race_mode == "competition"
       self.perform_for_competition_mode
     else
       self.perform_for_standard_mode
@@ -32,6 +31,19 @@ class RaceSessionEventAdapter
     if(max_laps_for_this_race > pilot_num_tracked_laps)
       # play the lap announcement for the last tracked lap count for this pilot
       RaceLapAnnouncerWorker.perform_async(pilot_num_tracked_laps)
+    else
+      #pilot finished race... let's see
+      # RaceSessionEventAdapter.new(RaceSessionAdapter.new(RaceSession.find(6)),12).perform
+      puts "finished race"
+
+      data = PilotRaceLap.where(race_session_id: self.race_session_adapter.race_session.id).where(lap_num: max_laps_for_this_race)
+
+      listing =  self.race_session_adapter.listing
+      listing.each do |entry|
+        if entry['pilot']['id'] == pilot_to_check.id
+          RacePilotPlacementAnnouncerWorker.perform_async(entry['position']) # let's play the position 
+        end
+      end
     end
   end
 
