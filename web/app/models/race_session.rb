@@ -18,7 +18,7 @@ class RaceSession < ActiveRecord::Base
   end
 
   def filter_reset_ir_daemon
-    IRDaemonCmd::send("RESET#\n")
+    #IRDaemonCmd::send("RESET#\n")
   end
 
   def add_lap(pilot,lap_time)
