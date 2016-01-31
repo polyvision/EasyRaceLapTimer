@@ -34,6 +34,8 @@ Be sure to use the full size of your SD card on the Raspberry PI
 
     sudo raspi-config
 
+**The documentation for the project can be found in the [/docs](https://github.com/polyvision/EasyRaceLapTimer/tree/master/docs) directory**
+
 # Unstable / Testing Version 0.5
 
 You can download a SD card image for the PI of EasyRaceLapTimer on the following pages:
