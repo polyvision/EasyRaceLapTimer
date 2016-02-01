@@ -24,3 +24,6 @@ en:
     delete: "delete"
     edit: "edit"
     deactivate_token: "remove token"
+  race_session:
+    idle_time_in_seconds: Idle time (s)
+    title: Title
