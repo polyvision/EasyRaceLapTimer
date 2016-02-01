@@ -36,7 +36,7 @@ class RaceSession < ActiveRecord::Base
     new_session.idle_time_in_seconds = src_session.idle_time_in_seconds
 
     new_session.save!
-    new_session.update_attribute(:title,new_session.title + " ##{new_session.id}") # a better naming ...
+    new_session.update_attribute(:title,new_session.title) # a better naming ...
 
     if new_session.mode == "competition" # we need to clone the pilots also
       src_session.race_attendees.each do |p|

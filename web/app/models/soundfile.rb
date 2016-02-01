@@ -6,8 +6,7 @@ class Soundfile < ActiveRecord::Base
 	snd_file = Soundfile.where(name: name).first
   	if snd_file && snd_file.file && !snd_file.file.path.blank?
       puts "Soundfile:play(#{name})"
-  		pid = spawn("aplay #{snd_file.file.path}")
-  		Process.detach pid
+  		system("aplay #{snd_file.file.path}")
   	end
   end
 end
