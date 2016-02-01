@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::RaceSessionController, type: :controller do
+  before(:each) do
+    ConfigValue::set_value("time_between_lap_track_requests_in_seconds","4")
+    ConfigValue::set_value("lap_max_lap_time_in_seconds","60")
+    ConfigValue::set_value("lap_min_lap_time_in_seconds","4")
+    ConfigValue::set_value("udp_broadcast_address","127.0.0.1")
+  end
+
   it "starting a new race" do
     post 'new'
     expect(response.status).to eq 200
@@ -17,16 +24,25 @@ RSpec.describe Api::V1::RaceSessionController, type: :controller do
     expect(json_data['id']).to eq(RaceSession::get_open_session.id)
   end
 
-  it "idle mode for standard mode races" do
+  it "idle mode for standard mode races",:type => :request do
     SoundFileWorker.drain
+    RaceLapAnnouncerWorker.drain
+
+    pilot_1 = Pilot.create(name: "Pilot 1", transponder_token: 1, quad:'ZMR')
+
 
     idled_race_session = RaceSession.create(title: 'Session',active: true,idle_time_in_seconds: 60) # 60 seconds idle time
     Timecop.travel(Time.now + 180.seconds)
 
-    get 'update_race_session_idle_time'
+    get '/api/v1/race_session/update_race_session_idle_time'
     expect(response.status).to eq 200
-    assert_equal 1, SoundFileWorker.jobs.size # should play a sound file
-    SoundFileWorker.drain
+
+    # first round, the last race got closed, so the system created a new one
+    post '/api/v1/lap_track',transponder_token: 1, lap_time_in_ms: 10000
+
+    expect(response.status).to eq 200
+    assert_equal 1, RaceLapAnnouncerWorker.jobs.size # should play a sound file
+    RaceLapAnnouncerWorker.drain
 
     # let's start anothe race without explicitly creating a new one via the gui
     # the system should detect that the last race was a race with an idle time
@@ -36,7 +52,7 @@ RSpec.describe Api::V1::RaceSessionController, type: :controller do
     Timecop.return
   end
 
-  it "idle mode for competition mode races" do
+  it "idle mode for competition mode races", type: :request do
     SoundFileWorker.drain
 
     pilot_1 = Pilot.create(name: "Pilot 1", transponder_token: 1, quad:'ZMR')
@@ -53,12 +69,12 @@ RSpec.describe Api::V1::RaceSessionController, type: :controller do
     new_race_data[:pilots] << {pilot_id: pilot_3.id, transponder_token: 30}
 
 
-    post 'new_competition', data: new_race_data.to_json
+    post '/api/v1/race_session/new_competition', data: new_race_data.to_json
 
     idled_race_session = RaceSession::get_open_session
     Timecop.travel(Time.now + 180.seconds)
 
-    get 'update_race_session_idle_time'
+    get '/api/v1/race_session/update_race_session_idle_time'
     expect(response.status).to eq 200
     assert_equal 1, SoundFileWorker.jobs.size # should play a sound file
     SoundFileWorker.drain
@@ -66,10 +82,13 @@ RSpec.describe Api::V1::RaceSessionController, type: :controller do
     # let's start anothe race without explicitly creating a new one via the gui
     # the system should detect that the last race was a race with an idle time
     # it should start enother again
+    post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
+    expect(response.status).to eq 200
+
     expect(RaceSession::get_open_session().id).to eq (idled_race_session.id + 1)
 
     open_race_session = RaceSession::get_open_session()
-    
+
     expect(open_race_session.race_attendees.count).to eq(3)
 
     expect(open_race_session.race_attendees.where(pilot_id: pilot_1.id).first.transponder_token).to eq("10")

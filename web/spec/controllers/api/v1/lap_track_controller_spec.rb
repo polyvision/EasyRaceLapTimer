@@ -88,6 +88,9 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
     end
 
     it "simulate a race in competition mode" ,:type => :request do
+      RaceLapAnnouncerWorker.drain
+      RacePilotPlacementAnnouncerWorker.drain
+      
       ConfigValue::set_value("time_between_lap_track_requests_in_seconds",4)
       ConfigValue::set_value("lap_max_lap_time_in_seconds",60)
 
