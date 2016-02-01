@@ -60,6 +60,7 @@ Rails.application.routes.draw do
 
   get 'api/v1/race_session/new' => 'api/v1/race_session#new'
   post 'api/v1/race_session/new_competition' => 'api/v1/race_session#new_competition'
+  get 'api/v1/race_session/update_race_session_idle_time' => 'api/v1/race_session#update_race_session_idle_time'
 
   get 'api/v1/info/last_scanned_token' => 'api/v1/info#last_scanned_token'
 
