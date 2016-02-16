@@ -28,7 +28,6 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
-LIBS:transmitter-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -52,6 +51,17 @@ F 1 "GND" H 4000 3900 50  0000 C CNN
 F 2 "" H 4000 4050 50  0000 C CNN
 F 3 "" H 4000 4050 50  0000 C CNN
 	1    4000 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L +5V #PWR02
+U 1 1 56C0E1BD
+P 4000 3450
+F 0 "#PWR02" H 4000 3300 50  0001 C CNN
+F 1 "+5V" H 4000 3590 50  0000 C CNN
+F 2 "" H 4000 3450 50  0000 C CNN
+F 3 "" H 4000 3450 50  0000 C CNN
+	1    4000 3450
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -135,6 +145,10 @@ Wire Wire Line
 Wire Wire Line
 	4400 4400 4400 4000
 Connection ~ 4400 4000
+Wire Wire Line
+	7700 3150 7700 3800
+Wire Wire Line
+	7700 3800 7350 3800
 $Comp
 L AVR-ISP-6 CON1
 U 1 1 56C0E8D5
@@ -151,7 +165,7 @@ Wire Wire Line
 Wire Wire Line
 	7550 3900 7550 3600
 Wire Wire Line
-	7350 3600 7700 3600
+	7550 3600 7350 3600
 Wire Wire Line
 	8000 4000 7450 4000
 Wire Wire Line
@@ -177,19 +191,4 @@ Wire Wire Line
 	8250 4100 8250 4400
 Connection ~ 8250 4400
 NoConn ~ 7350 3900
-Wire Wire Line
-	7700 3600 7700 3150
-Connection ~ 7550 3600
-$Comp
-L VCC #PWR?
-U 1 1 56C27B48
-P 4000 3450
-F 0 "#PWR?" H 4000 3300 50  0001 C CNN
-F 1 "VCC" H 4000 3600 50  0000 C CNN
-F 2 "" H 4000 3450 50  0000 C CNN
-F 3 "" H 4000 3450 50  0000 C CNN
-	1    4000 3450
-	1    0    0    -1  
-$EndComp
-NoConn ~ 7350 3800
 $EndSCHEMATC
