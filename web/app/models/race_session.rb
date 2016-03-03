@@ -98,6 +98,15 @@ class RaceSession < ActiveRecord::Base
     end
   end
 
+  # returns the last tracked lap time creation date, used for idle time of a race
+  def last_created_at_of_tracked_lap
+    if self.pilot_race_laps.last
+      return self.pilot_race_laps.last.created_at
+    else
+      return self.created_at
+    end
+  end
+
   def lap_count_of_pilot(pilot)
     return self.pilot_race_laps.where(pilot_id: pilot.id).count
   end

@@ -23,7 +23,7 @@ class Api::V1::RaceSessionController < Api::V1Controller
   def update_race_session_idle_time
     @race_session = RaceSession::get_open_session()
     if @race_session && @race_session.idle_time_in_seconds > 0
-        if  @race_session.created_at + @race_session.idle_time_in_seconds.seconds <= Time.now
+        if  @race_session.last_created_at_of_tracked_lap + @race_session.idle_time_in_seconds.seconds <= Time.now
           # looks like he have to stop this race
           RaceSession::stop_open_session
           SoundFileWorker.perform_async("sfx_race_finished")

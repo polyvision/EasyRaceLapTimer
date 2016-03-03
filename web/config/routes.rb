@@ -1,6 +1,7 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users
-  require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -46,8 +47,6 @@ Rails.application.routes.draw do
   get '/history/pdf/:id.:format' => 'history#pdf'
   delete '/history/delete/:id' =>  'history#delete'
 
-  root 'monitor#index'
-
   ########### API
   get 'api/v1/pilot' => 'api/v1/pilot#index'
 
@@ -63,6 +62,8 @@ Rails.application.routes.draw do
   get 'api/v1/race_session/update_race_session_idle_time' => 'api/v1/race_session#update_race_session_idle_time'
 
   get 'api/v1/info/last_scanned_token' => 'api/v1/info#last_scanned_token'
+
+  root 'monitor#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
