@@ -14,6 +14,7 @@
 #include "buzzer.h"
 #include "configuration.h"
 #include <stdio.h>
+#include "hoststation.h"
 
 //#define	IR_LED_1	1
 //#define	IR_LED_2	4
@@ -29,6 +30,7 @@
 
 GPIOReader::GPIOReader()
 {
+    this->m_bDebugMode = false;
     m_sensorCount = Configuration::instance()->sensorCount();
     for(int i = 0; i < m_sensorCount; i++) {
 
@@ -48,7 +50,6 @@ bool GPIOReader::init()
     for(int i = 0; i < m_sensorCount; i++)
         LOG_INFO(LOG_FACILTIY_COMMON, "GPIOReader:: sensor pin %d: %i",this->m_sensorPins[i], i+1);
 
-    this->m_bDebugMode = false;
     for(int i = 0; i < m_sensorCount; i++)
         pinMode(this->m_sensorPins[i],INPUT);
 
@@ -77,6 +78,9 @@ void GPIOReader::reset(){
 
 void GPIOReader::setDebug(bool v){
     this->m_bDebugMode = v;
+    if(this->m_bDebugMode){
+        LOG_INFOS(LOG_FACILTIY_COMMON, "GPIOReader enabled debugging mode");
+    }
 }
 
 unsigned int GPIOReader::num_ones_in_buffer(QList<int>& list){
@@ -123,6 +127,8 @@ void GPIOReader::push_to_service(int sensor_i,QList<int>& list,int control_bit){
     if(control_bit == own_control_bit){
         QString token = QString("%1").arg(val_to_push);
 
+        HostStation::instance()->setLastScannedToken(token);
+        
         if(m_sensoredTimes[token] == 0){
         	m_sensoredTimes[token] = millis();
         }else if(m_sensoredTimes[token] + 1000 < millis()){

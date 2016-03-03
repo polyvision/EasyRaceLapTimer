@@ -7,6 +7,8 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'timecop'
 require 'database_cleaner'
+require 'capybara/rails'
+require 'sidekiq/testing'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

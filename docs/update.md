@@ -2,6 +2,8 @@
 
 Instructions for updating to the next stable version. After updating the system, you need to restart the Raspberry PI.
 
+# updating to 0.5
+
 # updating from v0.3 to v0.4
 
     sudo apt-get install redis-server

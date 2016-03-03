@@ -11,11 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151224131125) do
+ActiveRecord::Schema.define(version: 20160131102343) do
 
   create_table "config_values", force: :cascade do |t|
     t.string "name"
     t.string "value"
+  end
+
+  create_table "custom_soundfiles", force: :cascade do |t|
+    t.string "title"
+    t.string "file"
   end
 
   create_table "pilot_race_laps", force: :cascade do |t|
@@ -62,6 +67,7 @@ ActiveRecord::Schema.define(version: 20151224131125) do
     t.integer  "num_satellites",             default: 0
     t.integer  "time_penalty_per_satellite", default: 2500
     t.boolean  "hot_seat_enabled",           default: false
+    t.integer  "idle_time_in_seconds",       default: 0
   end
 
   add_index "race_sessions", ["deleted_at"], name: "index_race_sessions_on_deleted_at"

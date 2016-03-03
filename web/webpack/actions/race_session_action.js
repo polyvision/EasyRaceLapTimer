@@ -14,7 +14,7 @@ var RaceSessionAPI = require('../util/race_session_api.js');
 
 
 class RaceSessionActions {
-  createCompetition(title,max_laps,num_satellites,time_penalty_per_satellite,pilot_data,hot_seat_enabled){
+  createCompetition(title,max_laps,num_satellites,time_penalty_per_satellite,pilot_data,hot_seat_enabled,idle_time_in_seconds){
     // transforming pilot data in correct post data
     var pilot_post_data = [];
     for(var i = 0; i < pilot_data.length; i++){
@@ -22,7 +22,7 @@ class RaceSessionActions {
     }
 
     var self = this;
-    RaceSessionAPI.createCompetition(title,max_laps,num_satellites,time_penalty_per_satellite,pilot_post_data,hot_seat_enabled,function(err,result){
+    RaceSessionAPI.createCompetition(title,max_laps,num_satellites,time_penalty_per_satellite,pilot_post_data,hot_seat_enabled,idle_time_in_seconds,function(err,result){
       if(!err){
         self.dispatch(result.body);
       }

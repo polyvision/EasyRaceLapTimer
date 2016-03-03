@@ -4,6 +4,11 @@ class Api::V1::LapTrackController < Api::V1Controller
 
     @race_session =  RaceSession::get_open_session
 
+    if !@race_session # maybe the last one was one with  defined idle time... => autostart
+      @race_session = RaceSession::get_session_from_previous
+      SoundFileWorker.perform_async("sfx_start_race")
+    end
+
     # there's no active race session
     if !@race_session
       render status: 409, text: 'no running race session'

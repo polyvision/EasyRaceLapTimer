@@ -14,7 +14,7 @@ class SystemController < ApplicationController
       SoundFileWorker.perform_async("sfx_start_race")
     end
 
-    redirect_to action: 'index'
+    redirect_to action: 'index', controller: '/race_director'
   end
 
   def stop_race_session
@@ -23,8 +23,9 @@ class SystemController < ApplicationController
       @race_session.update_attribute(:active,false)
       load "#{Rails.root}/lib/ir_daemon_cmd.rb"
       IRDaemonCmd::send("RESET#\n")
+      @race_session.update_attribute(:idle_time_in_seconds,0) # this one is important! otherwise the system will automaticly clone it.... so you won't be able to stop a session ;)
     end
-    redirect_to action: 'index'
+    redirect_to action: 'index', controller: '/race_director'
   end
 
   def update_style
@@ -51,7 +52,7 @@ class SystemController < ApplicationController
   end
 
   def strong_params_race_session
-    params.require(:race_session).permit(:title)
+    params.require(:race_session).permit(:title,:idle_time_in_seconds)
   end
 
   def strong_params_style_settings

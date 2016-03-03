@@ -34,14 +34,19 @@ Be sure to use the full size of your SD card on the Raspberry PI
 
     sudo raspi-config
 
-# Unstable / Testing Version 0.4 RC1
+# Important information
+
+The documentation for the project can be found in the [/docs](https://github.com/polyvision/EasyRaceLapTimer/tree/master/docs) directory.
+There's also a huge [RCGroups](http://www.rcgroups.com/forums/showthread.php?t=2538917) thread with lots of answered questions, images etc.
+
+# Unstable / Testing Version 0.5
 
 You can download a SD card image for the PI of EasyRaceLapTimer on the following pages:
 
 http://www.airbirds.de
 http://www.easyracelaptimer.com
 
-# Stable Version 0.3
+# Stable Version 0.4
 
 You can download a SD card image for the PI of EasyRaceLapTimer on the following pages:
 

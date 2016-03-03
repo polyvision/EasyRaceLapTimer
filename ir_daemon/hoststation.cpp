@@ -18,18 +18,33 @@
 #include "gpioreader.h"
 #include <curl/curl.h>
 #include "infoserver.h"
- #include <wiring_pi.h>
- #include "configuration.h"
+#include <wiring_pi.h>
+#include "configuration.h"
+#include <QMutexLocker>
 
 HostStation::HostStation(QObject *parent) : QObject(parent)
 {
     m_bDebug = false;
     m_bSatelliteMode = false;
+    m_strLastScannedToken = "none";
 
     m_bSatelliteMode = Configuration::instance()->satelliteMode();
     if(m_bSatelliteMode){
         LOG_INFOS(LOG_FACILTIY_COMMON, "HostStation:: started in satellite mode");
     }
+}
+
+void HostStation::setLastScannedToken(QString v){
+    QMutexLocker locker(&m_Mutex);
+    if(v.compare(m_strLastScannedToken) != 0){
+        m_strLastScannedToken = v;    
+    }
+	
+}
+
+QString HostStation::lastScannedToken(){
+    QMutexLocker locker(&m_Mutex);
+	return m_strLastScannedToken;
 }
 
 void HostStation::setDebug(bool v){
