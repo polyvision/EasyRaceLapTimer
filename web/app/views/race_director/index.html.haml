@@ -1,0 +1,53 @@
+%h1
+  Race Director
+
+.row
+  .col-xs-3
+    %h2
+      Last Scanned ID
+    %h3
+      #last_scanned_token
+  .col-xs-3
+    %h2
+      Current Race
+    %h3
+      -if @current_race_session
+        = @current_race_session.title
+        %p
+          .small
+            = @current_race_session.mode
+            |
+            %span#lap_count
+              Laps 0
+  .col-xs-6
+    %h2
+      Last Lap Times
+    #lap_overview
+      -#= render partial: 'lap_times'
+
+.row
+  .col-xs-12
+    %h2
+      Soundeffects
+    - @custom_soundfiles.each do |soundfile|
+      =link_to(url_for(action: 'play_custom', controller: 'api/v1/sound', id: soundfile.id),{remote: true, class: 'btn btn-primary'}) do
+        .span.glyphicon.glyphicon-play
+        = soundfile.title
+
+%hr
+= render file: '/shared/_panel_race_session_control'
+
+:javascript
+  setInterval(function() {
+    $.getJSON( "/api/v1/monitor", function( data ) {
+      $("#lap_count").html("Laps " + data['session']['current_lap_count']);
+    });
+
+    $.get( "/race_director/lap_times", function( data ) {
+      $("#lap_overview").html(data);
+    });
+
+    $.get( "/api/v1/info/last_scanned_token", function( data ) {
+      $("#last_scanned_token").html(data);
+    });
+  },2000);

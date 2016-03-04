@@ -25,6 +25,9 @@ gem 'axlsx', '~> 2.0.1'
 gem 'axlsx_rails'
 gem 'wicked_pdf'
 gem 'sidekiq'
+gem 'sinatra', :require => nil
+gem 'whenever'
+gem 'redis-namespace'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -47,14 +50,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-end
-
-group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   gem 'rspec-rails', '~> 3.0'
   gem 'timecop'
   gem 'database_cleaner'
+  gem 'capybara'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end

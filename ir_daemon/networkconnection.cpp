@@ -15,15 +15,31 @@
 NetworkConnection::NetworkConnection(QTcpSocket *socket,QObject *parent) : QObject(parent)
 {
     this->m_pSocketConnection = socket;
-    connect(m_pSocketConnection, SIGNAL(disconnected()),this, SLOT(deleteLater()));
+    connect(m_pSocketConnection, SIGNAL(disconnected()),this, SLOT(disconnected()));
     connect(m_pSocketConnection,SIGNAL(readyRead()),this,SLOT(readyRead()));
 }
 
+NetworkConnection::~NetworkConnection(){
+    delete m_pSocketConnection;
+}
+
 void NetworkConnection::readyRead(){
-    if(this->m_pSocketConnection->canReadLine()){
+    if(this->m_pSocketConnection != NULL && this->m_pSocketConnection->canReadLine()){
         QString data = m_pSocketConnection->readAll();
 
         data = data.replace("\n","").replace("\r","");
         emit incommingCommand(data);
     }
+}
+
+void NetworkConnection::write(QString data){
+	if(m_pSocketConnection->state() == QAbstractSocket::ConnectedState){
+		m_pSocketConnection->write(data.toLocal8Bit());
+    	m_pSocketConnection->flush();
+    	m_pSocketConnection->waitForBytesWritten(1000);
+	}
+}
+
+void NetworkConnection::disconnected(){
+    emit disconnectedSignal(this);
 }

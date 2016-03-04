@@ -11,6 +11,7 @@
  **/
 #include "infoserver.h"
 #include "logger.h"
+#include "hoststation.h"
 
 InfoServer::InfoServer() : QObject(0)
 {
@@ -21,15 +22,28 @@ InfoServer::InfoServer() : QObject(0)
 }
 
 void InfoServer::newConnection(){
-	this->m_pClientConnections.append(this->m_pTcpServer->nextPendingConnection());
+	
+	NetworkConnection *clientConnection = new NetworkConnection(this->m_pTcpServer->nextPendingConnection(),this);
+    connect(clientConnection, SIGNAL(incommingCommand(QString)), this, SLOT(incommingCommand(QString)));
+    connect(clientConnection, SIGNAL(disconnectedSignal(NetworkConnection*)),this, SLOT(disconnectedClient(NetworkConnection*)));
+
+	this->m_pClientConnections.append(clientConnection);
 }
 
 void InfoServer::broadcastMessage(QString msg){
 	for (int i = 0; i < this->m_pClientConnections.size(); ++i) {
-		if(m_pClientConnections[i]->state() == QAbstractSocket::ConnectedState){
-			m_pClientConnections[i]->write(QString("%1#\n").arg(msg).toLocal8Bit());
-    		m_pClientConnections[i]->flush();
-    		m_pClientConnections[i]->waitForBytesWritten(1000);
-		}
+		m_pClientConnections[i]->write(QString("%1#\n").arg(msg));
 	}
+}
+
+void InfoServer::incommingCommand(QString data){
+    if(data.compare("LAST_SCANNED_TOKEN#") == 0){
+        this->broadcastMessage(QString("%1").arg(HostStation::instance()->lastScannedToken()));
+        return;
+    }
+}
+
+void InfoServer::disconnectedClient(NetworkConnection* client){
+	this->m_pClientConnections.removeOne(client);
+	delete client;
 }

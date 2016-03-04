@@ -1,6 +1,7 @@
 class System::SoundfileController < SystemController
   def index
     @soundfiles = Soundfile.all
+    @custom_soundfiles = CustomSoundfile.order("title ASC")
   end
 
   def update
@@ -14,5 +15,29 @@ class System::SoundfileController < SystemController
     @soundfile.remove_file!
     @soundfile.save
     redirect_to action: 'index'
+  end
+
+  def create_custom
+    @soundfile = CustomSoundfile.create(strong_params_custom_soundfile)
+    @soundfile.save!
+    redirect_to action: 'index'
+  end
+
+  def delete_custom
+    @soundfile = CustomSoundfile.find(params[:id])
+    @soundfile.destroy
+    redirect_to action: 'index'
+  end
+
+  def change_volume
+    load "#{Rails.root}/lib/alsa_mixer.rb"
+    AlsaMixer::change_volume(params[:vol])
+    redirect_to action: 'index'
+  end
+
+  private
+
+  def strong_params_custom_soundfile
+    params.require(:custom_soundfile).permit(:title,:file)
   end
 end

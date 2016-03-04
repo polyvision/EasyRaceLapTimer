@@ -22,7 +22,7 @@ var RaceSessionCompetitionDialogEntryComponent = require('../components/race_ses
 
 var RaceSessionCompetitionDialogComponent = React.createClass({
   getInitialState: function(){
-      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition",num_satellites: 0, time_penalty_per_satellite: 2500,hot_seat_enabled: false};
+      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition",num_satellites: 0, time_penalty_per_satellite: 2500,hot_seat_enabled: false,idle_time_in_seconds:0 };
   },
 
   componentDidMount: function(){
@@ -81,6 +81,10 @@ var RaceSessionCompetitionDialogComponent = React.createClass({
     this.setState({max_laps: e.target.value});
   },
 
+  _changeIdleTimeInSeconds: function(e){
+    this.setState({idle_time_in_seconds: e.target.value});
+  },
+
   _changeTitle: function(e){
     this.setState({title: e.target.value});
   },
@@ -103,7 +107,7 @@ var RaceSessionCompetitionDialogComponent = React.createClass({
     if(this._pilotValidateUniqueTokens() == false){
       alert("transponder tokens must be unique, please change them!");
     }else{
-        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.num_satellites,this.state.time_penalty_per_satellite,this.state.pilots_listing,this.state.hot_seat_enabled);
+        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.num_satellites,this.state.time_penalty_per_satellite,this.state.pilots_listing,this.state.hot_seat_enabled,this.state.idle_time_in_seconds);
     }
 
   },
@@ -176,7 +180,13 @@ var RaceSessionCompetitionDialogComponent = React.createClass({
         </div>
         <div className="form-group">
           <label>Hot seat enabled:</label>
+          <span className="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="Everyone can attend this race. You don't need to explicitly set the pilots attending to this race."></span>
           <input className="form-control" type="checkbox" onClick={this._changeHotSeatEnabled} checked={this.state.hot_seat_enabled} required={true}></input>
+        </div>
+        <div className="form-group">
+          <label>Idle time:</label>
+          <span className="glyphicon glyphicon-question-sign" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="After X seconds of no tracked lap, the race will finish automaticly. As soon as a new lap gets tracked, the system will autostart a new race. Enter 0 will ignore this option."></span>
+          <input className="form-control" type="text" onChange={this._changeIdleTimeInSeconds} value={this.state.idle_time_in_seconds} required={true}></input>
         </div>
         <table className="table table-striped">
           <thead>

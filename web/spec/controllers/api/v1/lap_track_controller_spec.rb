@@ -88,6 +88,9 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
     end
 
     it "simulate a race in competition mode" ,:type => :request do
+      RaceLapAnnouncerWorker.drain
+      RacePilotPlacementAnnouncerWorker.drain
+      
       ConfigValue::set_value("time_between_lap_track_requests_in_seconds",4)
       ConfigValue::set_value("lap_max_lap_time_in_seconds",60)
 
@@ -116,10 +119,18 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       # first round
       post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
       expect(response.status).to eq 200
+      assert_equal 1, RaceLapAnnouncerWorker.jobs.size # should play a sound file
+      RaceLapAnnouncerWorker.drain
+
       post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
       expect(response.status).to eq 200
+      assert_equal 1, RaceLapAnnouncerWorker.jobs.size # should play a sound file
+      RaceLapAnnouncerWorker.drain
+
       post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 12000
       expect(response.status).to eq 200
+      assert_equal 1, RaceLapAnnouncerWorker.jobs.size # should play a sound file
+      RaceLapAnnouncerWorker.drain
 
       open_race_session.reload
       expect(open_race_session.pilot_race_laps.count).to eq(3)
@@ -143,12 +154,17 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       Timecop.travel(Time.now + 11.seconds)
       post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 10000
       expect(response.status).to eq 200
+      assert_equal 1, RaceLapAnnouncerWorker.jobs.size # should play a sound file
 
       post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 10000
       expect(response.status).to eq 200
+      assert_equal 2, RaceLapAnnouncerWorker.jobs.size # should play a sound file
 
       post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 13000
       expect(response.status).to eq 200
+      assert_equal 3, RaceLapAnnouncerWorker.jobs.size # should play a sound file
+      RaceLapAnnouncerWorker.drain
+      assert_equal 0, RaceLapAnnouncerWorker.jobs.size # should play a sound file
 
       open_race_session.reload
       expect(open_race_session.pilot_race_laps.count).to eq(6)
@@ -165,12 +181,18 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       Timecop.travel(Time.now + 11.seconds)
       post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 14000
       expect(response.status).to eq 200
+      assert_equal 1, RacePilotPlacementAnnouncerWorker.jobs.size # should play a finsihed race sound file
+      RacePilotPlacementAnnouncerWorker.drain
 
       post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 12000
       expect(response.status).to eq 200
+      assert_equal 1, RacePilotPlacementAnnouncerWorker.jobs.size # should play a finsihed race sound file
+      RacePilotPlacementAnnouncerWorker.drain
 
       post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
       expect(response.status).to eq 200
+      assert_equal 1, RacePilotPlacementAnnouncerWorker.jobs.size # should play a finsihed race sound file
+      RacePilotPlacementAnnouncerWorker.drain
 
       get '/api/v1/monitor'
       expect(response.status).to eq 200

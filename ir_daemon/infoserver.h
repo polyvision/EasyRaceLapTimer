@@ -17,6 +17,7 @@
 #include <QTcpServer>
 #include <QList>
 #include "singleton.h"
+#include "networkconnection.h"
 
 class InfoServer: public QObject,public Singleton<InfoServer> {
     Q_OBJECT
@@ -27,10 +28,12 @@ public:
 
 public Q_SLOTS:
     void newConnection();
+    void incommingCommand(QString);
+    void disconnectedClient(NetworkConnection*);
 
 private:
     QTcpServer *m_pTcpServer;
-    QList<QTcpSocket*>m_pClientConnections;
+    QList<NetworkConnection*>m_pClientConnections;
 
     friend class Singleton<InfoServer>;
 };
