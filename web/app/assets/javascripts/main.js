@@ -86,7 +86,7 @@
 
 	var RaceSessionCompetitionDialogComponent = React.createClass({displayName: "RaceSessionCompetitionDialogComponent",
 	  getInitialState: function(){
-	      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition",num_satellites: 0, time_penalty_per_satellite: 2500,hot_seat_enabled: false};
+	      return {pilots_data: [],pilots_listing: [], max_laps: 4, title: "Competition",num_satellites: 0, time_penalty_per_satellite: 2500,hot_seat_enabled: false,idle_time_in_seconds:0 };
 	  },
 
 	  componentDidMount: function(){
@@ -145,6 +145,10 @@
 	    this.setState({max_laps: e.target.value});
 	  },
 
+	  _changeIdleTimeInSeconds: function(e){
+	    this.setState({idle_time_in_seconds: e.target.value});
+	  },
+
 	  _changeTitle: function(e){
 	    this.setState({title: e.target.value});
 	  },
@@ -167,7 +171,7 @@
 	    if(this._pilotValidateUniqueTokens() == false){
 	      alert("transponder tokens must be unique, please change them!");
 	    }else{
-	        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.num_satellites,this.state.time_penalty_per_satellite,this.state.pilots_listing,this.state.hot_seat_enabled);
+	        RaceSessionActions.createCompetition(this.state.title,this.state.max_laps,this.state.num_satellites,this.state.time_penalty_per_satellite,this.state.pilots_listing,this.state.hot_seat_enabled,this.state.idle_time_in_seconds);
 	    }
 
 	  },
@@ -240,7 +244,13 @@
 	        ), 
 	        React.createElement("div", {className: "form-group"}, 
 	          React.createElement("label", null, "Hot seat enabled:"), 
+	          React.createElement("span", {className: "glyphicon glyphicon-question-sign", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "right", title: "Everyone can attend this race. You don't need to explicitly set the pilots attending to this race."}), 
 	          React.createElement("input", {className: "form-control", type: "checkbox", onClick: this._changeHotSeatEnabled, checked: this.state.hot_seat_enabled, required: true})
+	        ), 
+	        React.createElement("div", {className: "form-group"}, 
+	          React.createElement("label", null, "Idle time:"), 
+	          React.createElement("span", {className: "glyphicon glyphicon-question-sign", "aria-hidden": "true", "data-toggle": "tooltip", "data-placement": "right", title: "After X seconds of no tracked lap, the race will finish automaticly. As soon as a new lap gets tracked, the system will autostart a new race. Enter 0 will ignore this option."}), 
+	          React.createElement("input", {className: "form-control", type: "text", onChange: this._changeIdleTimeInSeconds, value: this.state.idle_time_in_seconds, required: true})
 	        ), 
 	        React.createElement("table", {className: "table table-striped"}, 
 	          React.createElement("thead", null, 
@@ -1283,7 +1293,7 @@
 	 * will remain to ensure logic does not differ in production.
 	 */
 
-	var invariant = function invariant(condition, format, a, b, c, d, e, f) {
+	function invariant(condition, format, a, b, c, d, e, f) {
 	  if (process.env.NODE_ENV !== 'production') {
 	    if (format === undefined) {
 	      throw new Error('invariant requires an error message argument');
@@ -1297,15 +1307,16 @@
 	    } else {
 	      var args = [a, b, c, d, e, f];
 	      var argIndex = 0;
-	      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
+	      error = new Error(format.replace(/%s/g, function () {
 	        return args[argIndex++];
 	      }));
+	      error.name = 'Invariant Violation';
 	    }
 
 	    error.framesToPop = 1; // we don't care about invariant's own frame
 	    throw error;
 	  }
-	};
+	}
 
 	module.exports = invariant;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
@@ -9524,6 +9535,7 @@
 	 */
 	var EventInterface = {
 	  type: null,
+	  target: null,
 	  // currentTarget is set when dispatching; no use in copying it here
 	  currentTarget: emptyFunction.thatReturnsNull,
 	  eventPhase: null,
@@ -9557,8 +9569,6 @@
 	  this.dispatchConfig = dispatchConfig;
 	  this.dispatchMarker = dispatchMarker;
 	  this.nativeEvent = nativeEvent;
-	  this.target = nativeEventTarget;
-	  this.currentTarget = nativeEventTarget;
 
 	  var Interface = this.constructor.Interface;
 	  for (var propName in Interface) {
@@ -9569,7 +9579,11 @@
 	    if (normalize) {
 	      this[propName] = normalize(nativeEvent);
 	    } else {
-	      this[propName] = nativeEvent[propName];
+	      if (propName === 'target') {
+	        this.target = nativeEventTarget;
+	      } else {
+	        this[propName] = nativeEvent[propName];
+	      }
 	    }
 	  }
 
@@ -10732,8 +10746,8 @@
 	     */
 	    // autoCapitalize and autoCorrect are supported in Mobile Safari for
 	    // keyboard hints.
-	    autoCapitalize: null,
-	    autoCorrect: null,
+	    autoCapitalize: MUST_USE_ATTRIBUTE,
+	    autoCorrect: MUST_USE_ATTRIBUTE,
 	    // autoSave allows WebKit/Blink to persist values of input fields on page reloads
 	    autoSave: null,
 	    // color is for Safari mask-icon link
@@ -10764,9 +10778,7 @@
 	    httpEquiv: 'http-equiv'
 	  },
 	  DOMPropertyNames: {
-	    autoCapitalize: 'autocapitalize',
 	    autoComplete: 'autocomplete',
-	    autoCorrect: 'autocorrect',
 	    autoFocus: 'autofocus',
 	    autoPlay: 'autoplay',
 	    autoSave: 'autosave',
@@ -13420,7 +13432,10 @@
 	      }
 	    });
 
-	    nativeProps.children = content;
+	    if (content) {
+	      nativeProps.children = content;
+	    }
+
 	    return nativeProps;
 	  }
 
@@ -13845,7 +13860,7 @@
 	    var value = LinkedValueUtils.getValue(props);
 
 	    if (value != null) {
-	      updateOptions(this, props, value);
+	      updateOptions(this, Boolean(props.multiple), value);
 	    }
 	  }
 	}
@@ -16880,11 +16895,14 @@
 	 * @typechecks
 	 */
 
+	/* eslint-disable fb-www/typeof-undefined */
+
 	/**
 	 * Same as document.activeElement but wraps in a try-catch block. In IE it is
 	 * not safe to call document.activeElement if there is nothing focused.
 	 *
-	 * The activeElement will be null only if the document or document body is not yet defined.
+	 * The activeElement will be null only if the document or document body is not
+	 * yet defined.
 	 */
 	'use strict';
 
@@ -16892,7 +16910,6 @@
 	  if (typeof document === 'undefined') {
 	    return null;
 	  }
-
 	  try {
 	    return document.activeElement || document.body;
 	  } catch (e) {
@@ -18632,7 +18649,9 @@
 	  'setValueForProperty': 'update attribute',
 	  'setValueForAttribute': 'update attribute',
 	  'deleteValueForProperty': 'remove attribute',
-	  'dangerouslyReplaceNodeWithMarkupByID': 'replace'
+	  'setValueForStyles': 'update styles',
+	  'replaceNodeWithMarkup': 'replace',
+	  'updateTextContent': 'set textContent'
 	};
 
 	function getTotalTime(measurements) {
@@ -18824,18 +18843,23 @@
 	'use strict';
 
 	var performance = __webpack_require__(147);
-	var curPerformance = performance;
+
+	var performanceNow;
 
 	/**
 	 * Detect if we can use `window.performance.now()` and gracefully fallback to
 	 * `Date.now()` if it doesn't exist. We need to support Firefox < 15 for now
 	 * because of Facebook's testing infrastructure.
 	 */
-	if (!curPerformance || !curPerformance.now) {
-	  curPerformance = Date;
+	if (performance.now) {
+	  performanceNow = function () {
+	    return performance.now();
+	  };
+	} else {
+	  performanceNow = function () {
+	    return Date.now();
+	  };
 	}
-
-	var performanceNow = curPerformance.now.bind(curPerformance);
 
 	module.exports = performanceNow;
 
@@ -18884,7 +18908,7 @@
 
 	'use strict';
 
-	module.exports = '0.14.3';
+	module.exports = '0.14.7';
 
 /***/ },
 /* 149 */
@@ -22834,26 +22858,15 @@
 
 	Request.prototype.attach = function (field, file, filename) {
 	  if (!this._formData) this._formData = new root.FormData();
-	  this._formData.append(field, file, filename);
+	  this._formData.append(field, file, filename || file.name);
 	  return this;
 	};
 
 	/**
-	 * Send `data`, defaulting the `.type()` to "json" when
+	 * Send `data` as the request body, defaulting the `.type()` to "json" when
 	 * an object is given.
 	 *
 	 * Examples:
-	 *
-	 *       // querystring
-	 *       request.get('/search')
-	 *         .end(callback)
-	 *
-	 *       // multiple data "writes"
-	 *       request.get('/search')
-	 *         .send({ search: 'query' })
-	 *         .send({ range: '1..5' })
-	 *         .send({ order: 'desc' })
-	 *         .end(callback)
 	 *
 	 *       // manual json
 	 *       request.post('/user')
@@ -23021,6 +23034,7 @@
 	    if (e.total > 0) {
 	      e.percent = e.loaded / e.total * 100;
 	    }
+	    e.direction = 'download';
 	    self.emit('progress', e);
 	  };
 	  if (this.hasListeners('progress')) {
@@ -23179,7 +23193,7 @@
 	  return req;
 	};
 
-	request.del = del;
+	request['del'] = del;
 	request['delete'] = del;
 
 	/**
@@ -23251,7 +23265,7 @@
 	 * Expose `Emitter`.
 	 */
 
-	"use strict";
+	'use strict';
 
 	module.exports = Emitter;
 
@@ -23291,7 +23305,7 @@
 
 	Emitter.prototype.on = Emitter.prototype.addEventListener = function (event, fn) {
 	  this._callbacks = this._callbacks || {};
-	  (this._callbacks[event] = this._callbacks[event] || []).push(fn);
+	  (this._callbacks['$' + event] = this._callbacks['$' + event] || []).push(fn);
 	  return this;
 	};
 
@@ -23306,11 +23320,8 @@
 	 */
 
 	Emitter.prototype.once = function (event, fn) {
-	  var self = this;
-	  this._callbacks = this._callbacks || {};
-
 	  function on() {
-	    self.off(event, on);
+	    this.off(event, on);
 	    fn.apply(this, arguments);
 	  }
 
@@ -23339,12 +23350,12 @@
 	  }
 
 	  // specific event
-	  var callbacks = this._callbacks[event];
+	  var callbacks = this._callbacks['$' + event];
 	  if (!callbacks) return this;
 
 	  // remove all handlers
 	  if (1 == arguments.length) {
-	    delete this._callbacks[event];
+	    delete this._callbacks['$' + event];
 	    return this;
 	  }
 
@@ -23371,7 +23382,7 @@
 	Emitter.prototype.emit = function (event) {
 	  this._callbacks = this._callbacks || {};
 	  var args = [].slice.call(arguments, 1),
-	      callbacks = this._callbacks[event];
+	      callbacks = this._callbacks['$' + event];
 
 	  if (callbacks) {
 	    callbacks = callbacks.slice(0);
@@ -23393,7 +23404,7 @@
 
 	Emitter.prototype.listeners = function (event) {
 	  this._callbacks = this._callbacks || {};
-	  return this._callbacks[event] || [];
+	  return this._callbacks['$' + event] || [];
 	};
 
 	/**
@@ -23530,7 +23541,7 @@
 
 	  _createClass(RaceSessionActions, [{
 	    key: 'createCompetition',
-	    value: function createCompetition(title, max_laps, num_satellites, time_penalty_per_satellite, pilot_data, hot_seat_enabled) {
+	    value: function createCompetition(title, max_laps, num_satellites, time_penalty_per_satellite, pilot_data, hot_seat_enabled, idle_time_in_seconds) {
 	      // transforming pilot data in correct post data
 	      var pilot_post_data = [];
 	      for (var i = 0; i < pilot_data.length; i++) {
@@ -23538,7 +23549,7 @@
 	      }
 
 	      var self = this;
-	      RaceSessionAPI.createCompetition(title, max_laps, num_satellites, time_penalty_per_satellite, pilot_post_data, hot_seat_enabled, function (err, result) {
+	      RaceSessionAPI.createCompetition(title, max_laps, num_satellites, time_penalty_per_satellite, pilot_post_data, hot_seat_enabled, idle_time_in_seconds, function (err, result) {
 	        if (!err) {
 	          self.dispatch(result.body);
 	        }
@@ -23573,9 +23584,9 @@
 	var RaceSessionApi = {};
 
 	// retrieves a list of all pilots
-	RaceSessionApi.createCompetition = function (title, max_laps, num_satellites, time_penalty_per_satellite, pilot_data, hot_seat_enabled, callback) {
+	RaceSessionApi.createCompetition = function (title, max_laps, num_satellites, time_penalty_per_satellite, pilot_data, hot_seat_enabled, idle_time_in_seconds, callback) {
 
-	  request.post("/api/v1/race_session/new_competition").send("data=" + JSON.stringify({ "title": title, "max_laps": max_laps, "pilots": pilot_data, "num_satellites": num_satellites, "time_penalty_per_satellite": time_penalty_per_satellite, "hot_seat_enabled": hot_seat_enabled })).end(function (err, result) {
+	  request.post("/api/v1/race_session/new_competition").send("data=" + JSON.stringify({ "title": title, "max_laps": max_laps, "pilots": pilot_data, "num_satellites": num_satellites, "time_penalty_per_satellite": time_penalty_per_satellite, "hot_seat_enabled": hot_seat_enabled, "idle_time_in_seconds": idle_time_in_seconds })).end(function (err, result) {
 	    callback(err, result);
 	  });
 	};

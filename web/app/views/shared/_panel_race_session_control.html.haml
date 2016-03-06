@@ -24,6 +24,9 @@
                 %label{:for => "exampleInputName2"}
                   Hot seat:
                 = RaceSession::get_open_session.hot_seat_enabled
+                %label{:for => "exampleInputName2"}
+                  Idle Time:
+                = RaceSession::get_open_session.idle_time_in_seconds
           .row
             .col-xs-12
               = link_to(t('actions.stop_race_session'),{action: 'stop_race_session', controller: '/system'},{confirm: 'sure?',class: 'btn btn-danger btn-large'})
@@ -33,9 +36,12 @@
               = form_for(@race_session_prototype,url: {action: 'start_race_session',controller: '/system'},html: {class: 'form-inline'}) do |f|
                 .form-group
                   %label{:for => "exampleInputName2"}
-                    = t('pilot.name')
+                    = t('race_session.title')
                   = f.text_field(:title, placeholder: "Awesome race", class: 'form-control', required: true)
-
+                .form-group
+                  %label{:for => "exampleInputName2"}
+                    = t('race_session.idle_time_in_seconds')
+                  = f.text_field(:idle_time_in_seconds, placeholder: "60", class: 'form-control', required: true)
                 %button.btn.btn-success{:type => "submit"}
                   = t('actions.start_standard_race_session')
 .row
@@ -45,4 +51,7 @@
         %h2
           Competition Race
       .panel-body
-        = render file: '/system/_race_session_competition_modal'
+        - if RaceSession::get_open_session
+          = link_to(t('actions.stop_race_session'),{action: 'stop_race_session', controller: '/system'},{confirm: 'sure?',class: 'btn btn-danger btn-large'})
+        -else
+          = render file: '/system/_race_session_competition_modal'

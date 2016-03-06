@@ -21,7 +21,7 @@ body > .container-fluid{
 }
 a, a:link, a:visited{
   font-family: 'Oswald', sans-serif;
-  color: $primary;  
+  color: $primary;
 }
 a:hover, a:focus{
   color: darken($primary, 25%);
@@ -40,7 +40,7 @@ a:hover, a:focus{
   display: block;
   margin-left: -15px;
   padding: 10px;
-  background: $primary url(erltlogo.png) no-repeat right center;
+  background: $primary asset-url("erltlogo.png") no-repeat right center;
 }
 .navbar-default .navbar-brand{
   color: $primary;
@@ -93,7 +93,7 @@ a:hover, a:focus{
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
     background: $primary;
-    
+
     .icon-bar{
 	  background: #FFF;
 	}
@@ -125,7 +125,7 @@ a:hover, a:focus{
 }
 a.btn{
   color: #FFF;
-} 
+}
 .btn-default{
   background: $grey3;
   color: #FFF;
@@ -135,7 +135,7 @@ a.btn{
   color: #FFF;
 }
 .btn-primary:hover, .btn-primary:focus{
-	 background: $primary; 
+	 background: $primary;
 }
 .btn-warning {
     background: $primary;
@@ -151,7 +151,7 @@ textarea:focus, textarea.form-control:focus, input.form-control:focus, input[typ
 }
 label{
     line-height: 36px;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 
@@ -177,7 +177,7 @@ h1, .h1{
 }
 
 .panel-heading h2{
- margin-top: 5px; 
+ margin-top: 5px;
 }
 
 
@@ -219,7 +219,7 @@ footer {
   li {
     float: left;
     margin-right: 0;
-    
+
     a, a:link, a:visited {
   		background: $primary;
   		color: #FFF;
@@ -233,6 +233,3 @@ footer {
     margin-bottom: 0;
   }
 }
-
-
-

@@ -13,7 +13,7 @@
 
 You will need a solder pad for each transponder, on which you will solder everything on to.
 
-Have a look at datasheets/easy_race_lap_timer_transponder_attiny85_schematic.png to see how all these parts are getting soldered.
+Have a look at the [transponder datasheet](/datasheets/easy_race_lap_timer_transponder_attiny85_schematic.png) to see how all these parts are getting soldered.
 
 ## Programmer
 

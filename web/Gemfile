@@ -26,6 +26,8 @@ gem 'axlsx_rails'
 gem 'wicked_pdf'
 gem 'sidekiq'
 gem 'sinatra', :require => nil
+gem 'whenever'
+gem 'redis-namespace'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

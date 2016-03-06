@@ -7,7 +7,46 @@ class RaceSession < ActiveRecord::Base
   after_create :filter_reset_ir_daemon
 
   def self.get_open_session
-    return RaceSession.where(active: true).first
+    return  RaceSession.where(active: true).first
+  end
+
+  def self.get_session_from_previous
+    last_session =  RaceSession.where(active: true).first
+    # ok, nothing found, lets see if idle_time_in_seconds was greater than zero in the last race
+    # if yes it means we shall auto restart a new race
+    if !last_session
+      last_session = RaceSession.order("created_at DESC").first
+      if last_session && last_session.idle_time_in_seconds > 0
+        return RaceSession::clone_race_session(last_session)
+      end
+    end
+
+    return nil
+  end
+
+  def self.clone_race_session(src_session)
+    new_session = RaceSession.new
+    new_session.title = src_session.title
+    new_session.active = true
+    new_session.mode = src_session.mode
+    new_session.max_laps = src_session.max_laps
+    new_session.num_satellites = src_session.num_satellites
+    new_session.time_penalty_per_satellite = src_session.time_penalty_per_satellite
+    new_session.hot_seat_enabled = src_session.hot_seat_enabled
+    new_session.idle_time_in_seconds = src_session.idle_time_in_seconds
+
+    new_session.save!
+    new_session.update_attribute(:title,new_session.title) # a better naming ...
+
+    if new_session.mode == "competition" # we need to clone the pilots also
+      src_session.race_attendees.each do |p|
+        new_attendee = p.class.new(p.attributes)
+        new_attendee.id = nil
+        new_attendee.race_session_id = new_session.id
+        new_attendee.save!
+      end
+    end
+    return new_session
   end
 
   def self.stop_open_session
@@ -56,6 +95,15 @@ class RaceSession < ActiveRecord::Base
       self.pilot_race_laps.sum(:lap_time) / self.pilot_race_laps.count
     rescue Exception => ex
       return 0
+    end
+  end
+
+  # returns the last tracked lap time creation date, used for idle time of a race
+  def last_created_at_of_tracked_lap
+    if self.pilot_race_laps.last
+      return self.pilot_race_laps.last.created_at
+    else
+      return self.created_at
     end
   end
 

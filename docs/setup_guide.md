@@ -42,7 +42,7 @@ a web API.
 To build it, perform the following steps:
 
     cd ~/EasyRaceLapTimer/ir_daemon
-    sudo apt-get install  qt5-default libcurl4-openssl-dev libudev-dev
+    sudo apt-get install  qt5-default libcurl4-openssl-dev libudev-dev wiringpi
     qmake ir_daemon.pro
     make
     sudo ./ir_daemon --use_standard_gpio_sensor_pins
