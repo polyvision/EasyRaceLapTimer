@@ -1,3 +1,9 @@
+version 0.5.1
+
+* added autorestart of race sessions via idle time
+* added transmitter code 0.3.1
+* bug fixing
+
 version 0.4b2
 
 * webview monitor updates itself all 2 seconds

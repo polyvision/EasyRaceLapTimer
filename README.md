@@ -13,6 +13,7 @@ What you get with EasyRaceLaptimer:
 * host system for tracking the laps
 * IR transponders (code & schematic files for building them) with a transmitting range of 2 to 4 meters
 * 63 available transponder IDs when using the project transponders
+* changing the ID via a push button on the transponder, no additional programming required (started with version 0.3.1 of the transponders)
 * update transponders with new code (Arduino hardware needed)
 * setup guide for building your Raspberry PI host station
 * the host station is also a WiFi access point to change configs etc on the fly
@@ -24,6 +25,7 @@ What you get with EasyRaceLaptimer:
 * export race events to PDF
 * standard practice/ time trial mode
 * competition mode for racing events with time penalties (satellites needed)
+* automatic restarting of a race session after a specified idle time
 * and much more comming soon
 
 **Important notices**

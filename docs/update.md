@@ -3,7 +3,14 @@
 Instructions for updating to the next stable version. After updating the system, you need to restart the Raspberry PI.
 
 # updating to 0.5
+    cd ~/EasyRaceLapTimer
+    git pull origin master
 
+    cd ~/EasyRaceLapTimer/web
+    bundle
+    RAILS_ENV=production rake db:migrate
+    RAILS_ENV=production rake assets:precompile
+    
 # updating from v0.3 to v0.4
 
     sudo apt-get install redis-server
