@@ -1,10 +1,10 @@
-To use, you will need the Perl module Linux::IRPulses.  Start by installing cpanm:
+To use, you will some Perl dependencies.  Start by installing cpanm:
 
   apt-get install cpanminus
 
-Then use that to install the module:
+Then, from the ir_daemon_v2/ directory, do:
 
-  cpanm Linux::IRPulses
+  cpanm --installdeps .
 
 You will also need to setup LIRC.  See:
 

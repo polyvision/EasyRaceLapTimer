@@ -37,14 +37,14 @@ Getopt::Long::GetOptions(
 );
 
 
-open( my $IN, '-|', $MODE2_PATH, '-d ' . $DEV ) or die "Can't open $MODE2_PATH: $!\n";
+open( my $IN, '-|', $MODE2_PATH, '-d', $DEV ) or die "Can't open $MODE2_PATH: $!\n";
 
 sub code_callback
 {
     my ($args) = @_;
     my $code = $args->{code};
     my $checksum = $code & 1;
-    my $id_value = $code >> 1;
+    my $id_value = 0x7F & ($code >> 1);
 
     my $one_bit_count = 0;
     my $id_check = $id_value;
@@ -54,8 +54,9 @@ sub code_callback
         $id_check >>= 1;
     }
 
-    if( $one_bit_count != $checksum ) {
-        warn "Checksum for value $id_value was supposed to be $one_bit_count,"
+    my $is_even = (($one_bit_count % 2) == 0) ? 1 : 0;
+    if( $is_even != $checksum ) {
+        warn "Checksum for value $id_value was supposed to be $is_even,"
             . " but it's $checksum, ignoring\n";
         return;
     }
@@ -78,8 +79,10 @@ my $pulse = Linux::IRPulses->new({
     zero => [ pulse_or_space 300 ],
     one => [ pulse_or_space 600 ],
     bit_count => 7,
+    tolerance => 0.40,
     callback => \&code_callback,
 });
+warn "Reading codes . . . \n";
 $pulse->run;
 
 close $IN;

@@ -24,9 +24,10 @@
 # POSSIBILITY OF SUCH DAMAGE.
 use v5.14;
 use warnings;
-use Linux::IRPulses;
+use IO::Async::Loop;
+use IO::Async::Stream;
+use IO::Async::Timer::Countdown;
 use Getopt::Long;
-use Time::HiRes qw{ tv_interval gettimeofday };
 use HiPi::Wiring qw( :wiring );
 
 
@@ -47,33 +48,35 @@ Getopt::Long::GetOptions(
 );
 
 my $LAST_TOKEN = '';
-my $BUZZER_START_TIME = 0;
+my $LOOP;
 
 
-sub loop
+sub handle_incoming_code
 {
-    my ($codes_in) = @_;
+    my ($io_async, $bufref, $eof) = @_;
 
-    my $continue = 1;
-    while( $continue ) {
-        if( is_data_available( $codes_in ) ) {
-            my $line = <$codes_in>;
-            chomp $line;
-            say $line;
-            set_last_token( $line );
-            start_buzzer();
-        }
-        if( is_data_available( \*STDIN ) ) {
-            my $line = <>;
-            chomp $line;
-            do_command( $line );
-        }
-        if( is_buzzer_time_up() ) {
-            stop_buzzer();
-        }
+    warn "Got buf: $$bufref\n";
+    while( my ($line) = $$bufref =~ s/\A (.*?) \n//x ) {
+        chomp $line;
+        say $line;
+        set_last_token( $line );
+        start_buzzer();
     }
 
-    return;
+    return 1;
+}
+
+sub handle_incoming_command
+{
+    my ($io_async, $bufref, $eof) = @_;
+    # TODO
+
+    while( my ($line) = $$bufref =~ s/\A (.*?) \n//x ) {
+        chomp $line;
+        do_command( $line );
+    }
+
+    return 1;
 }
 
 sub do_command
@@ -93,23 +96,8 @@ sub do_command
         say $LAST_TOKEN;
     }
 
+    print "> ";
     return;
-}
-
-sub is_data_available
-{
-    my ($fh) = @_;
-    # From http://www.perlmonks.org/?node_id=55249
-    my $rfd = '';
-    vec ($rfd, fileno($fh), 1) = 1;
-
-    if( select ($rfd, undef, undef, 0) >= 0
-        && vec($rfd, fileno($fh), 1)
-    ) {
-        return 1;
-    }
-
-    return 0;
 }
 
 sub set_last_token
@@ -121,16 +109,16 @@ sub set_last_token
     return;
 }
 
-sub is_buzzer_time_up
-{
-    my $elapsed = tv_interval( $BUZZER_START_TIME, [gettimeofday] );
-    return ( $elapsed > $BUZZER_ON_SEC ) ? 1 : 0;
-}
-
 sub start_buzzer
 {
-    $BUZZER_START_TIME = [gettimeofday];
     HiPi::Wiring::digitalWrite( $BUZZER_PIN, 1 );
+
+    my $timer = IO::Async::Timer::Countdown->new(
+        delay => $BUZZER_ON_SEC,
+        on_expire => \&stop_buzzer,
+    );
+    $LOOP->add( $timer );
+
     return;
 }
 
@@ -145,8 +133,24 @@ sub stop_buzzer
     HiPi::Wiring::wiringPiSetup();
     HiPi::Wiring::pinMode( $BUZZER_PIN, WPI_OUTPUT );
 
-    open( my $CODES_IN, '-|', $READ_CODES_PATH, "--mode2=$MODE2_PATH", "--dev=$DEV" )
+    $LOOP = IO::Async::Loop->new;
+
+    open( my $CODES_IN, '-|', 'perl', $READ_CODES_PATH,
+        "--mode2=$MODE2_PATH", "--dev=$DEV" )
         or die "Can't open $READ_CODES_PATH: $!\n";
-    loop( $CODES_IN );
+    my $codes_stream = IO::Async::Stream->new(
+        read_handle => $CODES_IN,
+        on_read => \&handle_incoming_code,
+    );
+    my $stdin_stream = IO::Async::Stream->new(
+        read_handle => \*STDIN,
+        on_read => \&handle_incoming_command,
+    );
+
+    print "> ";
+
+    $LOOP->add( $_ ) for $codes_stream, $stdin_stream;
+    $LOOP->run;
+
     close $CODES_IN;
 }
