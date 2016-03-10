@@ -26,6 +26,8 @@ use v5.14;
 use warnings;
 use Linux::IRPulses;
 use Getopt::Long;
+use IO::Async::Loop;
+use IO::Async::Stream;
 use Time::HiRes 'gettimeofday';
 
 
@@ -92,7 +94,25 @@ my $pulse = Linux::IRPulses->new({
     tolerance => 0.40,
     callback => \&code_callback,
 });
+my $loop = IO::Async::Loop->new;
+
+my $handle = IO::Async::Stream->new(
+    read_handle => $IN,
+    on_read => sub {
+        my ($self, $bufref, $eof) = @_;
+
+        while( $$bufref =~ s/^(.*\n)//x ) {
+            my $line = $1;
+            chomp $line;
+            $pulse->handle_line( $line );
+        }
+
+        return 1;
+    },
+);
+$loop->add( $handle );
+
 warn "Reading codes . . . \n";
-$pulse->run;
+$loop->run;
 
 close $IN;

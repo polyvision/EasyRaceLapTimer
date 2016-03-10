@@ -29,42 +29,88 @@ use IO::Async::Stream;
 use IO::Async::Timer::Countdown;
 use Getopt::Long;
 use HiPi::Wiring qw( :wiring );
+use Linux::IRPulses;
+use Time::HiRes 'gettimeofday';
 
 
 my $MODE2_PATH = '/usr/bin/mode2';
 my $DEV = '/dev/lirc0';
-my $READ_CODES_PATH = 'read_codes.pl';
 my $BUZZER_PIN = 21;
 my $BUZZER_ON_SEC = 1;
 my $SATELLITE_MODE = 0;
 my $WEB_HOST = 'http://localhost';
+my $IGNORE_DUP_SEC = 5;
 Getopt::Long::GetOptions(
     'mode2=s' => \$MODE2_PATH,
     'dev=s' => \$DEV,
-    'read_codes_path=s' => \$READ_CODES_PATH,
     'set_buzzer_pin=i' => \$BUZZER_PIN,
     'enable_satellite_mode' => \$SATELLITE_MODE,
     'set_web_host=s' => \$WEB_HOST,
+    'ignore_dup_code_sec=i' => \$IGNORE_DUP_SEC,
 );
 
 my $LAST_TOKEN = '';
 my $LOOP;
+my $PULSE;
+my %SAW_CODE_AT;
 
 
 sub handle_incoming_code
 {
     my ($io_async, $bufref, $eof) = @_;
 
-    warn "Got buf: $$bufref\n";
-    while( my ($line) = $$bufref =~ s/\A (.*?) \n//x ) {
+    while( $$bufref =~ s/^(.*\n)//x ) {
+        my $line = $1;
         chomp $line;
-        say $line;
-        set_last_token( $line );
-        start_buzzer();
+        $PULSE->handle_line( $line );
     }
 
     return 1;
 }
+
+sub code_callback
+{
+    my ($args) = @_;
+    my $code = $args->{code};
+    my $checksum = $code & 1;
+    my $id_value = 0x7F & ($code >> 1);
+
+    my $one_bit_count = 0;
+    my $id_check = $id_value;
+    while( $id_check > 0 ) {
+        my $bit = $id_check & 1;
+        $one_bit_count++ if $bit;
+        $id_check >>= 1;
+    }
+
+    my $is_even = (($one_bit_count % 2) == 0) ? 1 : 0;
+    if( $is_even != $checksum ) {
+        warn "Checksum for value $id_value was supposed to be $is_even,"
+            . " but it's $checksum, ignoring\n";
+        return;
+    }
+
+    my ($sec, $microsec) = gettimeofday();
+    if( exists $SAW_CODE_AT{$id_value}
+        && ($SAW_CODE_AT{$id_value} + $IGNORE_DUP_SEC > $sec) ) {
+        warn "Ignoring duplicate code value, last seen at $SAW_CODE_AT{$id_value}"
+            . " (now $sec, dup time $IGNORE_DUP_SEC)\n";
+    }
+    else {
+        my $msec = do {
+            my $msec = sprintf '%.0f', $microsec / 1000;
+            ($sec * 1000) + $msec;
+        };
+        say "LAP_TIME $id_value $msec#";
+        $SAW_CODE_AT{$id_value} = $sec;
+        $LAST_TOKEN = $id_value;
+        start_buzzer();
+    }
+
+    return;
+}
+
+
 
 sub handle_incoming_command
 {
@@ -100,15 +146,6 @@ sub do_command
     return;
 }
 
-sub set_last_token
-{
-    my ($cmd) = @_;
-    if( my ($token, $ms) = $cmd =~ /\A LAP_TIME \s+ (\d+) \s+ (\d+) \# \z/x ) {
-        $LAST_TOKEN = $token;
-    }
-    return;
-}
-
 sub start_buzzer
 {
     HiPi::Wiring::digitalWrite( $BUZZER_PIN, 1 );
@@ -135,9 +172,8 @@ sub stop_buzzer
 
     $LOOP = IO::Async::Loop->new;
 
-    open( my $CODES_IN, '-|', 'perl', $READ_CODES_PATH,
-        "--mode2=$MODE2_PATH", "--dev=$DEV" )
-        or die "Can't open $READ_CODES_PATH: $!\n";
+    open( my $CODES_IN, '-|', $MODE2_PATH, '-d', $DEV )
+        or die "Can't open $MODE2_PATH: $!\n";
     my $codes_stream = IO::Async::Stream->new(
         read_handle => $CODES_IN,
         on_read => \&handle_incoming_code,
@@ -146,6 +182,16 @@ sub stop_buzzer
         read_handle => \*STDIN,
         on_read => \&handle_incoming_command,
     );
+
+    $PULSE = Linux::IRPulses->new({
+        fh => $CODES_IN,
+        header => [ pulse 300, space 300 ],
+        zero => [ pulse_or_space 300 ],
+        one => [ pulse_or_space 600 ],
+        bit_count => 7,
+        tolerance => 0.40,
+        callback => \&code_callback,
+    });
 
     print "> ";
 
