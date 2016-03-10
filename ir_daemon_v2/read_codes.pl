@@ -31,10 +31,13 @@ use Time::HiRes 'gettimeofday';
 
 my $MODE2_PATH = '/usr/bin/mode2';
 my $DEV = '/dev/lirc0';
+my $IGNORE_DUP_SEC = 5;
 Getopt::Long::GetOptions(
     'mode2=s' => \$MODE2_PATH,
     'dev=s' => \$DEV,
 );
+
+my %SAW_CODE_AT;
 
 
 open( my $IN, '-|', $MODE2_PATH, '-d', $DEV ) or die "Can't open $MODE2_PATH: $!\n";
@@ -61,13 +64,20 @@ sub code_callback
         return;
     }
 
-    my $msec = do {
-        my ($sec, $microsec) = gettimeofday();
-        my $msec = sprintf '%.0f', $microsec / 1000;
-        $sec *= 1000;
-        $sec + $msec;
-    };
-    say "LAP_TIME $id_value $msec#";
+    my ($sec, $microsec) = gettimeofday();
+    if( exists $SAW_CODE_AT{$id_value}
+        && ($SAW_CODE_AT{$id_value} + $IGNORE_DUP_SEC > $sec) ) {
+        warn "Ignoring duplicate code value, last seen at $SAW_CODE_AT{$id_value}"
+            . " (now $sec, dup time $IGNORE_DUP_SEC)\n";
+    }
+    else {
+        my $msec = do {
+            my $msec = sprintf '%.0f', $microsec / 1000;
+            ($sec * 1000) + $msec;
+        };
+        say "LAP_TIME $id_value $msec#";
+        $SAW_CODE_AT{$id_value} = $sec;
+    }
 
     return;
 }
