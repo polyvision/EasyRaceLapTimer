@@ -5,7 +5,7 @@
  *
  * This file is part of EasyRaceLapTimer.
  * 
- * Vresion: 0.3
+ * Vresion: 0.3.1
  *
  * EasyRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  * EasyRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -49,6 +49,7 @@ void EEPROMWriteInt(int p_address, int p_value);
 unsigned int EEPROMReadInt(int p_address);
 
 void encodeIdToBuffer(){
+  num_one_pulses = 0;
   buffer[0] = ZERO;    
   buffer[1] = ZERO;    
   buffer[2] = get_pulse_width_for_buffer(5);
@@ -83,12 +84,15 @@ void readConfigButtonState(){
       transponder_id = 1;
     }
     EEPROMWriteInt(0, transponder_id);
-    
+
+    ir_pulse_off();
+    cli();
     buttonState = HIGH; // RESET
     buttonPushTime = millis(); // RESET
     ledBlinkStartTime = millis(); // Enable confirmation LED
     digitalWrite(STATUS_LED_PIN, HIGH);
     encodeIdToBuffer();
+    sei();
   }
 }
 
