@@ -81,13 +81,13 @@ sub code_callback
     my $id_check = $id_value;
     while( $id_check > 0 ) {
         my $bit = $id_check & 1;
-        $one_bit_count++ if $bit;
+        $one_bit_count += 1 if $bit;
         $id_check >>= 1;
     }
 
-    my $is_even = (($one_bit_count % 2) == 0) ? 1 : 0;
-    if( $is_even != $checksum ) {
-        warn "Checksum for value $id_value was supposed to be $is_even,"
+    my $is_odd = (($one_bit_count % 2) == 1) ? 1 : 0;
+    if( $is_odd != $checksum ) {
+        warn "Checksum for value $id_value was supposed to be $is_odd,"
             . " but it's $checksum, ignoring\n";
         return;
     }
