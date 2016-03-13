@@ -14,11 +14,11 @@ the length of a ZERO and ONE pulse can be found for example in
 
 *remember that each second pulse is actual a space for the ir receiver*
 
-    1200μs PULSE | 1200μs SPACE | 3 PULSE | 4 PULSE | 5 PULSE | 6 PULSE | 7 PULSE | 8 PULSE | 9 PULSE
+    1 PULSE | 2 PULSE | 3 PULSE | 4 PULSE | 5 PULSE | 6 PULSE | 7 PULSE | 8 PULSE | 9 PULSE
 
-**1200μs PULSE | 1200μs SPACE**
+**1 PULSE | 2 PULSE**
 
-This is our header.
+  both must be set zero, it's our header
 
 **3 PULSE | 4 PULSE | 5 PULSE | 6 PULSE | 7 PULSE | 8 PULSE**
 
@@ -37,15 +37,15 @@ This is our header.
 
 if you log the output of your IR receiver you would get something like this for the above examples
 
-    id 14: PULSE 1200 | SPACE 1200 | PULSE 300 | SPACE 300 | PULSE 600 | SPACE 600 | PULSE 600 | SPACE 300 | PULSE 300
-    id  3: PULSE 1200 | SPACE 1200 | PULSE 300 | SPACE 300 | PULSE 300 | SPACE 300 | PULSE 600 | SPACE 600 | PULSE 600
+    id 14: PULSE 300 | SPACE 300 | SPACE 300 | SPACE 300 | PULSE 600 | SPACE 600 | PULSE 600 | SPACE 300 | PULSE 300
+    id  3: PULSE 300 | SPACE 300 | SPACE 300 | SPACE 300 | PULSE 300 | SPACE 300 | PULSE 600 | SPACE 600 | PULSE 600
 
 please keep in mind that the pulse length differs a lot when using IR receivers, so they won't be 100% accurate
 
 ## some statistics
 
-The longest time an ID (63) needs to be transmitted is 2 * 1200μs + 7 * 600μs = 5050μs = 6.6ms
+The longest time an ID (63) needs to be transmitted is 2x 250&#181;s + 7 * 650&#181;s = 5050&#181;s = 5.05ms
 
-Assuming your quad top speed is 120km/h, that's 33.33 m/s  =  3.33 cm/ms. So the distance needed to transmit the ID is 22cm.
+Assuming your quad top speed is 120km/h, that's 33.33 m/s  =  3.33 cm/ms. So the distance needed to transmit the ID is 15cm.
 
-Distance needed with a speed of 90km/h = 25 m/s = 2.5 cm/ms -> 16.5 cm distance
+Distance needed with a speed of 90km/h = 25 m/s = 2,5 cm/ms -> 13.75 cm distance
