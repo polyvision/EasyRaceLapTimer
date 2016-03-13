@@ -37,8 +37,8 @@
 #define NUM_BITS  9
 #define HEADER_PULSE 1200
 #define HEADER_SPACE 1200
-#define ZERO 250
-#define ONE  650
+#define ZERO 300
+#define ONE  600
 
 unsigned int buffer[NUM_BITS];
 unsigned int num_one_pulses = 0;
@@ -196,56 +196,57 @@ void ir_pulse_off()
 }
 
 void loop(){
-  for(int i = 0; i < 3; i++){
-    for(int b = 0; b < NUM_BITS; b++){
-      switch(b){
-        case 0:
-          ir_pulse_on();
-          delayMicroseconds(buffer[b]);
-          break;
-        case 1:
+    while(1) { // Little bit faster if we loop ourselves
+      for(int i = 0; i < 3; i++){
+        for(int b = 0; b < NUM_BITS; b++){
+          switch(b){
+            case 0:
+              ir_pulse_on();
+              delayMicroseconds(buffer[b]);
+              break;
+            case 1:
+              ir_pulse_off();
+              delayMicroseconds(buffer[b]);
+              break;
+            case 2:
+              ir_pulse_on();
+              delayMicroseconds(buffer[b]);
+              break;
+            case 3:
+              ir_pulse_off();
+              delayMicroseconds(buffer[b]);
+              break;
+            case 4:
+              ir_pulse_on();
+              delayMicroseconds(buffer[b]);
+              break;
+            case 5:
+              ir_pulse_off();
+              delayMicroseconds(buffer[b]);
+              break;
+            case 6:
+              ir_pulse_on();
+              delayMicroseconds(buffer[b]);
+              break;
+            case 7:
+              ir_pulse_off();
+              delayMicroseconds(buffer[b]);
+              break;
+            case 8:
+              ir_pulse_on();
+              delayMicroseconds(buffer[b]);
+              break;
+          }
           ir_pulse_off();
-          delayMicroseconds(buffer[b]);
-          break;
-        case 2:
-          ir_pulse_on();
-          delayMicroseconds(buffer[b]);
-          break;
-        case 3:
-          ir_pulse_off();
-          delayMicroseconds(buffer[b]);
-          break;
-        case 4:
-          ir_pulse_on();
-          delayMicroseconds(buffer[b]);
-          break;
-        case 5:
-          ir_pulse_off();
-          delayMicroseconds(buffer[b]);
-          break;
-        case 6:
-          ir_pulse_on();
-          delayMicroseconds(buffer[b]);
-          break;
-        case 7:
-          ir_pulse_off();
-          delayMicroseconds(buffer[b]);
-          break;
-        case 8:
-          ir_pulse_on();
-          delayMicroseconds(buffer[b]);
-          break;
-      }
-      ir_pulse_off();
-    } // going through the buffer
-    
-    delay(20 + random(0, 5));
-  } // 3 times
+        } // going through the buffer
+        
+      } // 3 times
 
 #ifdef ENABLE_BUTTON_CONFIGURATION
   readConfigButtonState();
   updateConfirmationLed();
 #endif
+    }
 } // end of main loop
 
 void EEPROMWriteInt(int p_address, int p_value)
