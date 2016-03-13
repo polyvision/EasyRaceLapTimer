@@ -40,6 +40,7 @@ my $BUZZER_ON_SEC = 1;
 my $SATELLITE_MODE = 0;
 my $WEB_HOST = 'http://localhost';
 my $IGNORE_DUP_SEC = 5;
+my $USE_OLD_PROTOCOL = 0;
 Getopt::Long::GetOptions(
     'mode2=s' => \$MODE2_PATH,
     'dev=s' => \$DEV,
@@ -47,6 +48,7 @@ Getopt::Long::GetOptions(
     'enable_satellite_mode' => \$SATELLITE_MODE,
     'set_web_host=s' => \$WEB_HOST,
     'ignore_dup_code_sec=i' => \$IGNORE_DUP_SEC,
+    'use_old_protocol' => \$USE_OLD_PROTOCOL,
 );
 
 my $LAST_TOKEN = '';
@@ -183,9 +185,12 @@ sub stop_buzzer
         on_read => \&handle_incoming_command,
     );
 
+    my @header = $USE_OLD_PROTOCOL
+        ? ( pulse 300, space 300 )
+        : ( pulse 1200, space 1200 );
     $PULSE = Linux::IRPulses->new({
         fh => $CODES_IN,
-        header => [ pulse 300, space 300 ],
+        header => \@header,
         zero => [ pulse_or_space 300 ],
         one => [ pulse_or_space 600 ],
         bit_count => 7,
