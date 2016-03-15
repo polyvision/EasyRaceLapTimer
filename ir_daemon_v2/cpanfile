@@ -1,0 +1,3 @@
+requires 'Linux::IRPulses', '0.6';
+requires 'IO::Async', '0.70';
+#requires 'HiPi', '0.33';
