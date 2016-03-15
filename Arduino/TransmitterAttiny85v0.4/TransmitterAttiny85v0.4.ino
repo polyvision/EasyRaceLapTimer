@@ -4,8 +4,9 @@
  * Author: Alexander B. Bierbrauer
  *
  * This file is part of EasyRaceLapTimer.
- * 
- * Vresion: 0.3.1
+ *
+ * Version: 0.4 TESTING
+ * !THIS VERSION IS NOT COMPATIBLE WITH PREVIOUS VERSIONS!
  *
  * EasyRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  * EasyRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -20,8 +21,8 @@
 #define BIT_FLIP(a,b) ((a) ^= (1<<(b)))
 #define BIT_CHECK(a,b) ((a) & (1<<(b)))
 
-// CHANGE HERE THE ID OF TRANSPONDER 
-// possible values are 1 to 63 
+// CHANGE HERE THE ID OF TRANSPONDER
+// possible values are 1 to 63
 #define TRANSPONDER_ID 21
 
 // DEFINITIONS FOR TRANSPONDERS WITH PUSH BUTTON CONFIGURATION
@@ -52,22 +53,22 @@ unsigned int EEPROMReadInt(int p_address);
 
 void encodeIdToBuffer(){
   num_one_pulses = 0;
-  buffer[0] = HEADER_PULSE;    
-  buffer[1] = HEADER_SPACE;    
+  buffer[0] = HEADER_PULSE;
+  buffer[1] = HEADER_SPACE;
   buffer[2] = get_pulse_width_for_buffer(5);
   buffer[3] = get_pulse_width_for_buffer(4);
   buffer[4] = get_pulse_width_for_buffer(3);
   buffer[5] = get_pulse_width_for_buffer(2);
   buffer[6] = get_pulse_width_for_buffer(1);
   buffer[7] = get_pulse_width_for_buffer(0);
-  buffer[8] = control_bit(); 
+  buffer[8] = control_bit();
 }
 
 void readConfigButtonState(){
   if(ledBlinkStartTime != 0){
     return;
   }
-    
+
   int state = digitalRead(BUTTON_PIN);
   if(state == LOW){
     if(state != buttonState){
@@ -117,7 +118,7 @@ unsigned int get_pulse_width_for_buffer(int bit){
 
 unsigned int control_bit(){
   if(num_one_pulses % 2 >= 1){
-    return ONE;  
+    return ONE;
   }else{
     return ZERO;
   }
@@ -138,7 +139,7 @@ void setup()
     transponder_id = 1;
     EEPROMWriteInt(0, transponder_id);
   }
-  
+
   // put your setup code here, to run once:
   pinMode(STATUS_LED_PIN, OUTPUT);
   // initialize the pushbutton pin as an input:
@@ -174,7 +175,7 @@ void setFrequency(uint16_t freq)
    ++prescalerBits;
    prescalerVal <<= 1;
  }
- 
+
  uint8_t top = ((requiredDivisor + (prescalerVal/2))/prescalerVal) - 1;
  TCCR1 = (1 << CTC1) | prescalerBits;
  GTCCR = 0;
@@ -239,7 +240,7 @@ void loop(){
           }
           ir_pulse_off();
         } // going through the buffer
-        
+
       } // 3 times
 
 #ifdef ENABLE_BUTTON_CONFIGURATION

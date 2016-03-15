@@ -2,6 +2,23 @@
 
 # EasyRaceLapTimer IR_DAEMON
 
+## IR_DAEMON V2
+
+To use, you will some Perl dependencies.  Start by installing cpanm:
+
+    apt-get install cpanminus
+
+Then, from the ir_daemon_v2/ directory, do:
+
+    cpanm --installdeps .
+
+You will also need to setup LIRC.  See:
+
+http://alexba.in/blog/2013/01/06/setting-up-lirc-on-the-raspberrypi/
+
+**be aware that V2 is in testing phase**
+
+## IR_DAEMON V1
 The ir_daemon is a C++ daemon running in the background of your Raspberry PI. It's responsible for decoding IR data, receiving and sending commands from and to various sources etc.
 
 ## requirements
