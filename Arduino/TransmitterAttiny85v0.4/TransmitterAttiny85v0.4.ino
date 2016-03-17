@@ -241,6 +241,7 @@ void loop(){
           ir_pulse_off();
         } // going through the buffer
 
+        delay(20 + random(0, 5));
       } // 3 times
 
 #ifdef ENABLE_BUTTON_CONFIGURATION
