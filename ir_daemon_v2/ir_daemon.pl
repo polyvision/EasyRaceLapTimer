@@ -41,6 +41,7 @@ my $SATELLITE_MODE = 0;
 my $WEB_HOST = 'http://localhost';
 my $IGNORE_DUP_SEC = 5;
 my $USE_OLD_PROTOCOL = 0;
+my $HELP = 0;
 Getopt::Long::GetOptions(
     'mode2=s' => \$MODE2_PATH,
     'dev=s' => \$DEV,
@@ -49,13 +50,32 @@ Getopt::Long::GetOptions(
     'set_web_host=s' => \$WEB_HOST,
     'ignore_dup_code_sec=i' => \$IGNORE_DUP_SEC,
     'use_old_protocol' => \$USE_OLD_PROTOCOL,
+    'help' => \$HELP,
 );
+
+if( $HELP ) {
+    usage();
+    exit(0);
+}
 
 my $LAST_TOKEN = '';
 my $LOOP;
 my $PULSE;
 my %SAW_CODE_AT;
 
+
+sub usage
+{
+    say "Usage: ";
+    say "    --mode2 /path/to/mode2      Path to mode2 program (from LIRC)";
+    say "    --dev /dev/lirc0            Path to LIRC /dev entry";
+    say "    --set_buzzer_pin 21         Set GPIO pin for buzzer";
+    say "    --enable_satellite_mode     This is a satellite gate (NOT IMPLEMENTED)";
+    say "    --set_web_host http://...   URL of web server for reporting results (NOT IMPLEMENTED)";
+    say "    --ignore_dup_code_sec 5     Ignore duplicate codes sent within this many seconds";
+    say "    --use_old_protocol          Use the transmitter protocol for v0.3 or older";
+    return;
+}
 
 sub handle_incoming_code
 {
@@ -205,3 +225,20 @@ sub stop_buzzer
 
     close $CODES_IN;
 }
+
+
+__END__
+
+=head1 ir_daemon.pl
+
+Usage: 
+
+    --mode2 /path/to/mode2      Path to mode2 program (from LIRC)
+    --dev /dev/lirc0            Path to LIRC /dev entry
+    --set_buzzer_pin 21         Set GPIO pin for buzzer
+    --enable_satellite_mode     This is a satellite gate (NOT IMPLEMENTED)
+    --set_web_host http://...   URL of web server for reporting results (NOT IMPLEMENTED)
+    --ignore_dup_code_sec 5     Ignore duplicate codes sent within this many seconds
+    --use_old_protocol          Use the transmitter protocol for v0.3 or older
+
+=cut
