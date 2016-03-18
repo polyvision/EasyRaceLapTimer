@@ -24,6 +24,8 @@ en:
     delete: "delete"
     edit: "edit"
     deactivate_token: "remove token"
+    undo_invalidate_lap: "undo invalidation"
+    invalidate_lap: "invalidate"
   race_session:
     idle_time_in_seconds: Idle time (s)
     title: Title
