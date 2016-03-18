@@ -75,24 +75,24 @@ class RaceSession < ActiveRecord::Base
   end
 
   def total_laps
-    self.pilot_race_laps.count
+    self.pilot_race_laps_valid.count
   end
 
   def fastest_lap_time
-    t = self.pilot_race_laps.order("lap_time ASC").first
+    t = self.pilot_race_laps_valid.order("lap_time ASC").first
     return t.lap_time if t
     return 0
   end
 
    def fastest_pilot
-    t = self.pilot_race_laps.order("lap_time ASC").first
+    t = self.pilot_race_laps_valid.order("lap_time ASC").first
     return t.pilot if t
     return nil
   end
 
   def average_lap_time
     begin
-      self.pilot_race_laps.sum(:lap_time) / self.pilot_race_laps.count
+      self.pilot_race_laps_valid.sum(:lap_time) / self.pilot_race_laps.count
     rescue Exception => ex
       return 0
     end
@@ -108,11 +108,11 @@ class RaceSession < ActiveRecord::Base
   end
 
   def lap_count_of_pilot(pilot)
-    return self.pilot_race_laps.where(pilot_id: pilot.id).count
+    return self.pilot_race_laps_valid.where(pilot_id: pilot.id).count
   end
 
   def fastest_lap_of_pilot(pilot)
-    return self.pilot_race_laps.where(pilot_id: pilot.id).order("lap_time ASC").first
+    return self.pilot_race_laps_valid.where(pilot_id: pilot.id).order("lap_time ASC").first
   end
 
   def last_lap_of_pilot(pilot)
@@ -120,12 +120,16 @@ class RaceSession < ActiveRecord::Base
   end
 
   def last_lap_of_pilot_is_lasted_tracked_time_of_race?(pilot)
-    t=  self.pilot_race_laps.where(pilot_id: pilot.id).order("id DESC").first
+    t=  self.pilot_race_laps_valid.where(pilot_id: pilot.id).order("id DESC").first
     return t.latest if t
     return false
   end
 
+  def pilot_race_laps_valid
+    return self.pilot_race_laps.where(invalidated: false)
+  end
+
   def avg_lap_time_of_pilot(pilot)
-    self.pilot_race_laps.where(pilot_id: pilot.id).sum(:lap_time) / self.pilot_race_laps.where(pilot_id: pilot.id).count
+    self.pilot_race_laps_valid.where(pilot_id: pilot.id).sum(:lap_time) / self.pilot_race_laps.where(pilot_id: pilot.id).count
   end
 end
