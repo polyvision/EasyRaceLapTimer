@@ -158,6 +158,11 @@ In the same file, find the line that begins with "#dhcp-range" and edit it as fo
 
 Save and close the file.
 
+## Check Permissions for sidekiq.sh
+Double check that the sidekiq.sh script is executable
+
+sudo chmod +x /home/pi/EasyRaceLapTimer/web/start_sidekiq.sh
+
 ## Configure the IR Daemon to launch at startup
 
 Edit the following file:
