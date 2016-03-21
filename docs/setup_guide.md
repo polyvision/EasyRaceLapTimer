@@ -161,7 +161,7 @@ Save and close the file.
 ## Check Permissions for sidekiq.sh
 Double check that the sidekiq.sh script is executable
 
-sudo chmod +x /home/pi/EasyRaceLapTimer/web/start_sidekiq.sh
+    sudo chmod +x /home/pi/EasyRaceLapTimer/web/start_sidekiq.sh
 
 ## Configure the IR Daemon to launch at startup
 
