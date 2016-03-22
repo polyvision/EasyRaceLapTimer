@@ -1,3 +1,5 @@
 requires 'Linux::IRPulses', '0.6';
 requires 'IO::Async', '0.70';
-#requires 'HiPi', '0.33';
+requires 'HiPi', '0.44';
+requires 'Net::Async::HTTP', '0.40';
+requires 'URI', '1.71';

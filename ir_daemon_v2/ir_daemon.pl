@@ -30,7 +30,11 @@ use IO::Async::Timer::Countdown;
 use Getopt::Long;
 use HiPi::Wiring qw( :wiring );
 use Linux::IRPulses;
+use Net::Async::HTTP;
 use Time::HiRes 'gettimeofday';
+use URI;
+
+my $LAP_TRACK_PATH = '/api/v1/lap_track/create';
 
 
 my $MODE2_PATH = '/usr/bin/mode2';
@@ -61,6 +65,7 @@ if( $HELP ) {
 my $LAST_TOKEN = '';
 my $LOOP;
 my $PULSE;
+my $HTTP;
 my %SAW_CODE_AT;
 
 
@@ -127,6 +132,7 @@ sub code_callback
         $SAW_CODE_AT{$id_value} = $sec;
         $LAST_TOKEN = $id_value;
         start_buzzer();
+        send_lap_time( $id_value, $msec );
     }
 
     return;
@@ -168,6 +174,32 @@ sub do_command
     return;
 }
 
+sub send_lap_time
+{
+    my ($id_value, $msec) = @_;
+    my $uri = URI->new( $WEB_HOST
+        . $LAP_TRACK_PATH
+        . '?'
+        . 'transponder_token=' . $id_value
+        . '&'
+        . 'lap_time_in_ms=' . $msec
+    );
+
+    $HTTP->do_request(
+        uri => $uri,
+        on_error => sub {
+            my ($message) = @_;
+            warn "Error requesting '$uri': $message\n";
+            return;
+        },
+        on_response => sub {
+            # It worked, but we don't need to do anything
+        },
+    );
+
+    return;
+}
+
 sub start_buzzer
 {
     HiPi::Wiring::digitalWrite( $BUZZER_PIN, 1 );
@@ -193,6 +225,8 @@ sub stop_buzzer
     HiPi::Wiring::pinMode( $BUZZER_PIN, WPI_OUTPUT );
 
     $LOOP = IO::Async::Loop->new;
+    $HTTP = Net::Async::HTTP->new;
+    $LOOP->add( $HTTP );
 
     open( my $CODES_IN, '-|', $MODE2_PATH, '-d', $DEV )
         or die "Can't open $MODE2_PATH: $!\n";
@@ -218,6 +252,7 @@ sub stop_buzzer
         callback => \&code_callback,
     });
 
+    local $| = 1; # autobuffer off
     print "> ";
 
     $LOOP->add( $_ ) for $codes_stream, $stdin_stream;
