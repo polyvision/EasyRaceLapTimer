@@ -5,7 +5,7 @@
  *
  * This file is part of EasyRaceLapTimer.
  *
- * Vresion: 0.3.2
+ * Vresion: 0.3.1
  *
  * EasyRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  * EasyRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -84,7 +84,6 @@ void readConfigButtonState() {
       transponder_id = 1;
     }
     EEPROMWriteInt(0, transponder_id);
-
     ir_pulse_off();
     cli();
     buttonState = HIGH; // RESET
@@ -93,6 +92,10 @@ void readConfigButtonState() {
     digitalWrite(STATUS_LED_PIN, HIGH);
     encodeIdToBuffer();
     sei();
+    
+    delay(200);
+    flashTransponderId();
+
   }
 }
 
@@ -102,6 +105,7 @@ void updateConfirmationLed() {
     digitalWrite(STATUS_LED_PIN, LOW);
     ledBlinkStartTime = 0;
   }
+
 }
 
 unsigned int get_pulse_width_for_buffer(int bit) {
@@ -142,31 +146,8 @@ void setup()
   // initialize the pushbutton pin as an input:
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   PORTB |= (1 << BUTTON_PIN);    // enable pull-up resistor
-  
-  int fn = abs(transponder_id); //better way to find first digit of trasnponder_id
-    while(fn >= 10)
-    fn /= 10;
-  
-  //Display Transponder ID in two sets of LED Flashes
-  for (int i = 0; i < fn; i++) { //Display MSB
-    digitalWrite(STATUS_LED_PIN, HIGH);
-    delay(150);
-    digitalWrite(STATUS_LED_PIN, LOW);
-    delay(150);
-  }
-  //Display a single LED Flash to seperate the bits (helps distinguish ID 1 and ID 10)
-  delay(150);
-  digitalWrite(STATUS_LED_PIN, HIGH);
-  delay(50);
-  digitalWrite(STATUS_LED_PIN, LOW);
-  delay(150);
 
-  for (int i = 0; i < transponder_id % 10; i++) { //Display LSB
-    digitalWrite(STATUS_LED_PIN, HIGH);
-    delay(150);
-    digitalWrite(STATUS_LED_PIN, LOW);
-    delay(150);
-  }
+  flashTransponderId();
 
 #endif
 
@@ -280,4 +261,31 @@ unsigned int EEPROMReadInt(int p_address)
   byte highByte = EEPROM.read(p_address + 1);
 
   return ((lowByte << 0) & 0xFF) + ((highByte << 8) & 0xFF00);
+}
+
+void flashTransponderId() {
+  int fn = abs(transponder_id); //better way to find first digit of trasnponder_id
+  while (fn >= 10)
+    fn /= 10;
+
+  //Display Transponder ID in two sets of LED Flashes
+  for (int i = 0; i < fn; i++) { //Display MSB
+    digitalWrite(STATUS_LED_PIN, HIGH);
+    delay(150);
+    digitalWrite(STATUS_LED_PIN, LOW);
+    delay(150);
+  }
+  //Display a single LED Flash to seperate the bits (helps distinguish ID 1 and ID 10)
+  delay(150);
+  digitalWrite(STATUS_LED_PIN, HIGH);
+  delay(50);
+  digitalWrite(STATUS_LED_PIN, LOW);
+  delay(250);
+
+  for (int i = 0; i < transponder_id % 10; i++) { //Display LSB
+    digitalWrite(STATUS_LED_PIN, HIGH);
+    delay(150);
+    digitalWrite(STATUS_LED_PIN, LOW);
+    delay(150);
+  }
 }
