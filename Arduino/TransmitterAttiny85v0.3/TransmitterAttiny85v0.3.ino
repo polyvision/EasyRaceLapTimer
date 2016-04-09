@@ -4,8 +4,8 @@
  * Author: Alexander B. Bierbrauer
  *
  * This file is part of EasyRaceLapTimer.
- * 
- * Vresion: 0.3.1
+ *
+ * Vresion: 0.3.2
  *
  * EasyRaceLapTimer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
  * EasyRaceLapTimer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -20,8 +20,8 @@
 #define BIT_FLIP(a,b) ((a) ^= (1<<(b)))
 #define BIT_CHECK(a,b) ((a) & (1<<(b)))
 
-// CHANGE HERE THE ID OF TRANSPONDER 
-// possible values are 1 to 63 
+// CHANGE HERE THE ID OF TRANSPONDER
+// possible values are 1 to 63
 #define TRANSPONDER_ID 21
 
 // DEFINITIONS FOR TRANSPONDERS WITH PUSH BUTTON CONFIGURATION
@@ -48,39 +48,39 @@ unsigned long ledBlinkStartTime = 0;
 void EEPROMWriteInt(int p_address, int p_value);
 unsigned int EEPROMReadInt(int p_address);
 
-void encodeIdToBuffer(){
+void encodeIdToBuffer() {
   num_one_pulses = 0;
-  buffer[0] = ZERO;    
-  buffer[1] = ZERO;    
+  buffer[0] = ZERO;
+  buffer[1] = ZERO;
   buffer[2] = get_pulse_width_for_buffer(5);
   buffer[3] = get_pulse_width_for_buffer(4);
   buffer[4] = get_pulse_width_for_buffer(3);
   buffer[5] = get_pulse_width_for_buffer(2);
   buffer[6] = get_pulse_width_for_buffer(1);
   buffer[7] = get_pulse_width_for_buffer(0);
-  buffer[8] = control_bit(); 
+  buffer[8] = control_bit();
 }
 
-void readConfigButtonState(){
-  if(ledBlinkStartTime != 0){
+void readConfigButtonState() {
+  if (ledBlinkStartTime != 0) {
     return;
   }
-    
+
   int state = digitalRead(BUTTON_PIN);
-  if(state == LOW){
-    if(state != buttonState){
+  if (state == LOW) {
+    if (state != buttonState) {
       buttonState = state;
       buttonPushTime = millis();
     }
-  }else{
+  } else {
     buttonPushTime = millis();
   }
 
   buttonState = state;
 
-  if(buttonPushTime + BUTTON_INC_ID_PUSH_TIME <= millis()){
+  if (buttonPushTime + BUTTON_INC_ID_PUSH_TIME <= millis()) {
     transponder_id += 1;
-    if (transponder_id > 63){
+    if (transponder_id > 63) {
       transponder_id = 1;
     }
     EEPROMWriteInt(0, transponder_id);
@@ -97,15 +97,15 @@ void readConfigButtonState(){
 }
 
 
-void updateConfirmationLed(){
-  if(ledBlinkStartTime != 0 && ledBlinkStartTime + LED_BLINK_CONFIRM_TIME <= millis()){
+void updateConfirmationLed() {
+  if (ledBlinkStartTime != 0 && ledBlinkStartTime + LED_BLINK_CONFIRM_TIME <= millis()) {
     digitalWrite(STATUS_LED_PIN, LOW);
     ledBlinkStartTime = 0;
   }
 }
 
-unsigned int get_pulse_width_for_buffer(int bit){
-  if(BIT_CHECK(transponder_id,bit)){
+unsigned int get_pulse_width_for_buffer(int bit) {
+  if (BIT_CHECK(transponder_id, bit)) {
     num_one_pulses += 1;
     return ONE;
   }
@@ -113,10 +113,10 @@ unsigned int get_pulse_width_for_buffer(int bit){
   return ZERO;
 }
 
-unsigned int control_bit(){
-  if(num_one_pulses % 2 >= 1){
-    return ONE;  
-  }else{
+unsigned int control_bit() {
+  if (num_one_pulses % 2 >= 1) {
+    return ONE;
+  } else {
     return ZERO;
   }
 }
@@ -132,32 +132,36 @@ void setup()
 
 #ifdef ENABLE_BUTTON_CONFIGURATION
   transponder_id = EEPROMReadInt(0);
-  if(transponder_id == 0){
+  if (transponder_id == 0) {
     transponder_id = 1;
     EEPROMWriteInt(0, transponder_id);
   }
-  
+
   // put your setup code here, to run once:
   pinMode(STATUS_LED_PIN, OUTPUT);
   // initialize the pushbutton pin as an input:
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   PORTB |= (1 << BUTTON_PIN);    // enable pull-up resistor
-
-//Display Transponder ID in two sets of LED Flashes
-  for(int i=0; i < transponder_id/10; i++){ //Display MSB
+  
+  int fn = abs(transponder_id); //better way to find first digit of trasnponder_id
+    while(fn >= 10)
+    fn /= 10;
+  
+  //Display Transponder ID in two sets of LED Flashes
+  for (int i = 0; i < fn; i++) { //Display MSB
     digitalWrite(STATUS_LED_PIN, HIGH);
     delay(150);
     digitalWrite(STATUS_LED_PIN, LOW);
     delay(150);
   }
-    //Display a single LED Flash to seperate the bits (helps distinguish ID 1 and ID 10)
-    delay(150);
-    digitalWrite(STATUS_LED_PIN, HIGH); 
-    delay(50);
-    digitalWrite(STATUS_LED_PIN, LOW);
-    delay(150);
+  //Display a single LED Flash to seperate the bits (helps distinguish ID 1 and ID 10)
+  delay(150);
+  digitalWrite(STATUS_LED_PIN, HIGH);
+  delay(50);
+  digitalWrite(STATUS_LED_PIN, LOW);
+  delay(150);
 
-    for(int i=0; i < transponder_id%10; i++){ //Display LSB
+  for (int i = 0; i < transponder_id % 10; i++) { //Display LSB
     digitalWrite(STATUS_LED_PIN, HIGH);
     delay(150);
     digitalWrite(STATUS_LED_PIN, LOW);
@@ -178,40 +182,40 @@ void setup()
 // Set the frequency that we will get on pin OCR1A but don't turn it on
 void setFrequency(uint16_t freq)
 {
- uint32_t requiredDivisor = (F_CPU/2)/(uint32_t)freq;
+  uint32_t requiredDivisor = (F_CPU / 2) / (uint32_t)freq;
 
- uint16_t prescalerVal = 1;
- uint8_t prescalerBits = 1;
- while ((requiredDivisor + prescalerVal/2)/prescalerVal > 256)
- {
-   ++prescalerBits;
-   prescalerVal <<= 1;
- }
- 
- uint8_t top = ((requiredDivisor + (prescalerVal/2))/prescalerVal) - 1;
- TCCR1 = (1 << CTC1) | prescalerBits;
- GTCCR = 0;
- OCR1C = top;
+  uint16_t prescalerVal = 1;
+  uint8_t prescalerBits = 1;
+  while ((requiredDivisor + prescalerVal / 2) / prescalerVal > 256)
+  {
+    ++prescalerBits;
+    prescalerVal <<= 1;
+  }
+
+  uint8_t top = ((requiredDivisor + (prescalerVal / 2)) / prescalerVal) - 1;
+  TCCR1 = (1 << CTC1) | prescalerBits;
+  GTCCR = 0;
+  OCR1C = top;
 }
 
 // Turn the frequency on
 void ir_pulse_on()
 {
- TCNT1 = 0;
- TCCR1 |= (1 << COM1A0);
+  TCNT1 = 0;
+  TCCR1 |= (1 << COM1A0);
 }
 
 // Turn the frequency off and turn off the IR LED.
 // We let the counter continue running, we just turn off the OCR1A pin.
 void ir_pulse_off()
 {
- TCCR1 &= ~(1 << COM1A0);
+  TCCR1 &= ~(1 << COM1A0);
 }
 
-void loop(){
-  for(int i = 0; i < 3; i++){
-    for(int b = 0; b < NUM_BITS; b++){
-      switch(b){
+void loop() {
+  for (int i = 0; i < 3; i++) {
+    for (int b = 0; b < NUM_BITS; b++) {
+      switch (b) {
         case 0:
           ir_pulse_on();
           delayMicroseconds(buffer[b]);
@@ -251,7 +255,7 @@ void loop(){
       }
       ir_pulse_off();
     } // going through the buffer
-    
+
     delay(20 + random(0, 5));
   } // 3 times
 
@@ -263,17 +267,17 @@ void loop(){
 
 void EEPROMWriteInt(int p_address, int p_value)
 {
-     byte lowByte = ((p_value >> 0) & 0xFF);
-     byte highByte = ((p_value >> 8) & 0xFF);
+  byte lowByte = ((p_value >> 0) & 0xFF);
+  byte highByte = ((p_value >> 8) & 0xFF);
 
-     EEPROM.write(p_address, lowByte);
-     EEPROM.write(p_address + 1, highByte);
+  EEPROM.write(p_address, lowByte);
+  EEPROM.write(p_address + 1, highByte);
 }
 
 unsigned int EEPROMReadInt(int p_address)
 {
-     byte lowByte = EEPROM.read(p_address);
-     byte highByte = EEPROM.read(p_address + 1);
+  byte lowByte = EEPROM.read(p_address);
+  byte highByte = EEPROM.read(p_address + 1);
 
-     return ((lowByte << 0) & 0xFF) + ((highByte << 8) & 0xFF00);
+  return ((lowByte << 0) & 0xFF) + ((highByte << 8) & 0xFF00);
 }
