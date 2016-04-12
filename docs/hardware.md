@@ -4,10 +4,10 @@
 
 ## IR Transponder
 
-    1x Infrared LED 950nm (example: LD 274-3)
-    1x Resistor 56 Ohm
+    1x Infrared LED 950nm (Example: LD 274-3 or TSUS5202)
+    1x Resistor 33 Ohm
     1x Resistor 330 Ohm
-    1x Transistor NPN TO-92 45V 0,1A 0,5W
+    1x Transistor NPN TO-92 45V 0,1A 0,5W (Example: 2N2222)
     1x ATTINY 85-20 PU, DIP-8
     1x IC socket for the ATTINY
 
@@ -31,9 +31,9 @@ If you choose the Arduino ISP solution, here's an example [how to accomplish thi
 ## Host Station
 
     3x TSOP 31238 38kHz
-    1x Raspberry PI 2 (Raspberry PI 1 are not officially supported)
+    1x Raspberry Pi 2 (Raspberry Pi 1 is not officially supported)
     long wires to connect the TSOP IR sensors to the Raspberry GPIO ports
-    1x WiFi stick
-    power supply for the Raspberry PI, eg: a powerbank
+    1x USB WiFi stick (Example: Edimax EW-7811Un)
+    5V micro USB power supply for the Raspberry Pi, eg: a powerbank
 
     optional, a buzzer: CPM 121, but any other buzzer which can stand 5V will make it too.
