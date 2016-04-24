@@ -17,7 +17,7 @@ You will need a solder pad for each transponder, on which you will solder everyt
 Transponder version 0.2 & 0.3.1 are both compatible with ERLT. You can use both at the same time with ERLT. The only difference between 0.2 & 0.3.1 is the way you change the ID of the transonder.
 
 ## Transponder 0.3.1
-Have a look at the [transponder datasheet](/datasheets/easy_race_lap_timer_transponder_attiny85_rev3_schematic) to see how all these parts are getting soldered.
+Have a look at the [transponder datasheet](/datasheets/easy_race_lap_timer_transponder_attiny85_rev3_schematic.png) to see how all these parts are getting soldered.
 
 ## Transponder 0.2
 Have a look at the [transponder datasheet](/datasheets/easy_race_lap_timer_transponder_attiny85_schematic.png) to see how all these parts are getting soldered.
