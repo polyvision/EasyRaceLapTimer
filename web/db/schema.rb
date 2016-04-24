@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131102343) do
+ActiveRecord::Schema.define(version: 20160315232700) do
 
   create_table "config_values", force: :cascade do |t|
     t.string "name"
@@ -24,14 +24,15 @@ ActiveRecord::Schema.define(version: 20160131102343) do
   end
 
   create_table "pilot_race_laps", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "pilot_id"
     t.integer  "lap_num"
     t.integer  "lap_time"
     t.integer  "race_session_id"
     t.datetime "deleted_at"
     t.boolean  "latest"
+    t.boolean  "invalidated",     default: false
   end
 
   add_index "pilot_race_laps", ["deleted_at"], name: "index_pilot_race_laps_on_deleted_at"

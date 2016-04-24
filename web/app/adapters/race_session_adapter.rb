@@ -21,7 +21,7 @@ class RaceSessionAdapter
 
   def current_lap_for_pilot_by_token(token)
     pilot = self.get_pilot_by_token(token)
-    t = self.race_session.pilot_race_laps.where(pilot_id: pilot.id).order("lap_num DESC").first
+    t = self.race_session.pilot_race_laps_valid.where(pilot_id: pilot.id).order("lap_num DESC").first
 
     return t.lap_num+1 if t
     return 1
@@ -46,7 +46,7 @@ class RaceSessionAdapter
   end
 
   def current_lap_count
-    t = self.race_session.pilot_race_laps.order("lap_num DESC").first
+    t = self.race_session.pilot_race_laps_valid.order("lap_num DESC").first
     return t.lap_num if t
     return ""
   end
@@ -62,7 +62,7 @@ class RaceSessionAdapter
   def listing_standard_mode
     listing_data = Array.new
 
-    self.race_session.pilot_race_laps.order("lap_time ASC").group(:pilot_id).pluck(:pilot_id).each_with_index do |pilot_id,index|
+    self.race_session.pilot_race_laps_valid.order("lap_time ASC").group(:pilot_id).pluck(:pilot_id).each_with_index do |pilot_id,index|
       c_pilot = Pilot.where(id: pilot_id).first
       if c_pilot
         data = Hash.new
@@ -91,7 +91,7 @@ class RaceSessionAdapter
 
     listing_data = Array.new
 
-    self.race_session.pilot_race_laps.order("lap_num DESC,created_at ASC").group(:pilot_id).pluck(:pilot_id).each_with_index do |pilot_id,index|
+    self.race_session.pilot_race_laps_valid.order("lap_num DESC,created_at ASC").group(:pilot_id).pluck(:pilot_id).each_with_index do |pilot_id,index|
       c_pilot = Pilot.where(id: pilot_id).first
       if c_pilot
         data = Hash.new
@@ -121,7 +121,7 @@ class RaceSessionAdapter
     listing_data = Array.new
 
     pilot_time_sum_up = Hash.new
-    self.race_session.pilot_race_laps.order("created_at ASC").each do |lap|
+    self.race_session.pilot_race_laps_valid.order("created_at ASC").each do |lap|
       pilot = Pilot.find(lap.pilot_id)
 
       if !pilot_time_sum_up[lap.pilot_id]
