@@ -1,0 +1,247 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:micro_transponder-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L ATTINY85-S IC1
+U 1 1 57101B6A
+P 5650 3350
+F 0 "IC1" H 4500 3750 50  0000 C CNN
+F 1 "ATTINY85-S" H 6650 2950 50  0000 C CNN
+F 2 "Housings_SOIC:SOIC-8_3.9x4.9mm_Pitch1.27mm" H 6600 3350 50  0000 C CIN
+F 3 "" H 5650 3350 50  0000 C CNN
+	1    5650 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L LED D1
+U 1 1 57101BFC
+P 3900 2600
+F 0 "D1" H 3900 2700 50  0000 C CNN
+F 1 "LED" H 3900 2500 50  0000 C CNN
+F 2 "SMD_Packages:SMD-2010_Pol" H 3900 2600 50  0001 C CNN
+F 3 "" H 3900 2600 50  0000 C CNN
+F 4 "1497-1205-1-ND" H 3900 2600 60  0001 C CNN "DigiKey Part"
+	1    3900 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R1
+U 1 1 57101D17
+P 3450 2600
+F 0 "R1" V 3530 2600 50  0000 C CNN
+F 1 "150 Ohm, 0.25W" V 3450 2600 50  0001 C CNN
+F 2 "Resistors_SMD:R_0603_HandSoldering" V 3380 2600 50  0000 C CNN
+F 3 "" H 3450 2600 50  0000 C CNN
+F 4 "541-150SCT-ND" V 3450 2600 60  0001 C CNN "DigiKey Part"
+	1    3450 2600
+	0    1    1    0   
+$EndComp
+$Comp
+L +5V #PWR01
+U 1 1 57101F19
+P 7000 2900
+F 0 "#PWR01" H 7000 2750 50  0001 C CNN
+F 1 "+5V" H 7000 3040 50  0000 C CNN
+F 2 "" H 7000 2900 50  0000 C CNN
+F 3 "" H 7000 2900 50  0000 C CNN
+	1    7000 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR02
+U 1 1 57101F3C
+P 7000 3800
+F 0 "#PWR02" H 7000 3550 50  0001 C CNN
+F 1 "GND" H 7000 3650 50  0000 C CNN
+F 2 "" H 7000 3800 50  0000 C CNN
+F 3 "" H 7000 3800 50  0000 C CNN
+	1    7000 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 3600 7000 3800
+Wire Wire Line
+	7000 3100 7000 2900
+Wire Wire Line
+	3350 3200 4300 3200
+$Comp
+L GND #PWR03
+U 1 1 57101F79
+P 3250 2700
+F 0 "#PWR03" H 3250 2450 50  0001 C CNN
+F 1 "GND" H 3250 2550 50  0000 C CNN
+F 2 "" H 3250 2700 50  0000 C CNN
+F 3 "" H 3250 2700 50  0000 C CNN
+	1    3250 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X01 P1
+U 1 1 57101FB1
+P 3150 3100
+F 0 "P1" H 3150 3200 50  0000 C CNN
+F 1 "CONN_01X01" V 3250 3100 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 3150 3100 50  0001 C CNN
+F 3 "" H 3150 3100 50  0000 C CNN
+	1    3150 3100
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X01 P2
+U 1 1 571020C5
+P 3150 3250
+F 0 "P2" H 3150 3350 50  0000 C CNN
+F 1 "CONN_01X01" V 3250 3250 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 3150 3250 50  0001 C CNN
+F 3 "" H 3150 3250 50  0000 C CNN
+	1    3150 3250
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X01 P3
+U 1 1 5710210A
+P 3150 3400
+F 0 "P3" H 3150 3500 50  0000 C CNN
+F 1 "CONN_01X01" V 3250 3400 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 3150 3400 50  0001 C CNN
+F 3 "" H 3150 3400 50  0000 C CNN
+	1    3150 3400
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X01 P4
+U 1 1 5710216F
+P 3150 3550
+F 0 "P4" H 3150 3650 50  0000 C CNN
+F 1 "CONN_01X01" V 3250 3550 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 3150 3550 50  0001 C CNN
+F 3 "" H 3150 3550 50  0000 C CNN
+	1    3150 3550
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X01 P5
+U 1 1 571021AD
+P 3150 3700
+F 0 "P5" H 3150 3800 50  0000 C CNN
+F 1 "CONN_01X01" V 3250 3700 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 3150 3700 50  0001 C CNN
+F 3 "" H 3150 3700 50  0000 C CNN
+	1    3150 3700
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X01 P6
+U 1 1 571021F0
+P 3150 3850
+F 0 "P6" H 3150 3950 50  0000 C CNN
+F 1 "CONN_01X01" V 3250 3850 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 3150 3850 50  0001 C CNN
+F 3 "" H 3150 3850 50  0000 C CNN
+	1    3150 3850
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4300 3100 3350 3100
+Wire Wire Line
+	3350 3200 3350 3250
+Wire Wire Line
+	3350 3400 3500 3400
+Wire Wire Line
+	3500 3400 3500 3300
+Wire Wire Line
+	3500 3300 4300 3300
+Wire Wire Line
+	3350 3550 3550 3550
+Wire Wire Line
+	3550 3550 3550 3400
+Wire Wire Line
+	3550 3400 4300 3400
+Wire Wire Line
+	4300 3500 3900 3500
+Wire Wire Line
+	3900 3500 3900 3700
+Wire Wire Line
+	3900 3700 3350 3700
+Wire Wire Line
+	4300 3600 4300 3850
+Wire Wire Line
+	4300 3850 3350 3850
+$Comp
+L CONN_01X01 P7
+U 1 1 571022C6
+P 7350 3100
+F 0 "P7" H 7350 3200 50  0000 C CNN
+F 1 "CONN_01X01" V 7450 3100 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 7350 3100 50  0001 C CNN
+F 3 "" H 7350 3100 50  0000 C CNN
+	1    7350 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X01 P8
+U 1 1 57102315
+P 7350 3600
+F 0 "P8" H 7350 3700 50  0000 C CNN
+F 1 "CONN_01X01" V 7450 3600 50  0000 C CNN
+F 2 "Measurement_Points:Measurement_Point_Square-SMD-Pad_Big" H 7350 3600 50  0001 C CNN
+F 3 "" H 7350 3600 50  0000 C CNN
+	1    7350 3600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 3100 7150 3100
+Wire Wire Line
+	7000 3600 7150 3600
+Wire Wire Line
+	4100 2600 4100 3200
+Connection ~ 4100 3200
+Wire Wire Line
+	3700 2600 3600 2600
+Wire Wire Line
+	3300 2600 3250 2600
+Wire Wire Line
+	3250 2600 3250 2700
+$EndSCHEMATC
