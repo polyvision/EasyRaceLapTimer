@@ -13,7 +13,7 @@ class PilotRaceLap < ActiveRecord::Base
 
   def filter_fastest_lap
     t_fastest_lap = false
-	  t = RaceSession.find(self.race_session_id).pilot_race_laps.order("lap_time ASC").first
+	  t = RaceSession.find(self.race_session_id).pilot_race_laps_valid.order("lap_time ASC").first
   	if t.id == self.id
       t_fastest_lap = true
       SoundFileWorker.perform_async("sfx_fastet_lap")
@@ -22,7 +22,7 @@ class PilotRaceLap < ActiveRecord::Base
 
     # it was not the fastest lap in the race, but it might be a personal best time?
     if t_fastest_lap == false
-      t = RaceSession.find(self.race_session_id).pilot_race_laps.where(pilot_id: self.pilot_id).order("lap_time ASC").first
+      t = RaceSession.find(self.race_session_id).pilot_race_laps_valid.where(pilot_id: self.pilot_id).order("lap_time ASC").first
       if t.id == self.id
         SoundFileWorker.perform_async("sfx_personal_fastet_lap")
       end
@@ -35,6 +35,14 @@ class PilotRaceLap < ActiveRecord::Base
     end
 
     self.update_attribute(:latest,true)
+  end
+
+  def mark_invalidated
+    self.update_attribute(:invalidated,true)
+  end
+
+  def undo_invalidated
+    self.update_attribute(:invalidated,false)
   end
 
   def to_json
@@ -53,6 +61,7 @@ class PilotRaceLap < ActiveRecord::Base
     t[:race_session] = Hash.new
     t[:race_session][:title] = self.race_session.title
     t[:race_session][:mode] = self.race_session.mode
+    t[:invalidated] = self.invalidated;
     return t
   end
 end

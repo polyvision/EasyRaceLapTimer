@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   get 'race_director' => 'race_director#index'
   get 'race_director/lap_times' => 'race_director#lap_times'
-
+  get 'race_director/invalidate_lap' => 'race_director#invalidate_lap'
+  get 'race_director/undo_invalidate_lap' => 'race_director#undo_invalidate_lap'
+  
   # You can have the root of your site routed with "root"
   get 'system' => 'system#index'
   get '/system/pilot' => 'system/pilot#index'
