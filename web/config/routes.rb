@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'race_director/lap_times' => 'race_director#lap_times'
   get 'race_director/invalidate_lap' => 'race_director#invalidate_lap'
   get 'race_director/undo_invalidate_lap' => 'race_director#undo_invalidate_lap'
-  
+
   # You can have the root of your site routed with "root"
   get 'system' => 'system#index'
   get '/system/pilot' => 'system/pilot#index'
@@ -22,6 +22,13 @@ Rails.application.routes.draw do
   get '/system/pilot/deactivate_token/:id' => 'system/pilot#deactivate_token'
   post '/system/set_config_val/:id' => 'system#set_config_val'
   get '/system/shutdown' => 'system#shutdown'
+
+  get '/system/user' => 'system/user#index'
+  get '/system/user/new' => 'system/user#new'
+  post '/system/user/create' => 'system/user#create'
+  get '/system/user/:id' => 'system/user#edit'
+  delete '/system/user/delete/:id' => 'system/user#destroy'
+  put '/system/update/:id' => 'system/user#update'
 
   get 'system/soundfile' => 'system/soundfile#index'
   patch 'system/soundfile/:id' => 'system/soundfile#update'

@@ -1,0 +1,18 @@
+%h1
+  New User
+
+
+= form_for(@user,url: {action: :create }, :html => { :method => :post }) do |f|
+  .form-group
+    = f.label :email
+    = f.email_field :email, autofocus: true, class: "form-control"
+
+  .form-group
+    = f.label :password
+    = f.password_field :password, :autocomplete => "off", class: "form-control"
+
+  .form-group
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, class: "form-control"
+
+  = f.submit

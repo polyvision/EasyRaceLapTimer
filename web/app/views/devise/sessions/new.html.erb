@@ -14,7 +14,7 @@
       </div>
       <% if devise_mapping.rememberable? %>
         <div class="checkbox">
-          <label>  
+          <label>
           <%= f.check_box :remember_me %>
           <%= t('.remember_me', :default => "Remember me") %>
           </label>
@@ -24,4 +24,3 @@
     <% end %>
   </div>
 </div>
-<%= render "devise/shared/links" %>

@@ -1,5 +1,5 @@
 class SystemController < ApplicationController
-  before_action :authenticate_user!
+  before_action :filter_needs_admin_role
   before_action :get_style_settings
 
   def index

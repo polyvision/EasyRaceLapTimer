@@ -45,7 +45,7 @@
             %strong
               = formated_lap_time(session.average_lap_time)
           %td
-            - if current_user
+            - if current_user && current_user.has_role?(:admin)
               = link_to('Delete',url_for(action: 'delete', id: session.id),{method: 'DELETE', class: 'btn btn-warning', "data-confirm" => 'Are you sure?'})
             -#= link_to('XLSX Export',url_for(action: 'export_to_xlsx', id: session.id),{class: 'btn btn-success'})
             = link_to('PDF Export',url_for(action: 'pdf', id: session.id, format: :pdf),{class: 'btn btn-default btn-primary'})

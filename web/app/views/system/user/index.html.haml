@@ -1,0 +1,20 @@
+%h1
+  Accounts
+
+= link_to 'Add User',{action: 'new'},{class: 'btn btn-primary'}
+
+%table.table.table-bordered
+  %thead
+  %tbody
+    - @users.each do |u|
+      %tr
+        %td
+          = u.id
+        %td
+          = u.email
+        %td
+          - u.roles.each do |r|
+            = r.name
+        %td
+          = link_to('edit',{action: 'edit', id: u.id},{class: 'btn btn-primary'})
+          = link_to('delete',{action: 'destroy', id: u.id},{class: 'btn btn-warning', method: :delete,data: {confirm:'Are you sure?'}})

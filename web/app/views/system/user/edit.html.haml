@@ -1,0 +1,24 @@
+%h1
+  Edit User
+
+
+= form_for(@user,url: {action: :update, id: @user.id}, :html => { :method => :put }) do |f|
+  .form-group
+    = f.label :email
+    = f.email_field :email, autofocus: true, class: "form-control"
+
+  .form-group
+    = f.label :password
+    = f.password_field :password, :autocomplete => "off", class: "form-control"
+
+  .form-group
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, class: "form-control"
+
+  .form-group
+    Roles:
+    - Role.all.each do |role|
+      = check_box("role", role.id, checked: @user.has_role?(role.name))
+      = role.name
+
+  = f.submit

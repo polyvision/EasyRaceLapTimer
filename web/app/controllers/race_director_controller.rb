@@ -1,5 +1,5 @@
 class RaceDirectorController < ApplicationController
-  before_action :authenticate_user!
+  before_action :filter_needs_race_director_role
 
   def index
     @race_session_prototype = RaceSession.new
