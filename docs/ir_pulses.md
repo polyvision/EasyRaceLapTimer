@@ -37,8 +37,8 @@ the length of a ZERO and ONE pulse can be found for example in
 
 if you log the output of your IR receiver you would get something like this for the above examples
 
-    id 14: PULSE 300 | SPACE 300 | SPACE 300 | SPACE 300 | PULSE 600 | SPACE 600 | PULSE 600 | SPACE 300 | PULSE 300
-    id  3: PULSE 300 | SPACE 300 | SPACE 300 | SPACE 300 | PULSE 300 | SPACE 300 | PULSE 600 | SPACE 600 | PULSE 600
+    id 14: PULSE 300 | SPACE 300 | PULSE 300 | SPACE 300 | PULSE 600 | SPACE 600 | PULSE 600 | SPACE 300 | PULSE 300
+    id  3: PULSE 300 | SPACE 300 | PULSE 300 | SPACE 300 | PULSE 300 | SPACE 300 | PULSE 600 | SPACE 600 | PULSE 600
 
 please keep in mind that the pulse length differs a lot when using IR receivers, so they won't be 100% accurate
 
