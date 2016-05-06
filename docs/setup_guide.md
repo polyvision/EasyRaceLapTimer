@@ -176,4 +176,13 @@ Then add the following to the bottom of the file, just before "exit":
     (sleep 1; /home/pi/EasyRaceLapTimer/web/start_sidekiq.sh > /var/log/sidekiq.log 2>&1 &) || /bin/true
 
 
+## To login to the website:
+
+Connect to your raspberry Pi (via Ethernet or the Pi's Wifi Access Point)
+Default password for the Wifi AP is "raspberry"
+Open the webpage, if you're connected via Wifi AP the address is http://192.168.42.1
+default credentials are:
+
+    user: admin@easyracelaptimer.com
+    password: defaultpw
 *You are done!*
