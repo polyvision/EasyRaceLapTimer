@@ -158,6 +158,11 @@ In the same file, find the line that begins with "#dhcp-range" and edit it as fo
 
 Save and close the file.
 
+## Check Permissions for wkhtmltopdf
+Double check that the wkhtmltopdf is executable.  This ensures that "PDF Export" will work for race history.
+
+    sudo chmod+x /home/pi/EasyRaceLapTimer/web/bin/wkhtmltopdf
+
 ## Check Permissions for sidekiq.sh
 Double check that the sidekiq.sh script is executable
 
