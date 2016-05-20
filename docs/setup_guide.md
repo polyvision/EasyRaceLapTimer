@@ -181,15 +181,19 @@ Then add the following to the bottom of the file, just before "exit":
     (sleep 1; /home/pi/EasyRaceLapTimer/web/start_sidekiq.sh > /var/log/sidekiq.log 2>&1 &) || /bin/true
 
 ## Troubleshooting sound effects playback
+
 Sidekiq is responsible for playback of audio for sound effects.  Depending on the version and source fo Ruby installed, Sidekiq may not launch at startup.  If this is the case, please try these steps.
 
 Locate the path to the Sidekiq binary that is being used by Ruby:
-    which sidekiq
+
+    `which sidekiq`
 
 Edit the following file:
-    sudo nano ~/EasyRaceLapTimer/web/start_sidekiq.sh
 
-Edit the following line, replacing sidekiq with the full path (e.g. /path/to/sidekiq):
-    RAILS_ENV=production sidekiq -c 1
+    `sudo nano ~/EasyRaceLapTimer/web/start_sidekiq.sh`
+
+Edit the following line by replacing sidekiq with the /full/path/to/sidekiq:
+
+    `RAILS_ENV=production sidekiq -c 1`
 
 *You are done!*
