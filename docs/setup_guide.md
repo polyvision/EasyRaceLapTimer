@@ -55,7 +55,7 @@ To build it, perform the following steps (note: some of these steps will take a 
 
     cd ~/EasyRaceLapTimer/web/
     sudo apt-get update
-    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev imagemagick redis-server libsqlite3-dev bridge-utils wkhtmltopdf hostapd dnsmasq
+    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev imagemagick libsqlite3-dev bridge-utils wkhtmltopdf hostapd dnsmasq
     sudo gem install bundler
     bundle config build.nokogiri --use-system-libraries
     sudo  gem install nokogiri -v "1.6.6.2"
@@ -158,12 +158,17 @@ In the same file, find the line that begins with "#dhcp-range" and edit it as fo
 
 Save and close the file.
 
+## Check Permissions for wkhtmltopdf
+Double check that the wkhtmltopdf is executable.  This ensures that "PDF Export" will work for race history.
+
+    sudo chmod+x /home/pi/EasyRaceLapTimer/web/bin/wkhtmltopdf
+
 ## Check Permissions for sidekiq.sh
 Double check that the sidekiq.sh script is executable
 
     sudo chmod +x /home/pi/EasyRaceLapTimer/web/start_sidekiq.sh
 
-## Configure the IR Daemon to launch at startup
+## Configure the IR Daemon and Sidekiq (sound events) to launch at startup
 
 Edit the following file:
 
@@ -175,6 +180,21 @@ Then add the following to the bottom of the file, just before "exit":
     (sleep 1; /home/pi/EasyRaceLapTimer/ir_daemon/ir_daemon > /var/log/ir_daemon.log 2>&1 &) || /bin/true
     (sleep 1; /home/pi/EasyRaceLapTimer/web/start_sidekiq.sh > /var/log/sidekiq.log 2>&1 &) || /bin/true
 
+## Troubleshooting sound effects playback
+
+Sidekiq is responsible for playback of audio for sound effects.  Depending on the version and source fo Ruby installed, Sidekiq may not launch at startup.  If this is the case, please try these steps.
+
+Locate the path to the Sidekiq binary that is being used by Ruby:
+
+    `which sidekiq`
+
+Edit the following file:
+
+    `sudo nano ~/EasyRaceLapTimer/web/start_sidekiq.sh`
+
+Edit the following line by replacing sidekiq with the /full/path/to/sidekiq:
+
+    `RAILS_ENV=production sidekiq -c 1`
 
 ## To login to the website:
 
