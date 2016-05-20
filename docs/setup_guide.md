@@ -186,15 +186,15 @@ Sidekiq is responsible for playback of audio for sound effects.  Depending on th
 
 Locate the path to the Sidekiq binary that is being used by Ruby:
 
-    `which sidekiq`
+    which sidekiq
 
 Edit the following file:
 
-    `sudo nano ~/EasyRaceLapTimer/web/start_sidekiq.sh`
+    sudo nano ~/EasyRaceLapTimer/web/start_sidekiq.sh
 
 Edit the following line by replacing sidekiq with the /full/path/to/sidekiq:
 
-    `RAILS_ENV=production sidekiq -c 1`
+    RAILS_ENV=production sidekiq -c 1
 
 ## To login to the website:
 
