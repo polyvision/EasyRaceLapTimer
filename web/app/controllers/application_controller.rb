@@ -25,12 +25,7 @@ class ApplicationController < ActionController::Base
       return
     end
 
-    if !current_user.has_role?(:admin)
-      redirect_to "/"
-      return
-    end
-
-    if !current_user.has_role?(:race_director)
+    if !current_user.has_role?(:admin) && !current_user.has_role?(:race_director)
       redirect_to "/"
       return
     end
