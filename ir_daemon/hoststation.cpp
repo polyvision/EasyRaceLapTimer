@@ -18,6 +18,7 @@
 #include "gpioreader.h"
 #include <curl/curl.h>
 #include "infoserver.h"
+#include "vtx_sensor.h"
 #include <wiring_pi.h>
 #include "configuration.h"
 #include <QMutexLocker>
@@ -37,9 +38,9 @@ HostStation::HostStation(QObject *parent) : QObject(parent)
 void HostStation::setLastScannedToken(QString v){
     QMutexLocker locker(&m_Mutex);
     if(v.compare(m_strLastScannedToken) != 0){
-        m_strLastScannedToken = v;    
+        m_strLastScannedToken = v;
     }
-	
+
 }
 
 QString HostStation::lastScannedToken(){
@@ -52,7 +53,12 @@ void HostStation::setDebug(bool v){
 }
 
 void HostStation::eventStartNewRace(){
-    GPIOReader::instance()->reset();
+    if(Configuration::instance()->getVTXSensoring() == false){
+      GPIOReader::instance()->reset();
+    }else{
+      VTXSensor::instance()->reset();
+    }
+    
     QtConcurrent::run(this, &HostStation::webRequestStartNewRace);
     SerialConnection::instance()->write("RESET#\n");
     LOG_INFOS(LOG_FACILTIY_COMMON, "HostStation::eventStartNewRace");
@@ -66,7 +72,8 @@ void HostStation::eventReset(){
 void HostStation::setup(){
     NetworkServer *pNetworkServer = NetworkServer::instance();
     SerialConnection *pSerialConnection = SerialConnection::instance();
-    GPIOReader *pGPIOReader = GPIOReader::instance();
+
+
 
     // network connection signals
     connect(pNetworkServer,SIGNAL(startNewRaceEvent()),this,SLOT(eventStartNewRace()));
@@ -78,8 +85,15 @@ void HostStation::setup(){
     connect(pSerialConnection,SIGNAL(resetEvent()),this,SLOT(eventReset()));
     connect(pSerialConnection,SIGNAL(newLapTimeEvent(QString,unsigned int)),this,SLOT(eventNewLapTime(QString,unsigned int)));
 
-    //gpio reader connection signals
-    connect(pGPIOReader,SIGNAL(newLapTimeEvent(QString,unsigned int)),this,SLOT(eventNewLapTime(QString,unsigned int)));
+    if(Configuration::instance()->getVTXSensoring() == false){
+      GPIOReader *pGPIOReader = GPIOReader::instance();
+      //gpio reader connection signals
+      connect(pGPIOReader,SIGNAL(newLapTimeEvent(QString,unsigned int)),this,SLOT(eventNewLapTime(QString,unsigned int)));
+    }else{
+      VTXSensor *pVTXSensor = VTXSensor::instance();
+      connect(pVTXSensor,SIGNAL(newLapTimeEvent(QString,unsigned int)),this,SLOT(eventNewLapTime(QString,unsigned int)));
+    }
+
 
     connect(RestartButtonInput::instance(),SIGNAL(restartEvent()),this,SLOT(eventStartNewRace()));
 

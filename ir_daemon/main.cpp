@@ -24,6 +24,7 @@
 #include "serialconnection.h"
 #include "configuration.h"
 #include "infoserver.h"
+#include "vtx_sensor.h"
 #include "logger.h"
 
 #define VERSION "0.4"
@@ -57,6 +58,18 @@ int main(int argc, char *argv[])
 
         if(a.arguments().at(1).compare("--set_com_port_index") == 0){
             Configuration::instance()->setComPortIndex(a.arguments().at(2).toInt());
+            return 0;
+        }
+
+        if(a.arguments().at(1).compare("--enable_vtx_sensoring") == 0){
+            Configuration::instance()->setVTXSensoring(true);
+            LOG_DBGS(LOG_FACILTIY_COMMON, "enabled vtx sensoring");
+            return 0;
+        }
+
+        if(a.arguments().at(1).compare("--disable_vtx_sensoring") == 0){
+            Configuration::instance()->setVTXSensoring(false);
+            LOG_DBGS(LOG_FACILTIY_COMMON, "disabled vtx sensoring");
             return 0;
         }
 
@@ -110,13 +123,24 @@ int main(int argc, char *argv[])
 
     SerialConnection::instance()->setup();
 
-    if(!GPIOReader::instance()->init()) {
-        return -1;
+    if(Configuration::instance()->getVTXSensoring() == false){
+        if(!GPIOReader::instance()->init()) {
+            return -1;
+        }
+    }else{
+        if(!VTXSensor::instance()->init()) {
+            return -1;
+        }
     }
 
+
 	while(1){
-        GPIOReader::instance()->update();
-		Buzzer::instance()->update();
+        if(Configuration::instance()->getVTXSensoring() == false){
+          GPIOReader::instance()->update();
+        }else{
+          VTXSensor::instance()->update();
+        }
+		    Buzzer::instance()->update();
         RestartButtonInput::instance()->update();
         a.processEvents();
 	}

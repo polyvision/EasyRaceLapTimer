@@ -23,7 +23,8 @@ SOURCES += main.cpp restart_button_input.cpp buzzer.cpp \
     serialconnection.cpp \
     configuration.cpp \
     infoserver.cpp \
-    logger.cpp
+    logger.cpp \ 
+    vtx_sensor.cpp
     
 HEADERS += restart_button_input.h buzzer.h \
     hoststation.h \
@@ -40,7 +41,8 @@ HEADERS += restart_button_input.h buzzer.h \
     serialconnection.h \
     configuration.h \
     infoserver.h \
-    logger.h
+    logger.h \
+    vtx_sensor.h
 
 macx {
   SOURCES += qextserialport/qextserialenumerator_osx.cpp \

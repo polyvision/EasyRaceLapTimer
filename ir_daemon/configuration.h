@@ -45,6 +45,9 @@ public:
 
     void setRestartButtonPin(int);
     int restartButtonPin();
+    
+    void setVTXSensoring(bool);
+    bool getVTXSensoring();
 
     QString webHost();
     void setWebHost(const QString &);

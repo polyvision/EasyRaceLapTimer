@@ -54,6 +54,15 @@ bool Configuration::debug()
     return mp_settings->value("debug/debug", false).toBool();
 }
 
+void Configuration::setVTXSensoring(bool v){
+    mp_settings->setValue("vtx_sensoring/enabled", v);
+    mp_settings->sync();
+}
+
+bool Configuration::getVTXSensoring(){
+    return mp_settings->value("vtx_sensoring/enabled", false).toBool();
+}
+
 void Configuration::setComPortIndex(int index){
     mp_settings->setValue("serial_connection/com_port_index", index);
     mp_settings->sync();

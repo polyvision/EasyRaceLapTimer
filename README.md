@@ -11,6 +11,7 @@ What you get with EasyRaceLaptimer:
 **Features:**
 
 * host system for tracking the laps
+* VTX sensoring
 * IR transponders (code & schematic files for building them) with a transmitting range of 2 to 4 meters
 * 63 available transponder IDs when using the project transponders
 * changing the ID via a push button on the transponder, no additional programming required (started with version 0.3.1 of the transponders)
@@ -41,7 +42,7 @@ Be sure to use the full size of your SD card on the Raspberry PI
 The documentation for the project can be found in the [/docs](https://github.com/polyvision/EasyRaceLapTimer/tree/master/docs) directory.
 There's also a huge [RCGroups](http://www.rcgroups.com/forums/showthread.php?t=2538917) thread with lots of answered questions, images etc.
 
-# Version 0.5.x
+# Version 0.6.x
 
 You can download a SD card image for the PI of EasyRaceLapTimer on the following pages:
 
