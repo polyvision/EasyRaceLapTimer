@@ -63,7 +63,15 @@ To build it, perform the following steps (note: some of these steps will take a 
     RAILS_ENV=production rake db:create db:migrate db:seed assets:precompile
     sudo gem install passenger
     sudo passenger-install-apache2-module
+At the last step you need to copy & save the LoadModule lines. You'll need it later.
+These should look like this (different version numbers):
 
+    LoadModule passenger_module /var/lib/gems/2.1.0/gems/passenger-5.0.21/buildout/apache2/mod_passenger.so
+    <IfModule mod_passenger.c>
+      PassengerRoot /var/lib/gems/2.1.0/gems/passenger-5.0.21
+      PassengerDefaultRuby /usr/bin/ruby2.1
+    </IfModule>
+    
 ## Configure Apache Webserver
 
 First you need to setup the new site in Apache:
@@ -81,13 +89,7 @@ In that file, find the following lines:
     IncludeOptional mods-enabled/*.load
     IncludeOptional mods-enabled/*.conf
 
-and paste the following just before them
-
-    LoadModule passenger_module /var/lib/gems/2.1.0/gems/passenger-5.0.21/buildout/apache2/mod_passenger.so
-    <IfModule mod_passenger.c>
-      PassengerRoot /var/lib/gems/2.1.0/gems/passenger-5.0.21
-      PassengerDefaultRuby /usr/bin/ruby2.1
-    </IfModule>
+and paste the before saved LoadModule lines.
 
 ## Configure Linux Networking
 
