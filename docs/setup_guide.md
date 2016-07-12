@@ -32,7 +32,7 @@ unsure, leave it set to the default.
 On the Pi, execute the following commands to pull the source from this GitHub repository:
 
     cd ~
-    git clone https://github.com/polyvision/EasyRaceLapTimer.git
+    git clone -b 0.6 https://github.com/polyvision/EasyRaceLapTimer.git
 
 ## Build the IR Daemon
 
