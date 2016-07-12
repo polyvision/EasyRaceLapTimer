@@ -71,7 +71,7 @@ VTXSensor::VTXSensor(){
 }
 
 
-void VTXSensor::reset{
+void VTXSensor::reset(){
   for(int i = 0; i < 8; i++){
     m_iSensorStates[i] = 0;
     m_iSensorHighTimes[i] = 0;
