@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,17 +12,17 @@
 
 ActiveRecord::Schema.define(version: 20160502142410) do
 
-  create_table "config_values", force: :cascade do |t|
+  create_table "config_values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "value"
   end
 
-  create_table "custom_soundfiles", force: :cascade do |t|
+  create_table "custom_soundfiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
     t.string "file"
   end
 
-  create_table "pilot_race_laps", force: :cascade do |t|
+  create_table "pilot_race_laps", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.integer  "pilot_id"
@@ -33,31 +32,29 @@ ActiveRecord::Schema.define(version: 20160502142410) do
     t.datetime "deleted_at"
     t.boolean  "latest"
     t.boolean  "invalidated",     default: false
+    t.index ["deleted_at"], name: "index_pilot_race_laps_on_deleted_at", using: :btree
+    t.index ["lap_num"], name: "index_pilot_race_laps_on_lap_num", using: :btree
+    t.index ["lap_time"], name: "index_pilot_race_laps_on_lap_time", using: :btree
+    t.index ["pilot_id"], name: "index_pilot_race_laps_on_pilot_id", using: :btree
   end
 
-  add_index "pilot_race_laps", ["deleted_at"], name: "index_pilot_race_laps_on_deleted_at"
-  add_index "pilot_race_laps", ["lap_num"], name: "index_pilot_race_laps_on_lap_num"
-  add_index "pilot_race_laps", ["lap_time"], name: "index_pilot_race_laps_on_lap_time"
-  add_index "pilot_race_laps", ["pilot_id"], name: "index_pilot_race_laps_on_pilot_id"
-
-  create_table "pilots", force: :cascade do |t|
+  create_table "pilots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "image"
     t.string   "transponder_token"
     t.datetime "deleted_at"
     t.string   "quad"
     t.string   "team"
+    t.index ["deleted_at"], name: "index_pilots_on_deleted_at", using: :btree
   end
 
-  add_index "pilots", ["deleted_at"], name: "index_pilots_on_deleted_at"
-
-  create_table "race_attendees", force: :cascade do |t|
+  create_table "race_attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "race_session_id"
     t.integer "pilot_id"
     t.string  "transponder_token"
   end
 
-  create_table "race_sessions", force: :cascade do |t|
+  create_table "race_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.string   "title"
@@ -69,44 +66,41 @@ ActiveRecord::Schema.define(version: 20160502142410) do
     t.integer  "time_penalty_per_satellite", default: 2500
     t.boolean  "hot_seat_enabled",           default: false
     t.integer  "idle_time_in_seconds",       default: 0
+    t.index ["deleted_at"], name: "index_race_sessions_on_deleted_at", using: :btree
   end
 
-  add_index "race_sessions", ["deleted_at"], name: "index_race_sessions_on_deleted_at"
-
-  create_table "roles", force: :cascade do |t|
+  create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.integer  "resource_id"
     t.string   "resource_type"
+    t.integer  "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+    t.index ["name"], name: "index_roles_on_name", using: :btree
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
-  add_index "roles", ["name"], name: "index_roles_on_name"
-
-  create_table "satellite_check_points", force: :cascade do |t|
+  create_table "satellite_check_points", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "race_session_id"
     t.integer  "race_attendee_id"
     t.integer  "num_lap",          default: 0
+    t.index ["race_attendee_id"], name: "index_satellite_check_points_on_race_attendee_id", using: :btree
+    t.index ["race_session_id"], name: "index_satellite_check_points_on_race_session_id", using: :btree
   end
 
-  add_index "satellite_check_points", ["race_attendee_id"], name: "index_satellite_check_points_on_race_attendee_id"
-  add_index "satellite_check_points", ["race_session_id"], name: "index_satellite_check_points_on_race_session_id"
-
-  create_table "soundfiles", force: :cascade do |t|
+  create_table "soundfiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "file"
   end
 
-  create_table "style_settings", force: :cascade do |t|
+  create_table "style_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "own_logo_image"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",   null: false
     t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
@@ -127,16 +121,14 @@ ActiveRecord::Schema.define(version: 20160502142410) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.integer  "pin_code",               default: 1234
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-  create_table "users_roles", id: false, force: :cascade do |t|
+  create_table "users_roles", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.integer "role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
-
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
 
 end

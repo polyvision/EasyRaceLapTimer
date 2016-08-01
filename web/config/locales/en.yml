@@ -20,15 +20,4 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  actions:
-    delete: "delete"
-    edit: "edit"
-    deactivate_token: "remove token"
-    undo_invalidate_lap: "undo invalidation"
-    invalidate_lap: "invalidate"
-  race_session:
-    idle_time_in_seconds: Idle time (s)
-    title: Title
-  messages:
-    invalidated_successfully: "Lap is marked as invalidated"
-    undo_invalidation_successfully: "Lap is marked as valid"
+  hello: "Hello world"

@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
-gem 'sqlite3'
+gem 'rails', '5.0.0'
+gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -17,7 +17,7 @@ gem 'font-awesome-sass', '~> 4.4.0'
 gem 'devise'
 gem 'haml', '~> 4.0.5'
 gem 'devise-bootstrap-views'
-gem "paranoia", "~> 2.0"
+gem "paranoia", github: "rubysherpas/paranoia", branch: "rails5"
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'react-rails', '~> 1.5.0'
@@ -48,11 +48,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
+group :development do
+  gem 'web-console', '~> 2.0'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+end
+
+group :development, :test do
+
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+
   gem 'rspec-rails', '~> 3.0'
   gem 'timecop'
   gem 'database_cleaner'

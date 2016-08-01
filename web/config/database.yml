@@ -1,17 +1,23 @@
 development:
-  adapter: sqlite3
-  database: db/easy_race_lap_timer.sqlite3
+  adapter: mysql2
+  database: erlt_development
   pool: 5
   timeout: 5000
+  username: root
+  password:
 
 production:
-  adapter: sqlite3
-  database: db/easy_race_lap_timer.sqlite3
+  adapter: mysql2
+  database: erlt_production
   pool: 5
   timeout: 5000
+  username: root
+  password:
 
 test:
-  adapter: sqlite3
-  database: db/easy_race_lap_timer_test.sqlite3
+  adapter: mysql2
+  database: erl_test
   pool: 5
   timeout: 5000
+  username: root
+  password:
