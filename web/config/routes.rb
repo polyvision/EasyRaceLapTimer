@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'race_director/invalidate_lap' => 'race_director#invalidate_lap'
   get 'race_director/undo_invalidate_lap' => 'race_director#undo_invalidate_lap'
 
-  # You can have the root of your site routed with "root"
+
   get 'system' => 'system#index'
   get '/system/pilot' => 'system/pilot#index'
   post '/system/pilot/create' => 'system/pilot#create'
@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   get '/system/pilot/deactivate_token/:id' => 'system/pilot#deactivate_token'
   post '/system/set_config_val/:id' => 'system#set_config_val'
   get '/system/shutdown' => 'system#shutdown'
+
+  get '/system/race_event' => 'system/race_event#index'
+  get '/system/race_event/new' => 'system/race_event#new'
+  post '/system/race_event/create' => 'system/race_event#create'
 
   get '/system/user' => 'system/user#index'
   get '/system/user/new' => 'system/user#new'
@@ -71,6 +75,8 @@ Rails.application.routes.draw do
   get 'api/v1/race_session/update_race_session_idle_time' => 'api/v1/race_session#update_race_session_idle_time'
 
   get 'api/v1/info/last_scanned_token' => 'api/v1/info#last_scanned_token'
+
+  post 'api/v1/race_event/next_heat' => 'api/v1/race_event#next_heat'
 
   root 'monitor#index'
 

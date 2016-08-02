@@ -1,0 +1,20 @@
+%strong
+  = "Group #{group.group_no}"
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        = "#"
+      %th
+        Pilot
+      %th
+        Team
+  %tbody
+    - group.race_event_group_entries.each_with_index do |entry,index|
+      %tr
+        %td
+          = index + 1
+        %td
+          = entry.pilot.name
+        %td
+          = entry.pilot.team

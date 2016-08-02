@@ -1,0 +1,2 @@
+module System::RaceEventHelper
+end
