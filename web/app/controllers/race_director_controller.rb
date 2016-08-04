@@ -7,6 +7,8 @@ class RaceDirectorController < ApplicationController
 
     @current_race_session = RaceSession::get_open_session
     @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session) if @current_race_session
+
+    @current_race_event = RaceEvent.where(active: true).first
   end
 
   def invalidate_lap

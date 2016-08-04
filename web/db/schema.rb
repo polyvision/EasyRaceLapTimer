@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802122823) do
+ActiveRecord::Schema.define(version: 20160804122102) do
 
   create_table "config_values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -64,14 +64,16 @@ ActiveRecord::Schema.define(version: 20160802122823) do
   end
 
   create_table "race_event_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "race_event_id"
     t.integer  "group_no"
     t.integer  "placement"
     t.integer  "points"
-    t.integer  "heat_no",       default: 0
-    t.boolean  "heat_done",     default: false
+    t.integer  "heat_no",         default: 0
+    t.boolean  "heat_done",       default: false
+    t.integer  "race_session_id"
+    t.boolean  "current",         default: false
     t.index ["placement"], name: "index_race_event_groups_on_placement", using: :btree
     t.index ["points"], name: "index_race_event_groups_on_points", using: :btree
     t.index ["race_event_id"], name: "index_race_event_groups_on_race_event_id", using: :btree

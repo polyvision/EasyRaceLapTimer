@@ -9,6 +9,15 @@ class RaceSessionAdapter
     return self.race_session.mode
   end
 
+  def add_pilot_to_competition_race(pilot,transponder_token)
+    ra = self.race_session.race_attendees.build
+    ra.pilot_id = pilot.id
+    ra.transponder_token = transponder_token
+    ra.save!
+
+    puts "RaceSessionAdapter added pilot #{ra.pilot_id} token: #{ra.transponder_token} to race session: #{self.race_session.title}"
+  end
+
   def add_pilots_to_competition_race(params_pilots)
     params_pilots.each do |t|
       t_pilot = Pilot.find(t['pilot_id'])

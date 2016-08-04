@@ -7,7 +7,15 @@ class RaceEvent < ApplicationRecord
   end
 
   def get_next_group_in_heat
-    self.race_event_groups.where(heat_no: 1).count
+    self.race_event_groups.where(heat_no: self.current_heat).count
+  end
+
+  def get_next_group_in_heat_for_racing
+    self.race_event_groups.where(heat_no: self.current_heat).where(heat_done: false).order("id ASC").first
+  end
+
+  def current_group
+    self.race_event_groups.where(current:true).first
   end
 
   def next_heat

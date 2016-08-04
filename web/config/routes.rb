@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'race_director/lap_times' => 'race_director#lap_times'
   get 'race_director/invalidate_lap' => 'race_director#invalidate_lap'
   get 'race_director/undo_invalidate_lap' => 'race_director#undo_invalidate_lap'
+  get 'race_director/start_next_race_event_race' => 'race_director/start_next_race_event_race'
 
 
   get 'system' => 'system#index'

@@ -54,6 +54,14 @@ class RaceSession < ActiveRecord::Base
     if t && t.active
       t.update_attribute(:active, false)
     end
+
+    # if there's a race event group, we have to mark it as done
+    race_event_group = RaceEventGroup.where(race_session_id: t.id).first
+    if race_event_group
+      race_event_group.heat_done = true
+      race_event_group.current = false
+      race_event_group.save
+    end
   end
 
   def filter_reset_ir_daemon

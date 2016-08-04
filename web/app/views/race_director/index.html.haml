@@ -35,7 +35,10 @@
         = soundfile.title
 
 %hr
-= render file: '/shared/_panel_race_session_control'
+- if !@current_race_event
+  = render file: '/shared/_panel_race_session_control'
+- else
+  = render partial: 'race_event_control'
 
 :javascript
   setInterval(function() {
