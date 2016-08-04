@@ -38,7 +38,7 @@ RSpec.describe Api::V1::RaceSessionController, type: :controller do
     expect(response.status).to eq 200
 
     # first round, the last race got closed, so the system created a new one
-    post '/api/v1/lap_track',transponder_token: 1, lap_time_in_ms: 10000
+    post '/api/v1/lap_track',params:{transponder_token: 1, lap_time_in_ms: 10000}
 
     expect(response.status).to eq 200
     assert_equal 1, RaceLapAnnouncerWorker.jobs.size # should play a sound file
@@ -69,7 +69,7 @@ RSpec.describe Api::V1::RaceSessionController, type: :controller do
     new_race_data[:pilots] << {pilot_id: pilot_3.id, transponder_token: 30}
 
 
-    post '/api/v1/race_session/new_competition', data: new_race_data.to_json
+    post '/api/v1/race_session/new_competition', params:{data: new_race_data.to_json}
 
     idled_race_session = RaceSession::get_open_session
     Timecop.travel(Time.now + 180.seconds)
@@ -82,7 +82,7 @@ RSpec.describe Api::V1::RaceSessionController, type: :controller do
     # let's start anothe race without explicitly creating a new one via the gui
     # the system should detect that the last race was a race with an idle time
     # it should start enother again
-    post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
+    post '/api/v1/lap_track',params:{transponder_token: 10, lap_time_in_ms: 10000}
     expect(response.status).to eq 200
 
     expect(RaceSession::get_open_session().id).to eq (idled_race_session.id + 1)
@@ -114,7 +114,7 @@ RSpec.describe Api::V1::RaceSessionController, type: :controller do
     new_race_data[:pilots] << {pilot_id: pilot_3.id, transponder_token: 30}
 
 
-    post 'new_competition', data: new_race_data.to_json
+    post 'new_competition', params: {data: new_race_data.to_json}
 
     open_race_session = RaceSession::get_open_session
 

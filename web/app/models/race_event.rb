@@ -3,19 +3,20 @@ class RaceEvent < ApplicationRecord
   enum next_heat_grouping_mode: {stay: 0, shuffle: 1, combine_fastest_pilots_via_pos: 2,combine_fastest_pilots_via_fastest_lap: 3}
 
   def num_groups_per_heat
-    self.race_event_groups.where(heat_no: 1).count
+    return self.race_event_groups.where(heat_no: 1).count
   end
 
   def get_next_group_in_heat
-    self.race_event_groups.where(heat_no: self.current_heat).count
+    return self.race_event_groups.where(heat_no: self.current_heat).count
   end
 
   def get_next_group_in_heat_for_racing
-    self.race_event_groups.where(heat_no: self.current_heat).where(heat_done: false).order("id ASC").first
+    puts "get_next_group_in_heat_for_racing: heat:#{self.current_heat}"
+    return self.race_event_groups.where(heat_no: self.current_heat).where(heat_done: false).order("id ASC").first
   end
 
   def current_group
-    self.race_event_groups.where(current:true).first
+    return self.race_event_groups.where(current:true).first
   end
 
   def next_heat

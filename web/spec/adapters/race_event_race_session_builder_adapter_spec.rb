@@ -9,6 +9,7 @@ RSpec.describe "RaceEventRaceSessionBuilderAdapter", type: :request do
   end
 
   it "test starting race sessions",:type => :request do
+    RaceSession::stop_open_session
     for i in 1..7 do
       Pilot.create(name: "Pilot #{i}", transponder_token: "VTX#{i}", quad:'ZMR')
     end
@@ -103,7 +104,13 @@ RSpec.describe "RaceEventRaceSessionBuilderAdapter", type: :request do
     expect(race_event.get_next_group_in_heat_for_racing).to be_falsey
 
     # start a new heat
-    race_event.next_heat
+    expect(race_event.next_heat).to eq(true)
+    race_event.reload
+    expect(race_event.current_heat).to eq(2)
+    expect(RaceEventGroupEntry.all.count).to eq(14)
+    expect(RaceEventGroup.where(heat_done:true).count).to eq(3)
+    expect(RaceEventGroup.where(heat_done:false).count).to eq(3)
+
     expect(race_event.get_next_group_in_heat_for_racing).to be_truthy # now there must be again a new group ready
   end
 end

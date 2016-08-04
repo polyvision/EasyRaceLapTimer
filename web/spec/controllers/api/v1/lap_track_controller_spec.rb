@@ -18,7 +18,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       pilot = Pilot.create(name: "Test", transponder_token: 63, quad:'ZMR')
       race_session = RaceSession.create(title: 'Session',active: true)
 
-      post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 10000
+      post 'create',params: {transponder_token: pilot.transponder_token, lap_time_in_ms: 10000}
 
       expect(response.status).to eq 200
     end
@@ -29,20 +29,20 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       race_session = RaceSession.create(title: 'Session',active: true)
 
       # first lap
-      post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 10000
+      post 'create',params:{transponder_token: pilot.transponder_token, lap_time_in_ms: 10000}
       expect(response.status).to eq 200
       race_session.reload
       expect(race_session.pilot_race_laps.count).to eq(1)
 
       # too fast request
-      post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 10000
+      post 'create',params:{transponder_token: pilot.transponder_token, lap_time_in_ms: 10000}
       race_session.reload
       expect(race_session.pilot_race_laps.count).to eq(1)
       expect(response.status).to eq 403
 
       # now it should work again
       Timecop.travel(Time.now + 4.seconds)
-      post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 10000
+      post 'create',params:{transponder_token: pilot.transponder_token, lap_time_in_ms: 10000}
       race_session.reload
       expect(race_session.pilot_race_laps.count).to eq(2)
       expect(response.status).to eq 200
@@ -54,14 +54,14 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       race_session = RaceSession.create(title: 'Session',active: true)
 
       # should fail because of 60 seconds in lap_max_lap_time_in_seconds
-      post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 60000
+      post 'create',params:{transponder_token: pilot.transponder_token, lap_time_in_ms: 60000}
       expect(response.status).to eq 403
       race_session.reload
       expect(race_session.pilot_race_laps.count).to eq(0)
 
 
       # now it should work again
-      post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 59999
+      post 'create',params:{transponder_token: pilot.transponder_token, lap_time_in_ms: 59999}
       race_session.reload
       expect(race_session.pilot_race_laps.count).to eq(1)
       expect(response.status).to eq 200
@@ -73,14 +73,14 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       race_session = RaceSession.create(title: 'Session',active: true)
 
       # should fail because of 4 seconds in lap_min_lap_time_in_seconds
-      post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 3000
+      post 'create',params:{transponder_token: pilot.transponder_token, lap_time_in_ms: 3000}
       expect(response.status).to eq 403
       race_session.reload
       expect(race_session.pilot_race_laps.count).to eq(0)
 
 
       # now it should work again
-      post 'create',transponder_token: pilot.transponder_token, lap_time_in_ms: 4000
+      post 'create',params:{transponder_token: pilot.transponder_token, lap_time_in_ms: 4000}
       expect(response.status).to eq 200
       race_session.reload
       expect(race_session.pilot_race_laps.count).to eq(1)
@@ -90,7 +90,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
     it "simulate a race in competition mode" ,:type => :request do
       RaceLapAnnouncerWorker.drain
       RacePilotPlacementAnnouncerWorker.drain
-      
+
       ConfigValue::set_value("time_between_lap_track_requests_in_seconds",4)
       ConfigValue::set_value("lap_max_lap_time_in_seconds",60)
 
@@ -109,7 +109,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       new_race_data[:pilots] << {pilot_id: pilot_3.id, transponder_token: 30}
 
 
-      post '/api/v1/race_session/new_competition', data: new_race_data.to_json
+      post '/api/v1/race_session/new_competition',params:{ data: new_race_data.to_json}
 
       open_race_session = RaceSession::get_open_session
       expect(open_race_session.mode).to eq("competition")
@@ -117,17 +117,17 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
 
       # first round
-      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
+      post '/api/v1/lap_track',params:{transponder_token: 10, lap_time_in_ms: 10000}
       expect(response.status).to eq 200
       assert_equal 1, RaceLapAnnouncerWorker.jobs.size # should play a sound file
       RaceLapAnnouncerWorker.drain
 
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 11000}
       expect(response.status).to eq 200
       assert_equal 1, RaceLapAnnouncerWorker.jobs.size # should play a sound file
       RaceLapAnnouncerWorker.drain
 
-      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 12000
+      post '/api/v1/lap_track',params:{transponder_token: 30, lap_time_in_ms: 12000}
       expect(response.status).to eq 200
       assert_equal 1, RaceLapAnnouncerWorker.jobs.size # should play a sound file
       RaceLapAnnouncerWorker.drain
@@ -152,15 +152,15 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
       # second round
       Timecop.travel(Time.now + 11.seconds)
-      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 10000
+      post '/api/v1/lap_track',params:{transponder_token: 30, lap_time_in_ms: 10000}
       expect(response.status).to eq 200
       assert_equal 1, RaceLapAnnouncerWorker.jobs.size # should play a sound file
 
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 10000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 10000}
       expect(response.status).to eq 200
       assert_equal 2, RaceLapAnnouncerWorker.jobs.size # should play a sound file
 
-      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 13000
+      post '/api/v1/lap_track',params:{transponder_token: 10, lap_time_in_ms: 13000}
       expect(response.status).to eq 200
       assert_equal 3, RaceLapAnnouncerWorker.jobs.size # should play a sound file
       RaceLapAnnouncerWorker.drain
@@ -179,17 +179,17 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
       # third round
       Timecop.travel(Time.now + 11.seconds)
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 14000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 14000}
       expect(response.status).to eq 200
       assert_equal 1, RacePilotPlacementAnnouncerWorker.jobs.size # should play a finsihed race sound file
       RacePilotPlacementAnnouncerWorker.drain
 
-      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 12000
+      post '/api/v1/lap_track',params:{transponder_token: 30, lap_time_in_ms: 12000}
       expect(response.status).to eq 200
       assert_equal 1, RacePilotPlacementAnnouncerWorker.jobs.size # should play a finsihed race sound file
       RacePilotPlacementAnnouncerWorker.drain
 
-      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
+      post '/api/v1/lap_track',params:{transponder_token: 10, lap_time_in_ms: 10000}
       expect(response.status).to eq 200
       assert_equal 1, RacePilotPlacementAnnouncerWorker.jobs.size # should play a finsihed race sound file
       RacePilotPlacementAnnouncerWorker.drain
@@ -210,7 +210,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
       # just one more round to check if more laps would be counted
       Timecop.travel(Time.now + 11.seconds)
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 11000}
       expect(response.status).to eq 403
 
       open_race_session.reload
@@ -238,38 +238,38 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       new_race_data[:pilots] << {pilot_id: pilot_3.id, transponder_token: 30}
 
 
-      post '/api/v1/race_session/new_competition', data: new_race_data.to_json
+      post '/api/v1/race_session/new_competition',params:{ data: new_race_data.to_json}
 
       open_race_session = RaceSession::get_open_session
       expect(open_race_session.mode).to eq("competition")
       expect(open_race_session.active).to eq(true)
 
       # marking first gate satellite
-      post '/api/v1/satellite',transponder_token: 10
+      post '/api/v1/satellite',params:{transponder_token: 10}
       expect(response.status).to eq 200
       expect(SatelliteCheckPoint.joins(:race_attendee).where("race_attendees.transponder_token" => 10,race_session_id: open_race_session.id).first.num_lap).to eq(1)
-      post '/api/v1/satellite',transponder_token: 20
+      post '/api/v1/satellite',params:{transponder_token: 20}
       expect(response.status).to eq 200
-      post '/api/v1/satellite',transponder_token: 30
+      post '/api/v1/satellite',params:{transponder_token: 30}
       expect(response.status).to eq 200
 
       Timecop.travel(Time.now + 2.seconds)
 
       # marking 2nd gate satellite
-      post '/api/v1/satellite',transponder_token: 10
+      post '/api/v1/satellite',params:{transponder_token: 10}
       expect(response.status).to eq 200
-      post '/api/v1/satellite',transponder_token: 20
+      post '/api/v1/satellite',params:{transponder_token: 20}
       expect(response.status).to eq 200
       #post '/api/v1/satellite',transponder_token: 30 # pilot 3 won't hit the gate, so it's commented out
 
       # first round
-      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
+      post '/api/v1/lap_track',params:{transponder_token: 10, lap_time_in_ms: 10000}
       expect(response.status).to eq 200
 
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 11000}
       expect(response.status).to eq 200
 
-      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 9000
+      post '/api/v1/lap_track',params:{transponder_token: 30, lap_time_in_ms: 9000}
       expect(response.status).to eq 200
 
       open_race_session.reload
@@ -303,30 +303,30 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       # second round
 
       # marking first gate satellite
-      post '/api/v1/satellite',transponder_token: 10
+      post '/api/v1/satellite',params:{transponder_token: 10}
       expect(response.status).to eq 200
-      post '/api/v1/satellite',transponder_token: 20
+      post '/api/v1/satellite',params:{transponder_token: 20}
       expect(response.status).to eq 200
-      post '/api/v1/satellite',transponder_token: 30
+      post '/api/v1/satellite',params:{transponder_token: 30}
       expect(response.status).to eq 200
 
       Timecop.travel(Time.now + 2.seconds)
 
       # marking 2nd gate satellite
-      post '/api/v1/satellite',transponder_token: 10
+      post '/api/v1/satellite',params:{transponder_token: 10}
       expect(response.status).to eq 200
-      post '/api/v1/satellite',transponder_token: 20
+      post '/api/v1/satellite',params:{transponder_token: 20}
       expect(response.status).to eq 200
-      post '/api/v1/satellite',transponder_token: 30
+      post '/api/v1/satellite',params:{transponder_token: 30}
 
       Timecop.travel(Time.now + 11.seconds)
-      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 20000
+      post '/api/v1/lap_track',params:{transponder_token: 10, lap_time_in_ms: 20000}
       expect(response.status).to eq 200
 
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 11000}
       expect(response.status).to eq 200
 
-      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 12000
+      post '/api/v1/lap_track',params:{transponder_token: 30, lap_time_in_ms: 12000}
       expect(response.status).to eq 200
 
       open_race_session.reload
@@ -359,30 +359,30 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
       # third round
       # marking first gate satellite
-      post '/api/v1/satellite',transponder_token: 10
+      post '/api/v1/satellite',params:{transponder_token: 10}
       expect(response.status).to eq 200
-      post '/api/v1/satellite',transponder_token: 20
+      post '/api/v1/satellite',params:{transponder_token: 20}
       expect(response.status).to eq 200
-      post '/api/v1/satellite',transponder_token: 30
+      post '/api/v1/satellite',params:{transponder_token: 30}
       expect(response.status).to eq 200
 
       Timecop.travel(Time.now + 2.seconds)
 
       # marking 2nd gate satellite
-      post '/api/v1/satellite',transponder_token: 10
+      post '/api/v1/satellite',params:{transponder_token: 10}
       expect(response.status).to eq 200
-      post '/api/v1/satellite',transponder_token: 20
+      post '/api/v1/satellite',params:{transponder_token: 20}
       expect(response.status).to eq 200
-      post '/api/v1/satellite',transponder_token: 30
+      post '/api/v1/satellite',params:{transponder_token: 30}
 
       Timecop.travel(Time.now + 11.seconds)
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 11000}
       expect(response.status).to eq 200
 
-      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 12000
+      post '/api/v1/lap_track',params:{transponder_token: 30, lap_time_in_ms: 12000}
       expect(response.status).to eq 200
 
-      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
+      post '/api/v1/lap_track',params:{transponder_token: 10, lap_time_in_ms: 10000}
       expect(response.status).to eq 200
 
       get '/api/v1/monitor'
@@ -401,7 +401,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
       # just one more round to check if more laps would be counted
       Timecop.travel(Time.now + 11.seconds)
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 11000}
       expect(response.status).to eq 403
 
       open_race_session.reload
@@ -430,7 +430,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
       #new_race_data[:pilots] << {pilot_id: pilot_3.id, transponder_token: 30}
 
 
-      post '/api/v1/race_session/new_competition', data: new_race_data.to_json
+      post '/api/v1/race_session/new_competition',params:{ data: new_race_data.to_json}
 
       open_race_session = RaceSession::get_open_session
       expect(open_race_session.mode).to eq("competition")
@@ -439,12 +439,12 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
 
       # first round
-      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
+      post '/api/v1/lap_track',params:{transponder_token: 10, lap_time_in_ms: 10000}
       #puts response.body
       expect(response.status).to eq 200
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 11000}
       expect(response.status).to eq 200
-      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 12000
+      post '/api/v1/lap_track',params:{transponder_token: 30, lap_time_in_ms: 12000}
       expect(response.status).to eq 200
 
       open_race_session.reload
@@ -467,13 +467,13 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
       # second round
       Timecop.travel(Time.now + 11.seconds)
-      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 10000
+      post '/api/v1/lap_track',params:{transponder_token: 30, lap_time_in_ms: 10000}
       expect(response.status).to eq 200
 
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 10000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 10000}
       expect(response.status).to eq 200
 
-      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 13000
+      post '/api/v1/lap_track',params:{transponder_token: 10, lap_time_in_ms: 13000}
       expect(response.status).to eq 200
 
       open_race_session.reload
@@ -489,13 +489,13 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
       # third round
       Timecop.travel(Time.now + 11.seconds)
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 14000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 14000}
       expect(response.status).to eq 200
 
-      post '/api/v1/lap_track',transponder_token: 30, lap_time_in_ms: 12000
+      post '/api/v1/lap_track',params:{transponder_token: 30, lap_time_in_ms: 12000}
       expect(response.status).to eq 200
 
-      post '/api/v1/lap_track',transponder_token: 10, lap_time_in_ms: 10000
+      post '/api/v1/lap_track',params:{transponder_token: 10, lap_time_in_ms: 10000}
       expect(response.status).to eq 200
 
       get '/api/v1/monitor'
@@ -514,7 +514,7 @@ RSpec.describe Api::V1::LapTrackController, :type => :controller do
 
       # just one more round to check if more laps would be counted
       Timecop.travel(Time.now + 11.seconds)
-      post '/api/v1/lap_track',transponder_token: 20, lap_time_in_ms: 11000
+      post '/api/v1/lap_track',params:{transponder_token: 20, lap_time_in_ms: 11000}
       expect(response.status).to eq 403
 
       open_race_session.reload

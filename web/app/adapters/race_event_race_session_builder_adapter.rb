@@ -7,6 +7,8 @@ class RaceEventRaceSessionBuilderAdapter
   end
 
   def perform()
+    self.race_event.reload
+    
     if RaceSession::get_open_session
       self.error = "another race session is open"
       return false
