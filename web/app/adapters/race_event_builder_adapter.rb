@@ -39,7 +39,7 @@ class RaceEventBuilderAdapter
 
 
     self.race_event.race_event_groups.where(heat_no: self.race_event.current_heat-1).each do |old_group|
-      new_group = RaceEventGroup.new(race_event_id: old_group.id)
+      new_group = RaceEventGroup.new(race_event_id: old_group.race_event_id)
       new_group.heat_no = self.race_event.current_heat
       new_group.group_no = old_group.group_no
       new_group.save

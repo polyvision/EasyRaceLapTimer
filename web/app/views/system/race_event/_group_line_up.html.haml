@@ -1,5 +1,9 @@
 %strong
   = "Group #{group.group_no}"
+- if group.current
+  | RUNNING
+- if group.heat_done
+  | HEAT DONE
 %table.table.table-striped.table-bordered
   %thead
     %tr
@@ -9,6 +13,12 @@
         Pilot
       %th
         Team
+      %th
+        Pos
+      %th
+        TT
+      %th
+        FT
   %tbody
     - group.race_event_group_entries.each_with_index do |entry,index|
       %tr
@@ -18,3 +28,9 @@
           = entry.pilot.name
         %td
           = entry.pilot.team
+        %td
+          = entry.placement
+        %td
+          = formated_lap_time(entry.total_time)
+        %td
+          = formated_lap_time(entry.fastest_lap_time)

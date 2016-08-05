@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'race_director/invalidate_lap' => 'race_director#invalidate_lap'
   get 'race_director/undo_invalidate_lap' => 'race_director#undo_invalidate_lap'
   get 'race_director/start_next_race_event_race' => 'race_director/start_next_race_event_race'
+  get 'race_director/stop_race_event_race' => 'race_director/stop_race_event_race'
+  get 'race_director/start_next_race_event_heat' => 'race_director/start_next_race_event_heat'
 
 
   get 'system' => 'system#index'
@@ -78,6 +80,8 @@ Rails.application.routes.draw do
   get 'api/v1/info/last_scanned_token' => 'api/v1/info#last_scanned_token'
 
   post 'api/v1/race_event/next_heat' => 'api/v1/race_event#next_heat'
+  post 'api/v1/race_event/start_next_race' => 'api/v1/race_event#start_next_race'
+
 
   root 'monitor#index'
 

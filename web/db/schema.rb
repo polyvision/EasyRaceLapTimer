@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804122102) do
+ActiveRecord::Schema.define(version: 20160805051611) do
 
   create_table "config_values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -55,12 +55,14 @@ ActiveRecord::Schema.define(version: 20160804122102) do
   end
 
   create_table "race_event_group_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "token"
-    t.integer  "round_no"
     t.integer  "pilot_id"
     t.integer  "race_event_group_id"
+    t.integer  "fastest_lap_time",    default: 0
+    t.integer  "total_time",          default: 0
+    t.integer  "placement",           default: 0
   end
 
   create_table "race_event_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

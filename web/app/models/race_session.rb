@@ -60,6 +60,7 @@ class RaceSession < ActiveRecord::Base
         race_event_group.heat_done = true
         race_event_group.current = false
         race_event_group.save
+        race_event_group.calculate_race_data
         puts "RaceSession::stop_open_session closed marked group: #{race_event_group.id} as done"
       end
     end

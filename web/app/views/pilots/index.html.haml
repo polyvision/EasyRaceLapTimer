@@ -17,7 +17,7 @@
     - @pilots.each do |pilot|
       %tr
         %td
-          - if pilot.image
+          - if pilot.image && pilot.image.url
             = image_tag(pilot.image.url,width: 50,height:50)
         %td
           %strong
