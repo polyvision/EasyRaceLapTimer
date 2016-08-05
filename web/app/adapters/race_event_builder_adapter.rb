@@ -20,6 +20,10 @@ class RaceEventBuilderAdapter
     if(self.race_event.next_heat_grouping_mode == "shuffle")
       self.build_mode_shuffle
     end
+
+    if(self.race_event.next_heat_grouping_mode == "combine_fastest_pilots_via_pos")
+      self.build_mode_mode_combine_fastest_pilots_via_pos
+    end
   end
 
   def build_mode_shuffle
@@ -48,6 +52,27 @@ class RaceEventBuilderAdapter
         self.assign_pilot_to_race_group(entry.pilot,new_group,false)
       end
     end
+  end
+
+  def build_mode_mode_combine_fastest_pilots_via_pos
+    pos_data = Array.new
+    # getting all the placements
+    self.race_event.race_event_groups.where(heat_no: self.race_event.current_heat-1).each do |group|
+      group.race_event_group_entries.each do |entry|
+      pos_data << {pos: entry.placement,pilot: entry.pilot}
+      end
+    end
+
+    # sorting
+    pos_data = pos_data.sort_by do |item|
+      item[:pos]
+    end
+
+    current_race_group = RaceEventGroup.create(race_event_id: self.race_event.id,group_no: 1, heat_no: self.race_event.current_heat)
+
+    pos_data.each do |pos_entry|
+      current_race_group = self.assign_pilot_to_race_group(pos_entry[:pilot],current_race_group)
+    end # end of each pilot
   end
 
   def assign_pilot_to_race_group(pilot,current_race_group,create_new_group = true)
