@@ -22,6 +22,21 @@ class System::RaceEventController < SystemController
     redirect_to action: 'index'
   end
 
+  def invalidate_heat_for_group
+     @active_race_event = RaceEvent.where(active: true).first
+     if !@active_race_event
+      redirect_to action: 'index'
+      return
+    end
+
+    group = @active_race_event.race_event_groups.where(id: params[:id]).first
+    if group
+      group.invalidate
+    end
+
+    redirect_to action: 'index'
+  end
+
   private
 
   def strong_params_race_event

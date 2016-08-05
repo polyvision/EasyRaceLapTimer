@@ -30,7 +30,7 @@ class RaceEventRaceSessionBuilderAdapter
 
     race_session_adapter = RaceSessionAdapter.new(race_session)
     racing_group.race_event_group_entries.each_with_index do |entry,index|
-      race_session_adapter.add_pilot_to_competition_race(entry.pilot,"VTX_#{index+1}")
+      race_session_adapter.add_pilot_to_competition_race(entry.pilot,entry.token)
     end
     race_session.update_attribute(:active,true)
 

@@ -4,6 +4,21 @@
   | RUNNING
 - if group.heat_done
   | HEAT DONE
+
+.pull-right
+  .btn-group
+    %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+      %i.glyphicon.glyphicon-pencil
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        = link_to('Invalidate Heat',{action: 'invalidate_heat_for_group', id: group.id},"data-confirm" => "Invildate heat for Group #{group.group_no}?")
+      %li
+        %a{:href => "#"} Move Pilot
+      %li.divider{:role => "separator"}
+      %li
+        %a{:href => "#"} Show Race Session Results
+
 %table.table.table-striped.table-bordered
   %thead
     %tr

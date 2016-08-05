@@ -1,6 +1,17 @@
 %h1
   = @active_race_event.title
 
+.panel.panel-default
+  .panel-body
+    %strong
+      Heats: 
+    = @active_race_event.number_of_heats
+    %strong
+      Current Heat:
+    = @active_race_event.current_heat
+    %strong
+      Group Mode:
+    = @active_race_event.next_heat_grouping_mode
 %table.table
   %thead
     %tr

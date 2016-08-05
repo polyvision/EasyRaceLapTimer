@@ -71,6 +71,7 @@ class RaceEventBuilderAdapter
     current_race_group = RaceEventGroup.create(race_event_id: self.race_event.id,group_no: 1, heat_no: self.race_event.current_heat)
 
     pos_data.each do |pos_entry|
+      #puts "pos: #{pos_entry[:pos]} pilot: #{pos_entry[:pilot].id}"
       current_race_group = self.assign_pilot_to_race_group(pos_entry[:pilot],current_race_group)
     end # end of each pilot
   end
@@ -79,7 +80,15 @@ class RaceEventBuilderAdapter
     race_event_group_entry = RaceEventGroupEntry.new
     race_event_group_entry.pilot_id = pilot.id
     race_event_group_entry.race_event_group_id = current_race_group.id
+    race_event_group_entry.token = pilot.transponder_token
     race_event_group_entry.save
+
+    if(ConfigValue::get_value("vtx_enabled") && ConfigValue::get_value("vtx_enabled").to_i == 1)
+      current_race_group.reload
+      race_event_group_entry.token = "VTX_#{current_race_group.race_event_group_entries.count}"
+    end 
+
+    #puts "added pilot #{pilot.id} token: #{pilot.transponder_token} to group: #{current_race_group.group_no}"
 
 
     if(create_new_group == false)
@@ -87,7 +96,7 @@ class RaceEventBuilderAdapter
     end
 
     if(current_race_group.race_event_group_entries.count >= self.race_event.number_of_pilots_per_group)
-      puts "adding new current group via assign_pilot_to_race_group heat: #{self.race_event.current_heat}"
+      #puts "adding new current group via assign_pilot_to_race_group heat: #{self.race_event.current_heat}"
       group_no = current_race_group.group_no + 1
 
       current_race_group = RaceEventGroup.create(race_event_id: self.race_event.id)

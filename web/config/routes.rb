@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get '/system/race_event' => 'system/race_event#index'
   get '/system/race_event/new' => 'system/race_event#new'
   post '/system/race_event/create' => 'system/race_event#create'
+  get '/system/race_event/invalidate_heat_for_group/:id' => 'system/race_event#invalidate_heat_for_group'
 
   get '/system/user' => 'system/user#index'
   get '/system/user/new' => 'system/user#new'
