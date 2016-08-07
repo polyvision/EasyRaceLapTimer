@@ -27,9 +27,14 @@ Rails.application.routes.draw do
   get '/system/shutdown' => 'system#shutdown'
 
   get '/system/race_event' => 'system/race_event#index'
+  get 'system/race_event/manage/:id' => 'system/race_event#manage'
   get '/system/race_event/new' => 'system/race_event#new'
   post '/system/race_event/create' => 'system/race_event#create'
+  delete '/system/race_event/delete/:id' => 'system/race_event#destroy'
   get '/system/race_event/invalidate_heat_for_group/:id' => 'system/race_event#invalidate_heat_for_group'
+  get 'system/race_event/edit_group/:id' => 'system/race_event#edit_group'
+  delete 'system/race_event/del_pilot_from_group/:id' => 'system/race_event#del_pilot_from_group'
+  post 'system/race_event/add_pilot_to_group/:id' => 'system/race_event#add_pilot_to_group'
 
   get '/system/user' => 'system/user#index'
   get '/system/user/new' => 'system/user#new'

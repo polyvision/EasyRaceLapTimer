@@ -14,7 +14,7 @@
       %li
         = link_to('Invalidate Heat',{action: 'invalidate_heat_for_group', id: group.id},"data-confirm" => "Invildate heat for Group #{group.group_no}?")
       %li
-        %a{:href => "#"} Move Pilot
+        = link_to('Edit',{action: 'edit_group', id: group.id})
       %li.divider{:role => "separator"}
       %li
         %a{:href => "#"} Show Race Session Results
@@ -28,6 +28,8 @@
         Pilot
       %th
         Team
+      %th
+        TO
       %th
         Pos
       %th
@@ -43,6 +45,8 @@
           = entry.pilot.name
         %td
           = entry.pilot.team
+        %td
+          = entry.token
         %td
           = entry.placement
         %td

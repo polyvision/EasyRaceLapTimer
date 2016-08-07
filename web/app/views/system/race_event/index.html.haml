@@ -1,27 +1,21 @@
 %h1
-  = @active_race_event.title
+  RaceEvents
 
-.panel.panel-default
-  .panel-body
-    %strong
-      Heats: 
-    = @active_race_event.number_of_heats
-    %strong
-      Current Heat:
-    = @active_race_event.current_heat
-    %strong
-      Group Mode:
-    = @active_race_event.next_heat_grouping_mode
-%table.table
+=link_to('New RaceEvent',{action: 'new'}, class: 'btn btn-default')
+
+%table.table.table-striped
   %thead
-    %tr
-      - for i in 1..@active_race_event.number_of_heats do
-        %th
-          = "Heat #{i}"
   %tbody
-    - for group_no in 0..@active_race_event.num_groups_per_heat do
+    - @race_events.each do |event|
       %tr
-        - for heat_no in 1..@active_race_event.number_of_heats do
-          %td
-            - if @race_event_group_presenter.group_of_heat(heat_no,group_no)
-              = render partial: 'group_line_up', locals: {group: @race_event_group_presenter.group_of_heat(heat_no,group_no)}
+        %td
+          = event.id
+        %td
+          = event.title
+        %td
+          = event.number_of_pilots_per_group
+        %td
+          = event.number_of_heats
+        %td
+          = link_to('manage',{action: 'manage', id: event.id})
+          = link_to('delete',{action: 'destroy', id: event.id},{method: 'delete'})

@@ -83,10 +83,11 @@ class RaceEventBuilderAdapter
     race_event_group_entry.token = pilot.transponder_token
     race_event_group_entry.save
 
-    if(ConfigValue::get_value("vtx_enabled") && ConfigValue::get_value("vtx_enabled").to_i == 1)
+    if(ConfigValue::get_value("vtx_enabled") && ConfigValue::get_value("vtx_enabled").value.to_i == 1)
       current_race_group.reload
       race_event_group_entry.token = "VTX_#{current_race_group.race_event_group_entries.count}"
-    end 
+      race_event_group_entry.save
+    end
 
     #puts "added pilot #{pilot.id} token: #{pilot.transponder_token} to group: #{current_race_group.group_no}"
 

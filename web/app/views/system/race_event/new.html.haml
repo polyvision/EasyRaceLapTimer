@@ -21,7 +21,7 @@
       = t('race_event.next_heat_grouping_mode')
       %select{name: "race_event[next_heat_grouping_mode]", class: 'form-control'}
         - RaceEvent.next_heat_grouping_modes.keys.each do |k|
-          %option{value: RaceEvent.next_heat_grouping_modes[k]}
+          %option{value: k}
             = k
 
   %button.btn.btn-default.btn-primary{:type => "submit"}
