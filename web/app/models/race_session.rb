@@ -53,6 +53,16 @@ class RaceSession < ActiveRecord::Base
     t = RaceSession::get_open_session()
     if t && t.active
       t.update_attribute(:active, false)
+
+      # if there's a race event group, we have to mark it as done
+      race_event_group = RaceEventGroup.where(race_session_id: t.id).first
+      if race_event_group
+        race_event_group.heat_done = true
+        race_event_group.current = false
+        race_event_group.save
+        race_event_group.calculate_race_data
+        puts "RaceSession::stop_open_session closed marked group: #{race_event_group.id} as done"
+      end
     end
   end
 

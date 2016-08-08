@@ -1,0 +1,28 @@
+%h1
+  = t('race_event.header.new_race_event')
+
+= form_for(@race_event,url: {action: 'create'},html: {class: 'form-horizontal'}) do |f|
+  .form-group
+    %label
+      = t('race_event.title')
+    = f.text_field(:title, placeholder: "", class: 'form-control', required: true)
+  .form-group
+    %label
+      = t('race_event.number_of_pilots_per_group')
+    = f.text_field(:number_of_pilots_per_group, placeholder: 5, class: 'form-control', required: true)
+
+  .form-group
+    %label
+      = t('race_event.number_of_heats')
+    = f.text_field(:number_of_heats, placeholder: 5, class: 'form-control', required: true)
+
+  .form-group
+    %label
+      = t('race_event.next_heat_grouping_mode')
+      %select{name: "race_event[next_heat_grouping_mode]", class: 'form-control'}
+        - RaceEvent.next_heat_grouping_modes.keys.each do |k|
+          %option{value: k}
+            = k
+
+  %button.btn.btn-default.btn-primary{:type => "submit"}
+    = t('actions.create')

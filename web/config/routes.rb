@@ -11,8 +11,11 @@ Rails.application.routes.draw do
   get 'race_director/lap_times' => 'race_director#lap_times'
   get 'race_director/invalidate_lap' => 'race_director#invalidate_lap'
   get 'race_director/undo_invalidate_lap' => 'race_director#undo_invalidate_lap'
+  get 'race_director/start_next_race_event_race' => 'race_director/start_next_race_event_race'
+  get 'race_director/stop_race_event_race' => 'race_director/stop_race_event_race'
+  get 'race_director/start_next_race_event_heat' => 'race_director/start_next_race_event_heat'
 
-  # You can have the root of your site routed with "root"
+
   get 'system' => 'system#index'
   get '/system/pilot' => 'system/pilot#index'
   post '/system/pilot/create' => 'system/pilot#create'
@@ -22,6 +25,17 @@ Rails.application.routes.draw do
   get '/system/pilot/deactivate_token/:id' => 'system/pilot#deactivate_token'
   post '/system/set_config_val/:id' => 'system#set_config_val'
   get '/system/shutdown' => 'system#shutdown'
+
+  get '/system/race_event' => 'system/race_event#index'
+  get 'system/race_event/manage/:id' => 'system/race_event#manage'
+  get '/system/race_event/new' => 'system/race_event#new'
+  post '/system/race_event/create' => 'system/race_event#create'
+  delete '/system/race_event/delete/:id' => 'system/race_event#destroy'
+  get '/system/race_event/invalidate_heat_for_group/:id' => 'system/race_event#invalidate_heat_for_group'
+  get 'system/race_event/edit_group/:id' => 'system/race_event#edit_group'
+  delete 'system/race_event/del_pilot_from_group/:id' => 'system/race_event#del_pilot_from_group'
+  post 'system/race_event/add_pilot_to_group/:id' => 'system/race_event#add_pilot_to_group'
+  post 'system/race_event/update_pilot_token/:id' => 'system/race_event#update_pilot_token'
 
   get '/system/user' => 'system/user#index'
   get '/system/user/new' => 'system/user#new'
@@ -71,6 +85,10 @@ Rails.application.routes.draw do
   get 'api/v1/race_session/update_race_session_idle_time' => 'api/v1/race_session#update_race_session_idle_time'
 
   get 'api/v1/info/last_scanned_token' => 'api/v1/info#last_scanned_token'
+
+  post 'api/v1/race_event/next_heat' => 'api/v1/race_event#next_heat'
+  post 'api/v1/race_event/start_next_race' => 'api/v1/race_event#start_next_race'
+
 
   root 'monitor#index'
 

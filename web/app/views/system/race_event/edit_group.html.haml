@@ -1,0 +1,49 @@
+%h1
+  Edit:
+  Group
+  = @race_event_group.group_no
+
+%ol.breadcrumb
+  %li
+    = link_to('Race Event',{action: 'manage',id: @race_event_group.race_event.id})
+  
+
+- if @not_assigned_pilots.count > 0
+  .panel.panel-default
+    .panel-body
+      %h2
+        Add unassigned pilot to group
+      =form_tag({action: 'add_pilot_to_group', id: @race_event_group.id},{class: 'form-horizontal'}) do
+        %select{name: 'pilot_id', class: 'form-control'}
+          - @not_assigned_pilots.each do |pilot|
+            %option{value: pilot.id}
+              = pilot.name
+        = submit_tag 'add to group'
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th
+        = "#"
+      %th
+        Pilot
+      %th
+        Team
+      %th
+        Token
+      %th
+  %tbody
+    - @race_event_group.race_event_group_entries.each_with_index do |entry,index|
+      = form_tag({action: 'update_pilot_token', id: entry.id}) do
+        %tr
+          %td
+            = index + 1
+          %td
+            = entry.pilot.name
+          %td
+            = entry.pilot.team
+          %td
+            %input{name: 'token', value: entry.token, class: 'form-control'}
+          %td
+            = submit_tag 'update token', class: 'btn btn-primary'
+            = link_to('remove',{action: 'del_pilot_from_group', id: entry.id},{method: 'delete', "data-confirm" => 'Remove?', class: 'btn btn-warning'})

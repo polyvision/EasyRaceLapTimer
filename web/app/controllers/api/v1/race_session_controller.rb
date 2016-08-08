@@ -17,7 +17,7 @@ class Api::V1::RaceSessionController < Api::V1Controller
     race_session_adapter = RaceSessionAdapter.new(race_session)
     race_session_adapter.add_pilots_to_competition_race(json_input_data['pilots'])
     race_session.update_attribute(:active,true)
-    render status: 200, text: ""
+    render status: 200, plain: ""
   end
 
   def update_race_session_idle_time
@@ -30,6 +30,6 @@ class Api::V1::RaceSessionController < Api::V1Controller
         end
     end
 
-    render status: 200, text: ''
+    render status: 200, plain: ''
   end
 end

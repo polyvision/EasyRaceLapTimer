@@ -24,11 +24,12 @@ gem 'react-rails', '~> 1.5.0'
 gem 'axlsx', '~> 2.0.1'
 gem 'axlsx_rails'
 gem 'wicked_pdf'
-gem 'sidekiq'
+gem 'sidekiq', '< 5'
 gem 'sinatra', :require => nil
 gem 'whenever'
 gem 'redis-namespace'
 gem "rolify"
+gem 'rest-client'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -58,7 +59,7 @@ group :development, :test do
 
   # Access an IRB console on exception pages or by using <%= console %> in views
 
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.5'
   gem 'timecop'
   gem 'database_cleaner'
   gem 'capybara'

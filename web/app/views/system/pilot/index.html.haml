@@ -17,7 +17,7 @@
   .form-group
     %label{:for => "exampleInputEmail2"}
       = t('pilot.quad')
-    = f.text_field(:quad, placeholder: "ZMR 250 4S", class: 'form-control', required: true)
+    = f.text_field(:quad, placeholder: "ZMR 250 4S", class: 'form-control', required: false)
   .form-group
     %label{:for => "exampleInputEmail2"}
       = t('pilot.team')
@@ -45,7 +45,7 @@
         %td
           = pilot.id
         %td
-          - if pilot.image
+          - if pilot.image && pilot.image.url != nil
             = image_tag(pilot.image.url,width: 50,height:50)
         %td
           = pilot.name

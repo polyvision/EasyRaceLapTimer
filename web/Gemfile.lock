@@ -183,6 +183,8 @@ GEM
     ref (2.0.0)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rolify (5.1.0)
     rspec-core (3.5.2)
       rspec-support (~> 3.5.0)
@@ -277,11 +279,12 @@ DEPENDENCIES
   rails (= 5.0.0)
   react-rails (~> 1.5.0)
   redis-namespace
+  rest-client
   rolify
-  rspec-rails (~> 3.0)
+  rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  sidekiq
+  sidekiq (< 5)
   sinatra
   spring
   therubyracer
@@ -292,4 +295,4 @@ DEPENDENCIES
   wicked_pdf
 
 BUNDLED WITH
-   1.11.2
+   1.12.5

@@ -7,6 +7,8 @@ class RaceDirectorController < ApplicationController
 
     @current_race_session = RaceSession::get_open_session
     @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session) if @current_race_session
+
+    @current_race_event = RaceEvent.where(active: true).first
   end
 
   def invalidate_lap
@@ -27,5 +29,29 @@ class RaceDirectorController < ApplicationController
     @current_race_session = RaceSession::get_open_session
     @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session) if @current_race_session
     render layout: false
+  end
+
+  def start_next_race_event_race
+    @current_race_event = RaceEvent.where(active: true).first
+    if @current_race_event
+      adapter = RaceEventRaceSessionBuilderAdapter.new(@current_race_event)
+      if !adapter.perform
+        flash[:error]= "starting a new race failed: #{adapter.error}"
+      end
+    end
+    redirect_to action: 'index'
+  end
+
+  def stop_race_event_race
+    RaceSession::stop_open_session
+    redirect_to action: 'index'
+  end
+
+  def start_next_race_event_heat
+    @current_race_event = RaceEvent.where(active: true).first
+    if @current_race_event
+      @current_race_event.next_heat
+    end
+    redirect_to action: 'index'
   end
 end

@@ -9,6 +9,15 @@ class RaceSessionAdapter
     return self.race_session.mode
   end
 
+  def add_pilot_to_competition_race(pilot,transponder_token)
+    ra = self.race_session.race_attendees.build
+    ra.pilot_id = pilot.id
+    ra.transponder_token = transponder_token
+    ra.save!
+
+    puts "RaceSessionAdapter added pilot #{ra.pilot_id} token: #{ra.transponder_token} to race session: #{self.race_session.title}"
+  end
+
   def add_pilots_to_competition_race(params_pilots)
     params_pilots.each do |t|
       t_pilot = Pilot.find(t['pilot_id'])
@@ -90,27 +99,31 @@ class RaceSessionAdapter
   def listing_competition_mode
 
     listing_data = Array.new
+    ap = Array.new
 
-    self.race_session.pilot_race_laps_valid.order("lap_num DESC,created_at ASC").group(:pilot_id).pluck(:pilot_id).each_with_index do |pilot_id,index|
-      c_pilot = Pilot.where(id: pilot_id).first
-      if c_pilot
-        data = Hash.new
-        data['position'] = index + 1
-        data['pilot'] = c_pilot
-        data['lap_count'] = self.race_session.lap_count_of_pilot(c_pilot)
-        data['avg_lap_time'] = self.race_session.avg_lap_time_of_pilot(c_pilot)
+    self.race_session.pilot_race_laps_valid.order("lap_num DESC,created_at ASC").pluck(:pilot_id).each do |pilot_id|
+      if ap.include?(pilot_id) == false
+        ap << pilot_id
+        c_pilot = Pilot.where(id: pilot_id).first
+        if c_pilot
+          data = Hash.new
+          data['position'] = ap.count
+          data['pilot'] = c_pilot
+          data['lap_count'] = self.race_session.lap_count_of_pilot(c_pilot)
+          data['avg_lap_time'] = self.race_session.avg_lap_time_of_pilot(c_pilot)
 
-        data['fastest_lap'] = Hash.new
-        data['fastest_lap']['lap_num'] = self.race_session.fastest_lap_of_pilot(c_pilot).lap_num
-        data['fastest_lap']['lap_time'] = self.race_session.fastest_lap_of_pilot(c_pilot).lap_time
+          data['fastest_lap'] = Hash.new
+          data['fastest_lap']['lap_num'] = self.race_session.fastest_lap_of_pilot(c_pilot).lap_num
+          data['fastest_lap']['lap_time'] = self.race_session.fastest_lap_of_pilot(c_pilot).lap_time
 
-        data['last_lap'] = Hash.new
-        data['last_lap']['lap_num'] = self.race_session.last_lap_of_pilot(c_pilot).lap_num
-        data['last_lap']['lap_time'] = self.race_session.last_lap_of_pilot(c_pilot).lap_time
-        data['laps_left'] = self.race_session.max_laps.to_i - data['last_lap']['lap_num'].to_i
-        data['latest_tracked'] = self.race_session.last_lap_of_pilot_is_lasted_tracked_time_of_race?(c_pilot)
+          data['last_lap'] = Hash.new
+          data['last_lap']['lap_num'] = self.race_session.last_lap_of_pilot(c_pilot).lap_num
+          data['last_lap']['lap_time'] = self.race_session.last_lap_of_pilot(c_pilot).lap_time
+          data['laps_left'] = self.race_session.max_laps.to_i - data['last_lap']['lap_num'].to_i
+          data['latest_tracked'] = self.race_session.last_lap_of_pilot_is_lasted_tracked_time_of_race?(c_pilot)
 
-        listing_data << data
+          listing_data << data
+        end
       end
     end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502142410) do
+ActiveRecord::Schema.define(version: 20160805115311) do
 
   create_table "config_values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -52,6 +52,46 @@ ActiveRecord::Schema.define(version: 20160502142410) do
     t.integer "race_session_id"
     t.integer "pilot_id"
     t.string  "transponder_token"
+  end
+
+  create_table "race_event_group_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "token"
+    t.integer  "pilot_id"
+    t.integer  "race_event_group_id"
+    t.integer  "fastest_lap_time",    default: 0
+    t.integer  "total_time",          default: 0
+    t.integer  "placement",           default: 0
+  end
+
+  create_table "race_event_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "race_event_id"
+    t.integer  "group_no"
+    t.integer  "placement"
+    t.integer  "points"
+    t.integer  "heat_no",         default: 0
+    t.boolean  "heat_done",       default: false
+    t.integer  "race_session_id"
+    t.boolean  "current",         default: false
+    t.index ["placement"], name: "index_race_event_groups_on_placement", using: :btree
+    t.index ["points"], name: "index_race_event_groups_on_points", using: :btree
+    t.index ["race_event_id"], name: "index_race_event_groups_on_race_event_id", using: :btree
+  end
+
+  create_table "race_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "title"
+    t.integer  "number_of_pilots_per_group", default: 4
+    t.boolean  "active",                     default: true
+    t.integer  "number_of_heats",            default: 4
+    t.integer  "current_heat",               default: 1
+    t.integer  "next_heat_grouping_mode",    default: 0
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_race_events_on_deleted_at", using: :btree
   end
 
   create_table "race_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

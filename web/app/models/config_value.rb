@@ -4,6 +4,7 @@ class ConfigValue < ActiveRecord::Base
       config_value = ConfigValue.where(name: identifier).first
       if !config_value
         puts "ConfigValue::get_value: #{identifier} not found"
+        return false
       end
       return config_value
     end
