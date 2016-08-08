@@ -63,6 +63,13 @@ class System::RaceEventController < SystemController
     redirect_to action: 'edit_group', id: @race_event_group_entry.race_event_group.id
   end
 
+  def update_pilot_token
+    @race_event_group_entry = RaceEventGroupEntry.where(id: params[:id]).first
+    @race_event_group_entry.token = params[:token]
+    @race_event_group_entry.save
+    redirect_to action: 'edit_group', id: @race_event_group_entry.race_event_group.id
+  end
+
   def add_pilot_to_group
     @race_event_group = RaceEventGroup.where(id: params[:id]).first
     if @race_event_group.current || @race_event_group.heat_done

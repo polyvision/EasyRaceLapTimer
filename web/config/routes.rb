@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get 'system/race_event/edit_group/:id' => 'system/race_event#edit_group'
   delete 'system/race_event/del_pilot_from_group/:id' => 'system/race_event#del_pilot_from_group'
   post 'system/race_event/add_pilot_to_group/:id' => 'system/race_event#add_pilot_to_group'
+  post 'system/race_event/update_pilot_token/:id' => 'system/race_event#update_pilot_token'
 
   get '/system/user' => 'system/user#index'
   get '/system/user/new' => 'system/user#new'

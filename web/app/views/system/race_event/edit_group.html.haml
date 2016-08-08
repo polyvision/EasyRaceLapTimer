@@ -34,14 +34,16 @@
       %th
   %tbody
     - @race_event_group.race_event_group_entries.each_with_index do |entry,index|
-      %tr
-        %td
-          = index + 1
-        %td
-          = entry.pilot.name
-        %td
-          = entry.pilot.team
-        %td
-          = entry.token
-        %td
-          = link_to('remove',{action: 'del_pilot_from_group', id: entry.id},{method: 'delete', "data-confirm" => 'Remove?'})
+      = form_tag({action: 'update_pilot_token', id: entry.id}) do
+        %tr
+          %td
+            = index + 1
+          %td
+            = entry.pilot.name
+          %td
+            = entry.pilot.team
+          %td
+            %input{name: 'token', value: entry.token, class: 'form-control'}
+          %td
+            = submit_tag 'update token', class: 'btn btn-primary'
+            = link_to('remove',{action: 'del_pilot_from_group', id: entry.id},{method: 'delete', "data-confirm" => 'Remove?', class: 'btn btn-warning'})
