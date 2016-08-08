@@ -5,6 +5,16 @@
 
 %table.table.table-striped
   %thead
+    %tr
+      %th
+        = "#"
+      %th
+        title
+      %th
+        pilots per group
+      %th
+        number of heats
+      %th
   %tbody
     - @race_events.each do |event|
       %tr
@@ -17,5 +27,5 @@
         %td
           = event.number_of_heats
         %td
-          = link_to('manage',{action: 'manage', id: event.id})
-          = link_to('delete',{action: 'destroy', id: event.id},{method: 'delete'})
+          = link_to('manage',{action: 'manage', id: event.id},{class: 'btn btn-primary'})
+          = link_to('delete',{action: 'destroy', id: event.id},{method: 'delete', class: 'btn btn-warning',"data-confirm" => 'Sure?'})

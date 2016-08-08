@@ -59,19 +59,19 @@ class RaceEventBuilderAdapter
     # getting all the placements
     self.race_event.race_event_groups.where(heat_no: self.race_event.current_heat-1).each do |group|
       group.race_event_group_entries.each do |entry|
-      pos_data << {pos: entry.placement,pilot: entry.pilot}
+      pos_data << {pos: entry.placement,pilot: entry.pilot, tt: entry.total_time}
       end
     end
 
     # sorting
     pos_data = pos_data.sort_by do |item|
-      item[:pos]
+      item[:tt]
     end
 
     current_race_group = RaceEventGroup.create(race_event_id: self.race_event.id,group_no: 1, heat_no: self.race_event.current_heat)
 
     pos_data.each do |pos_entry|
-      #puts "pos: #{pos_entry[:pos]} pilot: #{pos_entry[:pilot].id}"
+      puts "tt: #{pos_entry[:tt]} pos: #{pos_entry[:pos]} pilot: #{pos_entry[:pilot].id}"
       current_race_group = self.assign_pilot_to_race_group(pos_entry[:pilot],current_race_group)
     end # end of each pilot
   end

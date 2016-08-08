@@ -24,7 +24,7 @@ gem 'react-rails', '~> 1.5.0'
 gem 'axlsx', '~> 2.0.1'
 gem 'axlsx_rails'
 gem 'wicked_pdf'
-gem 'sidekiq'
+gem 'sidekiq', '< 5'
 gem 'sinatra', :require => nil
 gem 'whenever'
 gem 'redis-namespace'

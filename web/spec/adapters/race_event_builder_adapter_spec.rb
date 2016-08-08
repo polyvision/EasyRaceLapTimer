@@ -113,9 +113,17 @@ RSpec.describe "RaceEventBuilderAdapter", type: :request do
     first_group_of_second_heat = race_event.race_event_groups.where(heat_no: race_event.current_heat).where(group_no: 1).first
     expect(first_group_of_second_heat).to be_truthy
     expect(first_group_of_second_heat.race_event_group_entries.count).to eq(3)
+    pilots_of_first_group = first_group_of_second_heat.race_event_group_entries.pluck(:pilot_id)
+    expect(pilots_of_first_group.include?(second_race_group.race_event_group_entries[4]))
+    expect(pilots_of_first_group.include?(second_race_group.race_event_group_entries[3]))
+    expect(pilots_of_first_group.include?(second_race_group.race_event_group_entries[2]))
 
     second_group_of_second_heat = race_event.race_event_groups.where(heat_no: race_event.current_heat).where(group_no: 2).first
     expect(second_group_of_second_heat).to be_truthy
     expect(second_group_of_second_heat.race_event_group_entries.count).to eq(2)
+
+    pilots_of_second_group = first_group_of_second_heat.race_event_group_entries.pluck(:pilot_id)
+    expect(pilots_of_second_group.include?(second_race_group.race_event_group_entries[1]))
+    expect(pilots_of_second_group.include?(second_race_group.race_event_group_entries[0]))
   end
 end

@@ -284,7 +284,7 @@ DEPENDENCIES
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  sidekiq
+  sidekiq (< 5)
   sinatra
   spring
   therubyracer
@@ -295,4 +295,4 @@ DEPENDENCIES
   wicked_pdf
 
 BUNDLED WITH
-   1.11.2
+   1.12.5
