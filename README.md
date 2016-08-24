@@ -88,6 +88,9 @@ more details of each indivial package can be found in the *docs* folder
  * [Peisel](https://github.com/peisel)
  * [p3root](https://github.com/p3root)
  * [Sven Michel](https://github.com/svenmichel)
+ * [bilson](https://github.com/bilson)
+ 
+ and many more ! just add yourself if you contributed!
 
 # license
 

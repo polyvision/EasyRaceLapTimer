@@ -1,0 +1,16 @@
+{
+  "name": "ir_daemon2",
+  "version": "0.0.1",
+  "description": "ir_daemon refactored in nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexander Bierbrauer",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "moment": "^2.14.1",
+    "request": "^2.74.0",
+    "wiring-pi": "^2.1.1"
+  }
+}

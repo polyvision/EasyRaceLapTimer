@@ -17,3 +17,4 @@ web/public/assets
 web/node_modules
 *.o
 moc_*
+/ir_daemon2/node_modules
