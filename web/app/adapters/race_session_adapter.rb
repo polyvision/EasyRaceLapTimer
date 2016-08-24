@@ -264,6 +264,7 @@ class RaceSessionAdapter
     json_data['session']['maps_laps'] = self.race_session.max_laps
     json_data['session']['current_lap_count'] = self.current_lap_count
     json_data['data'] = self.listing
+    json_data['race_attendees'] = self.race_session.race_attendees
     return json_data
   end
 end
