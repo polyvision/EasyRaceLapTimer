@@ -5,6 +5,8 @@
   %li
     = link_to('Configuration',{action: 'index', controller: '/system'})
 
+=link_to('Import Pilots from FPV-SPORTS.IO',{action: 'prepare_import'},{class: 'btn btn-primary'})
+  
 = form_for(@pilot_prototype,url: {action: 'create'},html: {class: 'form-inline'}) do |f|
   .form-group
     %label{:for => "exampleInputName2"}

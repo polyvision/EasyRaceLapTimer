@@ -1,0 +1,16 @@
+%h1
+  Import Pilots from FPV-SPORTS.IO
+
+.panel.panel-default
+  .panel-body
+    Importing pilots from FPV-SPORTS.IO removes all your current pilots!
+
+= form_tag({action: 'import'}) do
+  %label
+    Select your racing event:
+  %select.form-control{name: "racing_event_id"}
+    %option
+    - @racing_event_lists.each do |entry|
+      %option{value: entry['id']}
+        = entry['title']
+  = submit_tag 'import', class: 'btn btn-primary'

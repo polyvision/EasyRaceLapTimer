@@ -41,6 +41,28 @@ class System::PilotController < SystemController
     end
   end
 
+  def prepare_import
+    @racing_event_lists = FpvSportsApiAdapter::list_racing_events
+  end
+
+  def import
+    if params[:racing_event_id].blank?
+      redirect_to action: 'prepare_import'
+      return
+    end
+
+    Pilot.all.each do |pilot|
+      pilot.destroy
+    end
+
+    @pilot_list = FpvSportsApiAdapter::list_pilots_of_racing_event(params[:racing_event_id])
+
+    @pilot_list.each do |pilot|
+      Pilot.create(name: pilot['pilot_name'],transponder_token: "fpv_pilot_#{pilot['id']}")
+    end
+    redirect_to action: 'index'
+  end
+
   def strong_params_pilot
     params.require(:pilot).permit(:name,:transponder_token,:image,:quad,:team)
   end

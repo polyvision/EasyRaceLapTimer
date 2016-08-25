@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get '/system/pilot/edit/:id' => 'system/pilot#edit'
   patch '/system/pilot/update/:id' => 'system/pilot#update'
   delete '/system/pilot/delete/:id' => 'system/pilot#delete'
+  get '/system/pilot/prepare_import' => 'system/pilot#prepare_import'
+  post '/system/pilot/import' => 'system/pilot#import'
   get '/system/pilot/deactivate_token/:id' => 'system/pilot#deactivate_token'
   post '/system/set_config_val/:id' => 'system#set_config_val'
   get '/system/shutdown' => 'system#shutdown'
