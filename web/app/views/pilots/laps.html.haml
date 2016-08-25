@@ -6,7 +6,7 @@
   .col-md-3
     .row
       .col-xs-6.col-md-3
-        - if @pilot.image
+        - if @pilot.image.url
           = image_tag(@pilot.image.url,class: 'thumbnail',width: 173, height: 173)
   .col-md-6
     %h1
