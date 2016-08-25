@@ -20,4 +20,38 @@
   = render file: '/shared/_table_race_results_standard_mode', locals: {race_session: @current_race_session, race_session_adapter: @current_race_session_adapter}
 
 -@current_race_session_adapter.pilot_ids.each do |pilot_id|
-  = render partial: 'competition_mode_pilot', locals: {pilot: Pilot.find(pilot_id)}
+  - pilot = Pilot.find(pilot_id)
+  %h2
+    = pilot.name
+    %small
+      = pilot.quad
+      = pilot.team
+
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th
+          lap
+        %th
+          time
+        %th
+          penalties
+        %th
+          penalty time
+        %th
+    %tbody
+      - @current_race_session.pilot_race_laps.where(pilot_id: pilot.id).order("lap_num ASC").each do |lap|
+        %tr{:class => ("invalidatedlap" if lap.invalidated?)}
+          %td
+            = lap.lap_num
+          %td
+            = formated_lap_time(lap.lap_time)
+          %td
+            = @current_race_session_adapter.num_time_penalties_for_lap(pilot,lap.lap_num)
+          %td
+            = formated_lap_time(@current_race_session_adapter.num_time_penalties_for_lap(pilot,lap.lap_num) * @current_race_session.time_penalty_per_satellite)
+          %td
+            -if lap.invalidated
+              = link_to('Validate',{action: 'validate_lap', race_session_id: @current_race_session.id, id: lap.id})
+            - else
+              = link_to('Invalidate',{action: 'invalidate_lap', race_session_id: @current_race_session.id, id: lap.id})

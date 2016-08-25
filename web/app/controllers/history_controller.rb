@@ -18,6 +18,20 @@ class HistoryController < ApplicationController
     send_data data.to_stream.read, filename: "race_session_#{t.id}.xlsx", type:"application/xlsx"
   end
 
+  def invalidate_lap
+    t = RaceSession.find(params[:race_session_id])
+    lap = t.pilot_race_laps.where(id: params[:id]).first
+    lap.mark_invalidated
+    redirect_to action: 'show', id: t.id
+  end
+
+  def validate_lap
+    t = RaceSession.find(params[:race_session_id])
+    lap = t.pilot_race_laps.where(id: params[:id]).first
+    lap.undo_invalidated
+    redirect_to action: 'show', id: t.id
+  end
+
   def delete
     t = RaceSession.find(params[:id])
     t.destroy
