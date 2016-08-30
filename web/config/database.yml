@@ -4,8 +4,8 @@ development:
   pool: 5
   timeout: 5000
   username: root
-  password: defaultpw
-  socket: /var/run/mysqld/mysqld.sock
+  password: #defaultpw
+  #socket: /var/run/mysqld/mysqld.sock
 
 production:
   adapter: mysql2

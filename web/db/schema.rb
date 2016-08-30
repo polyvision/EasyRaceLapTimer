@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160825170843) do
+ActiveRecord::Schema.define(version: 20160830071811) do
 
   create_table "config_values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20160825170843) do
     t.datetime "deleted_at"
     t.boolean  "latest"
     t.boolean  "invalidated",     default: false
+    t.integer  "merged_with_id"
     t.index ["deleted_at"], name: "index_pilot_race_laps_on_deleted_at", using: :btree
     t.index ["lap_num"], name: "index_pilot_race_laps_on_lap_num", using: :btree
     t.index ["lap_time"], name: "index_pilot_race_laps_on_lap_time", using: :btree

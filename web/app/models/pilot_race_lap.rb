@@ -11,6 +11,45 @@ class PilotRaceLap < ActiveRecord::Base
     return ((self.lap_time / 1000.0) / 60.0).round(4)
   end
 
+  def merged?
+    if self.merged_with_id && self.merged_with_id > 0
+      return true
+    end
+
+    return false
+  end
+
+  def unmerge
+    to_recover = PilotRaceLap.only_deleted.where(id: self.merged_with_id).first
+    to_recover.deleted_at = nil
+    to_recover.save
+
+    self.merged_with_id = 0
+    self.lap_time = self.lap_time - to_recover.lap_time
+    self.save
+  end
+
+  def merge_up
+    for_merge = PilotRaceLap.where(pilot_id: self.pilot_id,race_session_id: self.race_session_id).where("id > ?", self.id).where(merged_with_id: 0).order("id ASC").first
+    if for_merge
+      for_merge.merge(self)
+    end
+  end
+
+  def merge_down
+    for_merge = PilotRaceLap.where(pilot_id: self.pilot_id,race_session_id: self.race_session_id).where("id < ?", self.id).where(merged_with_id: 0).order("id DESC").first
+    if for_merge
+      for_merge.merge(self)
+    end
+  end
+
+  def merge(pilot_race_lap)
+    self.merged_with_id = pilot_race_lap.id
+    self.lap_time = self.lap_time + pilot_race_lap.lap_time
+    self.save
+    pilot_race_lap.destroy
+  end
+
   def filter_fastest_lap
     t_fastest_lap = false
 	  t = RaceSession.find(self.race_session_id).pilot_race_laps_valid.order("lap_time ASC").first

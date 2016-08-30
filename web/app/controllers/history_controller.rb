@@ -32,6 +32,27 @@ class HistoryController < ApplicationController
     redirect_to action: 'show', id: t.id
   end
 
+  def merge_up
+    t = RaceSession.find(params[:race_session_id])
+    lap = t.pilot_race_laps.where(id: params[:id]).first
+    lap.merge_up
+    redirect_to action: 'show', id: t.id
+  end
+
+  def merge_down
+    t = RaceSession.find(params[:race_session_id])
+    lap = t.pilot_race_laps.where(id: params[:id]).first
+    lap.merge_down
+    redirect_to action: 'show', id: t.id
+  end
+
+  def unmerge
+    t = RaceSession.find(params[:race_session_id])
+    lap = t.pilot_race_laps.where(id: params[:id]).first
+    lap.unmerge
+    redirect_to action: 'show', id: t.id
+  end
+
   def delete
     t = RaceSession.find(params[:id])
     t.destroy
