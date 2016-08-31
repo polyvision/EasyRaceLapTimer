@@ -31,21 +31,17 @@ unsure, leave it set to the default.
 
 On the Pi, execute the following commands to pull the source from this GitHub repository:
 
+    sudo apt-get install git
     cd ~
     git clone -b 0.6 https://github.com/polyvision/EasyRaceLapTimer.git
 
-## Build the IR Daemon
+## Installing packages
 
-The IR Daemon listens for the signals coming from the IR detectors and sends them to the Rails app via
-a web API.
+    cd ~/EasyRaceLapTimer/
+    sudo apt-get install  qt5-default libcurl4-openssl-dev libudev-dev wiringpi screen mysql-server libmysqlclient-dev libssl-dev libreadline-dev libncurses-dev
 
-To build it, perform the following steps:
 
-    cd ~/EasyRaceLapTimer/ir_daemon
-    sudo apt-get install  qt5-default libcurl4-openssl-dev libudev-dev wiringpi
-    qmake ir_daemon.pro
-    make
-    sudo ./ir_daemon --use_standard_gpio_sensor_pins
+    Use "defaultpw" for the MySql server password
 
 ## Build the Rails App
 
@@ -53,9 +49,17 @@ This is the main system app, and it provides the web UI & API.
 
 To build it, perform the following steps (note: some of these steps will take a while to run, so be patient):
 
+    git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.profile
+    echo 'eval "$(rbenv init -)"' >> ~/.profile
+    git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+    source ~/.profile
+    rbenv install 2.2.3
+    rbenv global 2.2.3
+
     cd ~/EasyRaceLapTimer/web/
     sudo apt-get update
-    sudo apt-get install ruby2.1-dev libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev imagemagick libsqlite3-dev bridge-utils wkhtmltopdf hostapd dnsmasq
+    sudo apt-get install libssl-dev apache2 apache2-threaded-dev libapr1-dev redis-server libaprutil1-dev imagemagick bridge-utils wkhtmltopdf hostapd dnsmasq
     sudo gem install bundler
     bundle config build.nokogiri --use-system-libraries
     sudo  gem install nokogiri -v "1.6.6.2"
@@ -71,7 +75,7 @@ These should look like this (different version numbers):
       PassengerRoot /var/lib/gems/2.1.0/gems/passenger-5.0.21
       PassengerDefaultRuby /usr/bin/ruby2.1
     </IfModule>
-    
+
 ## Configure Apache Webserver
 
 First you need to setup the new site in Apache:
