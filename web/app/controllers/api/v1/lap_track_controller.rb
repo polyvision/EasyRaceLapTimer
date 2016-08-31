@@ -45,6 +45,30 @@ class Api::V1::LapTrackController < Api::V1Controller
       return
     end
 
+    send_monitor_update()
     render json: pilot_race_lap.to_json
+  end
+
+  private
+
+  def send_monitor_update
+    html = render_monitor_view
+    ActionCable.server.broadcast 'monitor', html: html
+  end
+
+  def render_monitor_view
+    @current_race_session = RaceSession::get_open_session
+    @current_race_session_adapter = RaceSessionAdapter.new(@current_race_session)
+    @style_setting = StyleSetting.where(id: 1).first_or_create
+
+
+    ApplicationController.render({
+      partial:'/monitor/view.html.haml',
+      locals: {current_user: current_user},
+      assigns: {current_race_session: @current_race_session,
+        current_race_session_adapter: @current_race_session_adapter,
+        style_setting: @style_setting,
+      }
+    })
   end
 end

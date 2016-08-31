@@ -1,6 +1,6 @@
 App.cable.subscriptions.create('MonitorChannel', {
   received: function(data) {
     // process data
-    console.log(data);
+    $("#monitor_view").html(data.html);
   }
 });
