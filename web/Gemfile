@@ -30,6 +30,7 @@ gem 'whenever'
 gem 'redis-namespace'
 gem "rolify"
 gem 'rest-client'
+gem 'puma'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
