@@ -1,0 +1,31 @@
+%h1
+    RaceBox Receivers
+
+= link_to('Read Saved RSSI',url_for(action: 'get_saved_rssi'),{class: 'btn btn-primary'})
+= link_to('Read Current RSSI',url_for(action: 'get_current_rssi'),{class: 'btn btn-primary'})
+
+%table.table.table-striped.table-bordered
+    %thead
+        %tr
+            %th ID
+            %th updated at
+            %th name
+            %th saved rssi
+            %th current rssi
+            %th
+    %tbody
+        - @race_box_receivers.each do |entry|
+            = form_tag(url_for(action: 'set_saved_rssi', vtx_id: entry.id)) do
+                %tr
+                    %td
+                        = entry.id
+                    %td
+                        = entry.updated_at
+                    %td
+                        = entry.name
+                    %td
+                        %input.form-control{name: 'rssi', value: entry.saved_rssi}
+                    %td
+                        = entry.current_rssi
+                    %td
+                        = submit_tag('set rssi');

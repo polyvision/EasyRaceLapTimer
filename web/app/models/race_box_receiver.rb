@@ -1,0 +1,2 @@
+class RaceBoxReceiver < ApplicationRecord
+end

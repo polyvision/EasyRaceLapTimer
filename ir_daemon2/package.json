@@ -11,6 +11,7 @@
   "dependencies": {
     "moment": "^2.14.1",
     "request": "^2.74.0",
+    "serialport": "^4.0.1",
     "wiring-pi": "^2.1.1"
   }
 }

@@ -13,12 +13,21 @@ var wpi = require('wiring-pi');
 var	net = require('net');
 var util = require('util');
 var vtx_sensor = require('./modules/vtx_sensor.js');
+var race_box = require('./modules/race_box.js');
 
 wpi.setup('wpi');
 vtx_sensor.setup(wpi);
 
 const SOCKET_PORT = 3006;
 
+
+if(process.argv[2] === "list_race_box_ports"){
+  race_box.list_ports();
+}
+
+if(process.argv[2] === "race_box"){
+  race_box.setup(process.argv[3]);
+}
 
 // Socket SERVER
 net.createServer(function (socket) {
@@ -44,8 +53,22 @@ net.createServer(function (socket) {
   	switch(cmd) {
   		case "RESET#":
   			vtx_sensor.resetLapTimes();
+        race_box.reset_timing();
+  			break;
+      case "RB_RST_TIMING#":
+  			race_box.reset_timing();
+  			break;
+      case "RB_SRSSI#":
+  			race_box.read_saved_rssi();
+  			break;
+      case "RB_CRSSI#":
+  			race_box.read_current_rssi();
   			break;
   	}
+
+    if(cmd.startsWith("RB_SC_RSSI")){
+  			race_box.set_channel_rssi(cmd);
+    }
   }
 
 }).listen(SOCKET_PORT);

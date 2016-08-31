@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830071811) do
+ActiveRecord::Schema.define(version: 20160831092600) do
 
   create_table "config_values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160830071811) do
     t.datetime "deleted_at"
     t.boolean  "latest"
     t.boolean  "invalidated",     default: false
-    t.integer  "merged_with_id"
+    t.integer  "merged_with_id",  default: 0
     t.index ["deleted_at"], name: "index_pilot_race_laps_on_deleted_at", using: :btree
     t.index ["lap_num"], name: "index_pilot_race_laps_on_lap_num", using: :btree
     t.index ["lap_time"], name: "index_pilot_race_laps_on_lap_time", using: :btree
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(version: 20160830071811) do
     t.integer "race_session_id"
     t.integer "pilot_id"
     t.string  "transponder_token"
+  end
+
+  create_table "race_box_receivers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "name"
+    t.integer  "current_rssi"
+    t.integer  "saved_rssi"
   end
 
   create_table "race_event_group_entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

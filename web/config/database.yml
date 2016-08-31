@@ -1,19 +1,18 @@
 development:
   adapter: mysql2
-  database: erlt_development
+  database: erlt
   pool: 5
   timeout: 5000
   username: root
-  password: #defaultpw
-  #socket: /var/run/mysqld/mysqld.sock
+  password: defaultpw 
 
 production:
   adapter: mysql2
-  database: erlt_production
+  database: erlt
   pool: 5
   timeout: 5000
   username: root
-  password:
+  password: defaultpw
 
 test:
   adapter: mysql2
@@ -21,4 +20,4 @@ test:
   pool: 5
   timeout: 5000
   username: root
-  password:
+  password: defaultpw 

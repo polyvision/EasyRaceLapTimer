@@ -39,6 +39,11 @@ Rails.application.routes.draw do
   post 'system/race_event/add_pilot_to_group/:id' => 'system/race_event#add_pilot_to_group'
   post 'system/race_event/update_pilot_token/:id' => 'system/race_event#update_pilot_token'
 
+  get 'system/racebox' => 'system/race_box#index'
+  get 'system/racebox/get_current_rssi' => 'system/race_box#get_current_rssi'
+  get 'system/racebox/get_saved_rssi' => 'system/race_box#get_saved_rssi'
+  post 'system/racebox/set_saved_rssi/:vtx_id' => 'system/race_box#set_saved_rssi'
+
   get '/system/user' => 'system/user#index'
   get '/system/user/new' => 'system/user#new'
   post '/system/user/create' => 'system/user#create'
@@ -95,6 +100,9 @@ Rails.application.routes.draw do
 
   post 'api/v1/race_event/next_heat' => 'api/v1/race_event#next_heat'
   post 'api/v1/race_event/start_next_race' => 'api/v1/race_event#start_next_race'
+
+  post 'api/v1/race_box/update_receiver' => 'api/v1/race_box#update_receiver'
+  get 'api/v1/race_box/update_receiver' => 'api/v1/race_box#update_receiver'
 
 
   root 'monitor#index'
