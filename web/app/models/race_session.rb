@@ -121,6 +121,15 @@ class RaceSession < ActiveRecord::Base
     return self.pilot_race_laps_valid.where(pilot_id: pilot.id).count
   end
 
+
+  def lap_time_of_pilot(pilot,num)
+    t =  self.pilot_race_laps_valid.where(pilot_id: pilot.id,lap_num: num).first
+    if t
+      return t.lap_time
+    end
+    return 0
+  end
+
   def fastest_lap_of_pilot(pilot)
     return self.pilot_race_laps_valid.where(pilot_id: pilot.id).order("lap_time ASC").first
   end

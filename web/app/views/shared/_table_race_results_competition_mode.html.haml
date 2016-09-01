@@ -3,7 +3,9 @@
     %thead
       %tr
         %th
-          place
+          position
+        %th
+          token
         %th
 
         %th
@@ -28,12 +30,25 @@
           penalty time
         %th
           time without penalties
+        %th
+          Lap 1
+        %th
+          Lap 2
+        %th
+          Lap 3
+        %th
+          Lap 4
+        %th
+          Lap 5
     %tbody
       - race_session_adapter.listing.each_with_index do |entry,index|
         %tr{class: "#{"success" if entry['latest_tracked']}"}
           %td
             %strong
               = index + 1
+          %td
+            %strong
+              = entry['token']
           %td
             - if !entry['pilot'].image.blank?
               - if @current_format == :pdf
@@ -73,3 +88,18 @@
           %td
             %strong
               = formated_lap_time(entry['race_time_sum_in_ms_without_penalty'])
+          %td
+            %strong
+              = formated_lap_time(@current_race_session.lap_time_of_pilot(entry['pilot'],1))
+          %td
+            %strong
+              = formated_lap_time(@current_race_session.lap_time_of_pilot(entry['pilot'],2))
+          %td
+            %strong
+              = formated_lap_time(@current_race_session.lap_time_of_pilot(entry['pilot'],3))
+          %td
+            %strong
+              = formated_lap_time(@current_race_session.lap_time_of_pilot(entry['pilot'],4))
+          %td
+            %strong
+              = formated_lap_time(@current_race_session.lap_time_of_pilot(entry['pilot'],5))

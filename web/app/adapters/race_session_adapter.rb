@@ -109,6 +109,7 @@ class RaceSessionAdapter
           data = Hash.new
           data['position'] = ap.count
           data['pilot'] = c_pilot
+          data['token'] = self.race_session.race_attendees.where(pilot_id: c_pilot.id).first.transponder_token
           data['lap_count'] = self.race_session.lap_count_of_pilot(c_pilot)
           data['avg_lap_time'] = self.race_session.avg_lap_time_of_pilot(c_pilot)
 
