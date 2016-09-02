@@ -12,6 +12,10 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  #config.action_cable.url = 'wss://172.24.1.117:8080/cable'
+  #config.action_cable.allowed_request_origins = [ 'http://172.24.1.117','http://172.24.1.1:8080', /http:\/\/*/,/http:\/\/172.24.1.117:8080*/ ]
+  config.action_cable.disable_request_forgery_protection = true
+
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true

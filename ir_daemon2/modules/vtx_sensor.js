@@ -14,7 +14,7 @@ var	request = require('request');
 
 var vtx_sensor = {};
 
-const API_WEB_HOST = 'http://localhost/';
+const API_WEB_HOST = 'http://localhost:8080/';
 const MIN_LAP_TIME = 5000;
 const MAX_LAP_TIME = 90000;
 
@@ -106,6 +106,7 @@ vtx_sensor.setup = function(wpi){
     procesLapTime(this.lapTimes.gpio0, delta)
     }.bind(this));
 
+   console.log("VTX_Sensor started PE ready");
 }
 
 vtx_sensor.resetLapTimes = function () {

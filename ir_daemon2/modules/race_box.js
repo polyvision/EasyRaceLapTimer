@@ -8,7 +8,7 @@
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
 
-const API_WEB_HOST = 'http://localhost/';
+const API_WEB_HOST = 'http://localhost:8080/';
 
 var moment = require('moment');
 var util = require('util');
@@ -148,6 +148,10 @@ race_box.read_current_rssi = function(){
 }
 
 race_box.write_to_rb = function(msg){
+    if(this.setup_done == false){
+        return;
+    }
+    
     this.port.write(msg, function(err) {
         if (err) {
         return console.log('Error on write: ', err.message);
