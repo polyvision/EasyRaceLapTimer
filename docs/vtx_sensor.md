@@ -2,17 +2,7 @@
 
 # VTX Sensoring
 
-In order to enable & use VTX sensoring you need an EasyRaceLapTimer PocketEdition or compatible device.
-
-## enabling VTX sensoring
-
-    cd /home/pi/EasyRaceLapTimer/ir_daemon
-    sudo ./ir_daemon --enable_vtx_sensoring
-
-## disabling VTX sensoring
-
-    cd /home/pi/EasyRaceLapTimer/ir_daemon
-    sudo ./ir_daemon --disable_vtx_sensoring
+In order to enable & use VTX sensoring you need an EasyRaceLapTimer PocketEdition or compatible device. You need to use ir_daemon2 instead of ir_daemon
 
 
 ## GPIO Pins on a PI 2
