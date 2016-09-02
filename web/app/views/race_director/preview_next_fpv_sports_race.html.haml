@@ -1,0 +1,28 @@
+%h1
+  Preview of next FPV Sports Race
+
+.panel.panel-default
+  .panel-body
+    %strong
+      Group:
+      = @adapter.fetch_data['fpv_sports_group_num']
+      Heat:
+      = @adapter.fetch_data['fpv_sports_heat_num']
+
+%table.table.table-striped.table-bordered
+  %thead
+    %tr
+      %th Channel
+      %th Token
+      %th Pilot
+  %tbody
+    - @adapter.fetch_data['pilots'].each_with_index do |entry,index|
+      %tr
+        %td
+          = index +1
+        %td
+          = entry['transponder_token']
+        %td
+          = entry['pilot'].name
+
+= link_to('start next FPV Sports race',url_for(action: 'start_next_fpv_sports_race'),{class: 'btn btn-primary'})

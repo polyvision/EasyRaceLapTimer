@@ -54,4 +54,16 @@ class RaceDirectorController < ApplicationController
     end
     redirect_to action: 'index'
   end
+
+  def preview_next_fpv_sports_race
+    @adapter = FpvSportsRaceSessionBuilderAdapter.new(ConfigValue::get_value("fpvsports_racing_event_id").value)
+    @adapter.fetch
+  end
+
+  def start_next_fpv_sports_race
+    @adapter = FpvSportsRaceSessionBuilderAdapter.new(ConfigValue::get_value("fpvsports_racing_event_id").value)
+    @adapter.fetch
+    @adapter.build_race_session
+    redirect_to action: 'index', controller: '/monitor'
+  end
 end

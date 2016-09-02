@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   mount ActionCable.server => '/cable'
-  
+
   get 'race_director' => 'race_director#index'
   get 'race_director/lap_times' => 'race_director#lap_times'
   get 'race_director/invalidate_lap' => 'race_director#invalidate_lap'
@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'race_director/start_next_race_event_race' => 'race_director/start_next_race_event_race'
   get 'race_director/stop_race_event_race' => 'race_director/stop_race_event_race'
   get 'race_director/start_next_race_event_heat' => 'race_director/start_next_race_event_heat'
+  get 'race_director/preview_next_fpv_sports_race' => 'race_director#preview_next_fpv_sports_race'
+  get 'race_director/start_next_fpv_sports_race' => 'race_director#start_next_fpv_sports_race'
 
 
   get 'system' => 'system#index'

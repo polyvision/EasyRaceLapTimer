@@ -1,6 +1,10 @@
 %h1
   Import Pilots from FPV-SPORTS.IO
 
+-if @adapter.error
+  .alert.alert-danger{role:"alert"}
+    = @adapter.error
+    
 .panel.panel-default
   .panel-body
     Importing pilots from FPV-SPORTS.IO removes all your current pilots!

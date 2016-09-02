@@ -42,7 +42,8 @@ class System::PilotController < SystemController
   end
 
   def prepare_import
-    @racing_event_lists = FpvSportsApiAdapter::list_racing_events
+    @adapter = FpvSportsApiAdapter.new()
+    @racing_event_lists = @adapter.list_racing_events
   end
 
   def import
@@ -55,11 +56,14 @@ class System::PilotController < SystemController
       pilot.destroy
     end
 
-    @pilot_list = FpvSportsApiAdapter::list_pilots_of_racing_event(params[:racing_event_id])
+    @adapter = FpvSportsApiAdapter.new()
+    @pilot_list = @adapter.list_pilots_of_racing_event(params[:racing_event_id])
 
     @pilot_list.each do |pilot|
-      Pilot.create(name: pilot['pilot_name'],transponder_token: "fpv_pilot_#{pilot['id']}")
+      Pilot.create(name: pilot['pilot_name'],transponder_token: "fpv_pilot_#{pilot['id']}",fpvsports_race_event_pilot_id: pilot['id'])
     end
+
+    ConfigValue::set_value("fpvsports_racing_event_id",params[:racing_event_id])
     redirect_to action: 'index'
   end
 

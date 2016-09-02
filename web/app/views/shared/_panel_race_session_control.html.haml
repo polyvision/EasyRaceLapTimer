@@ -44,6 +44,7 @@
                   = f.text_field(:idle_time_in_seconds, placeholder: "60", class: 'form-control', required: true)
                 %button.btn.btn-success{:type => "submit"}
                   = t('actions.start_standard_race_session')
+
 .row
   .col-xs-12.col-md-12.col-sm-12.col-lg-12
     .panel.panel-default
@@ -55,3 +56,15 @@
           = link_to(t('actions.stop_race_session'),{action: 'stop_race_session', controller: '/system'},{confirm: 'sure?',class: 'btn btn-danger btn-large'})
         -else
           = render file: '/system/_race_session_competition_modal'
+
+.row
+  .col-xs-12.col-md-12.col-sm-12.col-lg-12
+    .panel.panel-default
+      .panel-heading
+        %h2
+          FPV-Sports Race
+      .panel-body
+        - if RaceSession::get_open_session
+          = link_to(t('actions.stop_race_session'),{action: 'stop_race_session', controller: '/system'},{confirm: 'sure?',class: 'btn btn-danger btn-large'})
+        - else
+          = link_to('Next FPV-Sports Race',{action: 'preview_next_fpv_sports_race', controller: '/race_director'},{class: 'btn btn-danger btn-large'})
