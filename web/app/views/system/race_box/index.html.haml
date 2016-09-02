@@ -24,8 +24,9 @@
                     %td
                         = entry.name
                     %td
-                        %input.form-control{name: 'rssi', value: entry.saved_rssi}
+                        %input.form-control{name: 'rssi', value: entry.saved_rssi, id: "#{entry.name}_saved_rssi"}
                     %td
-                        = entry.current_rssi
+                        %div{id: "#{entry.name}_current_rssi"}
+                            = entry.current_rssi
                     %td
                         = submit_tag('set rssi');
