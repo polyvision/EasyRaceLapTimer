@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831092600) do
+ActiveRecord::Schema.define(version: 20160905183040) do
 
   create_table "config_values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160831092600) do
     t.datetime "deleted_at"
     t.string   "quad"
     t.string   "team"
+    t.integer  "fpvsports_race_event_pilot_id", default: 0
     t.index ["deleted_at"], name: "index_pilots_on_deleted_at", using: :btree
   end
 
@@ -104,17 +105,23 @@ ActiveRecord::Schema.define(version: 20160831092600) do
   end
 
   create_table "race_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.string   "title"
     t.boolean  "active"
-    t.integer  "mode",                       default: 0
-    t.integer  "max_laps",                   default: 0
+    t.integer  "mode",                                 default: 0
+    t.integer  "max_laps",                             default: 0
     t.datetime "deleted_at"
-    t.integer  "num_satellites",             default: 0
-    t.integer  "time_penalty_per_satellite", default: 2500
-    t.boolean  "hot_seat_enabled",           default: false
-    t.integer  "idle_time_in_seconds",       default: 0
+    t.integer  "num_satellites",                       default: 0
+    t.integer  "time_penalty_per_satellite",           default: 2500
+    t.boolean  "hot_seat_enabled",                     default: false
+    t.integer  "idle_time_in_seconds",                 default: 0
+    t.integer  "fpv_sports_racing_event_id",           default: 0
+    t.integer  "fpv_sports_race_event_heat_id",        default: 0
+    t.integer  "fpv_sports_race_event_heat_group_id",  default: 0
+    t.integer  "fpv_sports_race_event_heat_num",       default: 0
+    t.integer  "fpv_sports_race_event_heat_group_num", default: 0
+    t.boolean  "fpvsports_synchronized",               default: false
     t.index ["deleted_at"], name: "index_race_sessions_on_deleted_at", using: :btree
   end
 

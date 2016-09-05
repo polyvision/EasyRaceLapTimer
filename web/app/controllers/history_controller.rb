@@ -59,6 +59,27 @@ class HistoryController < ApplicationController
     redirect_to action: 'index'
   end
 
+  def synchronize_fpv_sports
+
+    if !current_user || !current_user.has_role?(:admin)
+      redirect_to "/"
+      return
+    end
+
+    race_session = RaceSession.find(params[:race_session_id])
+    adapter = FpvSportsApiAdapter.new()
+    result = adapter.report_race_result(ConfigValue::get_value("fpvsports_racing_event_id").value,FpvSportsRaceResultAdapter::build_hash(race_session))
+
+    if result
+      flash['notice'] = "Synchronized successfully with FPV-SPORTS.IO"
+      redirect_to action: 'index'
+    else
+      flash['error'] = adapter.error
+
+      redirect_to action: 'index'
+    end
+  end
+
   def pdf
     @style_setting = StyleSetting.where(id: 1).first_or_create
     @current_race_session = RaceSession.find(params[:id])
