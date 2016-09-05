@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902141335) do
+ActiveRecord::Schema.define(version: 20160905183040) do
 
   create_table "config_values", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20160902141335) do
     t.integer  "fpv_sports_race_event_heat_group_id",  default: 0
     t.integer  "fpv_sports_race_event_heat_num",       default: 0
     t.integer  "fpv_sports_race_event_heat_group_num", default: 0
+    t.boolean  "fpvsports_synchronized",               default: false
     t.index ["deleted_at"], name: "index_race_sessions_on_deleted_at", using: :btree
   end
 

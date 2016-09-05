@@ -82,6 +82,7 @@ Rails.application.routes.draw do
   get '/history/:race_session_id/merge_up/:id' =>  'history#merge_up'
   get '/history/:race_session_id/merge_down/:id' =>  'history#merge_down'
   get '/history/:race_session_id/unmerge/:id' =>  'history#unmerge'
+  get '/history/:race_session_id/synchronize_fpv_sports' =>  'history#synchronize_fpv_sports'
   get '/history/pdf_body/:id' =>  'history#pdf_body'
   get '/history/pdf/:id.:format' => 'history#pdf'
   delete '/history/delete/:id' =>  'history#delete'

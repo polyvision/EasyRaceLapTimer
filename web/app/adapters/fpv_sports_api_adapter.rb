@@ -2,6 +2,8 @@
   FpvSportsApiAdapter::list_racing_events
   FpvSportsApiAdapter::list_pilots_of_racing_event(1)
   FpvSportsApiAdapter::get_current_group(1)
+
+  FpvSportsApiAdapter::report_race_result(1,FpvSportsRaceResultAdapter::build_hash(RaceSession.find(2)))
 =end
 
 class FpvSportsApiAdapter
@@ -36,5 +38,15 @@ class FpvSportsApiAdapter
   def self.get_current_group(racing_event_id)
     res = RestClient.get "#{ConfigValue::get_value("fpvsports_api_host").value}/api/v1/racing_events/#{racing_event_id}/groups" ,{"Authorization" => "Token #{ConfigValue::get_value("fpvsports_api_token").value}"}
     return JSON::parse(res.body)
+  end
+
+  def report_race_result(racing_event_id,result_hash)
+    begin
+      res = RestClient.post "#{ConfigValue::get_value("fpvsports_api_host").value}/api/v1/racing_events/#{racing_event_id}/result" ,result_hash.to_json,{"Authorization" => "Token #{ConfigValue::get_value("fpvsports_api_token").value}",content_type: 'application/json', accept: 'application/json'}
+    rescue Exception => ex
+      self.error = "#{ex.message}: #{ex.response}"
+      return false
+    end
+      return true
   end
 end

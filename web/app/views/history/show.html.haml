@@ -63,9 +63,9 @@
               = link_to('Unmerge',{action: 'unmerge', race_session_id: @current_race_session.id, id: lap.id})
             -else
               = link_to({action: 'merge_up', race_session_id: @current_race_session.id, id: lap.id},{class: 'btn btn-primary btn-xs'}) do
-                %span.glyphicon.glyphicon-chevron-up
+                %span.glyphicon.glyphicon-chevron-down
                 Merge Up
 
               = link_to({action: 'merge_down', race_session_id: @current_race_session.id, id: lap.id},{class: 'btn btn-primary btn-xs'}) do
-                %span.glyphicon.glyphicon-chevron-down
+                %span.glyphicon.glyphicon-chevron-up
                 Merge Down
