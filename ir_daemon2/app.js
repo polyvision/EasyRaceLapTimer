@@ -14,20 +14,51 @@ var	net = require('net');
 var util = require('util');
 var vtx_sensor = require('./modules/vtx_sensor.js');
 var race_box = require('./modules/race_box.js');
+var fs = require('fs');
 
 wpi.setup('wpi');
 vtx_sensor.setup(wpi);
 
 const SOCKET_PORT = 3006;
 
+function readConfigVal(key){
+  try
+    {
+        var configuration = JSON.parse(fs.readFileSync("/etc/ir_daemon2.json"));
+        return configuration[key];
+    }
+    catch (err)
+    {
+        return false;
+    }
+}
+
+function setConfigVal(key,val){
+  var configuration = JSON.parse(fs.readFileSync("/etc/ir_daemon2.json"));
+  configuration[key] = val;
+  fs.writeFileSync("/etc/ir_daemon2.json",JSON.stringify(configuration));
+}
 
 if(process.argv[2] === "list_race_box_ports"){
   race_box.list_ports();
 }
 
-if(process.argv[2] === "race_box"){
-  race_box.setup(process.argv[3]);
+if(process.argv[2] === "set_race_box_port"){
+  setConfigVal("race_box_com_port",process.argv[3]);
 }
+
+var rb_port = readConfigVal('race_box_com_port');
+if (rb_port !== undefined && rb_port != false) {
+  try{
+    race_box.setup(readConfigVal('race_box_com_port'));
+  }
+  catch(err){
+    console.log(err);
+  }
+  
+}
+
+
 
 // Socket SERVER
 net.createServer(function (socket) {
