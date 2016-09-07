@@ -19,6 +19,8 @@ Supported devices:
 
     npm install
 
+    sudo cp /home/pi/EasyRaceLapTimer/config_files/ir_daemon2.json /etc/
+
 
 # starting the daemon
 
@@ -31,3 +33,21 @@ starting
 
     screen
     sudo node app.js
+
+# available cmds
+
+listing all ports for the race box
+
+    sudo node app.js list_race_box_ports
+
+setting the com port for the race box
+
+    sudo node app.js set_race_box_port <PORT>
+
+enable racebox mode
+
+    sudo node app.js enable_race_box
+
+disable racebox mode
+
+    sudo node app.js disable_race_box

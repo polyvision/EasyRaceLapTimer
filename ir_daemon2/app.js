@@ -41,21 +41,37 @@ function setConfigVal(key,val){
 
 if(process.argv[2] === "list_race_box_ports"){
   race_box.list_ports();
+  process.exit(1);
 }
 
 if(process.argv[2] === "set_race_box_port"){
   setConfigVal("race_box_com_port",process.argv[3]);
+  process.exit(1);
+}
+
+if(process.argv[2] === "enable_race_box"){
+  setConfigVal("race_box_enabled",true);
+  process.exit(1);
+}
+
+if(process.argv[2] === "disable_race_box"){
+  setConfigVal("race_box_enabled",false);
+  process.exit(1);
 }
 
 var rb_port = readConfigVal('race_box_com_port');
-if (rb_port !== undefined && rb_port != false) {
-  try{
-    race_box.setup(readConfigVal('race_box_com_port'));
+var rb_enabled = readConfigVal("race_box_enabled");
+if(rb_enabled === true){
+  if (rb_port !== undefined && rb_port != false) {
+    try{
+      race_box.setup(readConfigVal('race_box_com_port'));
+    }
+    catch(err){
+      console.log(err);
+    } 
   }
-  catch(err){
-    console.log(err);
-  }
-  
+}else{
+  console.log("race_box is disabled");
 }
 
 function process_cmd(cmd){
