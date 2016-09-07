@@ -1,4 +1,4 @@
-![alt text]http://www.easyracelaptimer.com/wp-content/uploads/2016/01/easy_race_lap_timer_logo-1.png "EasyRaceLapTimer")
+![alt text](http://www.easyracelaptimer.com/wp-content/uploads/2016/01/easy_race_lap_timer_logo-1.png "EasyRaceLapTimer")
 
 ## WIFI AccessPoint
 
@@ -27,4 +27,4 @@ to switch between the two modes enter this:
 
     sudo nano /etc/network/interfaces
 
-![alt text]https://github.com/polyvision/EasyRaceLapTimer/blob/0.6/docs/wifi_setup.png "Wifi Setup")
+![alt text](https://github.com/polyvision/EasyRaceLapTimer/blob/0.6/docs/wifi_setup.png "Wifi Setup")
