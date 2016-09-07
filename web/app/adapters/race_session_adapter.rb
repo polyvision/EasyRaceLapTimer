@@ -83,10 +83,12 @@ class RaceSessionAdapter
         data['fastest_lap'] = Hash.new
         data['fastest_lap']['lap_num'] = self.race_session.fastest_lap_of_pilot(c_pilot).lap_num
         data['fastest_lap']['lap_time'] = self.race_session.fastest_lap_of_pilot(c_pilot).lap_time
+        data['fastest_lap']['id'] = self.race_session.fastest_lap_of_pilot(c_pilot).id
 
         data['last_lap'] = Hash.new
         data['last_lap']['lap_num'] = self.race_session.last_lap_of_pilot(c_pilot).lap_num
         data['last_lap']['lap_time'] = self.race_session.last_lap_of_pilot(c_pilot).lap_time
+        data['last_lap']['id'] = self.race_session.last_lap_of_pilot(c_pilot).id
         data['latest_tracked'] = self.race_session.last_lap_of_pilot_is_lasted_tracked_time_of_race?(c_pilot)
 
         listing_data << data
@@ -109,17 +111,20 @@ class RaceSessionAdapter
           data = Hash.new
           data['position'] = ap.count
           data['pilot'] = c_pilot
-          data['token'] = self.race_session.race_attendees.where(pilot_id: c_pilot.id).first.transponder_token
+          data['race_attendee'] = self.race_session.race_attendees.where(pilot_id: c_pilot.id).first
+          data['token'] = data['race_attendee'].transponder_token
           data['lap_count'] = self.race_session.lap_count_of_pilot(c_pilot)
           data['avg_lap_time'] = self.race_session.avg_lap_time_of_pilot(c_pilot)
 
           data['fastest_lap'] = Hash.new
           data['fastest_lap']['lap_num'] = self.race_session.fastest_lap_of_pilot(c_pilot).lap_num
           data['fastest_lap']['lap_time'] = self.race_session.fastest_lap_of_pilot(c_pilot).lap_time
+          data['fastest_lap']['id'] = self.race_session.fastest_lap_of_pilot(c_pilot).id
 
           data['last_lap'] = Hash.new
           data['last_lap']['lap_num'] = self.race_session.last_lap_of_pilot(c_pilot).lap_num
           data['last_lap']['lap_time'] = self.race_session.last_lap_of_pilot(c_pilot).lap_time
+          data['last_lap']['id'] = self.race_session.last_lap_of_pilot(c_pilot).id
           data['laps_left'] = self.race_session.max_laps.to_i - data['last_lap']['lap_num'].to_i
           data['latest_tracked'] = self.race_session.last_lap_of_pilot_is_lasted_tracked_time_of_race?(c_pilot)
 

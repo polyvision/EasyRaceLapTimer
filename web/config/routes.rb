@@ -94,6 +94,7 @@ Rails.application.routes.draw do
   post 'api/v1/satellite' => 'api/v1/satellite#create'
   get 'api/v1/satellite' => 'api/v1/satellite#create'
   get 'api/v1/lap_track/create' => 'api/v1/lap_track#create'
+  delete 'api/v1/lap_track/:lap_id/:ra_id' => 'api/v1/lap_track#destroy'
   get 'api/v1/monitor' => 'api/v1/monitor#index'
   get 'api/v1/sound/play_custom/:id' => 'api/v1/sound#play_custom'
 

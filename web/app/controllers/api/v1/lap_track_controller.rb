@@ -1,4 +1,6 @@
 require 'socket'
+require "#{Rails.root}/lib/ir_daemon_cmd.rb"
+
 class Api::V1::LapTrackController < Api::V1Controller
   def create
 
@@ -47,6 +49,19 @@ class Api::V1::LapTrackController < Api::V1Controller
 
     send_monitor_update()
     render json: pilot_race_lap.to_json
+  end
+
+  def destroy
+    t = PilotRaceLap.where(id: params[:lap_id]).first
+    race_attendee = RaceAttendee.where(id: params[:ra_id]).first
+
+    if t
+      token = race_attendee.transponder_token.gsub("VTX_","")
+      IRDaemonCmd::get_info_server_value("ILT #{token}")
+      t.destroy
+    end
+
+    send_monitor_update()
   end
 
   private

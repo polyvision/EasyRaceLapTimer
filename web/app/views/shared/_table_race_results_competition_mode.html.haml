@@ -40,6 +40,7 @@
           Lap 4
         %th
           Lap 5
+        %th
     %tbody
       - race_session_adapter.listing.each_with_index do |entry,index|
         %tr{class: "#{"success" if entry['latest_tracked']}"}
@@ -103,3 +104,6 @@
           %td
             %strong
               = formated_lap_time(@current_race_session.lap_time_of_pilot(entry['pilot'],5))
+          %td
+            - if @current_race_session.active
+              = link_to('Remove',url_for(action: 'destroy', controller: '/api/v1/lap_track', lap_id: entry['last_lap']['id'],ra_id: entry['race_attendee'].id),{method: 'DELETE',class: 'btn btn-warning bt-xs', remote: true})
