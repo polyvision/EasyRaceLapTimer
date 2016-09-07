@@ -27,4 +27,4 @@ to switch between the two modes enter this:
 
     sudo nano /etc/network/interfaces
 
-![alt text]./wifi_setup "Wifi Setup")
+![alt text]https://github.com/polyvision/EasyRaceLapTimer/blob/0.6/docs/wifi_setup.png "Wifi Setup")
