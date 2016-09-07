@@ -58,7 +58,35 @@ if (rb_port !== undefined && rb_port != false) {
   
 }
 
+function process_cmd(cmd){
+	cmd = cmd.toString().trim();
+	console.log("Received command '%s' ", cmd);
+  	switch(cmd) {
+  		case "RESET#":
+  			vtx_sensor.resetLapTimes();
+        race_box.reset_timing();
+  			break;
+      case "RB_RST_TIMING#":
+  			race_box.reset_timing();
+  			break;
+      case "RB_SRSSI#":
+  			race_box.read_saved_rssi();
+  			break;
+      case "RB_CRSSI#":
+  			race_box.read_current_rssi();
+  			break;
+  	}
 
+    if(cmd.startsWith("RB_SC_RSSI")){
+      race_box.set_channel_rssi(cmd);
+      return;
+    }
+
+    if(cmd.startsWith("RB_ILT")){
+     race_box.invalidate_last_tracking(cmd);
+     return; 
+    }
+}
 
 // Socket SERVER
 net.createServer(function (socket) {
@@ -79,27 +107,8 @@ net.createServer(function (socket) {
   
   // Send a message to all clients
   function processData(socket_name, data, sender) {
-  	cmd = data.toString().trim();
-	console.log("Received command '%s' ", cmd);
-  	switch(cmd) {
-  		case "RESET#":
-  			vtx_sensor.resetLapTimes();
-        race_box.reset_timing();
-  			break;
-      case "RB_RST_TIMING#":
-  			race_box.reset_timing();
-  			break;
-      case "RB_SRSSI#":
-  			race_box.read_saved_rssi();
-  			break;
-      case "RB_CRSSI#":
-  			race_box.read_current_rssi();
-  			break;
-  	}
-
-    if(cmd.startsWith("RB_SC_RSSI")){
-  			race_box.set_channel_rssi(cmd);
-    }
+    process_cmd(data);
+    sender.end();
   }
 
 }).listen(SOCKET_PORT);

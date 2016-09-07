@@ -8,7 +8,7 @@
  * You should have received a copy of the GNU General Public License along with Foobar. If not, see http://www.gnu.org/licenses/.
  **/
 
-const API_WEB_HOST = 'http://localhost:8080/';
+const API_WEB_HOST = 'http://localhost/';
 
 var moment = require('moment');
 var util = require('util');
@@ -134,6 +134,13 @@ race_box.set_channel_rssi = function(msg){
     msg = msg.split(" ");
     this.write_to_rb("S_VTX_STR " + msg[1] + " "+ msg[2] +  "\n");
 }   
+
+race_box.invalidate_last_tracking = function(msg){
+    console.log("RaceBox.invalidate_last_tracking:" + msg);
+    msg = msg.replace("#","");
+    msg = msg.split(" ");
+    this.write_to_rb("ILT " + msg[1] + "\n");
+}
 
 race_box.reset_timing = function(){
   this.write_to_rb("RST_TIMING\n");

@@ -22,7 +22,7 @@ class IRDaemonCmd
 
   def self.get_info_server_value(val)
   	begin
-      s = TCPSocket.new 'localhost', 3007
+      s = TCPSocket.new 'localhost', 3006
       s.send "#{val}#\n",0
       while line = s.gets # Read lines from socket
   		puts line         # and print them

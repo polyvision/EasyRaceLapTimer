@@ -56,12 +56,18 @@ class Api::V1::LapTrackController < Api::V1Controller
     race_attendee = RaceAttendee.where(id: params[:ra_id]).first
 
     if t
-      token = race_attendee.transponder_token.gsub("VTX_","")
-      IRDaemonCmd::get_info_server_value("ILT #{token}")
+      if race_attendee
+        token = race_attendee.transponder_token.gsub("VTX_","")
+        IRDaemonCmd::get_info_server_value("RB_ILT #{token}")
+      else
+        puts "found no race attendee"
+      end
       t.destroy
     end
 
     send_monitor_update()
+
+    render status: 200, plain: 'OK!'
   end
 
   private
