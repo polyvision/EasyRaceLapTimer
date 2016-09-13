@@ -1,13 +1,13 @@
-.row
+.row.visor_hide
   .col-md-4.col-md-offset-5
     - if !@style_setting.own_logo_image.blank?
       = image_tag(@style_setting.own_logo_image.thumb.url)
 
-%h1
+%h1.visor_hide
   =@current_race_session.title
 
 - if @current_race_session.mode == "competition"
-  .panel.panel-default
+  .panel.panel-default.visor_hide
     .panel-body
       %strong
         Max Laps:
