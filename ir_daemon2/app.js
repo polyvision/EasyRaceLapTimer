@@ -14,10 +14,12 @@ var	net = require('net');
 var util = require('util');
 var vtx_sensor = require('./modules/vtx_sensor.js');
 var race_box = require('./modules/race_box.js');
+var ir_sensor = require('./modules/ir_sensor.js');
 var fs = require('fs');
 
 wpi.setup('wpi');
 vtx_sensor.setup(wpi);
+ir_sensor.setup(wpi);
 
 const SOCKET_PORT = 3006;
 
