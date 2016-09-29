@@ -1,3 +1,6 @@
+=begin
+  FpvSportsRaceSessionBuilderAdapter.new(10).fetch
+=end
 class FpvSportsRaceSessionBuilderAdapter
   attr_accessor :error, :fetch_data, :fpv_sports_racing_event_id
 
@@ -7,21 +10,23 @@ class FpvSportsRaceSessionBuilderAdapter
 
   def fetch
     json_data = FpvSportsApiAdapter::get_current_group(self.fpv_sports_racing_event_id)
-
+    puts json_data
     data = Hash.new
-    data['fpv_sports_group_id'] = json_data['id']
-    data['fpv_sports_group_num'] = json_data['num']
-    data['fpv_sports_heat_id'] = json_data['race_event_heat']['id']
-    data['fpv_sports_heat_num'] = json_data['race_event_heat']['heat_num']
+    data['fpv_sports_group_id'] = json_data['group_id']
+    data['fpv_sports_group_num'] = json_data['group_num']
+    data['fpv_sports_heat_id'] = json_data['heat_id']
+    data['fpv_sports_heat_num'] = json_data['heat_num']
 
     data['pilots'] = Array.new
 
-    json_data['race_event_heat_group_pilots'].each_with_index do |entry,index|
+    json_data['pilots'].each_with_index do |entry,index|
         t_pilot_data = Hash.new
-        t_pilot_data['pilot'] = Pilot.where(fpvsports_race_event_pilot_id: entry['race_event_pilot_id']).first
+        t_pilot_data['pilot'] = Pilot.where(fpvsports_race_event_pilot_id: entry['pilot_id']).first
         t_pilot_data['transponder_token'] = "VTX_#{index+1}"
 
-        data['pilots'] << t_pilot_data
+        if t_pilot_data['pilot'] # only add the pilot if it exists
+          data['pilots'] << t_pilot_data
+        end
     end
 
     self.fetch_data = data

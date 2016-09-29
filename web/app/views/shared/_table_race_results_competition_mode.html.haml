@@ -4,7 +4,7 @@
       %tr
         %th
           position
-        %th
+        %th.visor_hide
           token
         %th
 
@@ -12,7 +12,7 @@
           race time
         %th
           pilot
-        %th
+        %th.visor_hide
           quad
         %th
           team
@@ -24,11 +24,11 @@
           laps
         %th
           avg lap time
-        %th
+        %th.visor_hide
           penalties
-        %th
+        %th.visor_hide
           penalty time
-        %th
+        %th.visor_hide
           time without penalties
         %th
           Lap 1
@@ -40,14 +40,14 @@
           Lap 4
         %th
           Lap 5
-        %th
+        %th.visor_hide
     %tbody
       - race_session_adapter.listing.each_with_index do |entry,index|
         %tr{class: "#{"success" if entry['latest_tracked']}"}
           %td
             %strong
               = index + 1
-          %td
+          %td.visor_hide
             %strong
               = entry['token']
           %td
@@ -62,7 +62,7 @@
           %td
             %strong
               = entry['pilot'].name
-          %td
+          %td.visor_hide
             %strong
               = entry['pilot'].quad
           %td
@@ -80,13 +80,13 @@
           %td
             %strong
               = formated_lap_time(entry['avg_lap_time'])
-          %td
+          %td.visor_hide
             %strong
               = entry['num_time_penalties']
-          %td
+          %td.visor_hide
             %strong
               = formated_lap_time(entry['sum_time_penalties_in_ms'])
-          %td
+          %td.visor_hide
             %strong
               = formated_lap_time(entry['race_time_sum_in_ms_without_penalty'])
           %td
@@ -104,6 +104,6 @@
           %td
             %strong
               = formated_lap_time(@current_race_session.lap_time_of_pilot(entry['pilot'],5))
-          %td
+          %td.visor_hide
             - if @current_race_session.active 
               = link_to('Remove',url_for(action: 'destroy', controller: '/api/v1/lap_track', lap_id: entry['last_lap']['id'],ra_id: entry['race_attendee'].id),{method: 'DELETE',class: 'btn btn-warning bt-xs', remote: true})

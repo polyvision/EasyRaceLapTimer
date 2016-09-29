@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
+  get 'visor' => 'visor#index'
   get 'race_director' => 'race_director#index'
   get 'race_director/lap_times' => 'race_director#lap_times'
   get 'race_director/invalidate_lap' => 'race_director#invalidate_lap'
