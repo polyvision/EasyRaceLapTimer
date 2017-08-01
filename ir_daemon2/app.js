@@ -10,7 +10,7 @@
  **/
 
 var wpi = require('wiring-pi');
-var	net = require('net');
+var     net = require('net');
 var util = require('util');
 var vtx_sensor = require('./modules/vtx_sensor.js');
 var race_box = require('./modules/race_box.js');
@@ -70,30 +70,36 @@ if(rb_enabled === true){
     }
     catch(err){
       console.log(err);
-    } 
+    }
   }
 }else{
   console.log("race_box is disabled");
 }
 
-function process_cmd(cmd){
-	cmd = cmd.toString().trim();
-	console.log("Received command '%s' ", cmd);
-  	switch(cmd) {
-  		case "RESET#":
-  			vtx_sensor.resetLapTimes();
-        race_box.reset_timing();
-  			break;
-      case "RB_RST_TIMING#":
-  			race_box.reset_timing();
-  			break;
-      case "RB_SRSSI#":
-  			race_box.read_saved_rssi();
-  			break;
-      case "RB_CRSSI#":
-  			race_box.read_current_rssi();
-  			break;
-  	}
+function process_cmd(cmd, socket){
+        cmd = cmd.toString().trim();
+        console.log("Received command '%s' ", cmd);
+        switch(cmd) {
+                case "RESET#":
+                        vtx_sensor.resetLapTimes();
+                        race_box.reset_timing();
+                        ir_sensor.reset();
+                        break;
+                case "RB_RST_TIMING#":
+                        race_box.reset_timing();
+                        break;
+                case "RB_SRSSI#":
+                        race_box.read_saved_rssi();
+                        break;
+                case "RB_CRSSI#":
+                        race_box.read_current_rssi();
+                        break;
+                case "LAST_SCANNED_TOKEN#":
+                        var val = ir_sensor.last_token();
+                        if(val !== undefined)
+                          socket.write(val + '#\n')
+                        break;
+        }
 
     if(cmd.startsWith("RB_SC_RSSI")){
       race_box.set_channel_rssi(cmd);
@@ -102,7 +108,7 @@ function process_cmd(cmd){
 
     if(cmd.startsWith("RB_ILT")){
      race_box.invalidate_last_tracking(cmd);
-     return; 
+     return;
     }
 }
 
@@ -115,17 +121,17 @@ net.createServer(function (socket) {
 
   // Handle incoming messages from clients.
   socket.on('data', function (data) {
-    processData(socket.name, data, socket);
+    processData(socket, data, socket);
   });
 
   // Remove the client from the list when it leaves
   socket.on('end', function () {
-  	// console.log("Client %s close connection", socket.name);
+        // console.log("Client %s close connection", socket.name);
   });
-  
+
   // Send a message to all clients
-  function processData(socket_name, data, sender) {
-    process_cmd(data);
+  function processData(socket, data, sender) {
+    process_cmd(data, socket);
     sender.end();
   }
 
