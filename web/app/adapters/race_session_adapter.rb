@@ -160,6 +160,7 @@ class RaceSessionAdapter
     if self.race_session.mode == "standard"
       res = self.track_lap_time_standard_mode(transponder_token,delta_time_in_ms)
       RaceSessionEventAdapter.new(self,transponder_token).perform
+      return res
     elsif self.race_session.mode == "competition"
       res =  self.track_lap_time_competition_mode(transponder_token,delta_time_in_ms)
       RaceSessionEventAdapter.new(self,transponder_token).perform
