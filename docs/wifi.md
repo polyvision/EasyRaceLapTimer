@@ -3,7 +3,7 @@
 ## WIFI AccessPoint
 
     SSID: EasyRaceLapTimer
-    Password: 0123456789
+    Password: raspberry
 
 ## Host-IP
 
