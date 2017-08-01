@@ -8,3 +8,7 @@
 Use an USB image tool to copy the EasyRaceLapTimer distribution to a 16 GB micro SD card.
 
 USB image tool: http://www.alexpage.de/usb-image-tool/download/
+
+## MacOS / Linux
+
+USB image tool: https://etcher.io/
