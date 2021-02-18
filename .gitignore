@@ -17,3 +17,5 @@ web/public/assets
 web/node_modules
 *.o
 moc_*
+
+node_modules/

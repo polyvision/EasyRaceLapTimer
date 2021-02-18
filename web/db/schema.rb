@@ -23,22 +23,8 @@ ActiveRecord::Schema.define(version: 20160502142410) do
     t.string "file"
   end
 
-  create_table "pilot_race_laps", force: :cascade do |t|
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.integer  "pilot_id"
-    t.integer  "lap_num"
-    t.integer  "lap_time"
-    t.integer  "race_session_id"
-    t.datetime "deleted_at"
-    t.boolean  "latest"
-    t.boolean  "invalidated",     default: false
-  end
-
-  add_index "pilot_race_laps", ["deleted_at"], name: "index_pilot_race_laps_on_deleted_at"
-  add_index "pilot_race_laps", ["lap_num"], name: "index_pilot_race_laps_on_lap_num"
-  add_index "pilot_race_laps", ["lap_time"], name: "index_pilot_race_laps_on_lap_time"
-  add_index "pilot_race_laps", ["pilot_id"], name: "index_pilot_race_laps_on_pilot_id"
+# Could not dump table "pilot_race_laps" because of following FrozenError
+#   can't modify frozen String: "false"
 
   create_table "pilots", force: :cascade do |t|
     t.string   "name"
@@ -57,21 +43,8 @@ ActiveRecord::Schema.define(version: 20160502142410) do
     t.string  "transponder_token"
   end
 
-  create_table "race_sessions", force: :cascade do |t|
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.string   "title"
-    t.boolean  "active"
-    t.integer  "mode",                       default: 0
-    t.integer  "max_laps",                   default: 0
-    t.datetime "deleted_at"
-    t.integer  "num_satellites",             default: 0
-    t.integer  "time_penalty_per_satellite", default: 2500
-    t.boolean  "hot_seat_enabled",           default: false
-    t.integer  "idle_time_in_seconds",       default: 0
-  end
-
-  add_index "race_sessions", ["deleted_at"], name: "index_race_sessions_on_deleted_at"
+# Could not dump table "race_sessions" because of following FrozenError
+#   can't modify frozen String: "false"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
